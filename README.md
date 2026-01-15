@@ -3,7 +3,7 @@
 Practical governance templates for long-horizon work with Claude Cowork.
 
 Cowork gives Claude filesystem access. These templates give you the structure to make that sustainable.
-
+https://doi.org/10.5281/zenodo.18262128
 ---
 
 ## The Problem
