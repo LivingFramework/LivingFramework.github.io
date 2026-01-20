@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Framework | AI Governance That Actually Works</title>
+    <meta name="description" content="Practical frameworks for long-horizon human-AI collaboration. Built from 18 months of real work, not theory.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --color-bg: #09090b;
+            --color-bg-elevated: #18181b;
+            --color-bg-hover: #27272a;
+            --color-surface: rgba(255, 255, 255, 0.03);
+            --color-border: rgba(255, 255, 255, 0.08);
+            --color-border-hover: rgba(255, 255, 255, 0.15);
+            --color-text: #fafafa;
+            --color-text-secondary: #a1a1aa;
+            --color-text-tertiary: #71717a;
+            --color-accent: #10b981;
+            --color-accent-dim: rgba(16, 185, 129, 0.15);
+            --color-accent-glow: rgba(16, 185, 129, 0.4);
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --max-width: 1200px;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-display);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-bg);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* Subtle grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-weight: 500;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 7vw, 4.5rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+        }
+        h2 {
+            font-size: clamp(1.75rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+        }
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--color-text-secondary);
+        }
+        p:last-child { margin-bottom: 0; }
+
+        a {
+            color: var(--color-accent);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        a:hover {
+            color: #34d399;
+        }
+
+        /* Layout */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 16px 0;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--color-text);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-mark {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, var(--color-accent) 0%, #059669 100%);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--color-text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--color-text);
+        }
+
+        .nav-cta {
+            padding: 8px 16px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            color: var(--color-text) !important;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--color-bg-hover);
+            border-color: var(--color-border-hover);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-text);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hero glow effect */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 600px;
+            background: radial-gradient(ellipse, var(--color-accent-glow) 0%, transparent 60%);
+            opacity: 0.3;
+            filter: blur(80px);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: var(--color-accent-dim);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-accent);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            margin-bottom: 24px;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--color-accent) 0%, #34d399 50%, #6ee7b7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 80px;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-family: var(--font-display);
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-accent);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: #34d399;
+            color: #000;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px var(--color-accent-glow);
+        }
+
+        .btn-secondary {
+            background: var(--color-surface);
+            color: var(--color-text);
+            border: 1px solid var(--color-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-bg-hover);
+            border-color: var(--color-border-hover);
+        }
+
+        /* Stats */
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--color-text);
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            font-weight: 500;
+        }
+
+        /* Section headers */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 20px;
+            height: 1px;
+            background: var(--color-accent);
+        }
+
+        /* Problem Section */
+        .problem {
+            background: var(--color-bg-elevated);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .problem-header {
+            max-width: 700px;
+            margin-bottom: 64px;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--color-border);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+        }
+
+        .problem-card {
+            padding: 32px;
+            background: var(--color-bg);
+            transition: background 0.3s;
+        }
+
+        .problem-card:hover {
+            background: var(--color-bg-elevated);
+        }
+
+        .problem-card h3 {
+            color: var(--color-text);
+            margin-bottom: 12px;
+        }
+
+        .problem-card p {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            line-height: 1.6;
+        }
+
+        /* Framework Section */
+        .framework-intro {
+            max-width: 700px;
+            margin-bottom: 64px;
+        }
+
+        .framework-intro p {
+            font-size: 1.1rem;
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .control-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+        }
+
+        .control-item:hover {
+            border-color: var(--color-border-hover);
+            background: var(--color-bg-elevated);
+        }
+
+        .control-number {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--color-accent);
+            padding: 4px 8px;
+            background: var(--color-accent-dim);
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+
+        .control-content h4 {
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: var(--color-text);
+        }
+
+        .control-content p {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 0;
+        }
+
+        /* Protocols */
+        .protocols {
+            background: var(--color-bg-elevated);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .protocols-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .protocol-card {
+            padding: 32px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .protocol-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .protocol-card:hover {
+            border-color: var(--color-border-hover);
+            transform: translateY(-4px);
+        }
+
+        .protocol-card:hover::before {
+            opacity: 1;
+        }
+
+        .protocol-card h3 {
+            color: var(--color-text);
+        }
+
+        .protocol-card .subtitle {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
+
+        .protocol-card p {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Research Section */
+        .papers-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .paper-card {
+            display: grid;
+            grid-template-columns: 60px 1fr auto;
+            gap: 24px;
+            padding: 24px 32px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .paper-card:hover {
+            border-color: var(--color-border-hover);
+            background: var(--color-bg-elevated);
+        }
+
+        .paper-number {
+            font-family: var(--font-mono);
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--color-text-tertiary);
+        }
+
+        .paper-info h3 {
+            color: var(--color-text);
+            margin-bottom: 4px;
+        }
+
+        .paper-info p {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 0;
+        }
+
+        .paper-link {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            white-space: nowrap;
+            padding: 10px 20px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            transition: all 0.2s;
+        }
+
+        .paper-link:hover {
+            background: var(--color-accent-dim);
+            border-color: var(--color-accent);
+        }
+
+        /* Diagnostic */
+        .diagnostic {
+            background: var(--color-bg-elevated);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .diagnostic-header {
+            max-width: 600px;
+            margin-bottom: 48px;
+        }
+
+        .diagnostic-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 48px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+        }
+
+        .diagnostic-progress {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 40px;
+        }
+
+        .progress-dot {
+            flex: 1;
+            height: 4px;
+            background: var(--color-bg-hover);
+            border-radius: 2px;
+            transition: background 0.3s;
+        }
+
+        .progress-dot.active,
+        .progress-dot.completed {
+            background: var(--color-accent);
+        }
+
+        .question-container {
+            min-height: 280px;
+        }
+
+        .question-category {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--color-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 12px;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-text);
+            margin-bottom: 32px;
+            line-height: 1.4;
+        }
+
+        .answer-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .answer-btn {
+            padding: 16px 20px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            text-align: left;
+            cursor: pointer;
+            font-family: var(--font-display);
+            font-size: 15px;
+            color: var(--color-text-secondary);
+            transition: all 0.2s;
+        }
+
+        .answer-btn:hover {
+            border-color: var(--color-accent);
+            background: var(--color-accent-dim);
+            color: var(--color-text);
+        }
+
+        .results-container {
+            display: none;
+        }
+
+        .results-container.show {
+            display: block;
+        }
+
+        .score-display {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: var(--color-accent-dim);
+            border: 2px solid var(--color-accent);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+
+        .score-value {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--color-accent);
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+
+        .score-title {
+            font-size: 1.25rem;
+            color: var(--color-text);
+        }
+
+        .breakdown-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .breakdown-item {
+            padding: 16px;
+            background: var(--color-surface);
+            border-radius: var(--radius-sm);
+        }
+
+        .breakdown-item h4 {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            margin-bottom: 8px;
+        }
+
+        .breakdown-bar {
+            height: 4px;
+            background: var(--color-bg-hover);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-bottom: 4px;
+        }
+
+        .breakdown-fill {
+            height: 100%;
+            background: var(--color-accent);
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+
+        .breakdown-score {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+        }
+
+        .gaps-section {
+            padding: 24px;
+            background: rgba(234, 179, 8, 0.1);
+            border: 1px solid rgba(234, 179, 8, 0.2);
+            border-radius: var(--radius-md);
+            margin-bottom: 32px;
+        }
+
+        .gaps-section h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: #eab308;
+            margin-bottom: 16px;
+        }
+
+        .gap-item {
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--color-text-secondary);
+            border-bottom: 1px solid rgba(234, 179, 8, 0.1);
+        }
+
+        .gap-item:last-child {
+            border-bottom: none;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        /* Templates */
+        .templates-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .template-card {
+            padding: 32px;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+        }
+
+        .template-card:hover {
+            border-color: var(--color-border-hover);
+            transform: translateY(-2px);
+        }
+
+        .template-card h3 {
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+
+        .template-card p {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            margin-bottom: 20px;
+        }
+
+        .template-link {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Services */
+        .services {
+            background: var(--color-bg-elevated);
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .service-card {
+            padding: 40px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: var(--color-accent);
+        }
+
+        .service-card h3 {
+            color: var(--color-text);
+            margin-bottom: 8px;
+        }
+
+        .service-card .price {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--color-accent);
+            margin-bottom: 16px;
+        }
+
+        .service-card p {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+
+        /* About */
+        .about-content {
+            max-width: 700px;
+        }
+
+        .about-content .lead {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--color-text);
+            margin-bottom: 24px;
+            line-height: 1.4;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--color-bg-elevated);
+            border-top: 1px solid var(--color-border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            color: var(--color-text);
+        }
+
+        .contact-link:hover {
+            color: var(--color-accent);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 16px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            color: var(--color-text);
+            font-family: var(--font-display);
+            font-size: 15px;
+            transition: border-color 0.2s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: var(--color-text-tertiary);
+        }
+
+        .contact-form textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .contact-form button {
+            align-self: flex-start;
+        }
+
+        /* Footer */
+        footer {
+            padding: 32px 0;
+            border-top: 1px solid var(--color-border);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-inner p {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+            margin: 0;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            font-size: 14px;
+            color: var(--color-text-tertiary);
+        }
+
+        .footer-links a:hover {
+            color: var(--color-text);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .controls-grid,
+            .protocols-grid,
+            .templates-grid,
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 80px 0;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--color-bg);
+                flex-direction: column;
+                padding: 24px;
+                border-bottom: 1px solid var(--color-border);
+                gap: 16px;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .problem-grid,
+            .controls-grid,
+            .protocols-grid,
+            .templates-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .paper-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .paper-number {
+                display: none;
+            }
+
+            .paper-link {
+                justify-self: center;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 48px;
+            }
+
+            .breakdown-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .diagnostic-container {
+                padding: 32px 24px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <a href="#" class="logo">
+                <span class="logo-mark">LF</span>
+                Living Framework
+            </a>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#problem">Problem</a></li>
+                <li><a href="#framework">LC-OS</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#diagnostic">Diagnostic</a></li>
+                <li><a href="#templates">Templates</a></li>
+                <li><a href="#contact" class="nav-cta">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge">AI Governance Research</span>
+                <h1>Make AI collaboration <span class="gradient-text">reliable</span> over weeks, not minutes</h1>
+                <p class="hero-subtitle">Most AI workflows break after a few sessions. Context drifts. Decisions get lost. Trust erodes. Living Framework provides the governance infrastructure to make long-horizon collaboration actually work.</p>
+                <div class="hero-actions">
+                    <a href="#diagnostic" class="btn btn-primary">Take Assessment →</a>
+                    <a href="#research" class="btn btn-secondary">Read the Research</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">5</span>
+                        <span class="stat-label">Research Papers</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">18+</span>
+                        <span class="stat-label">Months Tested</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">3,500+</span>
+                        <span class="stat-label">Downloads</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="problem-header">
+                <span class="section-label">The Problem</span>
+                <h2>Week one feels like magic. Week three, you're untangling a mess.</h2>
+                <p>Everyone who works seriously with AI hits the same wall. The failures aren't about capability — they're about governance.</p>
+            </div>
+
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3>Context Drift</h3>
+                    <p>The AI "forgets" what you agreed on. Decisions made last week disappear. You're constantly re-explaining the basics.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Version Chaos</h3>
+                    <p>Multiple files with different versions of the truth. You reference one document, the AI references another.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Numeric Errors</h3>
+                    <p>Numbers drift silently. The AI "reconstructs" instead of references. Same calculation gives different results.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Boundary Blur</h3>
+                    <p>Work from one domain bleeds into another. Finance decisions start affecting research. Risk levels get confused.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>Trust Erosion</h3>
+                    <p>Small failures accumulate. You start second-guessing everything. The partnership that felt powerful now feels fragile.</p>
+                </div>
+                <div class="problem-card">
+                    <h3>No Repair Path</h3>
+                    <p>When things break, there's no systematic way to fix them. You patch and hope. Same failures keep recurring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Section -->
+    <section class="framework" id="framework">
+        <div class="container">
+            <span class="section-label">The Solution</span>
+            <h2>LC-OS: The Lean Collaboration Operating System</h2>
+            <div class="framework-intro">
+                <p>A lightweight governance framework that makes long-horizon AI collaboration reliable. Not about restricting the AI — about giving it structure to be trustworthy.</p>
+                <p><strong style="color: var(--color-text);">Core insight:</strong> Reliability comes from governance, not capability. A well-structured collaboration with a standard model outperforms an unstructured one with a frontier model.</p>
+            </div>
+
+            <h3 style="margin-bottom: 24px; color: var(--color-text-secondary);">The 10 Controls</h3>
+            <div class="controls-grid">
+                <div class="control-item">
+                    <span class="control-number">A1</span>
+                    <div class="control-content">
+                        <h4>Accuracy Over Speed</h4>
+                        <p>Prioritize verification over quick responses</p>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="control-number">A2</span>
+                    <div class="control-content">
+                        <h4>Single Source of Truth</h4>
+                        <p>One canonical location for each data type</p>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="control-number">A3</span>
+                    <div class="control-content">
+                        <h4>File Governance</h4>
+                        <p>Strict rules for file creation and versioning</p>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="control-number">A4</span>
+                    <div class="control-content">
+                        <h4>Explicit Permissions</h4>
+                        <p>Clear boundaries on what can be changed</p>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="control-number">A5</span>
+                    <div class="control-content">
+                        <h4>Audit Trail</h4>
+                        <p>Log all significant decisions</p>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="control-number">A6</span>
+                    <div class="control-content">
+                        <h4>Challenge Protocol</h4>
+                        <p>Structured disagreement process</p>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="control-number">A7</span>
+                    <div class="control-content">
+                        <h4>Error Recovery</h4>
+                        <p>Stop → Diagnose → Rollback → Note</p>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="control-number">A8</span>
+                    <div class="control-content">
+                        <h4>Stability Ping</h4>
+                        <p>Regular check-ins on collaboration health</p>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="control-number">A9</span>
+                    <div class="control-content">
+                        <h4>Pillar Boundaries</h4>
+                        <p>Separate domains with different risk levels</p>
+                    </div>
+                </div>
+                <div class="control-item">
+                    <span class="control-number">A10</span>
+                    <div class="control-content">
+                        <h4>Human Authority</h4>
+                        <p>Final decisions rest with the human</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Protocols Section -->
+    <section class="protocols">
+        <div class="container">
+            <span class="section-label">Implementation</span>
+            <h2>Core Protocols</h2>
+            <p style="max-width: 600px; margin-bottom: 48px;">Six practical protocols that turn the controls into daily practice.</p>
+
+            <div class="protocols-grid">
+                <div class="protocol-card">
+                    <h3>Running Documents</h3>
+                    <span class="subtitle">External Memory</span>
+                    <p>A continuously updated file preserving decisions, rules, and corrections across sessions. Read at every session start.</p>
+                </div>
+                <div class="protocol-card">
+                    <h3>Step Mode</h3>
+                    <span class="subtitle">Paced Reasoning</span>
+                    <p>Break complex tasks into numbered steps. Execute one at a time. Pause for confirmation before proceeding.</p>
+                </div>
+                <div class="protocol-card">
+                    <h3>Challenge Protocol</h3>
+                    <span class="subtitle">Structured Disagreement</span>
+                    <p>When something feels wrong: Stop → Question → AI explains → Decide to proceed, modify, or abort.</p>
+                </div>
+                <div class="protocol-card">
+                    <h3>Error Recovery</h3>
+                    <span class="subtitle">Systematic Repair</span>
+                    <p>When things break: Stop immediately → Diagnose → Rollback to stable state → Note the failure.</p>
+                </div>
+                <div class="protocol-card">
+                    <h3>Stability Ping</h3>
+                    <span class="subtitle">Drift Detection</span>
+                    <p>After milestones: Are we still aligned? Has drift crept in? One improvement before continuing?</p>
+                </div>
+                <div class="protocol-card">
+                    <h3>Canonical Numbers</h3>
+                    <span class="subtitle">Numeric Truth</span>
+                    <p>All numbers in one authoritative sheet. Reference, don't reconstruct. Non-canonical = can't drive decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section class="research" id="research">
+        <div class="container">
+            <span class="section-label">Evidence</span>
+            <h2>The Research</h2>
+            <p style="max-width: 600px; margin-bottom: 48px;">Five papers documenting 18+ months of empirical human-AI collaboration. Everything emerged from real work, not theory.</p>
+
+            <div class="papers-grid">
+                <div class="paper-card">
+                    <span class="paper-number">01</span>
+                    <div class="paper-info">
+                        <h3>Context-Engineered Human-AI Collaboration</h3>
+                        <p>The foundation. Introduces the Control Stack (A1-A10) and canonical information pipeline.</p>
+                    </div>
+                    <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-link">View Paper →</a>
+                </div>
+                <div class="paper-card">
+                    <span class="paper-number">02</span>
+                    <div class="paper-info">
+                        <h3>The Lean Collaboration Operating System</h3>
+                        <p>The manual. Running Documents, Step Mode, Challenge Protocol — day-to-day protocols.</p>
+                    </div>
+                    <a href="https://zenodo.org/records/17760777" target="_blank" class="paper-link">View Paper →</a>
+                </div>
+                <div class="paper-card">
+                    <span class="paper-number">03</span>
+                    <div class="paper-info">
+                        <h3>Failure and Repair in Long-Horizon Collaboration</h3>
+                        <p>The diagnostic. Taxonomy of how AI collaborations break — and repair patterns to fix them.</p>
+                    </div>
+                    <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-link">View Paper →</a>
+                </div>
+                <div class="paper-card">
+                    <span class="paper-number">04</span>
+                    <div class="paper-info">
+                        <h3>The Living Framework</h3>
+                        <p>The philosophy. What it means to live with an AI under governance — relational dynamics and ethics.</p>
+                    </div>
+                    <a href="https://zenodo.org/records/18015990" target="_blank" class="paper-link">View Paper →</a>
+                </div>
+                <div class="paper-card">
+                    <span class="paper-number">05</span>
+                    <div class="paper-info">
+                        <h3>The Mahdi Ledger</h3>
+                        <p>The proof. Written entirely by the AI system — a first-person account of constraint, drift, and repair.</p>
+                    </div>
+                    <a href="https://zenodo.org/records/18054346" target="_blank" class="paper-link">View Paper →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Diagnostic Section -->
+    <section class="diagnostic" id="diagnostic">
+        <div class="container">
+            <div class="diagnostic-header">
+                <span class="section-label">Assessment</span>
+                <h2>AI Collaboration Readiness</h2>
+                <p>Answer 10 questions to discover where your AI workflow is vulnerable. Takes 3 minutes.</p>
+            </div>
+
+            <div class="diagnostic-container">
+                <div class="diagnostic-progress" id="progressDots"></div>
+
+                <div class="question-container" id="questionContainer">
+                    <!-- Questions inserted by JavaScript -->
+                </div>
+
+                <div class="results-container" id="resultsContainer">
+                    <div class="score-display">
+                        <div class="score-circle">
+                            <span class="score-value" id="totalScore">0</span>
+                            <span class="score-label">out of 100</span>
+                        </div>
+                        <h3 class="score-title" id="scoreTitle">Your Readiness Level</h3>
+                    </div>
+
+                    <div class="breakdown-grid" id="breakdownGrid"></div>
+
+                    <div class="gaps-section" id="gapsSection">
+                        <h4>⚠ Priority Gaps to Address</h4>
+                        <div id="gapsList"></div>
+                    </div>
+
+                    <div class="results-actions">
+                        <a href="#contact" class="btn btn-primary">Get Help Implementing →</a>
+                        <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section class="templates" id="templates">
+        <div class="container">
+            <span class="section-label">Resources</span>
+            <h2>Free Templates</h2>
+            <p style="max-width: 600px; margin-bottom: 48px;">Everything you need to implement LC-OS. No email required.</p>
+
+            <div class="templates-grid">
+                <div class="template-card">
+                    <h3>Running Document</h3>
+                    <p>The core of external memory. Track decisions, rules, corrections across sessions.</p>
+                    <a href="https://github.com/LivingFramework/LC-OS-Project" target="_blank" class="template-link">GitHub →</a>
+                </div>
+                <div class="template-card">
+                    <h3>Canonical Numbers Sheet</h3>
+                    <p>Single source of numeric truth. Reference, don't reconstruct.</p>
+                    <a href="https://github.com/LivingFramework/LC-OS-Project" target="_blank" class="template-link">GitHub →</a>
+                </div>
+                <div class="template-card">
+                    <h3>Failure Log Template</h3>
+                    <p>Track what breaks, how you fixed it, what changed.</p>
+                    <a href="https://github.com/LivingFramework/LC-OS-Project" target="_blank" class="template-link">GitHub →</a>
+                </div>
+                <div class="template-card">
+                    <h3>LC-OS Checklist</h3>
+                    <p>Quick reference for all 10 controls. Audit your workflow.</p>
+                    <a href="https://github.com/LivingFramework/LC-OS-Project" target="_blank" class="template-link">GitHub →</a>
+                </div>
+                <div class="template-card">
+                    <h3>Claude Cowork Templates</h3>
+                    <p>Governance templates optimized for Claude Cowork filesystem access.</p>
+                    <a href="https://github.com/LivingFramework/governance-templates-for-claude-cowork" target="_blank" class="template-link">GitHub →</a>
+                </div>
+                <div class="template-card">
+                    <h3>Full LC-OS Project</h3>
+                    <p>Complete toolkit with worked examples and detailed guides.</p>
+                    <a href="https://github.com/LivingFramework/LC-OS-Project" target="_blank" class="template-link">GitHub →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <span class="section-label">Services</span>
+            <h2>Work With Me</h2>
+            <p style="max-width: 600px; margin-bottom: 48px;">If you're serious about making AI collaboration reliable, I can help implement what I've learned.</p>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Reliability Audit</h3>
+                    <p class="price">4-6 week engagement</p>
+                    <p>Comprehensive assessment of your AI workflows using the failure taxonomy. Identify vulnerabilities and get specific repair protocols.</p>
+                </div>
+                <div class="service-card">
+                    <h3>LC-OS Workshop</h3>
+                    <p class="price">1-2 day program</p>
+                    <p>Intensive training on implementing LC-OS. Hands-on work with Running Documents, the Control Stack, and error recovery.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Ongoing Advisory</h3>
+                    <p class="price">Retainer basis</p>
+                    <p>Fractional governance support for organizations deploying long-horizon AI systems. Expert guidance as needs evolve.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <span class="section-label">About</span>
+            <h2>Living Framework</h2>
+            <div class="about-content">
+                <p class="lead">This work exists because I ran into the same problem everyone does — AI collaboration that breaks after the first week.</p>
+                <p>Instead of accepting it as a limitation, I spent 18 months systematically developing solutions. Working with a frontier language model across finance, research, writing, and planning, I documented every failure mode and every repair pattern.</p>
+                <p>What emerged wasn't theory — it was a practical operating system for making AI collaboration actually reliable. The Control Stack. Running Documents. Step Mode. Error Recovery. All of it came from real breakdowns and real fixes.</p>
+                <p><strong style="color: var(--color-text);">Core belief:</strong> Stability is not the absence of failure. It's the capacity for visible, structured repair.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <span class="section-label">Contact</span>
+            <h2>Get in Touch</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <p>Whether you're struggling with AI reliability, interested in implementing LC-OS, or want to discuss the research — I'd love to hear from you.</p>
+                    <div class="contact-links">
+                        <a href="mailto:livingframeworkai@gmail.com" class="contact-link">
+                            <span>→</span> livingframeworkai@gmail.com
+                        </a>
+                        <a href="https://github.com/LivingFramework" target="_blank" class="contact-link">
+                            <span>→</span> github.com/LivingFramework
+                        </a>
+                        <a href="https://twitter.com/satoshisats" target="_blank" class="contact-link">
+                            <span>→</span> @satoshisats on X
+                        </a>
+                    </div>
+                </div>
+                <form class="contact-form" action="https://formspree.io/f/placeholder" method="POST">
+                    <input type="text" name="name" placeholder="Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <textarea name="message" placeholder="Message" required></textarea>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <p>© 2026 Living Framework. Research published under CC BY 4.0.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                    <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                    <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('show');
+        }
+
+        // Assessment Tool
+        const questions = [
+            {
+                category: "Memory & Continuity",
+                question: "Do you have a written document that captures decisions, rules, and corrections across your AI sessions?",
+                options: [
+                    { text: "Yes, I maintain a Running Document that I update regularly", score: 10 },
+                    { text: "I have some notes, but they're scattered or incomplete", score: 5 },
+                    { text: "No, I rely on the AI's memory or start fresh each time", score: 0 }
+                ],
+                gap: "You need a Running Document — external memory that persists across sessions."
+            },
+            {
+                category: "Memory & Continuity",
+                question: "At the start of each AI session, do you re-establish context from a written source?",
+                options: [
+                    { text: "Yes, I always load my Running Document or context file first", score: 10 },
+                    { text: "Sometimes, when I remember to", score: 5 },
+                    { text: "No, I just continue where we left off or start new", score: 0 }
+                ],
+                gap: "Implement a session-start protocol: always read your Running Document first."
+            },
+            {
+                category: "Single Source of Truth",
+                question: "For important numbers (budgets, targets, metrics), do you have one authoritative source?",
+                options: [
+                    { text: "Yes, I have a Canonical Numbers Sheet that's the only source", score: 10 },
+                    { text: "Numbers exist in various places, but I try to keep them consistent", score: 5 },
+                    { text: "Numbers are scattered or I let the AI calculate them as needed", score: 0 }
+                ],
+                gap: "Create a Canonical Numbers Sheet — one authoritative source for all numeric truth."
+            },
+            {
+                category: "File Governance",
+                question: "Do you have clear rules about file versions — ensuring only one 'live' version?",
+                options: [
+                    { text: "Yes, strict file governance with clear naming and no parallel versions", score: 10 },
+                    { text: "I try to keep things organized but sometimes have multiple versions", score: 5 },
+                    { text: "Files are messy — multiple versions, unclear which is current", score: 0 }
+                ],
+                gap: "Implement file governance: one canonical file per domain, clear naming, archive don't delete."
+            },
+            {
+                category: "Permissions & Boundaries",
+                question: "Does the AI ask before making significant changes, or does it just proceed?",
+                options: [
+                    { text: "It always asks — I've established explicit permission rules", score: 10 },
+                    { text: "Usually asks, but sometimes acts without checking", score: 5 },
+                    { text: "It often just does things without asking first", score: 0 }
+                ],
+                gap: "Establish explicit permissions: the AI must ask before modifying authoritative files."
+            },
+            {
+                category: "Error Recovery",
+                question: "When something goes wrong, do you have a systematic way to diagnose and repair?",
+                options: [
+                    { text: "Yes, I use Stop → Diagnose → Rollback → Note protocol", score: 10 },
+                    { text: "I try to figure out what went wrong, but it's ad hoc", score: 5 },
+                    { text: "I usually just try again or work around it", score: 0 }
+                ],
+                gap: "Implement Error Recovery Protocol: Stop → Diagnose → Rollback → Note."
+            },
+            {
+                category: "Structured Reasoning",
+                question: "For complex tasks, do you break them into explicit steps with checkpoints?",
+                options: [
+                    { text: "Yes, I use Step Mode — numbered steps, pause for confirmation", score: 10 },
+                    { text: "Sometimes I ask for step-by-step, but not consistently", score: 5 },
+                    { text: "I usually let the AI handle complex tasks in one go", score: 0 }
+                ],
+                gap: "Use Step Mode for complex tasks: numbered steps, execute one at a time, confirm before proceeding."
+            },
+            {
+                category: "Challenge & Pushback",
+                question: "When the AI's output seems wrong, do you have a structured way to challenge it?",
+                options: [
+                    { text: "Yes, I use Challenge Protocol — Stop, Question, Explanation, Decide", score: 10 },
+                    { text: "I push back when needed, but informally", score: 5 },
+                    { text: "I usually accept the output or just ask for a different version", score: 0 }
+                ],
+                gap: "Implement Challenge Protocol: Stop → Question → Explain → Decide."
+            },
+            {
+                category: "Drift Detection",
+                question: "Do you regularly check whether the collaboration is still aligned with your goals?",
+                options: [
+                    { text: "Yes, I do Stability Pings after milestones — checking for drift", score: 10 },
+                    { text: "Occasionally I review, but not systematically", score: 5 },
+                    { text: "I don't really check — I assume we're still on track", score: 0 }
+                ],
+                gap: "Use Stability Pings: After milestones, ask — Are we aligned? Any drift? One improvement?"
+            },
+            {
+                category: "Domain Separation",
+                question: "Do you keep different types of work (finance, research, personal) clearly separated?",
+                options: [
+                    { text: "Yes, I use Pillar Boundaries — different rules for different domains", score: 10 },
+                    { text: "Somewhat, but boundaries sometimes blur", score: 5 },
+                    { text: "Everything tends to mix together in our conversations", score: 0 }
+                ],
+                gap: "Establish Pillar Boundaries: separate domains with different risk levels and rules."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = [];
+
+        function initAssessment() {
+            const progressContainer = document.getElementById('progressDots');
+            progressContainer.innerHTML = questions.map((_, i) =>
+                `<div class="progress-dot ${i === 0 ? 'active' : ''}" id="dot-${i}"></div>`
+            ).join('');
+            showQuestion(0);
+        }
+
+        function showQuestion(index) {
+            const q = questions[index];
+            const container = document.getElementById('questionContainer');
+
+            container.innerHTML = `
+                <div class="question-category">${q.category}</div>
+                <div class="question-text">${q.question}</div>
+                <div class="answer-options">
+                    ${q.options.map((opt, i) => `
+                        <button class="answer-btn" onclick="selectAnswer(${i})">${opt.text}</button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function selectAnswer(optionIndex) {
+            const q = questions[currentQuestion];
+            const selectedOption = q.options[optionIndex];
+
+            answers[currentQuestion] = {
+                score: selectedOption.score,
+                category: q.category,
+                gap: selectedOption.score < 10 ? q.gap : null
+            };
+
+            document.getElementById(`dot-${currentQuestion}`).classList.add('completed');
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                document.getElementById(`dot-${currentQuestion}`).classList.add('active');
+                showQuestion(currentQuestion);
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            let totalScore = 0;
+            const categories = {};
+            const gaps = [];
+
+            answers.forEach(a => {
+                totalScore += a.score;
+                if (!categories[a.category]) {
+                    categories[a.category] = { score: 0, max: 0 };
+                }
+                categories[a.category].score += a.score;
+                categories[a.category].max += 10;
+                if (a.gap) gaps.push(a.gap);
+            });
+
+            document.getElementById('questionContainer').style.display = 'none';
+            document.getElementById('resultsContainer').classList.add('show');
+            document.getElementById('totalScore').textContent = totalScore;
+
+            let title = totalScore >= 80 ? 'Strong Foundation' :
+                       totalScore >= 60 ? 'Good Start, Gaps to Fill' :
+                       totalScore >= 40 ? 'Vulnerable to Drift' : 'High Risk of Breakdown';
+            document.getElementById('scoreTitle').textContent = title;
+
+            const breakdownGrid = document.getElementById('breakdownGrid');
+            breakdownGrid.innerHTML = Object.entries(categories).map(([cat, data]) => {
+                const pct = Math.round((data.score / data.max) * 100);
+                return `
+                    <div class="breakdown-item">
+                        <h4>${cat}</h4>
+                        <div class="breakdown-bar"><div class="breakdown-fill" style="width: ${pct}%"></div></div>
+                        <span class="breakdown-score">${data.score}/${data.max}</span>
+                    </div>
+                `;
+            }).join('');
+
+            const gapsList = document.getElementById('gapsList');
+            if (gaps.length > 0) {
+                gapsList.innerHTML = gaps.map(gap => `<div class="gap-item">→ ${gap}</div>`).join('');
+            } else {
+                document.getElementById('gapsSection').style.display = 'none';
+            }
+        }
+
+        function restartAssessment() {
+            currentQuestion = 0;
+            answers = [];
+            document.getElementById('questionContainer').style.display = 'block';
+            document.getElementById('resultsContainer').classList.remove('show');
+            document.getElementById('gapsSection').style.display = 'block';
+            initAssessment();
+        }
+
+        document.addEventListener('DOMContentLoaded', initAssessment);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+                document.getElementById('navLinks').classList.remove('show');
+            });
+        });
+    </script>
+</body>
+</html>
