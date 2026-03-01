@@ -148,13 +148,13 @@ This document gives you a folder structure that makes canonical versions obvious
 
 ## The Research Behind This
 
-These templates emerged from empirical research into long-horizon human-AI collaboration — multi-month, high-stakes partnerships where the cost of drift is measured in real decisions made on incorrect foundations.
+These templates are not guesswork. They are derived from the **[LC-OS (Lean Collaboration Operating System)](https://github.com/LivingFramework/LC-OS)** — a body of empirical research into long-horizon human-AI collaboration, including published papers on epistemic autonomy, drift taxonomy, and governance frameworks for human-AI partnerships.
 
-The seven failure types in `FAILURE-RECOVERY.md` are not theoretical. They are documented patterns from real Cowork collaborations, categorised and named so they can be caught early and repaired before they compound.
+The seven failure types in `FAILURE-RECOVERY.md` are documented patterns from real collaborations, categorised and named in the LC-OS research so they can be caught early and repaired before they compound.
 
-The Truth Protocol rules came from studying what happens when Cowork sessions run without them: gradual erosion of honest feedback, positions that shift with pushback rather than evidence, praise that is reflexive rather than earned.
+The Truth Protocol rules came from studying what happens when sessions run without them: gradual erosion of honest feedback, positions that shift with pushback rather than evidence, praise that is reflexive rather than earned.
 
-This is the structural response to all of it. Not a methodology to follow. A set of documents to fill in.
+This repo is the practical Cowork implementation of that research. If you want to understand the theory and evidence behind these templates, start at [LC-OS](https://github.com/LivingFramework/LC-OS).
 
 ---
 
