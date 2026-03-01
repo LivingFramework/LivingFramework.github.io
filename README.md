@@ -158,6 +158,19 @@ This repo is the practical Cowork implementation of that research. If you want t
 
 ---
 
+---
+
+## The Living Framework Ecosystem
+
+| | Resource | What it contains |
+|--|----------|-----------------|
+| 🌐 | [**Website**](https://livingframework.github.io/) | Full documentation, AI readiness assessment, quick-start guide |
+| 📚 | [**LC-OS Research**](https://github.com/LivingFramework/LC-OS) | Four published papers, Mahdi Ledger, empirical foundations |
+| 🛠️ | [**LC-OS Project**](https://github.com/LivingFramework/LC-OS-Project) | Practitioner toolkit — templates, worked examples, field manual |
+| ⚙️ | [**Cowork Templates**](https://github.com/LivingFramework/LivingFramework.github.io) | Governance templates optimised for Claude Cowork |
+
+*Each resource is standalone. Together they form a complete governance stack — from theory to daily practice.*
+
 ## How to Contribute
 
 These templates are live — they improve from real use.
