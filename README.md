@@ -2,6 +2,8 @@
 
 > Eight documents that turn Claude Cowork into a genuine long-horizon partner — not a capable assistant that forgets everything between sessions.
 
+> 🌐 **[Full documentation and assessment tool → livingframework.github.io](https://livingframework.github.io/)**
+
 Most people use AI like a search engine — ask, receive, discard. The results are impressive for isolated tasks. For sustained collaboration over months, they are quietly catastrophic.
 
 Every new Cowork session, Claude starts with no memory. Without structure, it reconstructs context from fragments, drifts from earlier decisions, and gradually shifts from a genuine collaborator into a capable but uninformed assistant. The collaboration feels fine. It is silently breaking.
