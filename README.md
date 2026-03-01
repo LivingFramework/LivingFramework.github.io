@@ -1,12 +1,12 @@
-# LC-OS: The Living Collaboration Operating System
+# Governance Templates for Claude Cowork
 
-> Governance templates for sustainable, long-horizon human-AI collaboration.
+> Eight documents that turn Claude Cowork into a genuine long-horizon partner — not a capable assistant that forgets everything between sessions.
 
 Most people use AI like a search engine — ask, receive, discard. The results are impressive for isolated tasks. For sustained collaboration over months, they are quietly catastrophic.
 
-Every new session, Claude starts with no memory. Without structure, it reconstructs context from fragments, drifts from earlier decisions, and gradually shifts from a genuine collaborator into a capable but uninformed assistant. The collaboration feels fine. It is silently breaking.
+Every new Cowork session, Claude starts with no memory. Without structure, it reconstructs context from fragments, drifts from earlier decisions, and gradually shifts from a genuine collaborator into a capable but uninformed assistant. The collaboration feels fine. It is silently breaking.
 
-LC-OS is the structural answer to this problem. It is a set of governance documents — templates you fill in once and reference forever — that give Claude what it cannot give itself: continuity, honesty, and a clear operating agreement.
+These templates are the structural fix. Fill them in once, reference them forever. They give Claude what it cannot give itself: continuity, honesty, and a clear operating agreement — session after session.
 
 ---
 
@@ -34,7 +34,7 @@ When you reference a number from three sessions ago, Claude doesn't look it up �
 
 Over time: drift. Numbers shift slightly. Decisions get re-made. Truth softens. The collaboration that felt productive begins producing work that contradicts itself.
 
-LC-OS prevents this by making everything explicit. One document per domain. One canonical version per decision. One agreed rule for handling disagreement.
+These templates prevent this by making everything explicit. One document per domain. One canonical version per decision. One agreed rule for handling disagreement.
 
 ---
 
@@ -148,13 +148,13 @@ This document gives you a folder structure that makes canonical versions obvious
 
 ## The Research Behind This
 
-LC-OS emerged from empirical research into long-horizon human-AI collaboration — multi-month, high-stakes partnerships where the cost of drift is measured in real decisions made on incorrect foundations.
+These templates emerged from empirical research into long-horizon human-AI collaboration — multi-month, high-stakes partnerships where the cost of drift is measured in real decisions made on incorrect foundations.
 
-The seven failure types in `FAILURE-RECOVERY.md` are not theoretical. They are documented patterns from real collaborations, categorised and named so they can be caught early and repaired before they compound.
+The seven failure types in `FAILURE-RECOVERY.md` are not theoretical. They are documented patterns from real Cowork collaborations, categorised and named so they can be caught early and repaired before they compound.
 
-The Truth Protocol rules came from studying what happens when AI systems are used without them: gradual erosion of honest feedback, positions that shift with pushback rather than evidence, praise that is reflexive rather than earned.
+The Truth Protocol rules came from studying what happens when Cowork sessions run without them: gradual erosion of honest feedback, positions that shift with pushback rather than evidence, praise that is reflexive rather than earned.
 
-LC-OS is the structural response to all of this. Not a methodology to follow. A set of documents to fill in.
+This is the structural response to all of it. Not a methodology to follow. A set of documents to fill in.
 
 ---
 
@@ -162,18 +162,16 @@ LC-OS is the structural response to all of this. Not a methodology to follow. A 
 
 These templates are live — they improve from real use.
 
-If you've been using LC-OS and discovered a failure mode not covered, a template structure that works better, or a prompt that produces consistently better results: open an issue or submit a pull request.
+If you've been using Claude Cowork and discovered a failure mode not covered, a template structure that works better, or a prompt that produces consistently better results: open an issue or submit a pull request.
 
-The goal is templates that work for non-technical users doing serious, sustained work with Claude — with no prior knowledge of AI systems required.
+The goal is templates that work for non-technical users doing serious, sustained work with Claude Cowork — with no prior knowledge of AI systems required.
 
 ---
 
 ## Compatibility
 
-These templates are designed for **Claude with Cowork** (Claude desktop app) but the principles apply to any sustained collaboration with any AI system.
-
-The Cowork-specific features (scheduled tasks, companion update files) are noted explicitly. Everything else works in any Claude interface.
+These templates are built for **Claude Cowork** (Claude desktop app). The core documents — Running Document, Partnership Agreement, Truth Protocol — work in any Claude interface. Cowork-specific features (scheduled tasks, companion update files) are labelled clearly.
 
 ---
 
-*Built from research. Tested in long-horizon collaboration. Designed for people doing serious work with AI.*
+*Built from research into long-horizon human-AI collaboration. Designed for people doing serious, sustained work with Claude Cowork.*
