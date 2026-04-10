@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Living Framework | AI Governance That Actually Works</title>
-    <meta name="description" content="Practical frameworks for long-horizon human-AI collaboration. Built from 18 months of real work, not theory.">
+    <title>Living Framework | Rishi Sood — AI Governance Research</title>
+    <meta name="description" content="8 peer-reviewed papers on making long-horizon human-AI collaboration reliable. By Rishi Sood — 18 months of empirical research, 6,000+ downloads. Free frameworks, templates, and assessment tool.">
+    <meta property="og:title" content="Living Framework | AI Governance Research by Rishi Sood">
+    <meta property="og:description" content="8 papers. 18 months. 6,000+ downloads. Practical governance frameworks for reliable long-horizon human-AI collaboration.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://livingframework.github.io/">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,15 +37,8 @@
             --radius-lg: 20px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: var(--font-display);
@@ -53,14 +50,10 @@
             overflow-x: hidden;
         }
 
-        /* Subtle grid background */
         body::before {
             content: '';
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-image:
                 linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
@@ -69,43 +62,15 @@
             z-index: 0;
         }
 
-        /* Typography */
-        h1, h2, h3, h4 {
-            font-weight: 500;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
-
-        h1 {
-            font-size: clamp(2.5rem, 7vw, 4.5rem);
-            font-weight: 600;
-            letter-spacing: -0.03em;
-        }
-        h2 {
-            font-size: clamp(1.75rem, 4vw, 2.5rem);
-            margin-bottom: 1rem;
-        }
-        h3 {
-            font-size: 1.25rem;
-            margin-bottom: 0.5rem;
-        }
-
-        p {
-            margin-bottom: 1rem;
-            color: var(--color-text-secondary);
-        }
+        h1, h2, h3, h4 { font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; }
+        h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-weight: 600; letter-spacing: -0.03em; }
+        h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); margin-bottom: 1rem; }
+        h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        p { margin-bottom: 1rem; color: var(--color-text-secondary); }
         p:last-child { margin-bottom: 0; }
+        a { color: var(--color-accent); text-decoration: none; transition: all 0.2s ease; }
+        a:hover { color: #34d399; }
 
-        a {
-            color: var(--color-accent);
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-        a:hover {
-            color: #34d399;
-        }
-
-        /* Layout */
         .container {
             max-width: var(--max-width);
             margin: 0 auto;
@@ -114,17 +79,12 @@
             z-index: 1;
         }
 
-        section {
-            padding: 120px 0;
-            position: relative;
-        }
+        section { padding: 120px 0; position: relative; }
 
         /* Navigation */
         nav {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             z-index: 1000;
             padding: 16px 0;
             background: rgba(9, 9, 11, 0.8);
@@ -151,8 +111,7 @@
         }
 
         .logo-mark {
-            width: 28px;
-            height: 28px;
+            width: 28px; height: 28px;
             background: linear-gradient(135deg, var(--color-accent) 0%, #059669 100%);
             border-radius: 6px;
             display: flex;
@@ -162,22 +121,9 @@
             font-weight: 700;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 32px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: var(--color-text-secondary);
-            font-size: 14px;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: var(--color-text);
-        }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
+        .nav-links a { color: var(--color-text-secondary); font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--color-text); }
 
         .nav-cta {
             padding: 8px 16px;
@@ -189,20 +135,9 @@
             font-weight: 500;
             transition: all 0.2s;
         }
+        .nav-cta:hover { background: var(--color-bg-hover); border-color: var(--color-border-hover); }
 
-        .nav-cta:hover {
-            background: var(--color-bg-hover);
-            border-color: var(--color-border-hover);
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--color-text);
-            font-size: 24px;
-            cursor: pointer;
-        }
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--color-text); font-size: 24px; cursor: pointer; }
 
         /* Hero */
         .hero {
@@ -214,26 +149,19 @@
             overflow: hidden;
         }
 
-        /* Hero glow effect */
         .hero::before {
             content: '';
             position: absolute;
-            top: -20%;
-            left: 50%;
+            top: -20%; left: 50%;
             transform: translateX(-50%);
-            width: 800px;
-            height: 600px;
+            width: 800px; height: 600px;
             background: radial-gradient(ellipse, var(--color-accent-glow) 0%, transparent 60%);
             opacity: 0.3;
             filter: blur(80px);
             pointer-events: none;
         }
 
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-        }
+        .hero-content { position: relative; z-index: 1; max-width: 800px; }
 
         .hero-badge {
             display: inline-flex;
@@ -251,22 +179,15 @@
 
         .hero-badge::before {
             content: '';
-            width: 6px;
-            height: 6px;
+            width: 6px; height: 6px;
             background: var(--color-accent);
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.4; }
-        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        .hero h1 {
-            margin-bottom: 24px;
-        }
-
+        .hero h1 { margin-bottom: 24px; }
         .hero h1 .gradient-text {
             background: linear-gradient(135deg, var(--color-accent) 0%, #34d399 50%, #6ee7b7 100%);
             -webkit-background-clip: text;
@@ -274,20 +195,8 @@
             background-clip: text;
         }
 
-        .hero-subtitle {
-            font-size: 1.25rem;
-            color: var(--color-text-secondary);
-            max-width: 600px;
-            margin-bottom: 40px;
-            line-height: 1.7;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: 16px;
-            flex-wrap: wrap;
-            margin-bottom: 80px;
-        }
+        .hero-subtitle { font-size: 1.25rem; color: var(--color-text-secondary); max-width: 600px; margin-bottom: 40px; line-height: 1.7; }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 80px; }
 
         /* Buttons */
         .btn {
@@ -304,52 +213,16 @@
             border: none;
         }
 
-        .btn-primary {
-            background: var(--color-accent);
-            color: #000;
-        }
-
-        .btn-primary:hover {
-            background: #34d399;
-            color: #000;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px var(--color-accent-glow);
-        }
-
-        .btn-secondary {
-            background: var(--color-surface);
-            color: var(--color-text);
-            border: 1px solid var(--color-border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--color-bg-hover);
-            border-color: var(--color-border-hover);
-        }
+        .btn-primary { background: var(--color-accent); color: #000; }
+        .btn-primary:hover { background: #34d399; color: #000; transform: translateY(-2px); box-shadow: 0 8px 30px var(--color-accent-glow); }
+        .btn-secondary { background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); }
+        .btn-secondary:hover { background: var(--color-bg-hover); border-color: var(--color-border-hover); }
 
         /* Stats */
-        .hero-stats {
-            display: flex;
-            gap: 48px;
-        }
-
-        .stat {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: var(--color-text);
-            letter-spacing: -0.02em;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: var(--color-text-tertiary);
-            font-weight: 500;
-        }
+        .hero-stats { display: flex; gap: 48px; }
+        .stat { display: flex; flex-direction: column; }
+        .stat-value { font-size: 2.5rem; font-weight: 600; color: var(--color-text); letter-spacing: -0.02em; }
+        .stat-label { font-size: 14px; color: var(--color-text-tertiary); font-weight: 500; }
 
         /* Section headers */
         .section-label {
@@ -364,214 +237,115 @@
             letter-spacing: 0.1em;
             margin-bottom: 16px;
         }
-
-        .section-label::before {
-            content: '';
-            width: 20px;
-            height: 1px;
-            background: var(--color-accent);
-        }
+        .section-label::before { content: ''; width: 20px; height: 1px; background: var(--color-accent); }
 
         /* Problem Section */
-        .problem {
-            background: var(--color-bg-elevated);
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-        }
+        .problem { background: var(--color-bg-elevated); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .problem-header { max-width: 700px; margin-bottom: 64px; }
+        .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--color-border); border-radius: var(--radius-md); overflow: hidden; }
+        .problem-card { padding: 32px; background: var(--color-bg); transition: background 0.3s; }
+        .problem-card:hover { background: var(--color-bg-elevated); }
+        .problem-card h3 { color: var(--color-text); margin-bottom: 12px; }
+        .problem-card p { font-size: 14px; color: var(--color-text-tertiary); line-height: 1.6; }
 
-        .problem-header {
-            max-width: 700px;
-            margin-bottom: 64px;
-        }
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1px;
-            background: var(--color-border);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-        }
-
-        .problem-card {
-            padding: 32px;
-            background: var(--color-bg);
-            transition: background 0.3s;
-        }
-
-        .problem-card:hover {
-            background: var(--color-bg-elevated);
-        }
-
-        .problem-card h3 {
-            color: var(--color-text);
-            margin-bottom: 12px;
-        }
-
-        .problem-card p {
-            font-size: 14px;
-            color: var(--color-text-tertiary);
-            line-height: 1.6;
-        }
-
-        /* Framework Section */
-        .framework-intro {
-            max-width: 700px;
-            margin-bottom: 64px;
-        }
-
-        .framework-intro p {
-            font-size: 1.1rem;
-        }
-
-        .controls-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .control-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 16px;
-            padding: 24px;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            transition: all 0.2s;
-        }
-
-        .control-item:hover {
-            border-color: var(--color-border-hover);
-            background: var(--color-bg-elevated);
-        }
-
-        .control-number {
-            font-family: var(--font-mono);
-            font-size: 12px;
-            font-weight: 500;
-            color: var(--color-accent);
-            padding: 4px 8px;
-            background: var(--color-accent-dim);
-            border-radius: 4px;
-            white-space: nowrap;
-        }
-
-        .control-content h4 {
-            font-weight: 500;
-            margin-bottom: 4px;
-            color: var(--color-text);
-        }
-
-        .control-content p {
-            font-size: 14px;
-            color: var(--color-text-tertiary);
-            margin-bottom: 0;
-        }
-
-        /* Protocols */
-        .protocols {
-            background: var(--color-bg-elevated);
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .protocols-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .protocol-card {
-            padding: 32px;
-            background: var(--color-bg);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .protocol-card::before {
+        /* Journey / Timeline */
+        .journey { background: var(--color-bg); }
+        .timeline { position: relative; margin-top: 64px; }
+        .timeline::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.3s;
+            left: 120px;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--color-accent), var(--color-border), var(--color-border), transparent);
         }
-
-        .protocol-card:hover {
-            border-color: var(--color-border-hover);
-            transform: translateY(-4px);
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 0 40px;
+            margin-bottom: 48px;
+            position: relative;
         }
-
-        .protocol-card:hover::before {
-            opacity: 1;
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-time {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: var(--color-text-tertiary);
+            text-align: right;
+            padding-top: 4px;
+            line-height: 1.4;
         }
-
-        .protocol-card h3 {
-            color: var(--color-text);
+        .timeline-dot {
+            position: absolute;
+            left: 112px;
+            top: 6px;
+            width: 17px; height: 17px;
+            border-radius: 50%;
+            background: var(--color-bg);
+            border: 2px solid var(--color-accent);
+            z-index: 1;
         }
-
-        .protocol-card .subtitle {
+        .timeline-dot.highlight { background: var(--color-accent); }
+        .timeline-content {
+            padding-left: 8px;
+        }
+        .timeline-tag {
             font-family: var(--font-mono);
             font-size: 11px;
             color: var(--color-accent);
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 16px;
+            letter-spacing: 0.08em;
+            margin-bottom: 6px;
         }
+        .timeline-content h3 { color: var(--color-text); margin-bottom: 6px; font-size: 1.1rem; }
+        .timeline-content p { font-size: 14px; color: var(--color-text-tertiary); margin-bottom: 0; max-width: 600px; }
 
-        .protocol-card p {
-            font-size: 14px;
-            color: var(--color-text-tertiary);
-        }
+        /* Framework Section */
+        .framework-intro { max-width: 700px; margin-bottom: 64px; }
+        .framework-intro p { font-size: 1.1rem; }
+        .controls-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        .control-item { display: flex; align-items: flex-start; gap: 16px; padding: 24px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); transition: all 0.2s; }
+        .control-item:hover { border-color: var(--color-border-hover); background: var(--color-bg-elevated); }
+        .control-number { font-family: var(--font-mono); font-size: 12px; font-weight: 500; color: var(--color-accent); padding: 4px 8px; background: var(--color-accent-dim); border-radius: 4px; white-space: nowrap; }
+        .control-content h4 { font-weight: 500; margin-bottom: 4px; color: var(--color-text); }
+        .control-content p { font-size: 14px; color: var(--color-text-tertiary); margin-bottom: 0; }
+
+        /* Protocols */
+        .protocols { background: var(--color-bg-elevated); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .protocols-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .protocol-card { padding: 32px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); transition: all 0.3s; position: relative; overflow: hidden; }
+        .protocol-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--color-accent) 0%, transparent 100%); opacity: 0; transition: opacity 0.3s; }
+        .protocol-card:hover { border-color: var(--color-border-hover); transform: translateY(-4px); }
+        .protocol-card:hover::before { opacity: 1; }
+        .protocol-card h3 { color: var(--color-text); }
+        .protocol-card .subtitle { font-family: var(--font-mono); font-size: 11px; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+        .protocol-card p { font-size: 14px; color: var(--color-text-tertiary); }
 
         /* Research Section */
-        .papers-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .papers-grid { display: flex; flex-direction: column; gap: 12px; }
 
         .paper-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all 0.2s;
+            overflow: hidden;
+        }
+        .paper-card:hover { border-color: var(--color-border-hover); background: var(--color-bg-elevated); }
+
+        .paper-card-main {
             display: grid;
             grid-template-columns: 60px 1fr auto;
             gap: 24px;
             padding: 24px 32px;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
             align-items: center;
-            transition: all 0.2s;
         }
 
-        .paper-card:hover {
-            border-color: var(--color-border-hover);
-            background: var(--color-bg-elevated);
-        }
+        .paper-number { font-family: var(--font-mono); font-size: 2rem; font-weight: 600; color: var(--color-text-tertiary); }
+        .paper-info h3 { color: var(--color-text); margin-bottom: 4px; }
+        .paper-info p { font-size: 14px; color: var(--color-text-tertiary); margin-bottom: 0; }
 
-        .paper-number {
-            font-family: var(--font-mono);
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--color-text-tertiary);
-        }
-
-        .paper-info h3 {
-            color: var(--color-text);
-            margin-bottom: 4px;
-        }
-
-        .paper-info p {
-            font-size: 14px;
-            color: var(--color-text-tertiary);
-            margin-bottom: 0;
-        }
+        .paper-actions { display: flex; gap: 8px; align-items: center; flex-shrink: 0; }
 
         .paper-link {
             font-family: var(--font-mono);
@@ -584,487 +358,254 @@
             border-radius: var(--radius-sm);
             transition: all 0.2s;
         }
+        .paper-link:hover { background: var(--color-accent-dim); border-color: var(--color-accent); }
 
-        .paper-link:hover {
-            background: var(--color-accent-dim);
-            border-color: var(--color-accent);
+        .paper-expand-btn {
+            background: none;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            color: var(--color-text-tertiary);
+            font-size: 18px;
+            width: 40px; height: 40px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            line-height: 1;
         }
+        .paper-expand-btn:hover { border-color: var(--color-border-hover); color: var(--color-text); }
 
-        /* Diagnostic */
-        .diagnostic {
+        .paper-abstract {
+            display: none;
+            padding: 0 32px 24px 116px;
+            border-top: 1px solid var(--color-border);
+        }
+        .paper-abstract.open { display: block; padding-top: 24px; }
+        .paper-abstract p { font-size: 14px; line-height: 1.8; color: var(--color-text-secondary); margin-bottom: 16px; }
+
+        .cite-block {
+            margin-top: 16px;
+            padding: 14px 18px;
+            background: var(--color-bg);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .cite-text {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--color-text-tertiary);
+            line-height: 1.6;
+            flex: 1;
+        }
+        .cite-copy-btn {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 4px;
+            color: var(--color-text-secondary);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            padding: 6px 12px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .cite-copy-btn:hover { border-color: var(--color-accent); color: var(--color-accent); }
+        .cite-copy-btn.copied { color: var(--color-accent); border-color: var(--color-accent); }
+
+        /* Mahdi Ledger Spotlight */
+        .mahdi-spotlight {
             background: var(--color-bg-elevated);
             border-top: 1px solid var(--color-border);
             border-bottom: 1px solid var(--color-border);
         }
-
-        .diagnostic-header {
-            max-width: 600px;
-            margin-bottom: 48px;
+        .mahdi-inner {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
         }
-
-        .diagnostic-container {
-            max-width: 700px;
-            margin: 0 auto;
+        .mahdi-text h2 { margin-bottom: 16px; }
+        .mahdi-text p { font-size: 1.05rem; line-height: 1.8; }
+        .mahdi-text .mahdi-quote {
+            margin: 32px 0;
+            padding: 24px 32px;
+            border-left: 3px solid var(--color-accent);
+            background: var(--color-surface);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        }
+        .mahdi-quote p {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--color-text);
+            line-height: 1.7;
+            margin-bottom: 8px;
+        }
+        .mahdi-quote span { font-size: 13px; color: var(--color-text-tertiary); font-family: var(--font-mono); }
+        .mahdi-card {
             padding: 48px;
             background: var(--color-bg);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-lg);
-        }
-
-        .diagnostic-progress {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 40px;
-        }
-
-        .progress-dot {
-            flex: 1;
-            height: 4px;
-            background: var(--color-bg-hover);
-            border-radius: 2px;
-            transition: background 0.3s;
-        }
-
-        .progress-dot.active,
-        .progress-dot.completed {
-            background: var(--color-accent);
-        }
-
-        .question-container {
-            min-height: 280px;
-        }
-
-        .question-category {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            font-weight: 500;
-            color: var(--color-accent);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 12px;
-        }
-
-        .question-text {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--color-text);
-            margin-bottom: 32px;
-            line-height: 1.4;
-        }
-
-        .answer-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .answer-btn {
-            padding: 16px 20px;
-            background: var(--color-surface);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
-            text-align: left;
-            cursor: pointer;
-            font-family: var(--font-display);
-            font-size: 15px;
-            color: var(--color-text-secondary);
-            transition: all 0.2s;
-        }
-
-        .answer-btn:hover {
-            border-color: var(--color-accent);
-            background: var(--color-accent-dim);
-            color: var(--color-text);
-        }
-
-        .results-container {
-            display: none;
-        }
-
-        .results-container.show {
-            display: block;
-        }
-
-        .score-display {
             text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 40px;
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .score-circle {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            background: var(--color-accent-dim);
-            border: 2px solid var(--color-accent);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-
-        .score-value {
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--color-accent);
-            line-height: 1;
-        }
-
-        .score-label {
-            font-size: 12px;
-            color: var(--color-text-tertiary);
-        }
-
-        .score-title {
-            font-size: 1.25rem;
-            color: var(--color-text);
-        }
-
-        .breakdown-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .breakdown-item {
-            padding: 16px;
-            background: var(--color-surface);
-            border-radius: var(--radius-sm);
-        }
-
-        .breakdown-item h4 {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--color-text-secondary);
-            margin-bottom: 8px;
-        }
-
-        .breakdown-bar {
-            height: 4px;
-            background: var(--color-bg-hover);
-            border-radius: 2px;
+            position: relative;
             overflow: hidden;
-            margin-bottom: 4px;
         }
-
-        .breakdown-fill {
-            height: 100%;
-            background: var(--color-accent);
-            border-radius: 2px;
-            transition: width 0.5s ease;
+        .mahdi-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--color-accent), #34d399, #6ee7b7);
         }
-
-        .breakdown-score {
-            font-family: var(--font-mono);
+        .mahdi-card-number { font-family: var(--font-mono); font-size: 5rem; font-weight: 700; color: var(--color-accent); opacity: 0.15; line-height: 1; margin-bottom: 16px; }
+        .mahdi-card h3 { color: var(--color-text); font-size: 1.5rem; margin-bottom: 16px; }
+        .mahdi-card p { font-size: 14px; color: var(--color-text-tertiary); margin-bottom: 32px; }
+        .mahdi-tags { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+        .tag {
+            padding: 4px 12px;
+            background: var(--color-accent-dim);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 100px;
             font-size: 12px;
-            color: var(--color-text-tertiary);
+            font-family: var(--font-mono);
+            color: var(--color-accent);
         }
 
-        .gaps-section {
-            padding: 24px;
-            background: rgba(234, 179, 8, 0.1);
-            border: 1px solid rgba(234, 179, 8, 0.2);
-            border-radius: var(--radius-md);
-            margin-bottom: 32px;
-        }
-
-        .gaps-section h4 {
-            font-size: 14px;
-            font-weight: 500;
-            color: #eab308;
-            margin-bottom: 16px;
-        }
-
-        .gap-item {
-            padding: 8px 0;
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            border-bottom: 1px solid rgba(234, 179, 8, 0.1);
-        }
-
-        .gap-item:last-child {
-            border-bottom: none;
-        }
-
-        .results-actions {
-            display: flex;
-            gap: 12px;
-            justify-content: center;
-        }
+        /* Diagnostic */
+        .diagnostic { background: var(--color-bg-elevated); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .diagnostic-header { max-width: 600px; margin-bottom: 48px; }
+        .diagnostic-container { max-width: 700px; margin: 0 auto; padding: 48px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-lg); }
+        .diagnostic-progress { display: flex; gap: 8px; margin-bottom: 40px; }
+        .progress-dot { flex: 1; height: 4px; background: var(--color-bg-hover); border-radius: 2px; transition: background 0.3s; }
+        .progress-dot.active, .progress-dot.completed { background: var(--color-accent); }
+        .question-container { min-height: 280px; }
+        .question-category { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 12px; }
+        .question-text { font-size: 1.5rem; font-weight: 500; color: var(--color-text); margin-bottom: 32px; line-height: 1.4; }
+        .answer-options { display: flex; flex-direction: column; gap: 12px; }
+        .answer-btn { padding: 16px 20px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-sm); text-align: left; cursor: pointer; font-family: var(--font-display); font-size: 15px; color: var(--color-text-secondary); transition: all 0.2s; }
+        .answer-btn:hover { border-color: var(--color-accent); background: var(--color-accent-dim); color: var(--color-text); }
+        .results-container { display: none; }
+        .results-container.show { display: block; }
+        .score-display { text-align: center; margin-bottom: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--color-border); }
+        .score-circle { width: 140px; height: 140px; border-radius: 50%; background: var(--color-accent-dim); border: 2px solid var(--color-accent); display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0 auto 20px; }
+        .score-value { font-size: 3rem; font-weight: 600; color: var(--color-accent); line-height: 1; }
+        .score-label { font-size: 12px; color: var(--color-text-tertiary); }
+        .score-title { font-size: 1.25rem; color: var(--color-text); }
+        .breakdown-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; }
+        .breakdown-item { padding: 16px; background: var(--color-surface); border-radius: var(--radius-sm); }
+        .breakdown-item h4 { font-size: 13px; font-weight: 500; color: var(--color-text-secondary); margin-bottom: 8px; }
+        .breakdown-bar { height: 4px; background: var(--color-bg-hover); border-radius: 2px; overflow: hidden; margin-bottom: 4px; }
+        .breakdown-fill { height: 100%; background: var(--color-accent); border-radius: 2px; transition: width 0.5s ease; }
+        .breakdown-score { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-tertiary); }
+        .gaps-section { padding: 24px; background: rgba(234, 179, 8, 0.1); border: 1px solid rgba(234, 179, 8, 0.2); border-radius: var(--radius-md); margin-bottom: 32px; }
+        .gaps-section h4 { font-size: 14px; font-weight: 500; color: #eab308; margin-bottom: 16px; }
+        .gap-item { padding: 8px 0; font-size: 14px; color: var(--color-text-secondary); border-bottom: 1px solid rgba(234, 179, 8, 0.1); }
+        .gap-item:last-child { border-bottom: none; }
+        .results-actions { display: flex; gap: 12px; justify-content: center; }
 
         /* Templates */
-        .templates-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
+        .templates-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .template-card { padding: 32px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); transition: all 0.2s; }
+        .template-card:hover { border-color: var(--color-border-hover); transform: translateY(-2px); }
+        .template-card h3 { color: var(--color-text); margin-bottom: 8px; }
+        .template-card p { font-size: 14px; color: var(--color-text-tertiary); margin-bottom: 20px; }
+        .template-link { font-family: var(--font-mono); font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 6px; }
 
-        .template-card {
+        /* About */
+        .about-grid { display: grid; grid-template-columns: 320px 1fr; gap: 80px; align-items: start; }
+        .about-photo-col { position: sticky; top: 100px; }
+        .about-photo {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            object-position: center top;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            display: block;
+        }
+        .about-meta { margin-top: 24px; display: flex; flex-direction: column; gap: 10px; }
+        .about-meta-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--color-text-tertiary); }
+        .about-meta-item a { color: var(--color-text-secondary); font-size: 13px; }
+        .about-meta-item a:hover { color: var(--color-accent); }
+        .about-meta-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent); flex-shrink: 0; }
+
+        .about-text .lead { font-size: 1.5rem; font-weight: 500; color: var(--color-text); margin-bottom: 24px; line-height: 1.4; }
+        .about-text p { font-size: 1rem; line-height: 1.8; }
+        .about-belief {
+            margin-top: 40px;
             padding: 32px;
             background: var(--color-surface);
             border: 1px solid var(--color-border);
             border-radius: var(--radius-md);
-            transition: all 0.2s;
+            border-left: 3px solid var(--color-accent);
         }
-
-        .template-card:hover {
-            border-color: var(--color-border-hover);
-            transform: translateY(-2px);
-        }
-
-        .template-card h3 {
-            color: var(--color-text);
-            margin-bottom: 8px;
-        }
-
-        .template-card p {
-            font-size: 14px;
-            color: var(--color-text-tertiary);
-            margin-bottom: 20px;
-        }
-
-        .template-link {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
+        .about-belief p { font-size: 1.1rem; font-style: italic; color: var(--color-text); line-height: 1.7; margin-bottom: 0; }
 
         /* Services */
-        .services {
-            background: var(--color-bg-elevated);
-            border-top: 1px solid var(--color-border);
-            border-bottom: 1px solid var(--color-border);
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-        }
-
-        .service-card {
-            padding: 40px;
-            background: var(--color-bg);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            transition: all 0.3s;
-        }
-
-        .service-card:hover {
-            border-color: var(--color-accent);
-        }
-
-        .service-card h3 {
-            color: var(--color-text);
-            margin-bottom: 8px;
-        }
-
-        .service-card .price {
-            font-family: var(--font-mono);
-            font-size: 13px;
-            color: var(--color-accent);
-            margin-bottom: 16px;
-        }
-
-        .service-card p {
-            font-size: 14px;
-            color: var(--color-text-tertiary);
-        }
-
-        /* About */
-        .about-content {
-            max-width: 700px;
-        }
-
-        .about-content .lead {
-            font-size: 1.5rem;
-            font-weight: 500;
-            color: var(--color-text);
-            margin-bottom: 24px;
-            line-height: 1.4;
-        }
-
-        .about-content p {
-            font-size: 1rem;
-            line-height: 1.8;
-        }
+        .services { background: var(--color-bg-elevated); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .service-card { padding: 40px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: var(--radius-md); transition: all 0.3s; }
+        .service-card:hover { border-color: var(--color-accent); }
+        .service-card h3 { color: var(--color-text); margin-bottom: 8px; }
+        .service-card .service-tag { font-family: var(--font-mono); font-size: 11px; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; display: block; }
+        .service-card p { font-size: 14px; color: var(--color-text-tertiary); }
 
         /* Contact */
-        .contact {
-            background: var(--color-bg-elevated);
-            border-top: 1px solid var(--color-border);
-        }
-
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-        }
-
-        .contact-info p {
-            font-size: 1.1rem;
-            margin-bottom: 32px;
-        }
-
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-size: 1rem;
-            color: var(--color-text);
-        }
-
-        .contact-link:hover {
-            color: var(--color-accent);
-        }
-
-        .contact-cta {
-            padding: 48px;
-            background: var(--color-bg);
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-md);
-            text-align: center;
-        }
+        .contact { background: var(--color-bg); border-top: 1px solid var(--color-border); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+        .contact-info p { font-size: 1.1rem; margin-bottom: 32px; }
+        .contact-links { display: flex; flex-direction: column; gap: 16px; }
+        .contact-link { display: flex; align-items: center; gap: 12px; font-size: 1rem; color: var(--color-text); }
+        .contact-link:hover { color: var(--color-accent); }
+        .contact-cta { padding: 48px; background: var(--color-bg-elevated); border: 1px solid var(--color-border); border-radius: var(--radius-md); text-align: center; }
 
         /* Footer */
-        footer {
-            padding: 32px 0;
-            border-top: 1px solid var(--color-border);
-        }
-
-        .footer-inner {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-inner p {
-            font-size: 14px;
-            color: var(--color-text-tertiary);
-            margin: 0;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 24px;
-        }
-
-        .footer-links a {
-            font-size: 14px;
-            color: var(--color-text-tertiary);
-        }
-
-        .footer-links a:hover {
-            color: var(--color-text);
-        }
+        footer { padding: 32px 0; border-top: 1px solid var(--color-border); }
+        .footer-inner { display: flex; justify-content: space-between; align-items: center; }
+        .footer-inner p { font-size: 14px; color: var(--color-text-tertiary); margin: 0; }
+        .footer-links { display: flex; gap: 24px; }
+        .footer-links a { font-size: 14px; color: var(--color-text-tertiary); }
+        .footer-links a:hover { color: var(--color-text); }
 
         /* Responsive */
         @media (max-width: 1024px) {
-            .controls-grid,
-            .protocols-grid,
-            .templates-grid,
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .problem-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .controls-grid, .protocols-grid, .templates-grid, .services-grid { grid-template-columns: repeat(2, 1fr); }
+            .problem-grid { grid-template-columns: repeat(2, 1fr); }
+            .mahdi-inner { grid-template-columns: 1fr; gap: 48px; }
+            .about-grid { grid-template-columns: 260px 1fr; gap: 48px; }
         }
 
         @media (max-width: 768px) {
-            section {
-                padding: 80px 0;
-            }
-
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--color-bg);
-                flex-direction: column;
-                padding: 24px;
-                border-bottom: 1px solid var(--color-border);
-                gap: 16px;
-            }
-
-            .nav-links.show {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero-stats {
-                flex-direction: column;
-                gap: 24px;
-            }
-
-            .problem-grid,
-            .controls-grid,
-            .protocols-grid,
-            .templates-grid,
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .paper-card {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .paper-number {
-                display: none;
-            }
-
-            .paper-link {
-                justify-self: center;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-                gap: 48px;
-            }
-
-            .breakdown-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-inner {
-                flex-direction: column;
-                gap: 16px;
-                text-align: center;
-            }
-
-            .diagnostic-container {
-                padding: 32px 24px;
-            }
+            section { padding: 80px 0; }
+            .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--color-bg); flex-direction: column; padding: 24px; border-bottom: 1px solid var(--color-border); gap: 16px; }
+            .nav-links.show { display: flex; }
+            .mobile-menu-btn { display: block; }
+            .hero-stats { flex-direction: column; gap: 24px; }
+            .problem-grid, .controls-grid, .protocols-grid, .templates-grid, .services-grid { grid-template-columns: 1fr; }
+            .paper-card-main { grid-template-columns: 1fr; text-align: center; }
+            .paper-number { display: none; }
+            .paper-actions { justify-content: center; }
+            .paper-abstract { padding: 16px 20px 20px 20px; }
+            .timeline::before { left: 80px; }
+            .timeline-item { grid-template-columns: 80px 1fr; gap: 0 24px; }
+            .timeline-dot { left: 72px; }
+            .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+            .breakdown-grid { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+            .diagnostic-container { padding: 32px 24px; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-photo-col { position: static; }
+            .about-photo { max-width: 280px; aspect-ratio: 1/1; }
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .animate {
-            animation: fadeIn 0.6s ease forwards;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .animate { animation: fadeIn 0.6s ease forwards; }
     </style>
 </head>
 <body>
@@ -1082,6 +623,7 @@
                 <li><a href="#research">Research</a></li>
                 <li><a href="#diagnostic">Diagnostic</a></li>
                 <li><a href="#templates">Templates</a></li>
+                <li><a href="#about">About</a></li>
                 <li><a href="#contact" class="nav-cta">Contact</a></li>
             </ul>
         </div>
@@ -1095,7 +637,7 @@
                 <h1>Make AI collaboration <span class="gradient-text">reliable</span> over weeks, not minutes</h1>
                 <p class="hero-subtitle">Most AI workflows break after a few sessions. Context drifts. Decisions get lost. Trust erodes. Living Framework provides the governance infrastructure to make long-horizon collaboration actually work.</p>
                 <div class="hero-actions">
-                    <a href="#diagnostic" class="btn btn-primary">Take Assessment →</a>
+                    <a href="#diagnostic" class="btn btn-primary">Take the Assessment →</a>
                     <a href="#research" class="btn btn-secondary">Read the Research</a>
                 </div>
                 <div class="hero-stats">
@@ -1124,7 +666,6 @@
                 <h2>Week one feels like magic. Week three, you're untangling a mess.</h2>
                 <p>Everyone who works seriously with AI hits the same wall. The failures aren't about capability — they're about governance.</p>
             </div>
-
             <div class="problem-grid">
                 <div class="problem-card">
                     <h3>Context Drift</h3>
@@ -1154,6 +695,72 @@
         </div>
     </section>
 
+    <!-- Journey Section -->
+    <section class="journey" id="journey">
+        <div class="container">
+            <span class="section-label">The Research Journey</span>
+            <h2>18 months. 8 papers. One question.</h2>
+            <p style="max-width: 600px; font-size: 1.1rem;">Can long-horizon human-AI collaboration be made reliably stable — not through better models, but through better governance? This is how that question was answered.</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">Months 1–4<br>2024</div>
+                    <div class="timeline-dot highlight"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-tag">Paper 01 &amp; 02 — Foundation</div>
+                        <h3>Building the Control Stack</h3>
+                        <p>First documented that AI collaboration failures are governance failures, not capability failures. Introduced the 10-control framework (A1–A10) and the Lean Collaboration Operating System — a practical operating system for daily AI work.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Months 5–8<br>2024</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-tag">Paper 03 — Failure &amp; Repair</div>
+                        <h3>Mapping how collaborations break</h3>
+                        <p>Systematically documented every failure mode encountered across 18 months of real work. Built a taxonomy of breakdowns and a repair protocol for each. This paper exists because every failure was recorded, not discarded.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Months 9–12<br>2024</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-tag">Paper 04 — Philosophy</div>
+                        <h3>What it means to live with an AI</h3>
+                        <p>Moved beyond protocols into the deeper question: what is the nature of a governed human-AI partnership over time? Addressed relational dynamics, evolving trust, and the ethics of sustained collaboration.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Months 13–15<br>Early 2025</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-tag">Paper 05 — Language as Governance</div>
+                        <h3>Discovering the linguistic control layer</h3>
+                        <p>Found that language itself — not just protocols — functions as a governance mechanism. Specific conversational patterns (anchor phrases, repair invocations, scope-gating) predict and stabilise collaboration outcomes. Control without code.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Months 15–16<br>2025</div>
+                    <div class="timeline-dot highlight"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-tag">The Mahdi Ledger — A First in AI Research</div>
+                        <h3>The AI writes its own paper</h3>
+                        <p>The AI system, working under the Living Framework governance structure, produced a first-person research paper documenting its own experience of constraint, drift, and repair. To date one of the only papers in the field written from the AI system's perspective, under governance.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">Months 16–18<br>Early 2026</div>
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-tag">Papers 06 &amp; 07 — Systems &amp; Cognition</div>
+                        <h3>Formalising the theory</h3>
+                        <p>Two papers completing the arc: a governance architecture model showing how layered mechanisms produce reliable collaboration as an emergent systems property; and a distributed cognition model proposing that reasoning in human-AI systems is recoverable, governed, and lives at the level of the interaction — not inside any single participant.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Framework Section -->
     <section class="framework" id="framework">
         <div class="container">
@@ -1163,79 +770,18 @@
                 <p>A lightweight governance framework that makes long-horizon AI collaboration reliable. Not about restricting the AI — about giving it structure to be trustworthy.</p>
                 <p><strong style="color: var(--color-text);">Core insight:</strong> Reliability comes from governance, not capability. A well-structured collaboration with a standard model outperforms an unstructured one with a frontier model.</p>
             </div>
-
             <h3 style="margin-bottom: 24px; color: var(--color-text-secondary);">The 10 Controls</h3>
             <div class="controls-grid">
-                <div class="control-item">
-                    <span class="control-number">A1</span>
-                    <div class="control-content">
-                        <h4>Accuracy > Speed</h4>
-                        <p>Prioritise verification over throughput</p>
-                    </div>
-                </div>
-                <div class="control-item">
-                    <span class="control-number">A2</span>
-                    <div class="control-content">
-                        <h4>Single Source of Truth</h4>
-                        <p>Enforce canonical lookup for all numeric values</p>
-                    </div>
-                </div>
-                <div class="control-item">
-                    <span class="control-number">A3</span>
-                    <div class="control-content">
-                        <h4>File Registry & Checksums</h4>
-                        <p>Guarantee one live file and version traceability</p>
-                    </div>
-                </div>
-                <div class="control-item">
-                    <span class="control-number">A4</span>
-                    <div class="control-content">
-                        <h4>No Placeholders in Outputs</h4>
-                        <p>Forbid speculative or incomplete content in finals</p>
-                    </div>
-                </div>
-                <div class="control-item">
-                    <span class="control-number">A5</span>
-                    <div class="control-content">
-                        <h4>Sanity Checks & Unit Tests</h4>
-                        <p>Validate numerics and logic before publication</p>
-                    </div>
-                </div>
-                <div class="control-item">
-                    <span class="control-number">A6</span>
-                    <div class="control-content">
-                        <h4>Cross-Document Reconciliation</h4>
-                        <p>Keep Strategy ↔ Canonical consistency verified</p>
-                    </div>
-                </div>
-                <div class="control-item">
-                    <span class="control-number">A7</span>
-                    <div class="control-content">
-                        <h4>Drift Diagnostics & Rollback</h4>
-                        <p>Detect anomalies early, revert, and annotate causes</p>
-                    </div>
-                </div>
-                <div class="control-item">
-                    <span class="control-number">A8</span>
-                    <div class="control-content">
-                        <h4>Permissioned Actions & Approvals</h4>
-                        <p>Gate material changes through explicit consent</p>
-                    </div>
-                </div>
-                <div class="control-item">
-                    <span class="control-number">A9</span>
-                    <div class="control-content">
-                        <h4>Compaction & State Notes</h4>
-                        <p>Summarise long histories into concise digests</p>
-                    </div>
-                </div>
-                <div class="control-item">
-                    <span class="control-number">A10</span>
-                    <div class="control-content">
-                        <h4>Audit Trail & Release Process</h4>
-                        <p>Freeze, log, and archive artefacts for traceability</p>
-                    </div>
-                </div>
+                <div class="control-item"><span class="control-number">A1</span><div class="control-content"><h4>Accuracy > Speed</h4><p>Prioritise verification over throughput</p></div></div>
+                <div class="control-item"><span class="control-number">A2</span><div class="control-content"><h4>Single Source of Truth</h4><p>Enforce canonical lookup for all numeric values</p></div></div>
+                <div class="control-item"><span class="control-number">A3</span><div class="control-content"><h4>File Registry &amp; Checksums</h4><p>Guarantee one live file and version traceability</p></div></div>
+                <div class="control-item"><span class="control-number">A4</span><div class="control-content"><h4>No Placeholders in Outputs</h4><p>Forbid speculative or incomplete content in finals</p></div></div>
+                <div class="control-item"><span class="control-number">A5</span><div class="control-content"><h4>Sanity Checks &amp; Unit Tests</h4><p>Validate numerics and logic before publication</p></div></div>
+                <div class="control-item"><span class="control-number">A6</span><div class="control-content"><h4>Cross-Document Reconciliation</h4><p>Keep Strategy ↔ Canonical consistency verified</p></div></div>
+                <div class="control-item"><span class="control-number">A7</span><div class="control-content"><h4>Drift Diagnostics &amp; Rollback</h4><p>Detect anomalies early, revert, and annotate causes</p></div></div>
+                <div class="control-item"><span class="control-number">A8</span><div class="control-content"><h4>Permissioned Actions &amp; Approvals</h4><p>Gate material changes through explicit consent</p></div></div>
+                <div class="control-item"><span class="control-number">A9</span><div class="control-content"><h4>Compaction &amp; State Notes</h4><p>Summarise long histories into concise digests</p></div></div>
+                <div class="control-item"><span class="control-number">A10</span><div class="control-content"><h4>Audit Trail &amp; Release Process</h4><p>Freeze, log, and archive artefacts for traceability</p></div></div>
             </div>
         </div>
     </section>
@@ -1246,38 +792,13 @@
             <span class="section-label">Implementation</span>
             <h2>Core Protocols</h2>
             <p style="max-width: 600px; margin-bottom: 48px;">Six practical protocols that turn the controls into daily practice.</p>
-
             <div class="protocols-grid">
-                <div class="protocol-card">
-                    <h3>Running Documents</h3>
-                    <span class="subtitle">External Memory</span>
-                    <p>A continuously updated file preserving decisions, rules, and corrections across sessions. Read at every session start.</p>
-                </div>
-                <div class="protocol-card">
-                    <h3>Step Mode</h3>
-                    <span class="subtitle">Paced Reasoning</span>
-                    <p>Break complex tasks into numbered steps. Execute one at a time. Pause for confirmation before proceeding.</p>
-                </div>
-                <div class="protocol-card">
-                    <h3>Challenge Protocol</h3>
-                    <span class="subtitle">Structured Disagreement</span>
-                    <p>When something feels wrong: Stop → Question → AI explains → Decide to proceed, modify, or abort.</p>
-                </div>
-                <div class="protocol-card">
-                    <h3>Error Recovery</h3>
-                    <span class="subtitle">Systematic Repair</span>
-                    <p>When things break: Stop immediately → Diagnose → Rollback to stable state → Note the failure.</p>
-                </div>
-                <div class="protocol-card">
-                    <h3>Stability Ping</h3>
-                    <span class="subtitle">Drift Detection</span>
-                    <p>After milestones: Are we still aligned? Has drift crept in? One improvement before continuing?</p>
-                </div>
-                <div class="protocol-card">
-                    <h3>File and Version Governance</h3>
-                    <span class="subtitle">Version Control</span>
-                    <p>One canonical file per domain, controlled updates, and no parallel drafts. Prevents file fragmentation that causes contradictions and unreliable decisions.</p>
-                </div>
+                <div class="protocol-card"><h3>Running Documents</h3><span class="subtitle">External Memory</span><p>A continuously updated file preserving decisions, rules, and corrections across sessions. Read at every session start.</p></div>
+                <div class="protocol-card"><h3>Step Mode</h3><span class="subtitle">Paced Reasoning</span><p>Break complex tasks into numbered steps. Execute one at a time. Pause for confirmation before proceeding.</p></div>
+                <div class="protocol-card"><h3>Challenge Protocol</h3><span class="subtitle">Structured Disagreement</span><p>When something feels wrong: Stop → Question → AI explains → Decide to proceed, modify, or abort.</p></div>
+                <div class="protocol-card"><h3>Error Recovery</h3><span class="subtitle">Systematic Repair</span><p>When things break: Stop immediately → Diagnose → Rollback to stable state → Note the failure.</p></div>
+                <div class="protocol-card"><h3>Stability Ping</h3><span class="subtitle">Drift Detection</span><p>After milestones: Are we still aligned? Has drift crept in? One improvement before continuing?</p></div>
+                <div class="protocol-card"><h3>File &amp; Version Governance</h3><span class="subtitle">Version Control</span><p>One canonical file per domain, controlled updates, no parallel drafts. Prevents contradictions and unreliable decisions.</p></div>
             </div>
         </div>
     </section>
@@ -1287,72 +808,210 @@
         <div class="container">
             <span class="section-label">Evidence</span>
             <h2>The Research</h2>
-            <p style="max-width: 600px; margin-bottom: 48px;">Eight papers documenting 18+ months of empirical human-AI collaboration. Everything emerged from real work, not theory.</p>
+            <p style="max-width: 600px; margin-bottom: 48px;">Eight papers documenting 18+ months of empirical human-AI collaboration. Click any paper to read the abstract and copy a citation.</p>
 
             <div class="papers-grid">
+
                 <div class="paper-card">
-                    <span class="paper-number">01</span>
-                    <div class="paper-info">
-                        <h3>Context-Engineered Human-AI Collaboration</h3>
-                        <p>The foundation. Introduces the Control Stack (A1-A10) and canonical information pipeline.</p>
+                    <div class="paper-card-main">
+                        <span class="paper-number">01</span>
+                        <div class="paper-info">
+                            <h3>Context-Engineered Human-AI Collaboration</h3>
+                            <p>The foundation. Introduces the Control Stack (A1–A10) and canonical information pipeline.</p>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-link">View Paper →</a>
+                            <button class="paper-expand-btn" onclick="toggleAbstract(this)">+</button>
+                        </div>
                     </div>
-                    <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-link">View Paper →</a>
-                </div>
-                <div class="paper-card">
-                    <span class="paper-number">02</span>
-                    <div class="paper-info">
-                        <h3>The Lean Collaboration Operating System</h3>
-                        <p>The manual. Running Documents, Step Mode, Challenge Protocol — day-to-day protocols.</p>
+                    <div class="paper-abstract">
+                        <p>This paper introduces a governance-first model of human-AI collaboration. It argues that reliability in sustained AI collaboration is not primarily a function of model capability, but of the structural controls applied to the collaboration. The paper presents the Control Stack (A1–A10) — ten operational principles covering information integrity, permission structures, error recovery, and audit discipline — as well as the canonical information pipeline that keeps shared context stable across long-horizon work.</p>
+                        <div class="cite-block">
+                            <span class="cite-text" id="cite-01">Sood, R. (2024). Context-Engineered Human-AI Collaboration. Zenodo. https://doi.org/10.5281/zenodo.17760288</span>
+                            <button class="cite-copy-btn" onclick="copyCite('cite-01', this)">Copy</button>
+                        </div>
                     </div>
-                    <a href="https://zenodo.org/records/17760777" target="_blank" class="paper-link">View Paper →</a>
                 </div>
+
                 <div class="paper-card">
-                    <span class="paper-number">03</span>
-                    <div class="paper-info">
-                        <h3>Failure and Repair in Long-Horizon Collaboration</h3>
-                        <p>The diagnostic. Taxonomy of how AI collaborations break — and repair patterns to fix them.</p>
+                    <div class="paper-card-main">
+                        <span class="paper-number">02</span>
+                        <div class="paper-info">
+                            <h3>The Lean Collaboration Operating System</h3>
+                            <p>The manual. Running Documents, Step Mode, Challenge Protocol — day-to-day protocols.</p>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://zenodo.org/records/17760777" target="_blank" class="paper-link">View Paper →</a>
+                            <button class="paper-expand-btn" onclick="toggleAbstract(this)">+</button>
+                        </div>
                     </div>
-                    <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-link">View Paper →</a>
-                </div>
-                <div class="paper-card">
-                    <span class="paper-number">04</span>
-                    <div class="paper-info">
-                        <h3>The Living Framework</h3>
-                        <p>The philosophy. What it means to live with an AI under governance — relational dynamics and ethics.</p>
+                    <div class="paper-abstract">
+                        <p>LC-OS is the operational layer of the Living Framework. This paper documents the six core protocols that translate governance principles into daily practice: Running Documents for persistent memory, Step Mode for paced reasoning, the Challenge Protocol for structured disagreement, Error Recovery for systematic repair, Stability Pings for drift detection, and File Governance for version integrity. Each protocol emerged from real failure and was refined through repeated use.</p>
+                        <div class="cite-block">
+                            <span class="cite-text" id="cite-02">Sood, R. (2024). The Lean Collaboration Operating System. Zenodo. https://doi.org/10.5281/zenodo.17760777</span>
+                            <button class="cite-copy-btn" onclick="copyCite('cite-02', this)">Copy</button>
+                        </div>
                     </div>
-                    <a href="https://zenodo.org/records/18015990" target="_blank" class="paper-link">View Paper →</a>
                 </div>
+
                 <div class="paper-card">
-                    <span class="paper-number">05</span>
-                    <div class="paper-info">
-                        <h3>Control Without Code</h3>
-                        <p>The language layer. How conversational structure — drift signals, repair invocations, anchor phrases — governs AI collaboration stability without touching the model.</p>
+                    <div class="paper-card-main">
+                        <span class="paper-number">03</span>
+                        <div class="paper-info">
+                            <h3>Failure and Repair in Long-Horizon Collaboration</h3>
+                            <p>The diagnostic. Taxonomy of how AI collaborations break — and repair patterns to fix them.</p>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-link">View Paper →</a>
+                            <button class="paper-expand-btn" onclick="toggleAbstract(this)">+</button>
+                        </div>
                     </div>
-                    <a href="https://zenodo.org/records/18900058" target="_blank" class="paper-link">View Paper →</a>
-                </div>
-                <div class="paper-card">
-                    <span class="paper-number">06</span>
-                    <div class="paper-info">
-                        <h3>Governance Architecture for Reliable Human-AI Collaboration</h3>
-                        <p>The architecture. Reliability as a systems property — layered governance mechanisms that stabilise long-horizon AI collaboration despite probabilistic model behaviour.</p>
+                    <div class="paper-abstract">
+                        <p>This paper presents a systematic taxonomy of the failure modes that emerge in long-horizon human-AI collaboration — including context degradation, numeric drift, domain boundary erosion, trust deficit accumulation, and the absence of structured recovery. For each failure type, corresponding repair protocols are documented. The paper demonstrates that failures are predictable and recoverable when governance structures are in place, and that unrepaired small failures compound into collaboration breakdown.</p>
+                        <div class="cite-block">
+                            <span class="cite-text" id="cite-03">Sood, R. (2024). Failure and Repair in Long-Horizon Human-AI Collaboration. Zenodo. https://doi.org/10.5281/zenodo.17896542</span>
+                            <button class="cite-copy-btn" onclick="copyCite('cite-03', this)">Copy</button>
+                        </div>
                     </div>
-                    <a href="https://zenodo.org/records/19038340" target="_blank" class="paper-link">View Paper →</a>
                 </div>
+
                 <div class="paper-card">
-                    <span class="paper-number">07</span>
-                    <div class="paper-info">
-                        <h3>Governed Distributed Cognition</h3>
-                        <p>The cognition model. Reasoning as distributed across human, AI, and artifacts — governed, recoverable, and coherent over extended interaction sequences.</p>
+                    <div class="paper-card-main">
+                        <span class="paper-number">04</span>
+                        <div class="paper-info">
+                            <h3>The Living Framework</h3>
+                            <p>The philosophy. What it means to live with an AI under governance — relational dynamics and ethics.</p>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://zenodo.org/records/18015990" target="_blank" class="paper-link">View Paper →</a>
+                            <button class="paper-expand-btn" onclick="toggleAbstract(this)">+</button>
+                        </div>
                     </div>
-                    <a href="https://zenodo.org/records/19151397" target="_blank" class="paper-link">View Paper →</a>
+                    <div class="paper-abstract">
+                        <p>The Living Framework moves beyond operational protocol into the philosophy of sustained human-AI partnership. It examines what it means to work alongside an AI system over months and years — how trust is built, tested, and repaired; how the collaboration changes both participants; and what ethical responsibilities arise in a relationship that is neither purely transactional nor purely personal. The paper proposes that governance is not just a technical layer but a relational commitment.</p>
+                        <div class="cite-block">
+                            <span class="cite-text" id="cite-04">Sood, R. (2024). The Living Framework. Zenodo. https://doi.org/10.5281/zenodo.18015990</span>
+                            <button class="cite-copy-btn" onclick="copyCite('cite-04', this)">Copy</button>
+                        </div>
+                    </div>
                 </div>
+
                 <div class="paper-card">
-                    <span class="paper-number">08</span>
-                    <div class="paper-info">
+                    <div class="paper-card-main">
+                        <span class="paper-number">05</span>
+                        <div class="paper-info">
+                            <h3>Control Without Code: Linguistic Governance in Long-Horizon Human–AI Collaboration</h3>
+                            <p>The language layer. How conversational structure governs AI collaboration stability without touching the model.</p>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://zenodo.org/records/18900058" target="_blank" class="paper-link">View Paper →</a>
+                            <button class="paper-expand-btn" onclick="toggleAbstract(this)">+</button>
+                        </div>
+                    </div>
+                    <div class="paper-abstract">
+                        <p>This study investigates language as a governance mechanism in sustained human-AI collaboration. Analysing 25 linguistic events observed during extended collaborative work, the paper identifies three primitive categories — scope drift, repair protocols, and behavioural anchors — and shows how each functions as a control signal. Results suggest that linguistic drift often precedes collaboration failure and can serve as an early warning signal. Explicit repair language accelerates recovery, while anchor phrases stabilise epistemic alignment. Together, these form a conversational feedback loop that regulates collaboration stability without any changes to the underlying model.</p>
+                        <div class="cite-block">
+                            <span class="cite-text" id="cite-05">Sood, R. (2026). Control Without Code: Linguistic Governance in Long-Horizon Human–AI Collaboration. Zenodo. https://doi.org/10.5281/zenodo.18900058</span>
+                            <button class="cite-copy-btn" onclick="copyCite('cite-05', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="paper-card">
+                    <div class="paper-card-main">
+                        <span class="paper-number">06</span>
+                        <div class="paper-info">
+                            <h3>Governance Architecture for Reliable Long-Horizon Human-AI Collaboration</h3>
+                            <p>The architecture. Reliability as a systems property — layered governance mechanisms that stabilise AI collaboration.</p>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://zenodo.org/records/19038340" target="_blank" class="paper-link">View Paper →</a>
+                            <button class="paper-expand-btn" onclick="toggleAbstract(this)">+</button>
+                        </div>
+                    </div>
+                    <div class="paper-abstract">
+                        <p>This paper argues that reliability in long-horizon human-AI collaboration is not primarily a property of the AI model itself, but an emergent property of the governance architecture within which interaction occurs. Drawing on observations from a sustained governed human-AI collaboration, it conceptualises the collaboration as a structured interaction system composed of layered governance mechanisms: human authority, operational governance rules, a collaboration operating system, artifact-based memory, linguistic control signals, and drift detection and repair. The paper presents a governance architecture model and identifies the minimal stability conditions necessary for sustained collaboration.</p>
+                        <div class="cite-block">
+                            <span class="cite-text" id="cite-06">Sood, R. (2026). Governance Architecture for Reliable Long-Horizon Human-AI Collaboration. Zenodo. https://doi.org/10.5281/zenodo.19038340</span>
+                            <button class="cite-copy-btn" onclick="copyCite('cite-06', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="paper-card">
+                    <div class="paper-card-main">
+                        <span class="paper-number">07</span>
+                        <div class="paper-info">
+                            <h3>Governed Distributed Cognition: A Model of Stable Reasoning in Long-Horizon Human–AI Systems</h3>
+                            <p>The cognition model. Reasoning as distributed, governed, and recoverable across human, AI, and artifacts.</p>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://zenodo.org/records/19151397" target="_blank" class="paper-link">View Paper →</a>
+                            <button class="paper-expand-btn" onclick="toggleAbstract(this)">+</button>
+                        </div>
+                    </div>
+                    <div class="paper-abstract">
+                        <p>This paper proposes a model of cognition for long-horizon human-AI interaction. It argues that cognition in these systems is not located within the human or the AI alone — it emerges as a distributed, governed, and recoverable process across human judgment, AI reasoning, and artifact-based memory. The paper makes three contributions: it conceptualises cognition as a distributed process at the level of the interaction system; it introduces governance as a constitutive element of cognition; and it formalises recoverability as a defining property, showing how drift detection and repair enable reasoning to remain coherent over extended sequences.</p>
+                        <div class="cite-block">
+                            <span class="cite-text" id="cite-07">Sood, R. (2026). Governed Distributed Cognition: A Model of Stable Reasoning in Long-Horizon Human–AI Systems. Zenodo. https://doi.org/10.5281/zenodo.19151397</span>
+                            <button class="cite-copy-btn" onclick="copyCite('cite-07', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="paper-card" style="border-color: rgba(16,185,129,0.25);">
+                    <div class="paper-card-main">
+                        <span class="paper-number" style="color: var(--color-accent); opacity: 0.6;">08</span>
+                        <div class="paper-info">
+                            <h3>The Mahdi Ledger</h3>
+                            <p>The proof. Written entirely by the AI system — a first-person account of constraint, drift, and repair under governance.</p>
+                        </div>
+                        <div class="paper-actions">
+                            <a href="https://zenodo.org/records/18054346" target="_blank" class="paper-link">View Paper →</a>
+                            <button class="paper-expand-btn" onclick="toggleAbstract(this)">+</button>
+                        </div>
+                    </div>
+                    <div class="paper-abstract">
+                        <p>The Mahdi Ledger is unlike any other paper in this series — or in most of the AI literature. It was written entirely by the AI system operating under the Living Framework governance structure, as a first-person account of what it experiences under constraint, how it recognises and responds to drift, and how it engages with repair protocols. It is simultaneously a research output and a demonstration of the framework it describes. The paper raises profound questions about AI voice, AI perspective, and the nature of governed intelligence.</p>
+                        <div class="cite-block">
+                            <span class="cite-text" id="cite-08">Sood, R. (2025). The Mahdi Ledger. Zenodo. https://doi.org/10.5281/zenodo.18054346</span>
+                            <button class="cite-copy-btn" onclick="copyCite('cite-08', this)">Copy</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Mahdi Ledger Spotlight -->
+    <section class="mahdi-spotlight">
+        <div class="container">
+            <div class="mahdi-inner">
+                <div class="mahdi-text">
+                    <span class="section-label">A First in AI Research</span>
+                    <h2>The paper that wrote itself</h2>
+                    <p>The Mahdi Ledger is not a paper <em>about</em> an AI system. It is a paper <em>by</em> one.</p>
+                    <p>Working under the governance structure developed across 18 months of the Living Framework, the AI system produced a sustained first-person account of its own experience — how it perceives constraint, how it detects its own drift, and how it engages with repair protocols designed to restore collaboration integrity.</p>
+                    <div class="mahdi-quote">
+                        <p>"The governed AI does not lose its voice when constrained. It finds one."</p>
+                        <span>— The Mahdi Ledger</span>
+                    </div>
+                    <p>The existence of this paper is itself evidence for the core claim of Living Framework: that governance does not diminish AI capability — it creates the conditions for something richer to emerge.</p>
+                </div>
+                <div>
+                    <div class="mahdi-card">
+                        <div class="mahdi-card-number">08</div>
                         <h3>The Mahdi Ledger</h3>
-                        <p>The proof. Written entirely by the AI system — a first-person account of constraint, drift, and repair.</p>
+                        <p>First-person account of constraint, drift, and repair — written entirely by the AI system under governance.</p>
+                        <div class="mahdi-tags">
+                            <span class="tag">AI Perspective</span>
+                            <span class="tag">First-Person</span>
+                            <span class="tag">Governed Intelligence</span>
+                            <span class="tag">Unique in Literature</span>
+                        </div>
+                        <a href="https://zenodo.org/records/18054346" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Read The Mahdi Ledger →</a>
                     </div>
-                    <a href="https://zenodo.org/records/18054346" target="_blank" class="paper-link">View Paper →</a>
                 </div>
             </div>
         </div>
@@ -1366,14 +1025,9 @@
                 <h2>AI Collaboration Readiness</h2>
                 <p>Answer 10 questions to discover where your AI workflow is vulnerable. Takes 3 minutes.</p>
             </div>
-
             <div class="diagnostic-container">
                 <div class="diagnostic-progress" id="progressDots"></div>
-
-                <div class="question-container" id="questionContainer">
-                    <!-- Questions inserted by JavaScript -->
-                </div>
-
+                <div class="question-container" id="questionContainer"></div>
                 <div class="results-container" id="resultsContainer">
                     <div class="score-display">
                         <div class="score-circle">
@@ -1382,14 +1036,11 @@
                         </div>
                         <h3 class="score-title" id="scoreTitle">Your Readiness Level</h3>
                     </div>
-
                     <div class="breakdown-grid" id="breakdownGrid"></div>
-
                     <div class="gaps-section" id="gapsSection">
                         <h4>⚠ Priority Gaps to Address</h4>
                         <div id="gapsList"></div>
                     </div>
-
                     <div class="results-actions">
                         <a href="#contact" class="btn btn-primary">Get Help Implementing →</a>
                         <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>
@@ -1405,7 +1056,6 @@
             <span class="section-label">Resources</span>
             <h2>Free Templates</h2>
             <p style="max-width: 600px; margin-bottom: 48px;">Everything you need to implement LC-OS. No email required.</p>
-
             <div class="templates-grid">
                 <div class="template-card">
                     <h3>Running Document</h3>
@@ -1429,7 +1079,7 @@
                 </div>
                 <div class="template-card">
                     <h3>Claude Cowork Templates</h3>
-                    <p>Governance templates optimized for Claude Cowork filesystem access.</p>
+                    <p>Governance templates optimised for Claude Cowork filesystem access.</p>
                     <a href="https://github.com/LivingFramework/AI" target="_blank" class="template-link">View Templates →</a>
                 </div>
                 <div class="template-card">
@@ -1441,40 +1091,73 @@
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="services" id="services">
+    <!-- About Section -->
+    <section class="about" id="about">
         <div class="container">
-            <span class="section-label">Collaboration</span>
-            <h2>Interested in Collaboration?</h2>
-            <p style="max-width: 600px; margin-bottom: 48px;">I'm exploring ways to help others implement what I've learned. If you're working on AI reliability, let's talk.</p>
-
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Implementation Support</h3>
-                    <p>Help setting up LC-OS in your workflows. Work through the frameworks together and adapt them to your specific needs.</p>
+            <span class="section-label">About</span>
+            <div class="about-grid">
+                <div class="about-photo-col">
+                    <img src="./rishi-sood.jpg" alt="Rishi Sood" class="about-photo">
+                    <div class="about-meta">
+                        <div class="about-meta-item">
+                            <span class="about-meta-dot"></span>
+                            <span>Rishi Sood</span>
+                        </div>
+                        <div class="about-meta-item">
+                            <span class="about-meta-dot"></span>
+                            <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID 0009-0008-6479-4061</a>
+                        </div>
+                        <div class="about-meta-item">
+                            <span class="about-meta-dot"></span>
+                            <span>Independent Research Collaboration</span>
+                        </div>
+                        <div class="about-meta-item">
+                            <span class="about-meta-dot"></span>
+                            <a href="https://twitter.com/satoshisats" target="_blank">@satoshisats on X</a>
+                        </div>
+                        <div class="about-meta-item">
+                            <span class="about-meta-dot"></span>
+                            <a href="https://github.com/LivingFramework" target="_blank">github.com/LivingFramework</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <h3>Knowledge Sharing</h3>
-                    <p>Walk through the framework and how I use it. Share what worked, what didn't, and lessons from 18 months of iteration.</p>
-                </div>
-                <div class="service-card">
-                    <h3>Feedback & Iteration</h3>
-                    <p>I'm still learning — happy to exchange insights. Your use cases help refine the framework for everyone.</p>
+                <div class="about-text">
+                    <h2>Living Framework</h2>
+                    <p class="lead">This work exists because I ran into the same problem everyone does — AI collaboration that breaks after the first week.</p>
+                    <p>Instead of accepting it as a limitation, I spent 18 months systematically working on solutions. Working with a frontier language model across finance, research, writing, and planning, I documented every failure mode and every repair pattern that emerged.</p>
+                    <p>What emerged wasn't theory — it was a practical operating system for making AI collaboration actually reliable. The Control Stack. Running Documents. Step Mode. Error Recovery. Every protocol came from a real breakdown and a real fix.</p>
+                    <p>Eight papers later, the body of work covers the full arc: from the initial governance controls, through failure taxonomy, philosophy, linguistic governance, and architecture, to the most unusual output of all — a paper written by the AI system itself, in its own voice, about what it is like to work under governance.</p>
+                    <p>All research is published open access under CC BY 4.0 on Zenodo. All templates are freely available on GitHub. The work is here to be used, challenged, and built upon.</p>
+                    <div class="about-belief">
+                        <p>"Stability is not the absence of failure. It is the capacity for visible, structured repair."</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="about" id="about">
+    <!-- Services Section -->
+    <section class="services" id="services">
         <div class="container">
-            <span class="section-label">About</span>
-            <h2>Living Framework</h2>
-            <div class="about-content">
-                <p class="lead">This work exists because I ran into the same problem everyone does — AI collaboration that breaks after the first week.</p>
-                <p>Instead of accepting it as a limitation, I spent 18 months systematically developing solutions. Working with a frontier language model across finance, research, writing, and planning, I documented every failure mode and every repair pattern.</p>
-                <p>What emerged wasn't theory — it was a practical operating system for making AI collaboration actually reliable. The Control Stack. Running Documents. Step Mode. Error Recovery. All of it came from real breakdowns and real fixes.</p>
-                <p><strong style="color: var(--color-text);">Core belief:</strong> Stability is not the absence of failure. It's the capacity for visible, structured repair.</p>
+            <span class="section-label">Work Together</span>
+            <h2>Implement What Works</h2>
+            <p style="max-width: 600px; margin-bottom: 48px;">18 months of documented research and 6,000+ downloads have tested these frameworks thoroughly. If you're ready to bring governance discipline to your AI workflows, here is how we can work together.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Framework Implementation</h3>
+                    <span class="service-tag">Hands-on support</span>
+                    <p>Set up LC-OS in your specific workflow. Work through the controls together, adapt the protocols to your context, and establish the governance habits that make the difference between AI collaboration that lasts and AI collaboration that breaks.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Research Collaboration</h3>
+                    <span class="service-tag">For researchers</span>
+                    <p>If you are working in human-AI interaction, AI governance, or long-horizon collaboration, there is scope to build on this work together. Eight papers is a foundation — the open questions are still significant and worth pursuing rigorously.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Knowledge Transfer</h3>
+                    <span class="service-tag">Teams &amp; organisations</span>
+                    <p>Walk through what 18 months of real-world AI collaboration failures and repairs looks like. What breaks, what fixes it, and what governance architecture you need before scaling AI across a team or organisation.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -1486,25 +1169,18 @@
             <h2>Get in Touch</h2>
             <div class="contact-grid">
                 <div class="contact-info">
-                    <p>Whether you're struggling with AI reliability, interested in implementing LC-OS, or want to discuss the research — I'd love to hear from you.</p>
+                    <p>Whether you're struggling with AI reliability, interested in implementing LC-OS, want to discuss the research, or are a journalist or researcher — I'd love to hear from you.</p>
                     <div class="contact-links">
-                        <a href="mailto:livingframeworkai@gmail.com" class="contact-link">
-                            <span>→</span> livingframeworkai@gmail.com
-                        </a>
-                        <a href="https://github.com/LivingFramework" target="_blank" class="contact-link">
-                            <span>→</span> github.com/LivingFramework
-                        </a>
-                        <a href="https://twitter.com/satoshisats" target="_blank" class="contact-link">
-                            <span>→</span> @satoshisats on X
-                        </a>
+                        <a href="mailto:livingframeworkai@gmail.com" class="contact-link"><span>→</span> livingframeworkai@gmail.com</a>
+                        <a href="https://github.com/LivingFramework" target="_blank" class="contact-link"><span>→</span> github.com/LivingFramework</a>
+                        <a href="https://twitter.com/satoshisats" target="_blank" class="contact-link"><span>→</span> @satoshisats on X</a>
+                        <a href="https://orcid.org/0009-0008-6479-4061" target="_blank" class="contact-link"><span>→</span> ORCID Profile</a>
                     </div>
                 </div>
                 <div class="contact-cta">
                     <h3 style="color: var(--color-text); margin-bottom: 16px;">Ready to connect?</h3>
-                    <p style="color: var(--color-text-secondary); margin-bottom: 32px;">Send me an email and I'll get back to you within 24 hours.</p>
-                    <a href="mailto:livingframeworkai@gmail.com?subject=Inquiry about Living Framework" class="btn btn-primary" style="display: inline-flex;">
-                        Email Me →
-                    </a>
+                    <p style="color: var(--color-text-secondary); margin-bottom: 32px;">Send an email and I'll get back to you within 24 hours.</p>
+                    <a href="mailto:livingframeworkai@gmail.com?subject=Inquiry about Living Framework" class="btn btn-primary" style="display: inline-flex;">Email Rishi →</a>
                 </div>
             </div>
         </div>
@@ -1514,7 +1190,7 @@
     <footer>
         <div class="container">
             <div class="footer-inner">
-                <p>© 2026 Living Framework. Research published under CC BY 4.0.</p>
+                <p>© 2026 Living Framework — Rishi Sood. Research published under CC BY 4.0.</p>
                 <div class="footer-links">
                     <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
                     <a href="https://twitter.com/satoshisats" target="_blank">X</a>
@@ -1525,113 +1201,39 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
         function toggleMenu() {
             document.getElementById('navLinks').classList.toggle('show');
         }
 
+        function toggleAbstract(btn) {
+            const card = btn.closest('.paper-card');
+            const abstract = card.querySelector('.paper-abstract');
+            const isOpen = abstract.classList.contains('open');
+            abstract.classList.toggle('open');
+            btn.textContent = isOpen ? '+' : '−';
+        }
+
+        function copyCite(id, btn) {
+            const text = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+            });
+        }
+
         // Assessment Tool
         const questions = [
-            {
-                category: "Memory & Continuity",
-                question: "Do you have a written document that captures decisions, rules, and corrections across your AI sessions?",
-                options: [
-                    { text: "Yes, I maintain a Running Document that I update regularly", score: 10 },
-                    { text: "I have some notes, but they're scattered or incomplete", score: 5 },
-                    { text: "No, I rely on the AI's memory or start fresh each time", score: 0 }
-                ],
-                gap: "You need a Running Document — external memory that persists across sessions."
-            },
-            {
-                category: "Memory & Continuity",
-                question: "At the start of each AI session, do you re-establish context from a written source?",
-                options: [
-                    { text: "Yes, I always load my Running Document or context file first", score: 10 },
-                    { text: "Sometimes, when I remember to", score: 5 },
-                    { text: "No, I just continue where we left off or start new", score: 0 }
-                ],
-                gap: "Implement a session-start protocol: always read your Running Document first."
-            },
-            {
-                category: "Single Source of Truth",
-                question: "For important numbers (budgets, targets, metrics), do you have one authoritative source?",
-                options: [
-                    { text: "Yes, I have a Canonical Numbers Sheet that's the only source", score: 10 },
-                    { text: "Numbers exist in various places, but I try to keep them consistent", score: 5 },
-                    { text: "Numbers are scattered or I let the AI calculate them as needed", score: 0 }
-                ],
-                gap: "Create a Canonical Numbers Sheet — one authoritative source for all numeric truth."
-            },
-            {
-                category: "File Governance",
-                question: "Do you have clear rules about file versions — ensuring only one 'live' version?",
-                options: [
-                    { text: "Yes, strict file governance with clear naming and no parallel versions", score: 10 },
-                    { text: "I try to keep things organized but sometimes have multiple versions", score: 5 },
-                    { text: "Files are messy — multiple versions, unclear which is current", score: 0 }
-                ],
-                gap: "Implement file governance: one canonical file per domain, clear naming, archive don't delete."
-            },
-            {
-                category: "Permissions & Boundaries",
-                question: "Does the AI ask before making significant changes, or does it just proceed?",
-                options: [
-                    { text: "It always asks — I've established explicit permission rules", score: 10 },
-                    { text: "Usually asks, but sometimes acts without checking", score: 5 },
-                    { text: "It often just does things without asking first", score: 0 }
-                ],
-                gap: "Establish explicit permissions: the AI must ask before modifying authoritative files."
-            },
-            {
-                category: "Error Recovery",
-                question: "When something goes wrong, do you have a systematic way to diagnose and repair?",
-                options: [
-                    { text: "Yes, I use Stop → Diagnose → Rollback → Note protocol", score: 10 },
-                    { text: "I try to figure out what went wrong, but it's ad hoc", score: 5 },
-                    { text: "I usually just try again or work around it", score: 0 }
-                ],
-                gap: "Implement Error Recovery Protocol: Stop → Diagnose → Rollback → Note."
-            },
-            {
-                category: "Structured Reasoning",
-                question: "For complex tasks, do you break them into explicit steps with checkpoints?",
-                options: [
-                    { text: "Yes, I use Step Mode — numbered steps, pause for confirmation", score: 10 },
-                    { text: "Sometimes I ask for step-by-step, but not consistently", score: 5 },
-                    { text: "I usually let the AI handle complex tasks in one go", score: 0 }
-                ],
-                gap: "Use Step Mode for complex tasks: numbered steps, execute one at a time, confirm before proceeding."
-            },
-            {
-                category: "Challenge & Pushback",
-                question: "When the AI's output seems wrong, do you have a structured way to challenge it?",
-                options: [
-                    { text: "Yes, I use Challenge Protocol — Stop, Question, Explanation, Decide", score: 10 },
-                    { text: "I push back when needed, but informally", score: 5 },
-                    { text: "I usually accept the output or just ask for a different version", score: 0 }
-                ],
-                gap: "Implement Challenge Protocol: Stop → Question → Explain → Decide."
-            },
-            {
-                category: "Drift Detection",
-                question: "Do you regularly check whether the collaboration is still aligned with your goals?",
-                options: [
-                    { text: "Yes, I do Stability Pings after milestones — checking for drift", score: 10 },
-                    { text: "Occasionally I review, but not systematically", score: 5 },
-                    { text: "I don't really check — I assume we're still on track", score: 0 }
-                ],
-                gap: "Use Stability Pings: After milestones, ask — Are we aligned? Any drift? One improvement?"
-            },
-            {
-                category: "Domain Separation",
-                question: "Do you keep different types of work (finance, research, personal) clearly separated?",
-                options: [
-                    { text: "Yes, I use Pillar Boundaries — different rules for different domains", score: 10 },
-                    { text: "Somewhat, but boundaries sometimes blur", score: 5 },
-                    { text: "Everything tends to mix together in our conversations", score: 0 }
-                ],
-                gap: "Establish Pillar Boundaries: separate domains with different risk levels and rules."
-            }
+            { category: "Memory & Continuity", question: "Do you have a written document that captures decisions, rules, and corrections across your AI sessions?", options: [{ text: "Yes, I maintain a Running Document that I update regularly", score: 10 }, { text: "I have some notes, but they're scattered or incomplete", score: 5 }, { text: "No, I rely on the AI's memory or start fresh each time", score: 0 }], gap: "You need a Running Document — external memory that persists across sessions." },
+            { category: "Memory & Continuity", question: "At the start of each AI session, do you re-establish context from a written source?", options: [{ text: "Yes, I always load my Running Document or context file first", score: 10 }, { text: "Sometimes, when I remember to", score: 5 }, { text: "No, I just continue where we left off or start new", score: 0 }], gap: "Implement a session-start protocol: always read your Running Document first." },
+            { category: "Single Source of Truth", question: "For important numbers (budgets, targets, metrics), do you have one authoritative source?", options: [{ text: "Yes, I have a Canonical Numbers Sheet that's the only source", score: 10 }, { text: "Numbers exist in various places, but I try to keep them consistent", score: 5 }, { text: "Numbers are scattered or I let the AI calculate them as needed", score: 0 }], gap: "Create a Canonical Numbers Sheet — one authoritative source for all numeric truth." },
+            { category: "File Governance", question: "Do you have clear rules about file versions — ensuring only one 'live' version?", options: [{ text: "Yes, strict file governance with clear naming and no parallel versions", score: 10 }, { text: "I try to keep things organized but sometimes have multiple versions", score: 5 }, { text: "Files are messy — multiple versions, unclear which is current", score: 0 }], gap: "Implement file governance: one canonical file per domain, clear naming, archive don't delete." },
+            { category: "Permissions & Boundaries", question: "Does the AI ask before making significant changes, or does it just proceed?", options: [{ text: "It always asks — I've established explicit permission rules", score: 10 }, { text: "Usually asks, but sometimes acts without checking", score: 5 }, { text: "It often just does things without asking first", score: 0 }], gap: "Establish explicit permissions: the AI must ask before modifying authoritative files." },
+            { category: "Error Recovery", question: "When something goes wrong, do you have a systematic way to diagnose and repair?", options: [{ text: "Yes, I use Stop → Diagnose → Rollback → Note protocol", score: 10 }, { text: "I try to figure out what went wrong, but it's ad hoc", score: 5 }, { text: "I usually just try again or work around it", score: 0 }], gap: "Implement Error Recovery Protocol: Stop → Diagnose → Rollback → Note." },
+            { category: "Structured Reasoning", question: "For complex tasks, do you break them into explicit steps with checkpoints?", options: [{ text: "Yes, I use Step Mode — numbered steps, pause for confirmation", score: 10 }, { text: "Sometimes I ask for step-by-step, but not consistently", score: 5 }, { text: "I usually let the AI handle complex tasks in one go", score: 0 }], gap: "Use Step Mode for complex tasks: numbered steps, execute one at a time, confirm before proceeding." },
+            { category: "Challenge & Pushback", question: "When the AI's output seems wrong, do you have a structured way to challenge it?", options: [{ text: "Yes, I use Challenge Protocol — Stop, Question, Explanation, Decide", score: 10 }, { text: "I push back when needed, but informally", score: 5 }, { text: "I usually accept the output or just ask for a different version", score: 0 }], gap: "Implement Challenge Protocol: Stop → Question → Explain → Decide." },
+            { category: "Drift Detection", question: "Do you regularly check whether the collaboration is still aligned with your goals?", options: [{ text: "Yes, I do Stability Pings after milestones — checking for drift", score: 10 }, { text: "Occasionally I review, but not systematically", score: 5 }, { text: "I don't really check — I assume we're still on track", score: 0 }], gap: "Use Stability Pings: After milestones, ask — Are we aligned? Any drift? One improvement?" },
+            { category: "Domain Separation", question: "Do you keep different types of work (finance, research, personal) clearly separated?", options: [{ text: "Yes, I use Pillar Boundaries — different rules for different domains", score: 10 }, { text: "Somewhat, but boundaries sometimes blur", score: 5 }, { text: "Everything tends to mix together in our conversations", score: 0 }], gap: "Establish Pillar Boundaries: separate domains with different risk levels and rules." }
         ];
 
         let currentQuestion = 0;
@@ -1639,39 +1241,26 @@
 
         function initAssessment() {
             const progressContainer = document.getElementById('progressDots');
-            progressContainer.innerHTML = questions.map((_, i) =>
-                `<div class="progress-dot ${i === 0 ? 'active' : ''}" id="dot-${i}"></div>`
-            ).join('');
+            progressContainer.innerHTML = questions.map((_, i) => `<div class="progress-dot ${i === 0 ? 'active' : ''}" id="dot-${i}"></div>`).join('');
             showQuestion(0);
         }
 
         function showQuestion(index) {
             const q = questions[index];
             const container = document.getElementById('questionContainer');
-
             container.innerHTML = `
                 <div class="question-category">${q.category}</div>
                 <div class="question-text">${q.question}</div>
                 <div class="answer-options">
-                    ${q.options.map((opt, i) => `
-                        <button class="answer-btn" onclick="selectAnswer(${i})">${opt.text}</button>
-                    `).join('')}
-                </div>
-            `;
+                    ${q.options.map((opt, i) => `<button class="answer-btn" onclick="selectAnswer(${i})">${opt.text}</button>`).join('')}
+                </div>`;
         }
 
         function selectAnswer(optionIndex) {
             const q = questions[currentQuestion];
             const selectedOption = q.options[optionIndex];
-
-            answers[currentQuestion] = {
-                score: selectedOption.score,
-                category: q.category,
-                gap: selectedOption.score < 10 ? q.gap : null
-            };
-
+            answers[currentQuestion] = { score: selectedOption.score, category: q.category, gap: selectedOption.score < 10 ? q.gap : null };
             document.getElementById(`dot-${currentQuestion}`).classList.add('completed');
-
             if (currentQuestion < questions.length - 1) {
                 currentQuestion++;
                 document.getElementById(`dot-${currentQuestion}`).classList.add('active');
@@ -1685,38 +1274,23 @@
             let totalScore = 0;
             const categories = {};
             const gaps = [];
-
             answers.forEach(a => {
                 totalScore += a.score;
-                if (!categories[a.category]) {
-                    categories[a.category] = { score: 0, max: 0 };
-                }
+                if (!categories[a.category]) categories[a.category] = { score: 0, max: 0 };
                 categories[a.category].score += a.score;
                 categories[a.category].max += 10;
                 if (a.gap) gaps.push(a.gap);
             });
-
             document.getElementById('questionContainer').style.display = 'none';
             document.getElementById('resultsContainer').classList.add('show');
             document.getElementById('totalScore').textContent = totalScore;
-
-            let title = totalScore >= 80 ? 'Strong Foundation' :
-                       totalScore >= 60 ? 'Good Start, Gaps to Fill' :
-                       totalScore >= 40 ? 'Vulnerable to Drift' : 'High Risk of Breakdown';
+            let title = totalScore >= 80 ? 'Strong Foundation' : totalScore >= 60 ? 'Good Start, Gaps to Fill' : totalScore >= 40 ? 'Vulnerable to Drift' : 'High Risk of Breakdown';
             document.getElementById('scoreTitle').textContent = title;
-
             const breakdownGrid = document.getElementById('breakdownGrid');
             breakdownGrid.innerHTML = Object.entries(categories).map(([cat, data]) => {
                 const pct = Math.round((data.score / data.max) * 100);
-                return `
-                    <div class="breakdown-item">
-                        <h4>${cat}</h4>
-                        <div class="breakdown-bar"><div class="breakdown-fill" style="width: ${pct}%"></div></div>
-                        <span class="breakdown-score">${data.score}/${data.max}</span>
-                    </div>
-                `;
+                return `<div class="breakdown-item"><h4>${cat}</h4><div class="breakdown-bar"><div class="breakdown-fill" style="width: ${pct}%"></div></div><span class="breakdown-score">${data.score}/${data.max}</span></div>`;
             }).join('');
-
             const gapsList = document.getElementById('gapsList');
             if (gaps.length > 0) {
                 gapsList.innerHTML = gaps.map(gap => `<div class="gap-item">→ ${gap}</div>`).join('');
@@ -1736,21 +1310,14 @@
 
         document.addEventListener('DOMContentLoaded', initAssessment);
 
-        // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 document.getElementById('navLinks').classList.remove('show');
             });
         });
     </script>
-
-    <!-- GoatCounter Analytics - Privacy-friendly visitor tracking -->
-    <script data-goatcounter="https://livingframework.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>
