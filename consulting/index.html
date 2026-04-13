@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulting | Living Framework — Context Engineering Advisory</title>
+    <meta name="description" content="Context Engineering consulting by Rishi Sood. Fix AI reliability problems at the architecture level. Fractional AI Officer, LC-OS implementation, and collaboration audits for teams deploying AI at scale.">
+    <link rel="canonical" href="https://livingframework.github.io/consulting/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #09090b;
+            --color-bg-elevated: #18181b;
+            --color-bg-hover: #27272a;
+            --color-surface: rgba(255, 255, 255, 0.03);
+            --color-border: rgba(255, 255, 255, 0.08);
+            --color-border-hover: rgba(255, 255, 255, 0.15);
+            --color-text: #fafafa;
+            --color-text-secondary: #a1a1aa;
+            --color-text-tertiary: #71717a;
+            --color-accent: #10b981;
+            --color-accent-dim: rgba(16, 185, 129, 0.15);
+            --color-accent-glow: rgba(16, 185, 129, 0.4);
+            --font-display: 'Space Grotesk', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --max-width: 1200px;
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-display);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .nav-inner {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo {
+            display: flex; align-items: center; gap: 10px;
+            text-decoration: none; color: var(--color-text);
+            font-weight: 600; font-size: 16px;
+        }
+        .logo-mark {
+            width: 32px; height: 32px;
+            background: var(--color-accent-dim);
+            border: 1px solid var(--color-accent);
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 12px; font-weight: 700; color: var(--color-accent);
+            font-family: var(--font-mono);
+        }
+        .nav-links { list-style: none; display: flex; gap: 8px; align-items: center; }
+        .nav-links a {
+            color: var(--color-text-secondary);
+            text-decoration: none; font-size: 14px; font-weight: 500;
+            padding: 6px 12px; border-radius: var(--radius-sm);
+            transition: all 0.2s;
+        }
+        .nav-links a:hover { color: var(--color-text); background: var(--color-bg-hover); }
+        .nav-links a.nav-cta {
+            color: var(--color-accent);
+            border: 1px solid rgba(16,185,129,0.3);
+            background: var(--color-accent-dim);
+        }
+        .nav-links a.nav-cta:hover { background: rgba(16,185,129,0.25); border-color: var(--color-accent); }
+        .nav-links a.nav-active { color: var(--color-accent); }
+
+        /* LAYOUT */
+        .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+
+        /* HERO */
+        .hero {
+            padding: 140px 0 80px;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .hero-label {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--color-accent-dim);
+            border: 1px solid rgba(16,185,129,0.25);
+            border-radius: 100px;
+            padding: 6px 14px;
+            font-size: 12px; font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase; letter-spacing: 0.08em;
+            font-family: var(--font-mono);
+            margin-bottom: 28px;
+        }
+        .hero h1 {
+            font-size: clamp(36px, 5vw, 60px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            max-width: 820px;
+            margin-bottom: 24px;
+        }
+        .hero h1 .accent { color: var(--color-accent); }
+        .hero-sub {
+            font-size: 18px;
+            color: var(--color-text-secondary);
+            max-width: 620px;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+        .hero-metrics {
+            display: flex; gap: 40px; flex-wrap: wrap;
+            padding: 28px 0;
+            border-top: 1px solid var(--color-border);
+            border-bottom: 1px solid var(--color-border);
+            margin-bottom: 40px;
+        }
+        .metric-item { display: flex; flex-direction: column; gap: 4px; }
+        .metric-value {
+            font-size: 28px; font-weight: 700;
+            color: var(--color-accent);
+            font-family: var(--font-mono);
+        }
+        .metric-label { font-size: 13px; color: var(--color-text-secondary); }
+        .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+        .btn-primary {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--color-accent);
+            color: #09090b;
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 600; font-size: 15px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover { background: #0ea572; transform: translateY(-1px); box-shadow: 0 8px 24px var(--color-accent-glow); }
+        .btn-secondary {
+            display: inline-flex; align-items: center; gap: 8px;
+            border: 1px solid var(--color-border-hover);
+            color: var(--color-text);
+            padding: 12px 24px;
+            border-radius: var(--radius-md);
+            font-weight: 500; font-size: 15px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .btn-secondary:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-accent-dim); }
+
+        /* SECTION */
+        section { padding: 80px 0; border-bottom: 1px solid var(--color-border); }
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--color-accent);
+            margin-bottom: 16px;
+        }
+        .section-title {
+            font-size: clamp(26px, 3.5vw, 40px);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+        .section-sub {
+            font-size: 17px;
+            color: var(--color-text-secondary);
+            max-width: 580px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+
+        /* PROBLEM */
+        .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 700px) { .problem-grid { grid-template-columns: 1fr; } }
+        .problem-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            transition: border-color 0.2s;
+        }
+        .problem-card:hover { border-color: var(--color-border-hover); }
+        .problem-icon {
+            width: 36px; height: 36px;
+            background: var(--color-accent-dim);
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+            margin-bottom: 14px;
+        }
+        .problem-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; }
+        .problem-card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
+
+        /* SERVICES */
+        .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 900px) { .services-grid { grid-template-columns: 1fr; } }
+        .service-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: all 0.2s;
+            display: flex; flex-direction: column; gap: 16px;
+        }
+        .service-card:hover { border-color: rgba(16,185,129,0.3); background: var(--color-accent-dim); }
+        .service-card.featured {
+            border-color: rgba(16,185,129,0.4);
+            background: rgba(16,185,129,0.06);
+        }
+        .service-tag {
+            display: inline-flex;
+            background: var(--color-accent-dim);
+            border: 1px solid rgba(16,185,129,0.25);
+            border-radius: 100px;
+            padding: 4px 10px;
+            font-size: 11px; font-weight: 600;
+            color: var(--color-accent);
+            text-transform: uppercase; letter-spacing: 0.06em;
+            font-family: var(--font-mono);
+            width: fit-content;
+        }
+        .service-card h3 { font-size: 20px; font-weight: 700; line-height: 1.3; }
+        .service-card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; flex: 1; }
+        .service-deliverables { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+        .service-deliverables li {
+            font-size: 13px; color: var(--color-text-secondary);
+            display: flex; align-items: flex-start; gap: 8px;
+        }
+        .service-deliverables li::before {
+            content: '→'; color: var(--color-accent);
+            flex-shrink: 0; margin-top: 1px;
+        }
+
+        /* HOW IT WORKS */
+        .process-steps { display: flex; flex-direction: column; gap: 0; }
+        .process-step {
+            display: grid; grid-template-columns: 80px 1fr;
+            gap: 24px; align-items: flex-start;
+            padding: 32px 0;
+            border-bottom: 1px solid var(--color-border);
+        }
+        .process-step:last-child { border-bottom: none; }
+        .step-num {
+            font-family: var(--font-mono);
+            font-size: 40px; font-weight: 700;
+            color: var(--color-accent-dim);
+            line-height: 1;
+            -webkit-text-stroke: 1px rgba(16,185,129,0.4);
+            color: transparent;
+        }
+        .step-content h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .step-content p { font-size: 15px; color: var(--color-text-secondary); line-height: 1.7; max-width: 600px; }
+
+        /* WHO */
+        .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        @media (max-width: 700px) { .who-grid { grid-template-columns: 1fr; } }
+        .who-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: 24px 28px;
+        }
+        .who-card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; color: var(--color-accent); }
+        .who-card p { font-size: 14px; color: var(--color-text-secondary); line-height: 1.6; }
+
+        /* RESEARCH ANCHOR */
+        .research-bar {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 32px 40px;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 24px; flex-wrap: wrap;
+        }
+        .research-bar-text h3 { font-size: 20px; font-weight: 700; margin-bottom: 6px; }
+        .research-bar-text p { font-size: 14px; color: var(--color-text-secondary); }
+        .research-stats { display: flex; gap: 32px; }
+        .r-stat { text-align: center; }
+        .r-stat-val { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--color-accent); }
+        .r-stat-lab { font-size: 12px; color: var(--color-text-tertiary); }
+
+        /* CONTACT */
+        .contact-section { padding: 80px 0; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+        @media (max-width: 800px) { .contact-grid { grid-template-columns: 1fr; } }
+        .contact-info h2 { font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+        .contact-info p { font-size: 16px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 32px; }
+        .contact-detail {
+            display: flex; align-items: center; gap: 12px;
+            padding: 16px 0;
+            border-top: 1px solid var(--color-border);
+            font-size: 15px;
+        }
+        .contact-detail span { color: var(--color-text-secondary); }
+        .contact-detail a { color: var(--color-accent); text-decoration: none; }
+        .contact-detail a:hover { text-decoration: underline; }
+        .contact-form {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+        }
+        .contact-form h3 { font-size: 20px; font-weight: 700; margin-bottom: 24px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--color-text-secondary); }
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            background: var(--color-bg-elevated);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            padding: 12px 16px;
+            font-family: var(--font-display);
+            font-size: 14px;
+            color: var(--color-text);
+            transition: border-color 0.2s;
+            outline: none;
+        }
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: var(--color-accent);
+        }
+        .form-group textarea { min-height: 120px; resize: vertical; }
+        .form-group select option { background: var(--color-bg-elevated); }
+        .form-submit {
+            width: 100%;
+            background: var(--color-accent);
+            color: #09090b;
+            border: none;
+            padding: 14px;
+            border-radius: var(--radius-md);
+            font-family: var(--font-display);
+            font-size: 15px; font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .form-submit:hover { background: #0ea572; transform: translateY(-1px); }
+
+        /* FOOTER */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--color-border);
+            text-align: center;
+        }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 16px; flex-wrap: wrap; }
+        .footer-links a { color: var(--color-text-secondary); text-decoration: none; font-size: 14px; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--color-accent); }
+        footer p { font-size: 13px; color: var(--color-text-tertiary); }
+
+        /* MOBILE NAV */
+        .mobile-menu-btn { display: none; background: none; border: none; color: var(--color-text); font-size: 20px; cursor: pointer; }
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--color-bg); border-bottom: 1px solid var(--color-border); flex-direction: column; padding: 16px 24px; gap: 4px; }
+            .nav-links.open { display: flex; }
+            .hero { padding: 110px 0 60px; }
+            .hero-metrics { gap: 24px; }
+            .research-bar { flex-direction: column; }
+            .research-stats { gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="https://livingframework.github.io" class="logo">
+            <span class="logo-mark">LF</span>
+            Living Framework
+        </a>
+        <button class="mobile-menu-btn" onclick="document.getElementById('navLinks').classList.toggle('open')">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#problem">The Problem</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#process">How It Works</a></li>
+            <li><a href="#who">Who It's For</a></li>
+            <li><a href="https://livingframework.github.io">Research</a></li>
+            <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+    <div class="container">
+        <div class="hero-label">Context Engineering Advisory</div>
+        <h1>Your AI reliability problem is an <span class="accent">architecture problem</span></h1>
+        <p class="hero-sub">
+            You do not need a better model. You need a better collaboration architecture. 
+            18 months of empirical research, 12 documented failure episodes, and a tested control stack 
+            that reduces AI error at the system level — not by prompting harder.
+        </p>
+        <div class="hero-metrics">
+            <div class="metric-item">
+                <span class="metric-value">89%</span>
+                <span class="metric-label">Reduction in file churn</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-value">93%</span>
+                <span class="metric-label">Reduction in numeric errors</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-value">18mo</span>
+                <span class="metric-label">Empirical research base</span>
+            </div>
+            <div class="metric-item">
+                <span class="metric-value">8</span>
+                <span class="metric-label">Peer-reviewed papers</span>
+            </div>
+        </div>
+        <div class="hero-cta">
+            <a href="#contact" class="btn-primary">Start a conversation →</a>
+            <a href="https://livingframework.github.io" class="btn-secondary">Read the research</a>
+        </div>
+    </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+    <div class="container">
+        <div class="section-label">The Problem</div>
+        <h2 class="section-title">Where AI deployments actually break</h2>
+        <p class="section-sub">
+            The failures organisations experience are not random. They follow a documented six-stage cascade — and every stage is addressable at the architecture level.
+        </p>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="problem-icon">⟳</div>
+                <h3>Context Drift</h3>
+                <p>AI reconstructs rather than retrieves. Without a canonical ground truth architecture, each session diverges from the last. Outputs become inconsistent without any visible cause.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">⊗</div>
+                <h3>File Divergence</h3>
+                <p>Multiple versions of the same document exist simultaneously. The AI draws from whichever is most salient — not whichever is correct. Errors compound silently.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">≠</div>
+                <h3>The Fluency-Reliability Paradox</h3>
+                <p>More fluent AI output is more dangerous. Confident, well-formed responses mask errors more effectively than hesitant ones. Fluency is not a reliability signal.</p>
+            </div>
+            <div class="problem-card">
+                <div class="problem-icon">↯</div>
+                <h3>Collaboration Fatigue</h3>
+                <p>Teams experiencing repeated AI failures reduce their ambition and their usage. The problem is diagnosed as a model limitation when it is a structural one. The ceiling is artificial.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+    <div class="container">
+        <div class="section-label">Services</div>
+        <h2 class="section-title">Three ways to work together</h2>
+        <p class="section-sub">
+            Each engagement is designed to produce a structural change in how your team collaborates with AI — not a one-time fix.
+        </p>
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-tag">Audit</span>
+                <h3>Collaboration Architecture Review</h3>
+                <p>A structured diagnostic of your current AI collaboration setup. Identify where your failure cascade begins, which controls are missing, and what changes will produce the highest reliability gain.</p>
+                <ul class="service-deliverables">
+                    <li>Failure pattern analysis across your current workflows</li>
+                    <li>Gap assessment against the A1-A10 control stack</li>
+                    <li>Prioritised remediation plan with implementation notes</li>
+                    <li>Written report you can act on without ongoing dependency</li>
+                </ul>
+            </div>
+            <div class="service-card featured">
+                <span class="service-tag">Implementation</span>
+                <h3>LC-OS Deployment</h3>
+                <p>Full implementation of the Lean Collaboration Operating System across your team or organisation. Canonical document architecture, control stack, verification protocols, and training for the people who will run it.</p>
+                <ul class="service-deliverables">
+                    <li>Canonical document templates built for your domain</li>
+                    <li>Full A1-A10 control stack configured for your workflows</li>
+                    <li>Team training on the protocol and its rationale</li>
+                    <li>30-day support period post-implementation</li>
+                </ul>
+            </div>
+            <div class="service-card">
+                <span class="service-tag">Ongoing</span>
+                <h3>Fractional AI Officer</h3>
+                <p>Embedded strategic oversight for organisations running AI at scale. Regular sessions to review architecture, catch emerging failure patterns, and keep the collaboration system calibrated as your usage evolves.</p>
+                <ul class="service-deliverables">
+                    <li>Monthly architecture reviews and recalibration</li>
+                    <li>Direct access for escalation between sessions</li>
+                    <li>Proactive identification of new failure surfaces</li>
+                    <li>Strategic input on new AI deployments before they go live</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+    <div class="container">
+        <div class="section-label">How It Works</div>
+        <h2 class="section-title">From first contact to structural change</h2>
+        <p class="section-sub">Every engagement starts with understanding your specific failure pattern before recommending anything.</p>
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="step-num">01</div>
+                <div class="step-content">
+                    <h3>Diagnostic conversation</h3>
+                    <p>A 45-minute session to understand where your AI collaboration is breaking, what you've already tried, and what the failure pattern looks like. No charge, no commitment. If I can't help you, I'll tell you that directly.</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">02</div>
+                <div class="step-content">
+                    <h3>Architecture assessment</h3>
+                    <p>Review of your current workflow structure, document architecture, and control mechanisms. Mapped against the six-stage failure cascade to identify where degradation is entering the system.</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">03</div>
+                <div class="step-content">
+                    <h3>Implementation or recommendation</h3>
+                    <p>Either a written remediation plan you can execute independently, or hands-on implementation of the LC-OS protocol across your team — depending on what the situation calls for and what you want.</p>
+                </div>
+            </div>
+            <div class="process-step">
+                <div class="step-num">04</div>
+                <div class="step-content">
+                    <h3>Verification and calibration</h3>
+                    <p>Measurement of the structural change. The 89% and 93% figures came from systematic tracking — the same approach applies to your deployment. You should be able to see the improvement, not just feel it.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- WHO -->
+<section id="who">
+    <div class="container">
+        <div class="section-label">Who This Is For</div>
+        <h2 class="section-title">Organisations that need reliability, not novelty</h2>
+        <p class="section-sub">This work is most valuable where AI is already deployed and the failure pattern is already visible.</p>
+        <div class="who-grid">
+            <div class="who-card">
+                <h3>Technology teams</h3>
+                <p>Engineering and product teams running AI in production workflows where reliability failures are costing time, creating rework, or eroding team confidence in the tooling.</p>
+            </div>
+            <div class="who-card">
+                <h3>L&D and HR organisations</h3>
+                <p>Teams deploying AI across a workforce where inconsistent outputs create compliance risk, quality variation, or require constant human correction that was never in the original design.</p>
+            </div>
+            <div class="who-card">
+                <h3>Operations and knowledge teams</h3>
+                <p>Document-heavy environments where AI-assisted work is producing divergent outputs, version control failures, or outputs that cannot be traced back to a reliable source of truth.</p>
+            </div>
+            <div class="who-card">
+                <h3>Leadership facing AI decisions</h3>
+                <p>Senior leaders who need to make architecture decisions about AI deployment and want an evidence-based framework for evaluating options — before committing to a direction that is difficult to reverse.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- RESEARCH ANCHOR -->
+<section>
+    <div class="container">
+        <div class="research-bar">
+            <div class="research-bar-text">
+                <h3>Grounded in published empirical research</h3>
+                <p>Every recommendation traces back to documented failure episodes, controlled observations, and peer-reviewed findings. Not theory. Not best guesses.</p>
+            </div>
+            <div class="research-stats">
+                <div class="r-stat">
+                    <div class="r-stat-val">8</div>
+                    <div class="r-stat-lab">Papers</div>
+                </div>
+                <div class="r-stat">
+                    <div class="r-stat-val">12</div>
+                    <div class="r-stat-lab">Failure episodes</div>
+                </div>
+                <div class="r-stat">
+                    <div class="r-stat-val">6k+</div>
+                    <div class="r-stat-lab">Downloads</div>
+                </div>
+            </div>
+            <a href="https://livingframework.github.io" class="btn-secondary">Read the research →</a>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="section-label">Get in Touch</div>
+                <h2>Start with a conversation</h2>
+                <p>The first step is a 45-minute diagnostic session. No charge. If your situation is one I can help with, I'll tell you what that looks like. If it isn't, I'll tell you that instead.</p>
+                <p style="color: var(--color-text-secondary); font-size: 15px; margin-top: 8px;">Response within 24 hours.</p>
+                <div class="contact-detail">
+                    <span>Email</span>
+                    <a href="mailto:sood.rishi@icloud.com">sood.rishi@icloud.com</a>
+                </div>
+                <div class="contact-detail">
+                    <span>Research</span>
+                    <a href="https://livingframework.github.io">livingframework.github.io</a>
+                </div>
+                <div class="contact-detail">
+                    <span>LinkedIn</span>
+                    <a href="https://linkedin.com/in/rishisood" target="_blank">Rishi Sood</a>
+                </div>
+            </div>
+            <div class="contact-form">
+                <h3>Tell me about your situation</h3>
+                <form id="contactForm" onsubmit="submitForm(event)">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" id="fname" placeholder="Your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="femail" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Organisation</label>
+                        <input type="text" id="forg" placeholder="Where you work">
+                    </div>
+                    <div class="form-group">
+                        <label>What are you dealing with?</label>
+                        <select id="ftype">
+                            <option value="">Select the closest fit</option>
+                            <option value="AI outputs are inconsistent — I need a diagnosis">AI outputs are inconsistent — I need a diagnosis</option>
+                            <option value="I want to implement a proper collaboration architecture">I want to implement a proper collaboration architecture</option>
+                            <option value="I need ongoing strategic oversight of our AI systems">I need ongoing strategic oversight of our AI systems</option>
+                            <option value="I am not sure yet — I want to talk it through">I'm not sure yet — I want to talk it through</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Brief context</label>
+                        <textarea id="fmsg" placeholder="What's breaking, what you've tried, what you need. Two sentences is fine."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Send →</button>
+                </form>
+                <script>
+                function submitForm(e) {
+                    e.preventDefault();
+                    var name = document.getElementById('fname').value;
+                    var email = document.getElementById('femail').value;
+                    var org = document.getElementById('forg').value;
+                    var type = document.getElementById('ftype').value;
+                    var msg = document.getElementById('fmsg').value;
+                    var subject = encodeURIComponent('Consulting Enquiry — Living Framework');
+                    var body = encodeURIComponent(
+                        'Name: ' + name + '\n' +
+                        'Email: ' + email + '\n' +
+                        'Organisation: ' + org + '\n' +
+                        'Situation: ' + type + '\n\n' +
+                        'Context:\n' + msg
+                    );
+                    window.location.href = 'mailto:sood.rishi@icloud.com?subject=' + subject + '&body=' + body;
+                }
+                </script>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-links">
+            <a href="https://livingframework.github.io">Research</a>
+            <a href="https://livingframework.github.io#framework">LC-OS</a>
+            <a href="https://livingframework.github.io#papers">Papers</a>
+            <a href="mailto:sood.rishi@icloud.com">Contact</a>
+        </div>
+        <p>© 2026 Rishi Sood · Living Framework · Context Engineering Research</p>
+    </div>
+</footer>
+
+</body>
+</html>
