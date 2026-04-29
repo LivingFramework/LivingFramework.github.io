@@ -606,6 +606,68 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .animate { animation: fadeIn 0.6s ease forwards; }
+
+        /* Books */
+        .books { background: var(--color-bg-elevated); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .books-intro { max-width: 600px; margin-bottom: 48px; }
+        .books-intro p { font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.7; }
+        .books-covers {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+            margin-bottom: 40px;
+        }
+        .books-covers::-webkit-scrollbar { display: none; }
+        .book-cover-item {
+            flex: 0 0 auto;
+            width: 120px;
+            transition: transform 0.2s;
+        }
+        .book-cover-item:hover { transform: translateY(-4px); }
+        .book-cover-item img {
+            width: 120px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--color-border);
+            display: block;
+        }
+        .books-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+        .books-cta-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--color-accent);
+            color: #000;
+            font-family: var(--font-display);
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .books-cta-primary:hover { opacity: 0.85; }
+        .books-cta-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-family: var(--font-mono);
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .books-cta-secondary:hover { border-color: var(--color-border-hover); color: var(--color-text); }
+        .books-count { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-tertiary); margin-top: 16px; }
+
     </style>
 </head>
 <body>
@@ -623,6 +685,7 @@
                 <li><a href="#research">Research</a></li>
                 <li><a href="#diagnostic">Diagnostic</a></li>
                 <li><a href="#templates">Templates</a></li>
+                <li><a href="#books">Books</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="/consulting" class="nav-cta">Consulting</a></li>
             </ul>
@@ -1088,6 +1151,52 @@
                     <a href="https://github.com/LivingFramework/LC-OS-Project" target="_blank" class="template-link">Explore Toolkit →</a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Books Section -->
+    <section class="books" id="books">
+        <div class="container" style="padding: 80px 0;">
+            <span class="section-label">Writing</span>
+            <div class="books-intro">
+                <h2>Practical AI guides for every profession</h2>
+                <p>Twelve short, actionable books on working with AI — written for managers, teachers, lawyers, HR professionals, and anyone building an AI habit. Applied Context Engineering for the real world.</p>
+            </div>
+            <div class="books-covers">
+                <div class="book-cover-item">
+                    <img src="https://livingframework.github.io/books/the-ai-habit.jpg" alt="The AI Habit" loading="lazy">
+                </div>
+                <div class="book-cover-item">
+                    <img src="https://livingframework.github.io/books/hello-ai.jpg" alt="Hello AI" loading="lazy">
+                </div>
+                <div class="book-cover-item">
+                    <img src="https://livingframework.github.io/books/managers-handbook.jpg" alt="Manager's AI Handbook" loading="lazy">
+                </div>
+                <div class="book-cover-item">
+                    <img src="https://livingframework.github.io/books/ai-heavy-lifting.jpg" alt="AI Heavy Lifting" loading="lazy">
+                </div>
+                <div class="book-cover-item">
+                    <img src="https://livingframework.github.io/books/ai-wont-remember.jpg" alt="AI Won't Remember" loading="lazy">
+                </div>
+                <div class="book-cover-item">
+                    <img src="https://livingframework.github.io/books/teachers-ai-playbook.jpg" alt="Teacher's AI Playbook" loading="lazy">
+                </div>
+                <div class="book-cover-item">
+                    <img src="https://livingframework.github.io/books/lawyers-ai-handbook.jpg" alt="Lawyer's AI Handbook" loading="lazy">
+                </div>
+                <div class="book-cover-item">
+                    <img src="https://livingframework.github.io/books/hr-ai-playbook.jpg" alt="HR AI Playbook" loading="lazy">
+                </div>
+            </div>
+            <div class="books-actions">
+                <a href="https://livingframework.github.io/books/" target="_blank" class="books-cta-primary">
+                    Browse all 12 books →
+                </a>
+                <a href="https://www.amazon.com/author/rishisood" target="_blank" class="books-cta-secondary">
+                    Amazon author page ↗
+                </a>
+            </div>
+            <p class="books-count">12 books · Available on Amazon Kindle and paperback</p>
         </div>
     </section>
 
