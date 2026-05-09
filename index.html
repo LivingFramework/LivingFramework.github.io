@@ -1471,15 +1471,15 @@
             // Score-aware CTA
             const actionsEl = document.getElementById('resultsActions');
             if (totalScore < 40) {
-                actionsEl.innerHTML = \`
+                actionsEl.innerHTML = `
                     <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:24px 28px;text-align:left;max-width:520px;margin:0 auto 12px;">
                         <p style="font-size:13px;font-family:'JetBrains Mono',monospace;color:#f59e0b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">High Risk — Professional Review Recommended</p>
                         <p style="color:#a1a1aa;font-size:15px;line-height:1.6;margin-bottom:20px;">Your workflow has significant structural gaps. A 45-minute diagnostic will identify exactly where failures are entering your system and what to fix first. No charge, no commitment.</p>
                         <a href="/consulting" style="display:inline-flex;align-items:center;gap:8px;background:#f59e0b;color:#09090b;padding:12px 24px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;">Book a diagnostic session →</a>
                     </div>
-                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>\`;
+                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>`;
             } else if (totalScore < 60) {
-                actionsEl.innerHTML = \`
+                actionsEl.innerHTML = `
                     <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:14px;padding:24px 28px;text-align:left;max-width:520px;margin:0 auto 12px;">
                         <p style="font-size:13px;font-family:'JetBrains Mono',monospace;color:#f59e0b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Vulnerable — Structured Support Available</p>
                         <p style="color:#a1a1aa;font-size:15px;line-height:1.6;margin-bottom:20px;">You have the right instincts but structural gaps that will compound over time. Use the free templates to address quick wins — or get hands-on help to fix the architecture properly.</p>
@@ -1488,17 +1488,17 @@
                             <a href="#templates" style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,0.15);color:#a1a1aa;padding:12px 24px;border-radius:10px;font-weight:500;font-size:14px;text-decoration:none;">Get the free templates</a>
                         </div>
                     </div>
-                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>\`;
+                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>`;
             } else if (totalScore < 80) {
-                actionsEl.innerHTML = \`
+                actionsEl.innerHTML = `
                     <a href="#templates" class="btn btn-primary">Get the Templates →</a>
                     <a href="/consulting" class="btn btn-secondary">Take it further with Rishi</a>
-                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>\`;
+                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>`;
             } else {
-                actionsEl.innerHTML = \`
+                actionsEl.innerHTML = `
                     <a href="#templates" class="btn btn-primary">Get the Templates →</a>
                     <a href="https://github.com/LivingFramework/LC-OS" target="_blank" class="btn btn-secondary">Explore the Research</a>
-                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>\`;
+                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>`;
             }
             const breakdownGrid = document.getElementById('breakdownGrid');
             breakdownGrid.innerHTML = Object.entries(categories).map(([cat, data]) => {
