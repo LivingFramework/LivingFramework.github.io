@@ -701,7 +701,8 @@
                 <p class="hero-subtitle">Most AI workflows break after a few sessions. Context drifts. Decisions get lost. Trust erodes. Living Framework provides the governance infrastructure to make long-horizon collaboration actually work.</p>
                 <div class="hero-actions">
                     <a href="#diagnostic" class="btn btn-primary">Take the Assessment →</a>
-                    <a href="#research" class="btn btn-secondary">Read the Research</a>
+                    <a href="/consulting" class="btn btn-secondary" style="border-color: rgba(245,158,11,0.5); color: #f59e0b;">Work with Rishi →</a>
+                    <a href="#research" class="btn btn-secondary" style="font-size: 14px; opacity: 0.7;">Read the Research</a>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
@@ -754,6 +755,22 @@
                     <h3>No Repair Path</h3>
                     <p>When things break, there's no systematic way to fix them. You patch and hope. Same failures keep recurring.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Consulting Hook -->
+    <section style="padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(245,158,11,0.03);">
+        <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap;">
+            <div style="max-width: 600px;">
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #f59e0b; margin-bottom: 14px;">Context Engineering Advisory</div>
+                <h2 style="font-size: clamp(22px, 3vw, 32px); font-weight: 600; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 14px; color: #fafafa;">Recognise these failures in your team?</h2>
+                <p style="font-size: 16px; color: #a1a1aa; line-height: 1.7; margin: 0;">These are documented, named failure patterns — not random bad luck. If they're showing up in your organisation's AI workflows, a 45-minute diagnostic will identify exactly where your architecture is breaking and what to fix first. No charge, no commitment.</p>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;">
+                <a href="/consulting" style="display: inline-flex; align-items: center; gap: 8px; background: #f59e0b; color: #09090b; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap;">Start a conversation →</a>
+                <a href="/consulting#services" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; padding: 12px 28px; border-radius: 12px; font-weight: 500; font-size: 14px; text-decoration: none; white-space: nowrap;">See how it works</a>
             </div>
         </div>
     </section>
@@ -1135,7 +1152,7 @@
                         <h4>⚠ Priority Gaps to Address</h4>
                         <div id="gapsList"></div>
                     </div>
-                    <div class="results-actions">
+                    <div class="results-actions" id="resultsActions">
                         <a href="#contact" class="btn btn-primary">Get Help Implementing →</a>
                         <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>
                     </div>
@@ -1310,14 +1327,14 @@
     <!-- CONSULTING CTA -->
     <section style="padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.08);">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
-            <div style="background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.25); border-radius: 20px; padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+            <div style="background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.25); border-radius: 20px; padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
                 <div style="max-width: 580px;">
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #10b981; margin-bottom: 14px;">Context Engineering Advisory</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #f59e0b; margin-bottom: 14px;">Context Engineering Advisory</div>
                     <h2 style="font-size: clamp(24px, 3vw, 36px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 14px;">Governance is an implementation problem, not a model problem</h2>
                     <p style="font-size: 16px; color: #a1a1aa; line-height: 1.7;">The research is freely available. If you need someone to implement it — auditing your current architecture, deploying LC-OS, or providing ongoing strategic oversight — that is what the consulting practice does.</p>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;">
-                    <a href="/consulting" style="display: inline-flex; align-items: center; gap: 8px; background: #10b981; color: #09090b; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap;">Work with Rishi →</a>
+                    <a href="/consulting" style="display: inline-flex; align-items: center; gap: 8px; background: #f59e0b; color: #09090b; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap;">Work with Rishi →</a>
                     <a href="/consulting#services" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid rgba(255,255,255,0.15); color: #a1a1aa; padding: 12px 28px; border-radius: 12px; font-weight: 500; font-size: 14px; text-decoration: none; white-space: nowrap;">See services</a>
                 </div>
             </div>
@@ -1450,6 +1467,39 @@
             document.getElementById('totalScore').textContent = totalScore;
             let title = totalScore >= 80 ? 'Strong Foundation' : totalScore >= 60 ? 'Good Start, Gaps to Fill' : totalScore >= 40 ? 'Vulnerable to Drift' : 'High Risk of Breakdown';
             document.getElementById('scoreTitle').textContent = title;
+
+            // Score-aware CTA
+            const actionsEl = document.getElementById('resultsActions');
+            if (totalScore < 40) {
+                actionsEl.innerHTML = \`
+                    <div style="background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.3);border-radius:14px;padding:24px 28px;text-align:left;max-width:520px;margin:0 auto 12px;">
+                        <p style="font-size:13px;font-family:'JetBrains Mono',monospace;color:#f59e0b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">High Risk — Professional Review Recommended</p>
+                        <p style="color:#a1a1aa;font-size:15px;line-height:1.6;margin-bottom:20px;">Your workflow has significant structural gaps. A 45-minute diagnostic will identify exactly where failures are entering your system and what to fix first. No charge, no commitment.</p>
+                        <a href="/consulting" style="display:inline-flex;align-items:center;gap:8px;background:#f59e0b;color:#09090b;padding:12px 24px;border-radius:10px;font-weight:700;font-size:15px;text-decoration:none;">Book a diagnostic session →</a>
+                    </div>
+                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>\`;
+            } else if (totalScore < 60) {
+                actionsEl.innerHTML = \`
+                    <div style="background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.2);border-radius:14px;padding:24px 28px;text-align:left;max-width:520px;margin:0 auto 12px;">
+                        <p style="font-size:13px;font-family:'JetBrains Mono',monospace;color:#f59e0b;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px;">Vulnerable — Structured Support Available</p>
+                        <p style="color:#a1a1aa;font-size:15px;line-height:1.6;margin-bottom:20px;">You have the right instincts but structural gaps that will compound over time. Use the free templates to address quick wins — or get hands-on help to fix the architecture properly.</p>
+                        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+                            <a href="/consulting" style="display:inline-flex;align-items:center;gap:8px;background:#f59e0b;color:#09090b;padding:12px 24px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;">Work with Rishi →</a>
+                            <a href="#templates" style="display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,0.15);color:#a1a1aa;padding:12px 24px;border-radius:10px;font-weight:500;font-size:14px;text-decoration:none;">Get the free templates</a>
+                        </div>
+                    </div>
+                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>\`;
+            } else if (totalScore < 80) {
+                actionsEl.innerHTML = \`
+                    <a href="#templates" class="btn btn-primary">Get the Templates →</a>
+                    <a href="/consulting" class="btn btn-secondary">Take it further with Rishi</a>
+                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>\`;
+            } else {
+                actionsEl.innerHTML = \`
+                    <a href="#templates" class="btn btn-primary">Get the Templates →</a>
+                    <a href="https://github.com/LivingFramework/LC-OS" target="_blank" class="btn btn-secondary">Explore the Research</a>
+                    <button onclick="restartAssessment()" class="btn btn-secondary">Retake</button>\`;
+            }
             const breakdownGrid = document.getElementById('breakdownGrid');
             breakdownGrid.innerHTML = Object.entries(categories).map(([cat, data]) => {
                 const pct = Math.round((data.score / data.max) * 100);

@@ -20,9 +20,9 @@
             --color-text: #fafafa;
             --color-text-secondary: #a1a1aa;
             --color-text-tertiary: #71717a;
-            --color-accent: #10b981;
-            --color-accent-dim: rgba(16, 185, 129, 0.15);
-            --color-accent-glow: rgba(16, 185, 129, 0.4);
+            --color-accent: #f59e0b;
+            --color-accent-dim: rgba(245, 158, 11, 0.12);
+            --color-accent-glow: rgba(245, 158, 11, 0.3);
             --font-display: 'Space Grotesk', -apple-system, sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
             --max-width: 1200px;
@@ -83,10 +83,10 @@
         .nav-links a:hover { color: var(--color-text); background: var(--color-bg-hover); }
         .nav-links a.nav-cta {
             color: var(--color-accent);
-            border: 1px solid rgba(16,185,129,0.3);
+            border: 1px solid rgba(245,158,11,0.3);
             background: var(--color-accent-dim);
         }
-        .nav-links a.nav-cta:hover { background: rgba(16,185,129,0.25); border-color: var(--color-accent); }
+        .nav-links a.nav-cta:hover { background: rgba(245,158,11,0.15); border-color: var(--color-accent); }
         .nav-links a.nav-active { color: var(--color-accent); }
 
         /* LAYOUT */
@@ -100,7 +100,7 @@
         .hero-label {
             display: inline-flex; align-items: center; gap: 8px;
             background: var(--color-accent-dim);
-            border: 1px solid rgba(16,185,129,0.25);
+            border: 1px solid rgba(245,158,11,0.25);
             border-radius: 100px;
             padding: 6px 14px;
             font-size: 12px; font-weight: 600;
@@ -150,7 +150,7 @@
             text-decoration: none;
             transition: all 0.2s;
         }
-        .btn-primary:hover { background: #0ea572; transform: translateY(-1px); box-shadow: 0 8px 24px var(--color-accent-glow); }
+        .btn-primary:hover { background: #d97706; transform: translateY(-1px); box-shadow: 0 8px 24px var(--color-accent-glow); }
         .btn-secondary {
             display: inline-flex; align-items: center; gap: 8px;
             border: 1px solid var(--color-border-hover);
@@ -220,15 +220,15 @@
             transition: all 0.2s;
             display: flex; flex-direction: column; gap: 16px;
         }
-        .service-card:hover { border-color: rgba(16,185,129,0.3); background: var(--color-accent-dim); }
+        .service-card:hover { border-color: rgba(245,158,11,0.25); background: var(--color-accent-dim); }
         .service-card.featured {
-            border-color: rgba(16,185,129,0.4);
-            background: rgba(16,185,129,0.06);
+            border-color: rgba(245,158,11,0.4);
+            background: rgba(245,158,11,0.06);
         }
         .service-tag {
             display: inline-flex;
             background: var(--color-accent-dim);
-            border: 1px solid rgba(16,185,129,0.25);
+            border: 1px solid rgba(245,158,11,0.25);
             border-radius: 100px;
             padding: 4px 10px;
             font-size: 11px; font-weight: 600;
@@ -263,7 +263,7 @@
             font-size: 40px; font-weight: 700;
             color: var(--color-accent-dim);
             line-height: 1;
-            -webkit-text-stroke: 1px rgba(16,185,129,0.4);
+            -webkit-text-stroke: 1px rgba(245,158,11,0.4);
             color: transparent;
         }
         .step-content h3 { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
@@ -350,7 +350,7 @@
             cursor: pointer;
             transition: all 0.2s;
         }
-        .form-submit:hover { background: #0ea572; transform: translateY(-1px); }
+        .form-submit:hover { background: #d97706; transform: translateY(-1px); }
 
         /* FOOTER */
         footer {
