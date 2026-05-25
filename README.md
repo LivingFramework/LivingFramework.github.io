@@ -44,6 +44,8 @@ These templates prevent this by making everything explicit. One document per dom
 
 **Five minutes now. Saves hours later.**
 
+**[→ Full setup instructions: SETUP-GUIDE.md](SETUP-GUIDE.md)**
+
 **Step 1 — Copy the templates**
 
 Copy these two files to your Cowork folder and fill them in:
@@ -66,6 +68,8 @@ Wait for confirmation. Then work.
 - Recovering from a mistake? Use `FAILURE-RECOVERY.md`.
 
 You don't need all eight documents on day one. You need the Running Document and the Partnership Agreement. Add the rest when the problems they solve become real for you.
+
+**See the templates filled in:** [`examples/`](examples/) contains two complete sets — a freelance consultant and a PhD researcher — showing all seven documents populated with real projects, real rules, and documented failure episodes.
 
 ---
 
@@ -145,6 +149,19 @@ Structure prevents version confusion. Version confusion causes file divergence. 
 This document gives you a folder structure that makes canonical versions obvious, separates inputs from outputs, and ensures archived work stays accessible for rollback.
 
 [→ View template](FOLDER-STRUCTURE.md)
+
+---
+
+## Filled-In Examples
+
+Blank templates tell you what to fill in. The [`examples/`](examples/) folder shows what they look like when filled in — complete with real projects, rules, and failure episodes.
+
+| Example | Context | Key Features |
+|---------|---------|-------------|
+| [Freelance Consultant](examples/freelance-consultant/) | Strategy consultant, 3 simultaneous clients | Codename system, rate/budget tracking, boundary failure documented |
+| [PhD Researcher](examples/phd-researcher/) | Postdoctoral researcher writing a monograph | Absolute citation prohibition (created after fabrication in month 1), evidential language levels |
+
+Both examples include all seven templates filled in for a specific person and project, with real corrections logs and rules that evolved from real failures.
 
 ---
 
