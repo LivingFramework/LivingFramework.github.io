@@ -44,13 +44,21 @@ These templates prevent this by making everything explicit. One document per dom
 
 **Five minutes now. Saves hours later.**
 
-**[→ Full setup instructions: SETUP-GUIDE.md](SETUP-GUIDE.md)**
+**Option A — Automated (recommended):**
 
-**Step 1 — Copy the templates**
+```
+node scripts/init-project.js
+```
 
-Copy these two files to your Cowork folder and fill them in:
-1. `RUNNING-DOCUMENT.md` — your collaboration's memory
-2. `PARTNERSHIP-AGREEMENT.md` — your operating agreement with Claude
+Asks four questions. Generates your pre-filled `00-governance/` folder in under a minute.  
+Requires Node.js 14+. [→ Full script instructions: scripts/README.md](scripts/README.md)
+
+**Option B — Manual:**
+
+Copy `RUNNING-DOCUMENT.md` and `PARTNERSHIP-AGREEMENT.md` to your Cowork folder and fill them in.  
+[→ Full manual setup: SETUP-GUIDE.md](SETUP-GUIDE.md)
+
+---
 
 **Step 2 — Start every session with one line**
 
@@ -67,7 +75,7 @@ Wait for confirmation. Then work.
 - Numbers getting inconsistent? Add `CANONICAL-NUMBERS.md`.
 - Recovering from a mistake? Use `FAILURE-RECOVERY.md`.
 
-You don't need all eight documents on day one. You need the Running Document and the Partnership Agreement. Add the rest when the problems they solve become real for you.
+You don't need all seven documents on day one. You need the Running Document and the Partnership Agreement. Add the rest when the problems they solve become real for you.
 
 **See the templates filled in:** [`examples/`](examples/) contains two complete sets — a freelance consultant and a PhD researcher — showing all seven documents populated with real projects, real rules, and documented failure episodes.
 
