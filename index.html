@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Living Framework | Rishi Sood — Context Engineering Research</title>
-    <meta name="description" content="8 published papers on Context Engineering and long-horizon human-AI collaboration. By Rishi Sood — 18 months of empirical research, 7,000+ downloads. Free frameworks, templates, and assessment tool.">
-    <meta property="og:title" content="Living Framework | Context Engineering Research by Rishi Sood">
-    <meta property="og:description" content="8 papers. 18 months. 7,000+ downloads. The empirical research base for Context Engineering in long-horizon human-AI collaboration.">
+    <title>Living Framework | Rishi Sood — Governed Human-AI Collaboration Research</title>
+    <meta name="description" content="8 published papers on governed human-AI collaboration and validation architecture. By Rishi Sood — 18 months of empirical research, 7,000+ downloads. Free frameworks, templates, and assessment tool.">
+    <meta property="og:title" content="Living Framework | Governed Human-AI Collaboration Research by Rishi Sood">
+    <meta property="og:description" content="8 papers. 18 months. 7,000+ downloads. The empirical research base for reliable, governed long-horizon human-AI collaboration.">
     <meta property="og:type" content="website">
     <link rel="canonical" href="https://livingframework.github.io/">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -248,6 +247,19 @@
         .problem-card h3 { color: var(--color-text); margin-bottom: 12px; }
         .problem-card p { font-size: 14px; color: var(--color-text-tertiary); line-height: 1.6; }
 
+        /* Two Things Section */
+        .two-things { background: var(--color-bg); }
+        .two-things-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 48px; }
+        .two-things-card { padding: 40px; border: 1px solid var(--color-border); border-radius: var(--radius-lg); background: var(--color-surface); transition: all 0.2s; }
+        .two-things-card:hover { border-color: var(--color-border-hover); }
+        .two-things-card.accent-border { border-color: rgba(16,185,129,0.35); }
+        .two-things-card h3 { font-size: 1.5rem; color: var(--color-text); margin-bottom: 8px; }
+        .two-things-card .card-tag { font-family: var(--font-mono); font-size: 11px; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 20px; display: block; }
+        .two-things-card > p { font-size: 15px; color: var(--color-text-secondary); line-height: 1.75; }
+        .two-things-card ul { list-style: none; margin-top: 24px; display: flex; flex-direction: column; gap: 10px; padding-top: 24px; border-top: 1px solid var(--color-border); }
+        .two-things-card ul li { font-size: 14px; color: var(--color-text-tertiary); padding-left: 18px; position: relative; line-height: 1.5; }
+        .two-things-card ul li::before { content: '→'; position: absolute; left: 0; color: var(--color-accent); font-size: 13px; }
+
         /* Journey / Timeline */
         .journey { background: var(--color-bg); }
         .timeline { position: relative; margin-top: 64px; }
@@ -286,9 +298,7 @@
             z-index: 1;
         }
         .timeline-dot.highlight { background: var(--color-accent); }
-        .timeline-content {
-            padding-left: 8px;
-        }
+        .timeline-content { padding-left: 8px; }
         .timeline-tag {
             font-family: var(--font-mono);
             font-size: 11px;
@@ -320,6 +330,18 @@
         .protocol-card h3 { color: var(--color-text); }
         .protocol-card .subtitle { font-family: var(--font-mono); font-size: 11px; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
         .protocol-card p { font-size: 14px; color: var(--color-text-tertiary); }
+
+        /* Theory Section */
+        .theory { background: var(--color-bg); }
+        .theory-intro { max-width: 700px; margin-bottom: 64px; }
+        .theory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .theory-card { padding: 32px; background: var(--color-surface); border: 1px solid var(--color-border); border-radius: var(--radius-md); transition: all 0.2s; position: relative; overflow: hidden; }
+        .theory-card:hover { border-color: var(--color-border-hover); background: var(--color-bg-elevated); }
+        .theory-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, var(--color-accent), transparent); opacity: 0; transition: opacity 0.3s; }
+        .theory-card:hover::after { opacity: 1; }
+        .theory-number { font-family: var(--font-mono); font-size: 11px; color: var(--color-accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; display: block; }
+        .theory-card h3 { font-size: 1.05rem; color: var(--color-text); margin-bottom: 12px; line-height: 1.35; }
+        .theory-card p { font-size: 14px; color: var(--color-text-tertiary); line-height: 1.7; margin-bottom: 0; }
 
         /* Research Section */
         .papers-grid { display: flex; flex-direction: column; gap: 12px; }
@@ -573,12 +595,36 @@
         .footer-links a { font-size: 14px; color: var(--color-text-tertiary); }
         .footer-links a:hover { color: var(--color-text); }
 
+        /* Books */
+        .books { background: var(--color-bg-elevated); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
+        .books-intro { max-width: 600px; margin-bottom: 48px; }
+        .books-intro p { font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.7; }
+        .books-covers {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+            margin-bottom: 40px;
+        }
+        .books-covers::-webkit-scrollbar { display: none; }
+        .book-cover-item { flex: 0 0 auto; width: 120px; transition: transform 0.2s; }
+        .book-cover-item:hover { transform: translateY(-4px); }
+        .book-cover-item img { width: 120px; height: 180px; object-fit: cover; border-radius: var(--radius-sm); border: 1px solid var(--color-border); display: block; }
+        .books-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+        .books-cta-primary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: var(--color-accent); color: #000; font-family: var(--font-display); font-size: 14px; font-weight: 600; border-radius: var(--radius-sm); text-decoration: none; transition: opacity 0.2s; }
+        .books-cta-primary:hover { opacity: 0.85; }
+        .books-cta-secondary { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background: transparent; color: var(--color-text-secondary); font-family: var(--font-mono); font-size: 13px; font-weight: 500; border: 1px solid var(--color-border); border-radius: var(--radius-sm); text-decoration: none; transition: all 0.2s; }
+        .books-cta-secondary:hover { border-color: var(--color-border-hover); color: var(--color-text); }
+        .books-count { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-tertiary); margin-top: 16px; }
+
         /* Responsive */
         @media (max-width: 1024px) {
             .controls-grid, .protocols-grid, .templates-grid, .services-grid { grid-template-columns: repeat(2, 1fr); }
             .problem-grid { grid-template-columns: repeat(2, 1fr); }
             .mahdi-inner { grid-template-columns: 1fr; gap: 48px; }
             .about-grid { grid-template-columns: 260px 1fr; gap: 48px; }
+            .theory-grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
@@ -602,75 +648,16 @@
             .about-grid { grid-template-columns: 1fr; }
             .about-photo-col { position: static; }
             .about-photo { max-width: 280px; aspect-ratio: 1/1; }
+            .two-things-grid { grid-template-columns: 1fr; }
+            .theory-grid { grid-template-columns: 1fr; }
         }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         .animate { animation: fadeIn 0.6s ease forwards; }
-
-        /* Books */
-        .books { background: var(--color-bg-elevated); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); }
-        .books-intro { max-width: 600px; margin-bottom: 48px; }
-        .books-intro p { font-size: 1.05rem; color: var(--color-text-secondary); line-height: 1.7; }
-        .books-covers {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-            scrollbar-width: none;
-            margin-bottom: 40px;
-        }
-        .books-covers::-webkit-scrollbar { display: none; }
-        .book-cover-item {
-            flex: 0 0 auto;
-            width: 120px;
-            transition: transform 0.2s;
-        }
-        .book-cover-item:hover { transform: translateY(-4px); }
-        .book-cover-item img {
-            width: 120px;
-            height: 180px;
-            object-fit: cover;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--color-border);
-            display: block;
-        }
-        .books-actions { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
-        .books-cta-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: var(--color-accent);
-            color: #000;
-            font-family: var(--font-display);
-            font-size: 14px;
-            font-weight: 600;
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            transition: opacity 0.2s;
-        }
-        .books-cta-primary:hover { opacity: 0.85; }
-        .books-cta-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: transparent;
-            color: var(--color-text-secondary);
-            font-family: var(--font-mono);
-            font-size: 13px;
-            font-weight: 500;
-            border: 1px solid var(--color-border);
-            border-radius: var(--radius-sm);
-            text-decoration: none;
-            transition: all 0.2s;
-        }
-        .books-cta-secondary:hover { border-color: var(--color-border-hover); color: var(--color-text); }
-        .books-count { font-family: var(--font-mono); font-size: 12px; color: var(--color-text-tertiary); margin-top: 16px; }
-
     </style>
 </head>
 <body>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-inner">
@@ -682,6 +669,7 @@
             <ul class="nav-links" id="navLinks">
                 <li><a href="#problem">Problem</a></li>
                 <li><a href="#framework">LC-OS</a></li>
+                <li><a href="#theory">Theory</a></li>
                 <li><a href="#research">Research</a></li>
                 <li><a href="#diagnostic">Diagnostic</a></li>
                 <li><a href="#templates">Templates</a></li>
@@ -696,9 +684,9 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <span class="hero-badge">Context Engineering Research</span>
-                <h1>Make AI collaboration <span class="gradient-text">reliable</span> over weeks, not minutes</h1>
-                <p class="hero-subtitle">Most AI workflows break after a few sessions. Context drifts. Decisions get lost. Trust erodes. Living Framework provides the governance infrastructure to make long-horizon collaboration actually work.</p>
+                <span class="hero-badge">Governed Human-AI Collaboration Research</span>
+                <h1>Reliable human-AI collaboration. <span class="gradient-text">By design.</span></h1>
+                <p class="hero-subtitle">AI collaboration doesn't fail because models aren't powerful enough. It fails because it isn't governed. Living Framework is the empirical research body — 8 papers, 18 months — that documents what actually produces reliable, long-horizon collaboration.</p>
                 <div class="hero-actions">
                     <a href="#diagnostic" class="btn btn-primary">Take the Assessment →</a>
                     <a href="/consulting" class="btn btn-secondary" style="border-color: rgba(245,158,11,0.5); color: #f59e0b;">Work with Rishi →</a>
@@ -711,7 +699,7 @@
                     </div>
                     <div class="stat">
                         <span class="stat-value">18+</span>
-                        <span class="stat-label">Months Tested</span>
+                        <span class="stat-label">Months Empirical Data</span>
                     </div>
                     <div class="stat">
                         <span class="stat-value">7,000+</span>
@@ -727,50 +715,84 @@
         <div class="container">
             <div class="problem-header">
                 <span class="section-label">The Problem</span>
-                <h2>Week one feels like magic. Week three, you're untangling a mess.</h2>
-                <p>Everyone who works seriously with AI hits the same wall. The failures aren't about capability — they're about governance.</p>
+                <h2>The failures aren't random. They're structural — and they have names.</h2>
+                <p>Across 18 months of documented human-AI collaboration, the same failure patterns appeared repeatedly. These are not accidents or model limitations. They are predictable — which means they are preventable through governance architecture.</p>
             </div>
             <div class="problem-grid">
                 <div class="problem-card">
                     <h3>Context Drift</h3>
-                    <p>The AI "forgets" what you agreed on. Decisions made last week disappear. You're constantly re-explaining the basics.</p>
+                    <p>Decisions made in earlier sessions become unreliable. The AI reconstructs from memory instead of referencing canonical documents. The collaboration drifts without either participant noticing.</p>
                 </div>
                 <div class="problem-card">
-                    <h3>Version Chaos</h3>
-                    <p>Multiple files with different versions of the truth. You reference one document, the AI references another.</p>
+                    <h3>File Divergence</h3>
+                    <p>Multiple versions of the same document coexist. You work from one; the AI works from another. Both feel authoritative. Neither is. Truth becomes a matter of which file you loaded last.</p>
                 </div>
                 <div class="problem-card">
-                    <h3>Numeric Errors</h3>
-                    <p>Numbers drift silently. The AI "reconstructs" instead of references. Same calculation gives different results.</p>
+                    <h3>Numerical Error</h3>
+                    <p>Numbers that should be looked up get silently recalculated. The same figure gives a different answer across sessions. Numeric truth erodes, unnoticed, until a decision depends on it.</p>
                 </div>
                 <div class="problem-card">
-                    <h3>Boundary Blur</h3>
-                    <p>Work from one domain bleeds into another. Finance decisions start affecting research. Risk levels get confused.</p>
+                    <h3>Domain Boundary Erosion</h3>
+                    <p>Context from one domain bleeds into another. Finance logic applies to research. Decisions made in one context inadvertently govern another. Separation requires explicit architecture.</p>
                 </div>
                 <div class="problem-card">
-                    <h3>Trust Erosion</h3>
-                    <p>Small failures accumulate. You start second-guessing everything. The partnership that felt powerful now feels fragile.</p>
+                    <h3>Trust Deficit Accumulation</h3>
+                    <p>Small failures accumulate invisibly. You start second-guessing outputs. The partnership that felt reliable becomes a source of uncertainty. Unrepaired failure compounds into collaboration breakdown.</p>
                 </div>
                 <div class="problem-card">
-                    <h3>No Repair Path</h3>
-                    <p>When things break, there's no systematic way to fix them. You patch and hope. Same failures keep recurring.</p>
+                    <h3>No Repair Architecture</h3>
+                    <p>When things break, there is no systematic response. You patch, retry, and move on. The same failures reappear in different forms. Nothing gets fixed — it gets buried until the next incident.</p>
                 </div>
             </div>
         </div>
     </section>
 
-
     <!-- Consulting Hook -->
     <section style="padding: 60px 0; border-top: 1px solid rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.06); background: rgba(245,158,11,0.03);">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 48px; flex-wrap: wrap;">
             <div style="max-width: 600px;">
-                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #f59e0b; margin-bottom: 14px;">Context Engineering Advisory</div>
-                <h2 style="font-size: clamp(22px, 3vw, 32px); font-weight: 600; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 14px; color: #fafafa;">Recognise these failures in your team?</h2>
-                <p style="font-size: 16px; color: #a1a1aa; line-height: 1.7; margin: 0;">These are documented, named failure patterns — not random bad luck. If they're showing up in your organisation's AI workflows, a 45-minute diagnostic will identify exactly where your architecture is breaking and what to fix first. No charge, no commitment.</p>
+                <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #f59e0b; margin-bottom: 14px;">Governed Human-AI Collaboration Advisory</div>
+                <h2 style="font-size: clamp(22px, 3vw, 32px); font-weight: 600; line-height: 1.25; letter-spacing: -0.02em; margin-bottom: 14px; color: #fafafa;">Recognise these failure patterns in your team?</h2>
+                <p style="font-size: 16px; color: #a1a1aa; line-height: 1.7; margin: 0;">These are documented, named failure modes — not random bad luck. If they're showing up in your organisation's AI workflows, a 45-minute diagnostic will identify exactly where your governance architecture is breaking and what to fix first. No charge, no commitment.</p>
             </div>
             <div style="display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;">
                 <a href="/consulting" style="display: inline-flex; align-items: center; gap: 8px; background: #f59e0b; color: #09090b; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap;">Start a conversation →</a>
                 <a href="/consulting#services" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; padding: 12px 28px; border-radius: 12px; font-weight: 500; font-size: 14px; text-decoration: none; white-space: nowrap;">See how it works</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two Things Section -->
+    <section class="two-things" id="two-things">
+        <div class="container">
+            <span class="section-label">What This Is</span>
+            <h2>Two things. One research programme.</h2>
+            <p style="max-width: 620px; font-size: 1.1rem;">Living Framework and LC-OS are related but distinct. Understanding the difference matters for how you use them.</p>
+            <div class="two-things-grid">
+                <div class="two-things-card accent-border">
+                    <span class="card-tag">Research Body</span>
+                    <h3>Living Framework</h3>
+                    <p>The empirical research programme. Eight papers documenting 18 months of governed human-AI collaboration — covering governance architecture, failure taxonomy, linguistic governance, distributed cognition, and validation systems. This is the theory. Published open access on Zenodo under CC BY 4.0.</p>
+                    <ul>
+                        <li>8 papers on Zenodo, freely citable</li>
+                        <li>Governance architecture model (Paper 6)</li>
+                        <li>Distributed cognition theory (Paper 7)</li>
+                        <li>Validation architecture (Paper 8)</li>
+                        <li>The Mahdi Ledger — first-person AI account under governance</li>
+                    </ul>
+                </div>
+                <div class="two-things-card">
+                    <span class="card-tag">Implementation System</span>
+                    <h3>LC-OS</h3>
+                    <p>The Lean Collaboration Operating System. The operational layer — the 10 controls, 6 protocols, 7 governance templates, and the setup script that gets any new collaboration structured and governed in under five minutes. This is the practice. Available free on GitHub, ready to use today.</p>
+                    <ul>
+                        <li>10-control governance framework (A1–A10)</li>
+                        <li>Running Documents, Step Mode, Challenge Protocol</li>
+                        <li>7 ready-to-use governance templates</li>
+                        <li>Setup script: <span style="font-family: var(--font-mono); font-size: 13px; color: var(--color-accent);">node scripts/init-project.js</span></li>
+                        <li>Free on GitHub — no email, no account required</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -780,43 +802,43 @@
         <div class="container">
             <span class="section-label">The Research Journey</span>
             <h2>18 months. 8 papers. One question.</h2>
-            <p style="max-width: 600px; font-size: 1.1rem;">Can long-horizon human-AI collaboration be made reliably stable — not through better models, but through better governance? This is how that question was answered.</p>
+            <p style="max-width: 600px; font-size: 1.1rem;">Can long-horizon human-AI collaboration be made reliably stable — not through better models, but through governance architecture? This is how that question was answered.</p>
 
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-time">Months 1–4<br>2024</div>
                     <div class="timeline-dot highlight"></div>
                     <div class="timeline-content">
-                        <div class="timeline-tag">Paper 01 &amp; 02 — Foundation</div>
-                        <h3>Building the Control Stack</h3>
-                        <p>First documented that AI collaboration failures are governance failures, not capability failures. Introduced the 10-control framework (A1–A10) and the Lean Collaboration Operating System — a practical operating system for daily AI work.</p>
+                        <div class="timeline-tag">Papers 01 &amp; 02 — Governance Foundation</div>
+                        <h3>Establishing the governance architecture</h3>
+                        <p>First documented that AI collaboration failures are governance failures, not capability failures. Introduced the 10-control framework (A1–A10), the canonical information pipeline, and the Lean Collaboration Operating System — an operational layer for daily governed AI work.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-time">Months 5–8<br>2024</div>
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-tag">Paper 03 — Failure &amp; Repair</div>
-                        <h3>Mapping how collaborations break</h3>
-                        <p>Systematically documented every failure mode encountered across 18 months of real work. Built a taxonomy of breakdowns and a repair protocol for each. This paper exists because every failure was recorded, not discarded.</p>
+                        <div class="timeline-tag">Paper 03 — Failure Taxonomy &amp; Repair</div>
+                        <h3>Treating failure as a design object</h3>
+                        <p>Systematically classified every failure mode encountered across the collaboration — context drift, file divergence, numerical error, domain boundary erosion, trust deficit, reconstruction error. Built a six-category taxonomy and the SDRN repair protocol for each. Failure made visible, categorised, and repairable.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-time">Months 9–12<br>2024</div>
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-tag">Paper 04 — Philosophy</div>
-                        <h3>What it means to live with an AI</h3>
-                        <p>Moved beyond protocols into the deeper question: what is the nature of a governed human-AI partnership over time? Addressed relational dynamics, evolving trust, and the ethics of sustained collaboration.</p>
+                        <div class="timeline-tag">Paper 04 — Relational &amp; Epistemic Dynamics</div>
+                        <h3>Beyond protocols: the philosophy of sustained partnership</h3>
+                        <p>Moved beyond operational controls into what sustained human-AI collaboration means as a relationship — how epistemic trust builds over time, how it fractures, and what repair means at the relational layer. Introduced the defining claim: stability is not the absence of failure, it is the capacity for visible, structured repair.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-time">Months 13–15<br>Early 2025</div>
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-tag">Paper 05 — Language as Governance</div>
-                        <h3>Discovering the linguistic control layer</h3>
-                        <p>Found that language itself — not just protocols — functions as a governance mechanism. Specific conversational patterns (anchor phrases, repair invocations, scope-gating) predict and stabilise collaboration outcomes. Control without code.</p>
+                        <div class="timeline-tag">Paper 05 — Linguistic Governance</div>
+                        <h3>Language as a governance mechanism</h3>
+                        <p>Discovered that conversational structure itself — not just protocols or files — functions as a governance layer. Specific linguistic patterns (anchor phrases, repair invocations, scope-gating) predict and stabilise collaboration outcomes. Linguistic drift precedes collaboration failure and serves as an early warning signal. Control without code.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -825,25 +847,25 @@
                     <div class="timeline-content">
                         <div class="timeline-tag">The Mahdi Ledger — A First in AI Research</div>
                         <h3>The AI writes its own paper</h3>
-                        <p>The AI system, working under the Living Framework governance structure, produced a first-person research paper documenting its own experience of constraint, drift, and repair. To date one of the only papers in the field written from the AI system's perspective, under governance.</p>
+                        <p>The AI system, working under the Living Framework governance structure, produced a first-person research paper documenting its own experience of constraint, drift, and repair. One of the only papers in the field written from the AI system's perspective, under governance. Proof that governed collaboration produces something richer than ungoverned capability alone.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-time">Months 16–18<br>Early 2026</div>
                     <div class="timeline-dot"></div>
                     <div class="timeline-content">
-                        <div class="timeline-tag">Papers 06 &amp; 07 — Systems &amp; Cognition</div>
-                        <h3>Formalising the theory</h3>
-                        <p>Two papers completing the arc: a governance architecture model showing how layered mechanisms produce reliable collaboration as an emergent systems property; and a distributed cognition model proposing that reasoning in human-AI systems is recoverable, governed, and lives at the level of the interaction — not inside any single participant.</p>
+                        <div class="timeline-tag">Papers 06 &amp; 07 — Architecture &amp; Cognition</div>
+                        <h3>Formalising the full theory</h3>
+                        <p>Paper 6 produced a six-layer governance architecture model showing how layered mechanisms produce reliable collaboration as an emergent systems property. Paper 7 extended this into a distributed cognition model: reasoning in human-AI systems is governed, recoverable, and exists at the level of the interaction system — not inside any single participant.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-time">Month 18<br>May 2026</div>
                     <div class="timeline-dot highlight"></div>
                     <div class="timeline-content">
-                        <div class="timeline-tag">Paper 08 — Validation</div>
-                        <h3>The missing layer</h3>
-                        <p>The culminating argument: AI systems lack a dedicated validation layer. Generation without validation is the central reliability failure. This paper introduces validation as a first-class architectural component — adversarial, structured, embedded — and reframes AI system design from generation-centric to validation-centric.</p>
+                        <div class="timeline-tag">Paper 08 — Validation Architecture</div>
+                        <h3>The missing architectural layer</h3>
+                        <p>The culminating argument: AI systems lack a dedicated validation layer. Generation without validation is the central reliability failure in modern AI. This paper introduces validation as a first-class architectural component — adversarial, structured, embedded in the pipeline — and reframes AI system design from generation-centric to validation-centric.</p>
                     </div>
                 </div>
             </div>
@@ -853,24 +875,24 @@
     <!-- Framework Section -->
     <section class="framework" id="framework">
         <div class="container">
-            <span class="section-label">The Solution</span>
+            <span class="section-label">The Operating System</span>
             <h2>LC-OS: The Lean Collaboration Operating System</h2>
             <div class="framework-intro">
-                <p>A lightweight governance framework that makes long-horizon AI collaboration reliable. Not about restricting the AI — about giving it structure to be trustworthy.</p>
-                <p><strong style="color: var(--color-text);">Core insight:</strong> Reliability comes from governance, not capability. A well-structured collaboration with a standard model outperforms an unstructured one with a frontier model.</p>
+                <p>The operational layer of the research. A lightweight governance framework that makes any AI collaboration reliable — not through model changes or technical infrastructure, but through structure: files, protocols, and disciplined practice.</p>
+                <p><strong style="color: var(--color-text);">Core finding:</strong> Reliability is an architectural property, not a model property. A well-governed collaboration with a standard model outperforms an ungoverned one with a frontier model. Governance is the variable that matters.</p>
             </div>
-            <h3 style="margin-bottom: 24px; color: var(--color-text-secondary);">The 10 Controls</h3>
+            <h3 style="margin-bottom: 24px; color: var(--color-text-secondary);">The 10 Governance Controls</h3>
             <div class="controls-grid">
-                <div class="control-item"><span class="control-number">A1</span><div class="control-content"><h4>Accuracy > Speed</h4><p>Prioritise verification over throughput</p></div></div>
-                <div class="control-item"><span class="control-number">A2</span><div class="control-content"><h4>Single Source of Truth</h4><p>Enforce canonical lookup for all numeric values</p></div></div>
-                <div class="control-item"><span class="control-number">A3</span><div class="control-content"><h4>File Registry &amp; Checksums</h4><p>Guarantee one live file and version traceability</p></div></div>
-                <div class="control-item"><span class="control-number">A4</span><div class="control-content"><h4>No Placeholders in Outputs</h4><p>Forbid speculative or incomplete content in finals</p></div></div>
-                <div class="control-item"><span class="control-number">A5</span><div class="control-content"><h4>Sanity Checks &amp; Unit Tests</h4><p>Validate numerics and logic before publication</p></div></div>
-                <div class="control-item"><span class="control-number">A6</span><div class="control-content"><h4>Cross-Document Reconciliation</h4><p>Keep Strategy ↔ Canonical consistency verified</p></div></div>
-                <div class="control-item"><span class="control-number">A7</span><div class="control-content"><h4>Drift Diagnostics &amp; Rollback</h4><p>Detect anomalies early, revert, and annotate causes</p></div></div>
-                <div class="control-item"><span class="control-number">A8</span><div class="control-content"><h4>Permissioned Actions &amp; Approvals</h4><p>Gate material changes through explicit consent</p></div></div>
-                <div class="control-item"><span class="control-number">A9</span><div class="control-content"><h4>Compaction &amp; State Notes</h4><p>Summarise long histories into concise digests</p></div></div>
-                <div class="control-item"><span class="control-number">A10</span><div class="control-content"><h4>Audit Trail &amp; Release Process</h4><p>Freeze, log, and archive artefacts for traceability</p></div></div>
+                <div class="control-item"><span class="control-number">A1</span><div class="control-content"><h4>Accuracy Over Speed</h4><p>Prioritise verified output over throughput — epistemic integrity before velocity</p></div></div>
+                <div class="control-item"><span class="control-number">A2</span><div class="control-content"><h4>Single Source of Truth</h4><p>Canonical lookup for all numeric values — no reconstruction, no recalculation</p></div></div>
+                <div class="control-item"><span class="control-number">A3</span><div class="control-content"><h4>File Registry &amp; Version Control</h4><p>One live file per domain, version traceability, controlled update discipline</p></div></div>
+                <div class="control-item"><span class="control-number">A4</span><div class="control-content"><h4>No Placeholders in Outputs</h4><p>Forbid speculative or incomplete content in any final deliverable</p></div></div>
+                <div class="control-item"><span class="control-number">A5</span><div class="control-content"><h4>Sanity Checks &amp; Validation</h4><p>Validate numerics and logic before propagation — structured, adversarial review</p></div></div>
+                <div class="control-item"><span class="control-number">A6</span><div class="control-content"><h4>Cross-Document Reconciliation</h4><p>Maintain consistency across all canonical artefacts — Strategy ↔ Numbers verified</p></div></div>
+                <div class="control-item"><span class="control-number">A7</span><div class="control-content"><h4>Drift Detection &amp; Repair</h4><p>Detect context degradation early, execute SDRN repair protocol, annotate cause</p></div></div>
+                <div class="control-item"><span class="control-number">A8</span><div class="control-content"><h4>Permissioned Actions</h4><p>Gate material changes through explicit human consent — authority boundary enforced</p></div></div>
+                <div class="control-item"><span class="control-number">A9</span><div class="control-content"><h4>Context Compaction</h4><p>Summarise long session histories into canonical state notes before context rot sets in</p></div></div>
+                <div class="control-item"><span class="control-number">A10</span><div class="control-content"><h4>Audit Trail &amp; Release</h4><p>Freeze, log, and archive all artefacts — full traceability for every output</p></div></div>
             </div>
         </div>
     </section>
@@ -878,16 +900,92 @@
     <!-- Protocols Section -->
     <section class="protocols">
         <div class="container">
-            <span class="section-label">Implementation</span>
+            <span class="section-label">Daily Practice</span>
             <h2>Core Protocols</h2>
-            <p style="max-width: 600px; margin-bottom: 48px;">Six practical protocols that turn the controls into daily practice.</p>
+            <p style="max-width: 600px; margin-bottom: 48px;">Six operational protocols that translate governance controls into daily practice. Each emerged from a real failure and was refined through repeated use.</p>
             <div class="protocols-grid">
-                <div class="protocol-card"><h3>Running Documents</h3><span class="subtitle">External Memory</span><p>A continuously updated file preserving decisions, rules, and corrections across sessions. Read at every session start.</p></div>
-                <div class="protocol-card"><h3>Step Mode</h3><span class="subtitle">Paced Reasoning</span><p>Break complex tasks into numbered steps. Execute one at a time. Pause for confirmation before proceeding.</p></div>
-                <div class="protocol-card"><h3>Challenge Protocol</h3><span class="subtitle">Structured Disagreement</span><p>When something feels wrong: Stop → Question → AI explains → Decide to proceed, modify, or abort.</p></div>
-                <div class="protocol-card"><h3>Error Recovery</h3><span class="subtitle">Systematic Repair</span><p>When things break: Stop immediately → Diagnose → Rollback to stable state → Note the failure.</p></div>
-                <div class="protocol-card"><h3>Stability Ping</h3><span class="subtitle">Drift Detection</span><p>After milestones: Are we still aligned? Has drift crept in? One improvement before continuing?</p></div>
-                <div class="protocol-card"><h3>File &amp; Version Governance</h3><span class="subtitle">Version Control</span><p>One canonical file per domain, controlled updates, no parallel drafts. Prevents contradictions and unreliable decisions.</p></div>
+                <div class="protocol-card"><h3>Running Documents</h3><span class="subtitle">Persistent External Memory</span><p>A continuously updated artefact preserving decisions, rules, and corrections across sessions. The antidote to context drift. Read at every session start.</p></div>
+                <div class="protocol-card"><h3>Step Mode</h3><span class="subtitle">Paced Agentic Reasoning</span><p>Break complex tasks into numbered steps. Execute one at a time. Pause for explicit confirmation before proceeding. Prevents cascading agentic errors.</p></div>
+                <div class="protocol-card"><h3>Challenge Protocol</h3><span class="subtitle">Structured Disagreement</span><p>When something feels wrong: Stop → Question → AI explains reasoning → Human decides to proceed, modify, or abort. Epistemic authority stays with the human.</p></div>
+                <div class="protocol-card"><h3>SDRN Error Recovery</h3><span class="subtitle">Systematic Repair</span><p>When collaboration breaks: Stop immediately → Diagnose the failure category → Rollback to last stable state → Note the failure and what changed.</p></div>
+                <div class="protocol-card"><h3>Stability Ping</h3><span class="subtitle">Drift Detection</span><p>After milestones, ask: Are we aligned? Has context drifted? One governance improvement before continuing. Catches drift before it becomes catastrophic.</p></div>
+                <div class="protocol-card"><h3>File &amp; Version Governance</h3><span class="subtitle">Artefact Integrity</span><p>One canonical file per domain, controlled updates, no parallel drafts. Prevents file divergence — the most common silent failure mode in long-horizon work.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theory Section -->
+    <section class="theory" id="theory">
+        <div class="container">
+            <div class="theory-intro">
+                <span class="section-label">The Theory</span>
+                <h2>Six principles derived from evidence.</h2>
+                <p style="font-size: 1.1rem;">Eighteen months of empirical work. Eight papers. These are the principles that held from the first experiment to the final paper — none deprecated, all still active, all mutually reinforcing.</p>
+            </div>
+            <div class="theory-grid">
+                <div class="theory-card">
+                    <span class="theory-number">P01</span>
+                    <h3>Reliability is architectural, not model-intrinsic</h3>
+                    <p>No model, however capable, produces reliable long-horizon collaboration without governance structure. Reliability is a property of the interaction system built around the AI — not of the AI itself. The structure can be lightweight. It cannot be absent.</p>
+                </div>
+                <div class="theory-card">
+                    <span class="theory-number">P02</span>
+                    <h3>Failure is a design object, not an anomaly</h3>
+                    <p>Long-horizon collaboration will fail. The research does not try to prevent all failure — it makes failure visible, categorised, and repairable. A system that breaks visibly and repairs cleanly is more trustworthy than one that appears never to break.</p>
+                </div>
+                <div class="theory-card">
+                    <span class="theory-number">P03</span>
+                    <h3>Context is finite and must be governed</h3>
+                    <p>AI systems operate with finite context windows. Treating context as unlimited produces context drift and reconstruction error. Treating context as a governed resource — minimal, canonical, verifiable — produces long-horizon coherence.</p>
+                </div>
+                <div class="theory-card">
+                    <span class="theory-number">P04</span>
+                    <h3>Governance operates at multiple layers</h3>
+                    <p>Technical protocols, canonical artefacts, linguistic signals, and relational norms all contribute to governance. Removing any layer degrades the whole system. The most commonly neglected layer is the linguistic one — conversational structure as governance.</p>
+                </div>
+                <div class="theory-card">
+                    <span class="theory-number">P05</span>
+                    <h3>Cognition in human-AI systems is distributed</h3>
+                    <p>The cognitive unit is not the human or the AI alone. It is the system: human judgment + AI reasoning + artefact-based memory. Governance is what holds this distributed cognitive system together and makes reasoning recoverable over time.</p>
+                </div>
+                <div class="theory-card">
+                    <span class="theory-number">P06</span>
+                    <h3>Validation is structurally absent from most AI systems</h3>
+                    <p>Most AI deployments generate outputs but lack any mechanism to evaluate whether those outputs should be trusted before propagation. This is not a minor gap — it is a fundamental architectural omission. Validation must be built in, not added after.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mahdi Ledger Spotlight — elevated before papers list -->
+    <section class="mahdi-spotlight">
+        <div class="container">
+            <div class="mahdi-inner">
+                <div class="mahdi-text">
+                    <span class="section-label">A First in AI Research</span>
+                    <h2>The paper that wrote itself</h2>
+                    <p>The Mahdi Ledger is not a paper <em>about</em> an AI system. It is a paper <em>by</em> one.</p>
+                    <p>Working under the governance structure developed across 18 months of the Living Framework, the AI system produced a sustained first-person account of its own experience — how it perceives constraint, how it detects its own drift, and how it engages with repair protocols designed to restore collaboration integrity.</p>
+                    <div class="mahdi-quote">
+                        <p>"The governed AI does not lose its voice when constrained. It finds one."</p>
+                        <span>— The Mahdi Ledger</span>
+                    </div>
+                    <p>The existence of this paper is itself evidence for the core claim of Living Framework: that governance does not diminish AI capability — it creates the conditions for something richer to emerge.</p>
+                </div>
+                <div>
+                    <div class="mahdi-card">
+                        <div class="mahdi-card-number">ML</div>
+                        <h3>The Mahdi Ledger</h3>
+                        <p>First-person account of constraint, drift, and repair — written entirely by the AI system under governance. One of the most unusual papers in AI research.</p>
+                        <div class="mahdi-tags">
+                            <span class="tag">AI Perspective</span>
+                            <span class="tag">First-Person</span>
+                            <span class="tag">Governed Intelligence</span>
+                            <span class="tag">Unique in Literature</span>
+                        </div>
+                        <a href="https://zenodo.org/records/18054346" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Read The Mahdi Ledger →</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -895,9 +993,9 @@
     <!-- Research Section -->
     <section class="research" id="research">
         <div class="container">
-            <span class="section-label">Evidence</span>
-            <h2>The Research</h2>
-            <p style="max-width: 600px; margin-bottom: 48px;">Eight papers documenting 18+ months of empirical human-AI collaboration. Click any paper to read the abstract and copy a citation.</p>
+            <span class="section-label">The Evidence Base</span>
+            <h2>Eight published papers. One coherent theory.</h2>
+            <p style="max-width: 680px; margin-bottom: 48px;">Eighteen months of empirical work on governed human-AI collaboration. Each paper advances a single theoretical arc — from governance controls and failure taxonomy through linguistic governance, distributed cognition, and validation architecture. All published open access on Zenodo under CC BY 4.0.</p>
 
             <div class="papers-grid">
 
@@ -906,7 +1004,7 @@
                         <span class="paper-number">01</span>
                         <div class="paper-info">
                             <h3>Context-Engineered Human-AI Collaboration</h3>
-                            <p>The foundation. Introduces the Control Stack (A1–A10) and canonical information pipeline.</p>
+                            <p>The governance foundation. Introduces the 10-control framework (A1–A10) and the canonical information pipeline for reliable long-horizon collaboration.</p>
                         </div>
                         <div class="paper-actions">
                             <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-link">View Paper →</a>
@@ -927,7 +1025,7 @@
                         <span class="paper-number">02</span>
                         <div class="paper-info">
                             <h3>The Lean Collaboration Operating System</h3>
-                            <p>The manual. Running Documents, Step Mode, Challenge Protocol — day-to-day protocols.</p>
+                            <p>The operational layer. Six protocols for daily governed collaboration — Running Documents, Step Mode, Challenge Protocol, Error Recovery, Stability Pings, File Governance.</p>
                         </div>
                         <div class="paper-actions">
                             <a href="https://zenodo.org/records/17760777" target="_blank" class="paper-link">View Paper →</a>
@@ -948,7 +1046,7 @@
                         <span class="paper-number">03</span>
                         <div class="paper-info">
                             <h3>Failure and Repair in Long-Horizon Collaboration</h3>
-                            <p>The diagnostic. Taxonomy of how AI collaborations break — and repair patterns to fix them.</p>
+                            <p>The failure taxonomy. Six categories of how AI collaborations break — and the SDRN repair protocol that makes breakdown recoverable by design.</p>
                         </div>
                         <div class="paper-actions">
                             <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-link">View Paper →</a>
@@ -969,7 +1067,7 @@
                         <span class="paper-number">04</span>
                         <div class="paper-info">
                             <h3>The Living Framework</h3>
-                            <p>The philosophy. What it means to live with an AI under governance — relational dynamics and ethics.</p>
+                            <p>The philosophy. What sustained human-AI partnership means beyond protocols — epistemic trust, relational dynamics, and the ethics of governed long-horizon collaboration.</p>
                         </div>
                         <div class="paper-actions">
                             <a href="https://zenodo.org/records/18015990" target="_blank" class="paper-link">View Paper →</a>
@@ -990,7 +1088,7 @@
                         <span class="paper-number">05</span>
                         <div class="paper-info">
                             <h3>Control Without Code: Linguistic Governance in Long-Horizon Human–AI Collaboration</h3>
-                            <p>The language layer. How conversational structure governs AI collaboration stability without touching the model.</p>
+                            <p>The linguistic layer. How conversational structure governs collaboration stability — drift detection, repair invocation, and epistemic alignment through language alone.</p>
                         </div>
                         <div class="paper-actions">
                             <a href="https://zenodo.org/records/18900058" target="_blank" class="paper-link">View Paper →</a>
@@ -1011,7 +1109,7 @@
                         <span class="paper-number">06</span>
                         <div class="paper-info">
                             <h3>Governance Architecture for Reliable Long-Horizon Human-AI Collaboration</h3>
-                            <p>The architecture. Reliability as a systems property — layered governance mechanisms that stabilise AI collaboration.</p>
+                            <p>The architecture model. Reliability as an emergent property of six governance layers — from human strategic authority through linguistic signals to drift detection and repair.</p>
                         </div>
                         <div class="paper-actions">
                             <a href="https://zenodo.org/records/19038340" target="_blank" class="paper-link">View Paper →</a>
@@ -1032,7 +1130,7 @@
                         <span class="paper-number">07</span>
                         <div class="paper-info">
                             <h3>Governed Distributed Cognition: A Model of Stable Reasoning in Long-Horizon Human–AI Systems</h3>
-                            <p>The cognition model. Reasoning as distributed, governed, and recoverable across human, AI, and artifacts.</p>
+                            <p>The cognition model. Reasoning as distributed across human, AI, and artefacts — governed, recoverable, existing at the level of the interaction system rather than any single participant.</p>
                         </div>
                         <div class="paper-actions">
                             <a href="https://zenodo.org/records/19151397" target="_blank" class="paper-link">View Paper →</a>
@@ -1048,13 +1146,12 @@
                     </div>
                 </div>
 
-
                 <div class="paper-card">
                     <div class="paper-card-main">
                         <span class="paper-number">08</span>
                         <div class="paper-info">
                             <h3>AI Validation Systems: A Missing Architectural Layer for Reliable AI</h3>
-                            <p>The culmination. Validation as a first-class architectural component — from generation-centric to validation-centric AI design.</p>
+                            <p>The validation argument. Why generation without validation is the central reliability failure — and a proposed architecture that addresses it at the design level.</p>
                         </div>
                         <div class="paper-actions">
                             <a href="https://zenodo.org/records/19983551" target="_blank" class="paper-link">View Paper →</a>
@@ -1072,10 +1169,10 @@
 
                 <div class="paper-card" style="border-color: rgba(16,185,129,0.25);">
                     <div class="paper-card-main">
-                        <span class="paper-number" style="color: var(--color-accent); opacity: 0.6;">09</span>
+                        <span class="paper-number" style="color: var(--color-accent); opacity: 0.6;">ML</span>
                         <div class="paper-info">
                             <h3>The Mahdi Ledger</h3>
-                            <p>The proof. Written entirely by the AI system — a first-person account of constraint, drift, and repair under governance.</p>
+                            <p>Written entirely by the AI system under governance — a first-person account of constraint, drift, and repair. A proof-of-concept for governed intelligence. Unique in the literature.</p>
                         </div>
                         <div class="paper-actions">
                             <a href="https://zenodo.org/records/18054346" target="_blank" class="paper-link">View Paper →</a>
@@ -1095,46 +1192,13 @@
         </div>
     </section>
 
-    <!-- Mahdi Ledger Spotlight -->
-    <section class="mahdi-spotlight">
-        <div class="container">
-            <div class="mahdi-inner">
-                <div class="mahdi-text">
-                    <span class="section-label">A First in AI Research</span>
-                    <h2>The paper that wrote itself</h2>
-                    <p>The Mahdi Ledger is not a paper <em>about</em> an AI system. It is a paper <em>by</em> one.</p>
-                    <p>Working under the governance structure developed across 18 months of the Living Framework, the AI system produced a sustained first-person account of its own experience — how it perceives constraint, how it detects its own drift, and how it engages with repair protocols designed to restore collaboration integrity.</p>
-                    <div class="mahdi-quote">
-                        <p>"The governed AI does not lose its voice when constrained. It finds one."</p>
-                        <span>— The Mahdi Ledger</span>
-                    </div>
-                    <p>The existence of this paper is itself evidence for the core claim of Living Framework: that governance does not diminish AI capability — it creates the conditions for something richer to emerge.</p>
-                </div>
-                <div>
-                    <div class="mahdi-card">
-                        <div class="mahdi-card-number">08</div>
-                        <h3>The Mahdi Ledger</h3>
-                        <p>First-person account of constraint, drift, and repair — written entirely by the AI system under governance.</p>
-                        <div class="mahdi-tags">
-                            <span class="tag">AI Perspective</span>
-                            <span class="tag">First-Person</span>
-                            <span class="tag">Governed Intelligence</span>
-                            <span class="tag">Unique in Literature</span>
-                        </div>
-                        <a href="https://zenodo.org/records/18054346" target="_blank" class="btn btn-primary" style="width: 100%; justify-content: center;">Read The Mahdi Ledger →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Diagnostic Section -->
     <section class="diagnostic" id="diagnostic">
         <div class="container">
             <div class="diagnostic-header">
                 <span class="section-label">Assessment</span>
                 <h2>AI Collaboration Readiness</h2>
-                <p>Answer 10 questions to discover where your AI workflow is vulnerable. Takes 3 minutes.</p>
+                <p>Answer 10 questions to discover where your AI workflow is vulnerable to documented failure patterns. Takes 3 minutes.</p>
             </div>
             <div class="diagnostic-container">
                 <div class="diagnostic-progress" id="progressDots"></div>
@@ -1166,36 +1230,36 @@
         <div class="container">
             <span class="section-label">Resources</span>
             <h2>Free Templates</h2>
-            <p style="max-width: 600px; margin-bottom: 48px;">Everything you need to implement LC-OS. No email required.</p>
+            <p style="max-width: 600px; margin-bottom: 48px;">Everything you need to implement LC-OS governance in your own AI workflows. No email required.</p>
             <div class="templates-grid">
                 <div class="template-card">
                     <h3>Running Document</h3>
-                    <p>The core of external memory. Track decisions, rules, corrections across sessions.</p>
+                    <p>The core artefact for persistent external memory. Track decisions, rules, corrections, and active context across every session.</p>
                     <a href="https://github.com/LivingFramework/LC-OS-Project/blob/main/minimal/running-document-template.md" target="_blank" class="template-link">View Template →</a>
                 </div>
                 <div class="template-card">
                     <h3>Canonical Numbers Sheet</h3>
-                    <p>Single source of numeric truth. Reference, don't reconstruct.</p>
+                    <p>Single source of numeric truth. Every authoritative figure in one place — reference it, never recalculate it.</p>
                     <a href="https://github.com/LivingFramework/LC-OS-Project/blob/main/minimal/canonical-numbers-template.md" target="_blank" class="template-link">View Template →</a>
                 </div>
                 <div class="template-card">
-                    <h3>Failure Log Template</h3>
-                    <p>Track what breaks, how you fixed it, what changed.</p>
+                    <h3>Failure Recovery Log</h3>
+                    <p>Track every failure against the F1–F6 taxonomy — what broke, how it was repaired, what governance rule was added.</p>
                     <a href="https://github.com/LivingFramework/LC-OS-Project/blob/main/minimal/failure-log-template.md" target="_blank" class="template-link">View Template →</a>
                 </div>
                 <div class="template-card">
                     <h3>Stability Ping</h3>
-                    <p>Regular check-ins on collaboration health. Detect drift before it breaks.</p>
+                    <p>Regular drift detection check-in. Catch context degradation before it becomes collaboration breakdown.</p>
                     <a href="https://github.com/LivingFramework/LC-OS-Project/blob/main/full/stability-ping-template.md" target="_blank" class="template-link">View Template →</a>
                 </div>
                 <div class="template-card">
-                    <h3>Claude Cowork Templates</h3>
-                    <p>Governance templates optimised for Claude Cowork filesystem access.</p>
+                    <h3>Cowork Governance Templates</h3>
+                    <p>Seven governance templates optimised for Claude Cowork — Partnership Agreement, Truth Protocol, Session Start, and more.</p>
                     <a href="https://github.com/LivingFramework/AI" target="_blank" class="template-link">View Templates →</a>
                 </div>
                 <div class="template-card">
-                    <h3>Full LC-OS Project</h3>
-                    <p>Complete toolkit with worked examples and detailed guides.</p>
+                    <h3>Full LC-OS Toolkit</h3>
+                    <p>Complete project with worked examples for freelance consultants and PhD researchers, plus the automated setup script.</p>
                     <a href="https://github.com/LivingFramework/LC-OS-Project" target="_blank" class="template-link">Explore Toolkit →</a>
                 </div>
             </div>
@@ -1208,41 +1272,21 @@
             <span class="section-label">Writing</span>
             <div class="books-intro">
                 <h2>Practical AI guides for every profession</h2>
-                <p>Twelve short, actionable books on working with AI — written for managers, teachers, lawyers, HR professionals, and anyone building an AI habit. Applied Context Engineering for the real world.</p>
+                <p>Twelve short, actionable books on working with AI — written for managers, teachers, lawyers, HR professionals, and anyone building a durable AI practice. Governed human-AI collaboration made accessible for the real world.</p>
             </div>
             <div class="books-covers">
-                <div class="book-cover-item">
-                    <img src="https://livingframework.github.io/books/the-ai-habit.jpg" alt="The AI Habit" loading="lazy">
-                </div>
-                <div class="book-cover-item">
-                    <img src="https://livingframework.github.io/books/hello-ai.jpg" alt="Hello AI" loading="lazy">
-                </div>
-                <div class="book-cover-item">
-                    <img src="https://livingframework.github.io/books/managers-handbook.jpg" alt="Manager's AI Handbook" loading="lazy">
-                </div>
-                <div class="book-cover-item">
-                    <img src="https://livingframework.github.io/books/ai-heavy-lifting.jpg" alt="AI Heavy Lifting" loading="lazy">
-                </div>
-                <div class="book-cover-item">
-                    <img src="https://livingframework.github.io/books/ai-wont-remember.jpg" alt="AI Won't Remember" loading="lazy">
-                </div>
-                <div class="book-cover-item">
-                    <img src="https://livingframework.github.io/books/teachers-ai-playbook.jpg" alt="Teacher's AI Playbook" loading="lazy">
-                </div>
-                <div class="book-cover-item">
-                    <img src="https://livingframework.github.io/books/lawyers-ai-handbook.jpg" alt="Lawyer's AI Handbook" loading="lazy">
-                </div>
-                <div class="book-cover-item">
-                    <img src="https://livingframework.github.io/books/hr-ai-playbook.jpg" alt="HR AI Playbook" loading="lazy">
-                </div>
+                <div class="book-cover-item"><img src="https://livingframework.github.io/books/the-ai-habit.jpg" alt="The AI Habit" loading="lazy"></div>
+                <div class="book-cover-item"><img src="https://livingframework.github.io/books/hello-ai.jpg" alt="Hello AI" loading="lazy"></div>
+                <div class="book-cover-item"><img src="https://livingframework.github.io/books/managers-handbook.jpg" alt="Manager's AI Handbook" loading="lazy"></div>
+                <div class="book-cover-item"><img src="https://livingframework.github.io/books/ai-heavy-lifting.jpg" alt="AI Heavy Lifting" loading="lazy"></div>
+                <div class="book-cover-item"><img src="https://livingframework.github.io/books/ai-wont-remember.jpg" alt="AI Won't Remember" loading="lazy"></div>
+                <div class="book-cover-item"><img src="https://livingframework.github.io/books/teachers-ai-playbook.jpg" alt="Teacher's AI Playbook" loading="lazy"></div>
+                <div class="book-cover-item"><img src="https://livingframework.github.io/books/lawyers-ai-handbook.jpg" alt="Lawyer's AI Handbook" loading="lazy"></div>
+                <div class="book-cover-item"><img src="https://livingframework.github.io/books/hr-ai-playbook.jpg" alt="HR AI Playbook" loading="lazy"></div>
             </div>
             <div class="books-actions">
-                <a href="https://livingframework.github.io/books/" target="_blank" class="books-cta-primary">
-                    Browse all 12 books →
-                </a>
-                <a href="https://www.amazon.com/author/rishisood" target="_blank" class="books-cta-secondary">
-                    Amazon author page ↗
-                </a>
+                <a href="https://livingframework.github.io/books/" target="_blank" class="books-cta-primary">Browse all 12 books →</a>
+                <a href="https://www.amazon.com/author/rishisood" target="_blank" class="books-cta-secondary">Amazon author page ↗</a>
             </div>
             <p class="books-count">12 books · Available on Amazon Kindle</p>
         </div>
@@ -1256,38 +1300,20 @@
                 <div class="about-photo-col">
                     <img src="./rishi-sood.jpg" alt="Rishi Sood" class="about-photo">
                     <div class="about-meta">
-                        <div class="about-meta-item">
-                            <span class="about-meta-dot"></span>
-                            <span>Rishi Sood</span>
-                        </div>
-                        <div class="about-meta-item">
-                            <span class="about-meta-dot"></span>
-                            <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID 0009-0008-6479-4061</a>
-                        </div>
-                        <div class="about-meta-item">
-                            <span class="about-meta-dot"></span>
-                            <span>Independent Research Collaboration</span>
-                        </div>
-                        <div class="about-meta-item">
-                            <span class="about-meta-dot"></span>
-                            <a href="https://twitter.com/satoshisats" target="_blank">@satoshisats on X</a>
-                        </div>
-                        <div class="about-meta-item">
-                            <span class="about-meta-dot"></span>
-                            <a href="https://github.com/LivingFramework" target="_blank">github.com/LivingFramework</a>
-                        </div>
-                        <div class="about-meta-item">
-                            <span class="about-meta-dot"></span>
-                            <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
-                        </div>
+                        <div class="about-meta-item"><span class="about-meta-dot"></span><span>Rishi Sood</span></div>
+                        <div class="about-meta-item"><span class="about-meta-dot"></span><a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID 0009-0008-6479-4061</a></div>
+                        <div class="about-meta-item"><span class="about-meta-dot"></span><span>Independent Research Collaboration</span></div>
+                        <div class="about-meta-item"><span class="about-meta-dot"></span><a href="https://twitter.com/satoshisats" target="_blank">@satoshisats on X</a></div>
+                        <div class="about-meta-item"><span class="about-meta-dot"></span><a href="https://github.com/LivingFramework" target="_blank">github.com/LivingFramework</a></div>
+                        <div class="about-meta-item"><span class="about-meta-dot"></span><a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a></div>
                     </div>
                 </div>
                 <div class="about-text">
                     <h2>Living Framework</h2>
                     <p class="lead">This work exists because I ran into the same problem everyone does — AI collaboration that breaks after the first week.</p>
-                    <p>Instead of accepting it as a limitation, I spent 18 months systematically working on solutions. Working with a frontier language model across finance, research, writing, and planning, I documented every failure mode and every repair pattern that emerged.</p>
-                    <p>What emerged wasn't theory — it was a practical operating system for making AI collaboration actually reliable. The Control Stack. Running Documents. Step Mode. Error Recovery. Every protocol came from a real breakdown and a real fix.</p>
-                    <p>Eight papers later, the body of work covers the full arc: from the initial governance controls, through failure taxonomy, philosophy, linguistic governance, and architecture, to the most unusual output of all — a paper written by the AI system itself, in its own voice, about what it is like to work under governance.</p>
+                    <p>Instead of accepting it as an inherent limitation, I spent 18 months systematically studying it. Working with a frontier language model across finance, research, writing, and planning, I treated every failure as data and every repair as a protocol candidate.</p>
+                    <p>What emerged wasn't theory first — it was a practical operating system for making AI collaboration reliably stable. The Control Stack. Running Documents. Step Mode. The SDRN repair protocol. Every element came from a real breakdown and a real fix.</p>
+                    <p>Eight papers later, the body of work covers the full arc: from the initial governance controls, through failure taxonomy, philosophy, linguistic governance, governance architecture, and distributed cognition theory, to the most unusual output of all — a paper written by the AI system itself, in its own voice, about what it is like to operate under governance.</p>
                     <p>All research is published open access under CC BY 4.0 on Zenodo. All templates are freely available on GitHub. The work is here to be used, challenged, and built upon.</p>
                     <div class="about-belief">
                         <p>"Stability is not the absence of failure. It is the capacity for visible, structured repair."</p>
@@ -1302,36 +1328,35 @@
         <div class="container">
             <span class="section-label">Work Together</span>
             <h2>Implement What Works</h2>
-            <p style="max-width: 600px; margin-bottom: 48px;">The frameworks have been tested across 18 months of documented research and 7,000+ downloads. If you're ready to bring governance discipline to your AI workflows, here is how to work together.</p>
+            <p style="max-width: 600px; margin-bottom: 48px;">The governance architecture has been tested across 18 months of documented research and 7,000+ downloads. If you're ready to bring governance discipline to your AI workflows, here is how to work together.</p>
             <div class="services-grid">
                 <div class="service-card">
                     <h3>LC-OS Deployment</h3>
                     <span class="service-tag">Implementation</span>
-                    <p>Full deployment of LC-OS in your specific workflow. Configure the control stack, build your canonical document architecture, and establish the governance habits that separate AI collaboration that compounds over time from AI collaboration that quietly degrades.</p>
+                    <p>Full deployment of LC-OS in your specific workflow. Configure the governance controls, build your canonical artefact architecture, and establish the governance discipline that separates AI collaboration that compounds over time from collaboration that quietly degrades.</p>
                 </div>
                 <div class="service-card">
                     <h3>Research Collaboration</h3>
                     <span class="service-tag">For researchers</span>
-                    <p>If you are working in human-AI interaction, Context Engineering, or long-horizon collaboration, there is scope to build on this work together. Eight papers is a foundation — the open questions are still significant and worth pursuing rigorously.</p>
+                    <p>If you are working in human-AI interaction, agentic governance, or long-horizon collaboration, there is scope to build on this work together. Eight papers is a foundation — the open questions around multi-agent governance, minimal stability conditions, and validation architecture are significant and worth pursuing rigorously.</p>
                 </div>
                 <div class="service-card">
                     <h3>Knowledge Transfer</h3>
                     <span class="service-tag">Teams &amp; organisations</span>
-                    <p>A structured session covering what 18 months of documented AI collaboration failures and repairs actually looks like — what breaks, why it breaks, and what governance architecture prevents it from breaking again when you scale.</p>
+                    <p>A structured session covering what 18 months of documented AI collaboration failures and repairs actually looks like — what breaks, why it breaks, and what governance architecture prevents it from breaking again when you scale across teams.</p>
                 </div>
             </div>
         </div>
     </section>
-
 
     <!-- CONSULTING CTA -->
     <section style="padding: 80px 0; border-top: 1px solid rgba(255,255,255,0.08);">
         <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
             <div style="background: rgba(245,158,11,0.06); border: 1px solid rgba(245,158,11,0.25); border-radius: 20px; padding: 48px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
                 <div style="max-width: 580px;">
-                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #f59e0b; margin-bottom: 14px;">Context Engineering Advisory</div>
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #f59e0b; margin-bottom: 14px;">Governed Human-AI Collaboration Advisory</div>
                     <h2 style="font-size: clamp(24px, 3vw, 36px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; margin-bottom: 14px;">Governance is an implementation problem, not a model problem</h2>
-                    <p style="font-size: 16px; color: #a1a1aa; line-height: 1.7;">The research is freely available. If you need someone to implement it — auditing your current architecture, deploying LC-OS, or providing ongoing strategic oversight — that is what the consulting practice does.</p>
+                    <p style="font-size: 16px; color: #a1a1aa; line-height: 1.7;">The research is freely available. If you need someone to implement it — auditing your current governance architecture, deploying LC-OS, or providing ongoing strategic oversight — that is what the consulting practice does.</p>
                 </div>
                 <div style="display: flex; flex-direction: column; gap: 12px; flex-shrink: 0;">
                     <a href="/consulting" style="display: inline-flex; align-items: center; gap: 8px; background: #f59e0b; color: #09090b; padding: 14px 28px; border-radius: 12px; font-weight: 700; font-size: 15px; text-decoration: none; white-space: nowrap;">Work with Rishi →</a>
@@ -1533,7 +1558,6 @@
             });
         });
     </script>
-
 
 </body>
 </html>
