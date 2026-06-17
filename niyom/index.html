@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIYOM | Living Framework — Rishi Sood</title>
-    <meta name="description" content="NIYOM is the reliability execution layer — translating the RITAM architecture and Living Framework research into practical tools, protocols, and verification procedures.">
+    <meta name="description" content="NIYOM is a live AI verification harness — Plan, Execute, Verify, Repair. Forces AI output through governed stages before it reaches the user. Built on the LC-OS research series. Live at niyom.vercel.app.">
     <link rel="canonical" href="https://livingframework.github.io/niyom/">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -286,9 +286,9 @@
             <span>/</span>
             NIYOM
         </div>
-        <div class="page-label">Reliability Execution Layer · Early Development · 2026</div>
+        <div class="page-label">AI Verification Harness · v1.0.0 · Stage 7 · Active · 2026</div>
         <h1>NIYOM</h1>
-        <p>The execution layer that implements the RITAM architecture — turning research-derived controls, verification protocols, and repair procedures into tools practitioners can actually use.</p>
+        <p>A structured execution harness for AI output. Every task goes through Plan, Execute, Verify, and Repair — with adversarial verification between generation and acceptance. Not a chatbot. Not a wrapper. Infrastructure. Live at niyom.vercel.app.</p>
     </div>
 </header>
 
@@ -298,74 +298,95 @@
         <div class="main-content">
 
             <div class="callout">
-                <span>The problem NIYOM solves</span>
-                <p>Research and architecture are necessary but not sufficient. A practitioner who reads the papers and understands the architecture still faces a gap: how does this actually work in a real workflow, on a real day, with real constraints? NIYOM closes that gap.</p>
+                <span>The problem it’s built to solve</span>
+                <p>41–87% of production AI failures are architectural, not model-based. The model isn’t the problem — the harness is. Standard AI tools generate output and present it directly. There is no verification step. Errors arrive confidently. NIYOM separates generation from judgement — the AI generates, a separate adversarial pass judges independently, and the user only receives output that has passed structured verification.</p>
             </div>
 
             <div class="prose-block">
                 <div class="prose-label">What NIYOM Is</div>
-                <h2>Implementation, not theory</h2>
-                <p>NIYOM is the execution layer of the Living Framework research programme. Where the papers document findings and RITAM specifies an architecture, NIYOM implements that architecture into practical form.</p>
-                <p>The research established what reliable AI collaboration requires structurally. RITAM translates that into an architecture. NIYOM makes the architecture usable — the controls become operable, the verification steps become executable, the repair protocols become actionable. The research does not remain at the level of principle.</p>
+                <h2>A governed four-stage loop</h2>
+                <p>NIYOM is not a chatbot, not an AI wrapper, not an agent. It is a verification harness: a governed execution environment that forces AI output through four enforced stages before anything reaches the user.</p>
+                <p>Plan — the AI commits to a structured approach with declared assumptions and a cognitive contract before any execution begins. Execute — the plan runs step by step in enforced format. Verify — a completely separate AI prompt, independent of the execute prompt, audits the output adversarially. It doesn’t know it’s reviewing the same pipeline’s work. Repair — if Verify returns REDO, the output is rewritten to address every identified failure, and Verify runs again.</p>
+                <p>Only verified outputs enter memory. No unvalidated work accumulates. This is the Stochastic-Deterministic Boundary: generation is stochastic, Verify is the deterministic gate.</p>
             </div>
 
             <div class="prose-block">
-                <div class="prose-label">The Dependency Chain</div>
-                <h2>How the three layers relate</h2>
-                <p>NIYOM is the third layer in a deliberate sequence. Each layer depends on the one before it being correct.</p>
-                <div class="dep-chain">
-                    <div class="dep-node">
-                        <div class="dep-node-label">Layer 1</div>
-                        <div class="dep-node-name">Research</div>
-                        <div class="dep-node-desc">Eight papers documenting what reliable AI collaboration requires and why</div>
-                    </div>
-                    <div class="dep-node">
-                        <div class="dep-node-label">Layer 2</div>
-                        <div class="dep-node-name">RITAM</div>
-                        <div class="dep-node-desc">Architecture that specifies how the research findings translate into structural form</div>
-                    </div>
-                    <div class="dep-node current">
-                        <div class="dep-node-label">Layer 3</div>
-                        <div class="dep-node-name">NIYOM</div>
-                        <div class="dep-node-desc">Execution layer that implements the architecture as usable protocols and tools</div>
-                    </div>
-                </div>
-                <p style="margin-top:18px;">NIYOM does not attempt to shortcut this sequence. Implementation built on a wrong architecture produces reliable-looking unreliability — it embeds the mistakes deeply and makes them harder to find. The sequence is intentional.</p>
-            </div>
-
-            <div class="prose-block">
-                <div class="prose-label">What It Implements</div>
-                <h2>The research, made operational</h2>
-                <p>NIYOM works through the specific controls, protocols, and procedures established by the research and specified by RITAM.</p>
+                <div class="prose-label">Verdicts</div>
+                <h2>What Verify can return</h2>
+                <p>Every task ends with one of four verdicts — not a score, not a rating. A governed decision about whether the output has earned the right to reach the user.</p>
                 <div class="impl-list" style="margin-top:18px;">
                     <div class="impl-row">
                         <div>
-                            <div class="impl-name">Reliability controls (A1–A10)</div>
-                            <div class="impl-src" style="margin-top:3px;">From Paper 01 · Specified in RITAM</div>
+                            <div class="impl-name">READY</div>
+                            <div class="impl-src" style="margin-top:3px;">Output passed structured verification. Use it.</div>
                         </div>
                     </div>
                     <div class="impl-row">
                         <div>
-                            <div class="impl-name">Verification protocols</div>
-                            <div class="impl-src" style="margin-top:3px;">From Paper 08 · Core gap the research identified</div>
+                            <div class="impl-name">REVIEW</div>
+                            <div class="impl-src" style="margin-top:3px;">Usable, but findings were noted. Check before acting. Acceptance requires friction.</div>
                         </div>
                     </div>
                     <div class="impl-row">
                         <div>
-                            <div class="impl-name">Memory governance procedures</div>
-                            <div class="impl-src" style="margin-top:3px;">From Papers 01–02 · Prevents Context Drift and Reconstruction Failure</div>
+                            <div class="impl-name">REDO</div>
+                            <div class="impl-src" style="margin-top:3px;">Critical failure. Output rewrites automatically. Verify runs again.</div>
                         </div>
                     </div>
                     <div class="impl-row">
                         <div>
-                            <div class="impl-name">Failure mode detection and repair</div>
-                            <div class="impl-src" style="margin-top:3px;">From Paper 03 · Six documented failure modes, each with repair paths</div>
+                            <div class="impl-name">BLOCKED</div>
+                            <div class="impl-src" style="margin-top:3px;">Objective cannot be reliably governed as stated. Pipeline does not start.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">Development</div>
+                <h2>Seven stages, six complete</h2>
+                <p>Niyom was built in certified stages — each stage gated by automated Python certification scripts run against the live production URL, not locally.</p>
+                <div class="impl-list" style="margin-top:18px;">
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Stage 1 — Core Loop</div>
+                            <div class="impl-src" style="margin-top:3px;">PLAN → EXECUTE → VERIFY → REPAIR · three output modes · streaming ✓</div>
                         </div>
                     </div>
                     <div class="impl-row">
                         <div>
-                            <div class="impl-name">Linguistic governance layer</div>
-                            <div class="impl-src" style="margin-top:3px;">From Paper 05 · Language as a reliability mechanism</div>
+                            <div class="impl-name">Stage 2 — Validation Architecture</div>
+                            <div class="impl-src" style="margin-top:3px;">7-type failure taxonomy · READY/REVIEW/REDO/BLOCKED · adversarial verify posture ✓</div>
+                        </div>
+                    </div>
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Stage 3 — Intelligence Layer</div>
+                            <div class="impl-src" style="margin-top:3px;">Typed verdicts · cognitive contract locking · governability classifier · evidence-gated execution ✓</div>
+                        </div>
+                    </div>
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Stage 4 — Auth + Persistent Sessions</div>
+                            <div class="impl-src" style="margin-top:3px;">Magic-link auth · run history · row-level security ✓</div>
+                        </div>
+                    </div>
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Stage 5 — Smart Memory Retrieval</div>
+                            <div class="impl-src" style="margin-top:3px;">Prior run retrieval · anti-pattern injection · decay scoring ✓</div>
+                        </div>
+                    </div>
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Stage 6 — Clarification Routing</div>
+                            <div class="impl-src" style="margin-top:3px;">4-tier routing (INFER / ASSUME / ASK / BLOCK) · ambiguity as governance state ✓</div>
+                        </div>
+                    </div>
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Stage 7 — Semantic Governance</div>
+                            <div class="impl-src" style="margin-top:3px;">CONTRACT_JSON code enforcement · semantic alignment scan · in progress</div>
                         </div>
                     </div>
                 </div>
@@ -373,9 +394,10 @@
 
             <div class="prose-block">
                 <div class="prose-label">Current Status</div>
-                <h2>Early development · 2026</h2>
-                <p>NIYOM is in early development. RITAM, the architecture layer it depends on, is currently active. NIYOM development proceeds in step with RITAM's output — implementation cannot get ahead of the architecture it is implementing.</p>
-                <p>NIYOM is not a product. It is an implementation project whose output is a set of structured, research-grounded tools and protocols for practitioners working with AI systems in sustained, high-stakes contexts.</p>
+                <h2>v1.0.0 · Session 63 · Stage 7 in progress</h2>
+                <p>Niyom is live at niyom.vercel.app. Six of seven development stages are complete. Stage 7 (Semantic Governance) is in progress — Phase A (CONTRACT_JSON code-layer enforcement) and Phase B (semantic alignment scan) certified.</p>
+                <p>Every completed run is stored to the user's account, protected by row-level security. Smart memory retrieval injects relevant prior runs into new plans, weighted by recency and verdict quality. Clarification routing classifies every ambiguous objective before the pipeline starts — ambiguity is a governance state, not a repair problem.</p>
+                <p>Niyom is a product. The research programme has run 432 controlled experiments across the architecture.</p>
             </div>
 
             <div style="padding-top:8px;">
@@ -417,27 +439,27 @@
                 <div class="sidebar-label">Project Status</div>
                 <div class="sidebar-row">
                     <span class="s-key">Status</span>
-                    <span class="s-val active">Early dev</span>
+                    <span class="s-val active">v1.0.0 · Active</span>
                 </div>
                 <div class="sidebar-row">
                     <span class="s-key">Type</span>
-                    <span class="s-val">Execution Layer</span>
+                    <span class="s-val">Verification Harness</span>
                 </div>
                 <div class="sidebar-row">
                     <span class="s-key">Started</span>
                     <span class="s-val">2026</span>
                 </div>
                 <div class="sidebar-row">
-                    <span class="s-key">Depends on</span>
-                    <span class="s-val">RITAM</span>
+                    <span class="s-key">Built on</span>
+                    <span class="s-val">LC-OS Papers 1–8</span>
                 </div>
                 <div class="sidebar-row">
                     <span class="s-key">Output</span>
-                    <span class="s-val">Protocols + Tools</span>
+                    <span class="s-val">Live software</span>
                 </div>
                 <div class="sidebar-row">
                     <span class="s-key">Product</span>
-                    <span class="s-val">No</span>
+                    <span class="s-val active">Yes — niyom.vercel.app</span>
                 </div>
             </div>
 
