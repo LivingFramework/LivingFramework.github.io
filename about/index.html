@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Living Framework — Rishi Sood</title>
+    <meta name="description" content="Independent AI reliability research. No institution. No funding. Two years of documented observations on why AI systems fail — and what prevents it. By Rishi Sood.">
+    <link rel="canonical" href="https://livingframework.github.io/about/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height:1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.8; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 72px;
+            border-bottom:1px solid var(--border);
+        }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:22px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:5px; height:5px;
+            border-radius:50%; background:var(--green);
+        }
+        .page-header h1 {
+            font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:600;
+            letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px;
+        }
+        .page-header p { font-size:1rem; max-width:560px; }
+
+        /* ── Content layout ── */
+        .content-grid {
+            display:grid;
+            grid-template-columns:1fr 280px;
+            gap:72px;
+            padding:72px 0 96px;
+            align-items:start;
+        }
+
+        /* ── Prose sections ── */
+        .prose-section { margin-bottom:56px; }
+        .prose-section:last-child { margin-bottom:0; }
+
+        .prose-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:16px;
+        }
+        .prose-section h2 {
+            font-size:1.25rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em; line-height:1.2; margin-bottom:18px;
+        }
+        .prose-section p {
+            font-size:0.9375rem; margin-bottom:14px;
+        }
+        .prose-section p:last-child { margin-bottom:0; }
+
+        /* ── Sidebar ── */
+        .sidebar { position:sticky; top:80px; }
+        .sidebar-block {
+            padding:22px;
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            background:var(--bg-2);
+            margin-bottom:14px;
+        }
+        .sidebar-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.12em; color:var(--text-3); margin-bottom:12px;
+        }
+        .sidebar-item {
+            display:flex; justify-content:space-between; align-items:baseline;
+            padding:6px 0; border-bottom:1px solid var(--border); gap:12px;
+        }
+        .sidebar-item:last-child { border-bottom:none; padding-bottom:0; }
+        .sidebar-key { font-size:12px; color:var(--text-3); }
+        .sidebar-val { font-size:12px; color:var(--text-2); font-weight:500; text-align:right; }
+        .sidebar-link {
+            display:flex; align-items:center; gap:8px;
+            padding:8px 0; font-size:12.5px; color:var(--text-3);
+            border-bottom:1px solid var(--border);
+            transition:color 0.15s;
+        }
+        .sidebar-link:last-child { border-bottom:none; }
+        .sidebar-link:hover { color:var(--text-2); }
+
+        /* ── Independence callout ── */
+        .independence {
+            padding:28px 32px;
+            border:1px solid var(--green-border);
+            border-radius:var(--r);
+            background:var(--green-dim);
+            margin-bottom:56px;
+        }
+        .independence p {
+            font-family:var(--mono); font-size:12.5px;
+            color:var(--text-2); line-height:1.7; letter-spacing:0.01em;
+        }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        /* ── Responsive ── */
+        @media (max-width:800px) {
+            .content-grid { grid-template-columns:1fr; gap:0; }
+            .sidebar { position:static; margin-top:48px; }
+        }
+        @media (max-width:600px) {
+            .nav-links { display:none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="./" class="active">About</a></li>
+            <li><a href="../#advisory">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">About</div>
+        <h1>Why this research exists.</h1>
+        <p>Independent research into AI reliability. No institution, no funding, no predetermined conclusions — just two years of sustained observation and documentation.</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="content-grid">
+        <div class="prose-content">
+
+            <div class="independence">
+                <p>This research is not affiliated with any university, research lab, or company. It is not funded by any grant, foundation, or corporate sponsor. There is no institution behind it — just one person doing extended knowledge work with AI systems and keeping careful notes about what works, what fails, and why.</p>
+            </div>
+
+            <div class="prose-section">
+                <div class="prose-label">Origin</div>
+                <h2>How this started</h2>
+                <p>Two years ago I started noticing something. AI collaboration worked well in short bursts — single sessions, contained tasks, fresh contexts. But it degraded over time. The same failure patterns kept appearing across different AI systems, different tasks, different working conditions. Context would drift. Outputs would propagate without verification. Shared understanding would erode. Models got better. The failures persisted.</p>
+                <p>The failures weren't model failures — the models were often performing exactly as designed. They were architectural failures. The system around the model wasn't built to maintain reliability over time. Nobody seemed to be studying this systematically.</p>
+                <p>So I started keeping notes. Then formalizing those notes. Then publishing them.</p>
+            </div>
+
+            <div class="prose-section">
+                <div class="prose-label">Methodology</div>
+                <h2>How the research works</h2>
+                <p>The methodology is observation-first. I conduct extended long-horizon AI collaboration — weeks and months of sustained work with AI systems on substantive problems — and document what happens in detail. Failure episodes are recorded as they occur, not reconstructed after the fact. Patterns across episodes are identified and formalized.</p>
+                <p>Over 18 months, this produced a corpus of 12+ documented failure episodes, several hundred hours of collaboration sessions, and the eight published papers that synthesize what the observations revealed. The papers are the formalization of field notes into peer-reviewable research.</p>
+                <p>This approach has a limitation: the sample is one researcher's practice. It has a compensating strength: the observations are grounded in real extended work, not laboratory simulations of collaboration.</p>
+            </div>
+
+            <div class="prose-section">
+                <div class="prose-label">The Research</div>
+                <h2>What "Living Framework" means</h2>
+                <p>A framework that is alive — not static, not finished, evolving with the system it describes. Most governance frameworks treat the problem as bounded: define the rules, implement the controls, declare the system compliant. The Living Framework takes a different view: reliable AI collaboration is an ongoing relational achievement, not a compliance state to reach once and maintain passively.</p>
+                <p>The "living" aspect is also methodological. The research itself is updated as the collaboration system it studies evolves. Papers 01 through 08 represent a progression — each one responding to what the previous ones missed or left unresolved. Paper 08's argument about verification architecture couldn't have been written before Papers 05, 06, and 07 established the theoretical ground it stands on.</p>
+            </div>
+
+            <div class="prose-section">
+                <div class="prose-label">Current Work</div>
+                <h2>What's active now</h2>
+                <p><strong style="color:var(--text); font-weight:600;">RITAM</strong> — Architecture research translating the published reliability framework into a practical architecture for real AI collaboration workflows. RITAM investigates what it takes to build systems that remain coherent, verifiable, and recoverable across extended working relationships.</p>
+                <p><strong style="color:var(--text); font-weight:600;">NIYOM</strong> — The reliability execution layer. Where RITAM is architecture, NIYOM is implementation. It translates the controls, verification protocols, and repair procedures from the research into structured tools that practitioners can actually use.</p>
+                <p>Both projects are active in 2026. Neither is a product.</p>
+            </div>
+
+            <div class="prose-section">
+                <div class="prose-label">Contact</div>
+                <h2>Getting in touch</h2>
+                <p>I occasionally work with teams applying these ideas to real AI workflows, and I'm interested in conversations with researchers working on adjacent problems. If something here is relevant to work you're doing, reach out.</p>
+                <p><a href="mailto:rishisood@protonmail.com" style="color:var(--green);">rishisood@protonmail.com</a></p>
+            </div>
+
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-block">
+                <div class="sidebar-label">Research Record</div>
+                <div class="sidebar-item">
+                    <span class="sidebar-key">Papers published</span>
+                    <span class="sidebar-val">8 + 1 special</span>
+                </div>
+                <div class="sidebar-item">
+                    <span class="sidebar-key">Downloads</span>
+                    <span class="sidebar-val">7,000+</span>
+                </div>
+                <div class="sidebar-item">
+                    <span class="sidebar-key">Investigation period</span>
+                    <span class="sidebar-val">18+ months</span>
+                </div>
+                <div class="sidebar-item">
+                    <span class="sidebar-key">Failure episodes</span>
+                    <span class="sidebar-val">12+ documented</span>
+                </div>
+                <div class="sidebar-item">
+                    <span class="sidebar-key">License</span>
+                    <span class="sidebar-val">CC BY 4.0</span>
+                </div>
+                <div class="sidebar-item">
+                    <span class="sidebar-key">Funding</span>
+                    <span class="sidebar-val">None</span>
+                </div>
+                <div class="sidebar-item">
+                    <span class="sidebar-key">Affiliation</span>
+                    <span class="sidebar-val">Independent</span>
+                </div>
+            </div>
+
+            <div class="sidebar-block">
+                <div class="sidebar-label">Profiles</div>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank" class="sidebar-link">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank" class="sidebar-link">Google Scholar</a>
+                <a href="https://zenodo.org" target="_blank" class="sidebar-link">Zenodo Repository</a>
+                <a href="https://twitter.com/satoshisats" target="_blank" class="sidebar-link">X / @satoshisats</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank" class="sidebar-link">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank" class="sidebar-link">GitHub</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
