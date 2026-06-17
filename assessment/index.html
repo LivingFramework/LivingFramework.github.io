@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Reliability Assessment | Living Framework — Rishi Sood</title>
+    <meta name="description" content="A structured diagnostic across five reliability domains. Find out which failure modes your AI workflow is exposed to and which papers address them.">
+    <link rel="canonical" href="https://livingframework.github.io/assessment/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --amber: #f59e0b;
+            --amber-dim:    rgba(245,158,11,0.08);
+            --amber-border: rgba(245,158,11,0.20);
+            --red:   #ef4444;
+            --red-dim:      rgba(239,68,68,0.08);
+            --red-border:   rgba(239,68,68,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   860px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.75; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:1080px; margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:120px 0 52px;
+            border-bottom:1px solid var(--border);
+        }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:18px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:5px; height:5px;
+            border-radius:50%; background:var(--green);
+        }
+        .page-header h1 {
+            font-size:clamp(1.8rem, 4vw, 2.6rem); font-weight:600;
+            letter-spacing:-0.03em; line-height:1.1; margin-bottom:16px;
+        }
+        .page-header p { font-size:0.9375rem; max-width:540px; }
+
+        .meta-row {
+            display:flex; gap:24px; margin-top:20px; flex-wrap:wrap;
+        }
+        .meta-item {
+            font-family:var(--mono); font-size:11px; color:var(--text-3);
+            display:flex; align-items:center; gap:6px;
+        }
+        .meta-item::before { content:'·'; color:var(--text-3); }
+
+        /* ── Progress bar ── */
+        .progress-bar-wrap {
+            position:sticky; top:54px; z-index:90;
+            background:var(--bg); border-bottom:1px solid var(--border);
+            padding:10px 0;
+        }
+        .progress-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            display:flex; align-items:center; gap:14px;
+        }
+        .progress-track {
+            flex:1; height:3px; background:var(--border); border-radius:2px;
+        }
+        .progress-fill {
+            height:100%; background:var(--green); border-radius:2px;
+            transition:width 0.25s ease; width:0%;
+        }
+        .progress-count {
+            font-family:var(--mono); font-size:11px; color:var(--text-3);
+            white-space:nowrap;
+        }
+
+        /* ── Assessment form ── */
+        .assessment-body { padding:48px 0 96px; }
+
+        .domain-block { margin-bottom:48px; }
+        .domain-block:last-of-type { margin-bottom:36px; }
+
+        .domain-header {
+            display:flex; align-items:baseline; gap:12px;
+            margin-bottom:6px;
+        }
+        .domain-num {
+            font-family:var(--mono); font-size:10px; color:var(--text-3);
+            letter-spacing:0.08em;
+        }
+        .domain-name {
+            font-size:1.05rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em;
+        }
+        .domain-desc {
+            font-size:13px; color:var(--text-3); margin-bottom:20px;
+            padding-left:0;
+        }
+
+        .question-card {
+            border:1px solid var(--border); border-radius:var(--r);
+            background:var(--bg-2); margin-bottom:10px;
+            transition:border-color 0.15s;
+        }
+        .question-card.answered { border-color:var(--border-hover); }
+
+        .question-top {
+            padding:18px 20px 14px;
+        }
+        .question-text {
+            font-size:14px; color:var(--text-2); line-height:1.55;
+        }
+        .answer-row {
+            display:flex; gap:0;
+            border-top:1px solid var(--border);
+        }
+        .answer-btn {
+            flex:1; padding:10px 0;
+            font-family:var(--font); font-size:12.5px; font-weight:500;
+            color:var(--text-3); background:none; border:none;
+            cursor:pointer; transition:all 0.12s;
+            border-right:1px solid var(--border);
+            text-align:center;
+        }
+        .answer-btn:last-child { border-right:none; }
+        .answer-btn:hover { background:var(--bg-3); color:var(--text-2); }
+        .answer-btn.selected-yes { background:var(--green-dim); color:var(--green); }
+        .answer-btn.selected-partial { background:var(--amber-dim); color:var(--amber); }
+        .answer-btn.selected-no { background:var(--red-dim); color:var(--red); }
+
+        /* ── Submit ── */
+        .submit-area {
+            padding:32px 0 48px;
+            border-top:1px solid var(--border);
+            display:flex; align-items:center; gap:20px; flex-wrap:wrap;
+        }
+        .submit-btn {
+            font-family:var(--font); font-size:14px; font-weight:600;
+            color:#000; background:var(--green);
+            border:none; border-radius:var(--r);
+            padding:12px 28px; cursor:pointer;
+            transition:opacity 0.15s, transform 0.1s;
+        }
+        .submit-btn:hover:not(:disabled) { opacity:0.9; transform:translateY(-1px); }
+        .submit-btn:disabled {
+            opacity:0.3; cursor:not-allowed; transform:none;
+        }
+        .submit-note {
+            font-size:12.5px; color:var(--text-3);
+        }
+
+        /* ── Results ── */
+        #results { display:none; }
+        #results.visible { display:block; }
+
+        .results-header {
+            padding:52px 0 40px;
+            border-top:1px solid var(--border);
+        }
+        .results-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:16px;
+        }
+
+        .overall-score-wrap {
+            display:flex; align-items:center; gap:28px;
+            margin-bottom:40px; flex-wrap:wrap;
+        }
+        .score-circle {
+            width:110px; height:110px; border-radius:50%;
+            border:3px solid var(--border);
+            display:flex; flex-direction:column;
+            align-items:center; justify-content:center;
+            flex-shrink:0;
+        }
+        .score-num {
+            font-family:var(--mono); font-size:2rem; font-weight:700;
+            line-height:1;
+        }
+        .score-label-small {
+            font-family:var(--mono); font-size:9px; color:var(--text-3);
+            text-transform:uppercase; letter-spacing:0.1em;
+            margin-top:2px;
+        }
+        .score-verdict { }
+        .score-verdict-label {
+            font-size:1.4rem; font-weight:600; letter-spacing:-0.02em;
+            margin-bottom:6px; line-height:1.1;
+        }
+        .score-verdict-desc {
+            font-size:13.5px; color:var(--text-3); max-width:420px;
+            line-height:1.55;
+        }
+
+        /* ── Domain breakdown ── */
+        .section-title-sm {
+            font-size:0.95rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.01em; margin-bottom:16px;
+        }
+        .domain-bars { margin-bottom:48px; }
+        .domain-bar-row {
+            display:grid; grid-template-columns:140px 1fr 36px;
+            gap:14px; align-items:center; margin-bottom:10px;
+        }
+        .domain-bar-name { font-size:13px; color:var(--text-2); }
+        .domain-bar-track {
+            height:6px; background:var(--border); border-radius:3px;
+        }
+        .domain-bar-fill {
+            height:100%; border-radius:3px;
+            transition:width 0.6s ease;
+        }
+        .domain-bar-pct {
+            font-family:var(--mono); font-size:11px;
+            color:var(--text-3); text-align:right;
+        }
+
+        /* ── Failure modes ── */
+        .failure-modes { margin-bottom:48px; }
+        .failure-mode-list { display:flex; flex-direction:column; gap:8px; }
+        .failure-mode-card {
+            padding:16px 18px;
+            border:1px solid var(--red-border); border-radius:var(--r);
+            background:var(--red-dim);
+        }
+        .failure-mode-name {
+            font-size:13.5px; font-weight:600; color:var(--text);
+            margin-bottom:4px;
+        }
+        .failure-mode-desc { font-size:12.5px; color:var(--text-3); line-height:1.5; }
+        .no-failures {
+            padding:20px; border:1px solid var(--green-border);
+            border-radius:var(--r); background:var(--green-dim);
+            font-size:13.5px; color:var(--green);
+        }
+
+        /* ── Paper recommendations ── */
+        .paper-recs { margin-bottom:48px; }
+        .rec-list { display:flex; flex-direction:column; gap:8px; }
+        .rec-card {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:14px 18px;
+            border:1px solid var(--border); border-radius:var(--r);
+            background:var(--bg-2); transition:border-color 0.15s;
+        }
+        .rec-card:hover { border-color:var(--border-hover); }
+        .rec-card-left { }
+        .rec-card-num {
+            font-family:var(--mono); font-size:10px; color:var(--text-3);
+            margin-bottom:2px; letter-spacing:0.06em;
+        }
+        .rec-card-title { font-size:13.5px; color:var(--text); font-weight:500; }
+        .rec-card-domain { font-size:12px; color:var(--text-3); margin-top:2px; }
+        .rec-card-link {
+            font-family:var(--mono); font-size:11px; color:var(--green);
+            border:1px solid var(--green-border); border-radius:4px;
+            padding:5px 10px; transition:all 0.15s;
+        }
+        .rec-card-link:hover { background:var(--green-dim); }
+
+        /* ── Retake ── */
+        .retake-area { padding:0 0 80px; }
+        .retake-btn {
+            font-family:var(--font); font-size:13px;
+            color:var(--text-3); background:none;
+            border:1px solid var(--border); border-radius:var(--r);
+            padding:9px 20px; cursor:pointer;
+            transition:all 0.15s;
+        }
+        .retake-btn:hover { border-color:var(--border-hover); color:var(--text-2); }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        @media (max-width:600px) {
+            .nav-links { display:none; }
+            .domain-bar-row { grid-template-columns:100px 1fr 32px; }
+            .overall-score-wrap { gap:20px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="../#projects">Projects</a></li>
+            <li><a href="../#advisory">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">Reliability Diagnostic</div>
+        <h1>How reliably governed is your AI workflow?</h1>
+        <p>A structured assessment across five reliability domains. Answer 20 questions about your current practice. Receive a reliability score, your exposed failure modes, and the papers that address your specific gaps.</p>
+        <div class="meta-row">
+            <span class="meta-item">20 questions</span>
+            <span class="meta-item">5 domains</span>
+            <span class="meta-item">3–4 minutes</span>
+            <span class="meta-item">No data collected</span>
+        </div>
+    </div>
+</header>
+
+<div class="progress-bar-wrap">
+    <div class="progress-inner">
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-count" id="progressCount">0 / 20 answered</div>
+    </div>
+</div>
+
+<div class="assessment-body">
+    <div class="container">
+        <form id="assessmentForm">
+
+            <!-- Domain 1 -->
+            <div class="domain-block">
+                <div class="domain-header">
+                    <span class="domain-num">01 /</span>
+                    <span class="domain-name">Context Integrity</span>
+                </div>
+                <div class="domain-desc">How well shared context is maintained and carried across sessions.</div>
+
+                <div class="question-card" id="card-q1_1">
+                    <div class="question-top">
+                        <div class="question-text">I provide the AI with a structured summary of prior decisions and context at the start of each new session.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q1_1" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q1_1" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q1_1" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q1_2">
+                    <div class="question-top">
+                        <div class="question-text">AI outputs remain consistent with directions and constraints set in earlier sessions.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q1_2" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q1_2" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q1_2" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q1_3">
+                    <div class="question-top">
+                        <div class="question-text">I have noticed the AI producing outputs that contradict or ignore decisions already established in the collaboration.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q1_3" data-val="0" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q1_3" data-val="1" data-class="selected-partial">Sometimes</button>
+                        <button type="button" class="answer-btn" data-q="q1_3" data-val="2" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q1_4">
+                    <div class="question-top">
+                        <div class="question-text">There is a documented record of key decisions from AI sessions that I can refer back to at any time.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q1_4" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q1_4" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q1_4" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Domain 2 -->
+            <div class="domain-block">
+                <div class="domain-header">
+                    <span class="domain-num">02 /</span>
+                    <span class="domain-name">Memory Governance</span>
+                </div>
+                <div class="domain-desc">Whether corrections and decisions are preserved and accessible across sessions.</div>
+
+                <div class="question-card" id="card-q2_1">
+                    <div class="question-top">
+                        <div class="question-text">Corrections I make to the AI in one session are applied and available in future sessions.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q2_1" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q2_1" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q2_1" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q2_2">
+                    <div class="question-top">
+                        <div class="question-text">I maintain a persistent external record of important working decisions — separate from the AI's context window.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q2_2" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q2_2" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q2_2" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q2_3">
+                    <div class="question-top">
+                        <div class="question-text">If all AI context were lost today, I could reconstruct the full working state of my project from existing records.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q2_3" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q2_3" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q2_3" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q2_4">
+                    <div class="question-top">
+                        <div class="question-text">I have a defined process for updating shared working memory when decisions change or new constraints are established.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q2_4" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q2_4" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q2_4" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Domain 3 -->
+            <div class="domain-block">
+                <div class="domain-header">
+                    <span class="domain-num">03 /</span>
+                    <span class="domain-name">Verification</span>
+                </div>
+                <div class="domain-desc">Whether AI outputs are independently checked before being acted on.</div>
+
+                <div class="question-card" id="card-q3_1">
+                    <div class="question-top">
+                        <div class="question-text">I treat verification of AI outputs as a distinct step — separate from the generation process.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q3_1" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q3_1" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q3_1" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q3_2">
+                    <div class="question-top">
+                        <div class="question-text">Numerical or factual claims in AI outputs are checked against source material before I act on them.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q3_2" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q3_2" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q3_2" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q3_3">
+                    <div class="question-top">
+                        <div class="question-text">I rely on the same AI that generated an output to also verify that output.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q3_3" data-val="0" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q3_3" data-val="1" data-class="selected-partial">Sometimes</button>
+                        <button type="button" class="answer-btn" data-q="q3_3" data-val="2" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q3_4">
+                    <div class="question-top">
+                        <div class="question-text">Critical decisions based on AI outputs are reviewed independently before action is taken.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q3_4" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q3_4" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q3_4" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Domain 4 -->
+            <div class="domain-block">
+                <div class="domain-header">
+                    <span class="domain-num">04 /</span>
+                    <span class="domain-name">Language Governance</span>
+                </div>
+                <div class="domain-desc">Whether instructions are precise and shared vocabulary remains stable across sessions.</div>
+
+                <div class="question-card" id="card-q4_1">
+                    <div class="question-top">
+                        <div class="question-text">The AI and I use defined, consistent terminology across all sessions — terms are not left to be interpreted each time.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q4_1" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q4_1" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q4_1" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q4_2">
+                    <div class="question-top">
+                        <div class="question-text">My instructions to the AI are specific and unambiguous — I avoid relying on the AI to infer intent.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q4_2" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q4_2" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q4_2" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q4_3">
+                    <div class="question-top">
+                        <div class="question-text">I correct imprecise, vague, or drifting language when it appears in AI outputs — rather than accepting it and continuing.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q4_3" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q4_3" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q4_3" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q4_4">
+                    <div class="question-top">
+                        <div class="question-text">I have noticed the same terms or concepts being interpreted differently by the AI across different sessions.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q4_4" data-val="0" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q4_4" data-val="1" data-class="selected-partial">Sometimes</button>
+                        <button type="button" class="answer-btn" data-q="q4_4" data-val="2" data-class="selected-no">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Domain 5 -->
+            <div class="domain-block">
+                <div class="domain-header">
+                    <span class="domain-num">05 /</span>
+                    <span class="domain-name">Recovery</span>
+                </div>
+                <div class="domain-desc">Whether you have defined procedures for when collaboration failures occur.</div>
+
+                <div class="question-card" id="card-q5_1">
+                    <div class="question-top">
+                        <div class="question-text">I have a defined procedure for recovering from a failed or corrupted AI collaboration session.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q5_1" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q5_1" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q5_1" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q5_2">
+                    <div class="question-top">
+                        <div class="question-text">When something goes wrong in an AI collaboration, I can identify what type of failure has occurred.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q5_2" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q5_2" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q5_2" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q5_3">
+                    <div class="question-top">
+                        <div class="question-text">I have defined checkpoints in my AI workflow that allow me to restore a known-good working state.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q5_3" data-val="2" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q5_3" data-val="1" data-class="selected-partial">Partial</button>
+                        <button type="button" class="answer-btn" data-q="q5_3" data-val="0" data-class="selected-no">No</button>
+                    </div>
+                </div>
+
+                <div class="question-card" id="card-q5_4">
+                    <div class="question-top">
+                        <div class="question-text">A major AI collaboration failure has caused me to lose significant work or restart a substantial piece of work from scratch.</div>
+                    </div>
+                    <div class="answer-row">
+                        <button type="button" class="answer-btn" data-q="q5_4" data-val="0" data-class="selected-yes">Yes</button>
+                        <button type="button" class="answer-btn" data-q="q5_4" data-val="1" data-class="selected-partial">Once</button>
+                        <button type="button" class="answer-btn" data-q="q5_4" data-val="2" data-class="selected-no">No</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submit-area">
+                <button type="button" class="submit-btn" id="submitBtn" disabled onclick="calculateResults()">Calculate my reliability score</button>
+                <span class="submit-note" id="submitNote">Answer all 20 questions to continue.</span>
+            </div>
+
+        </form>
+
+        <!-- Results -->
+        <div id="results">
+
+            <div class="results-header">
+                <div class="results-label">Your Results</div>
+                <div class="overall-score-wrap">
+                    <div class="score-circle" id="scoreCircle">
+                        <div class="score-num" id="scoreNum">—</div>
+                        <div class="score-label-small">/ 100</div>
+                    </div>
+                    <div class="score-verdict">
+                        <div class="score-verdict-label" id="verdictLabel">—</div>
+                        <div class="score-verdict-desc" id="verdictDesc">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="domain-bars">
+                <div class="section-title-sm">Score by domain</div>
+                <div id="domainBarsContainer"></div>
+            </div>
+
+            <div class="failure-modes">
+                <div class="section-title-sm" style="margin-bottom:12px;">Failure modes you are currently exposed to</div>
+                <div class="failure-mode-list" id="failureModeList"></div>
+            </div>
+
+            <div class="paper-recs">
+                <div class="section-title-sm" style="margin-bottom:6px;">Recommended reading for your gaps</div>
+                <p style="font-size:13px; color:var(--text-3); margin-bottom:16px;">Based on your lowest-scoring domains, these papers address the structural problems your workflow is currently exposed to.</p>
+                <div class="rec-list" id="recList"></div>
+            </div>
+
+            <div class="retake-area">
+                <button class="retake-btn" onclick="retake()">← Retake the assessment</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const TOTAL_QUESTIONS = 20;
+    const answers = {};
+
+    const domainNames = [
+        'Context Integrity',
+        'Memory Governance',
+        'Verification',
+        'Language Governance',
+        'Recovery'
+    ];
+
+    const paperData = {
+        '01': { title: 'Reliability Architecture (A1–A10)', zenodo: 'https://zenodo.org/records/17760288', domains: 'Context Integrity · Memory Governance' },
+        '02': { title: 'Operational Protocols', zenodo: 'https://zenodo.org/records/17760777', domains: 'Context Integrity · Memory Governance' },
+        '03': { title: 'AI Failure Taxonomy', zenodo: 'https://zenodo.org/records/17896542', domains: 'Recovery · Failure Identification' },
+        '05': { title: 'Linguistic Governance', zenodo: 'https://zenodo.org/records/18900058', domains: 'Language Governance' },
+        '06': { title: 'Six-Layer Architecture', zenodo: 'https://zenodo.org/records/19038340', domains: 'Verification · Recovery' },
+        '07': { title: 'Distributed Cognition Model', zenodo: 'https://zenodo.org/records/19151397', domains: 'Recovery · System Design' },
+        '08': { title: 'Verification Systems', zenodo: 'https://zenodo.org/records/19983551', domains: 'Verification' },
+    };
+
+    const failureModeData = [
+        {
+            name: 'Context Drift',
+            desc: 'Shared context degrades incrementally across sessions. The AI\'s working assumptions diverge from established constraints without either party noticing.',
+            domains: [0, 1]
+        },
+        {
+            name: 'Reconstruction Failure',
+            desc: 'Loss of shared working state that cannot be recovered. Occurs when external memory is absent and the AI\'s context window is the only record of the collaboration.',
+            domains: [0, 1]
+        },
+        {
+            name: 'File Divergence',
+            desc: 'Multiple versions of outputs coexist with no verified master. Corrections applied to one version are not propagated, producing conflicting records.',
+            domains: [2]
+        },
+        {
+            name: 'Numerical Error Propagation',
+            desc: 'Unverified numerical outputs are used as inputs to subsequent work. Errors compound across iterations without detection.',
+            domains: [2]
+        },
+        {
+            name: 'Domain Erosion',
+            desc: 'Shared vocabulary and domain-specific knowledge degrades over the course of the collaboration. The AI begins applying general-purpose interpretations to specialist terms.',
+            domains: [3, 1]
+        },
+        {
+            name: 'Trust Deficit',
+            desc: 'Confidence in AI outputs declines due to accumulated inconsistencies. Collaboration becomes adversarial rather than cooperative.',
+            domains: [3, 4]
+        },
+    ];
+
+    // Track answer selections
+    document.querySelectorAll('.answer-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const qId = btn.dataset.q;
+            const val = parseInt(btn.dataset.val);
+            const cls = btn.dataset.class;
+
+            // Clear siblings
+            const siblings = document.querySelectorAll(`.answer-btn[data-q="${qId}"]`);
+            siblings.forEach(s => s.classList.remove('selected-yes', 'selected-partial', 'selected-no'));
+
+            // Select this
+            btn.classList.add(cls);
+            answers[qId] = val;
+
+            // Mark card answered
+            const card = document.getElementById(`card-${qId}`);
+            if (card) card.classList.add('answered');
+
+            updateProgress();
+        });
+    });
+
+    function updateProgress() {
+        const count = Object.keys(answers).length;
+        const pct = (count / TOTAL_QUESTIONS) * 100;
+        document.getElementById('progressFill').style.width = pct + '%';
+        document.getElementById('progressCount').textContent = `${count} / ${TOTAL_QUESTIONS} answered`;
+
+        const btn = document.getElementById('submitBtn');
+        const note = document.getElementById('submitNote');
+        if (count === TOTAL_QUESTIONS) {
+            btn.disabled = false;
+            note.textContent = 'All questions answered. Ready.';
+        } else {
+            btn.disabled = true;
+            note.textContent = `${TOTAL_QUESTIONS - count} question${TOTAL_QUESTIONS - count !== 1 ? 's' : ''} remaining.`;
+        }
+    }
+
+    function calculateResults() {
+        // Sum scores per domain (4 questions each, max 8)
+        const domainKeys = [
+            ['q1_1','q1_2','q1_3','q1_4'],
+            ['q2_1','q2_2','q2_3','q2_4'],
+            ['q3_1','q3_2','q3_3','q3_4'],
+            ['q4_1','q4_2','q4_3','q4_4'],
+            ['q5_1','q5_2','q5_3','q5_4'],
+        ];
+
+        const domainScores = domainKeys.map(keys => {
+            const raw = keys.reduce((sum, k) => sum + (answers[k] || 0), 0);
+            return Math.round((raw / 8) * 100);
+        });
+
+        const overall = Math.round(domainScores.reduce((a, b) => a + b, 0) / 5);
+
+        renderResults(overall, domainScores);
+
+        document.getElementById('results').classList.add('visible');
+        document.getElementById('assessmentForm').style.opacity = '0.4';
+        document.getElementById('assessmentForm').style.pointerEvents = 'none';
+
+        setTimeout(() => {
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+    }
+
+    function renderResults(overall, domainScores) {
+        // Overall score
+        const circle = document.getElementById('scoreCircle');
+        const scoreNum = document.getElementById('scoreNum');
+        const verdictLabel = document.getElementById('verdictLabel');
+        const verdictDesc = document.getElementById('verdictDesc');
+
+        scoreNum.textContent = overall;
+
+        let color, label, desc;
+        if (overall >= 80) {
+            color = 'var(--green)';
+            label = 'Reliably governed';
+            desc = 'Your workflow has strong structural controls in place across most domains. The gaps that remain are worth addressing before scaling or extending the collaboration.';
+        } else if (overall >= 60) {
+            color = 'var(--amber)';
+            label = 'Partially governed';
+            desc = 'Some structural controls are in place, but meaningful gaps exist. The failure modes you are exposed to will surface under sustained or complex collaboration.';
+        } else if (overall >= 40) {
+            color = '#f97316';
+            label = 'Structurally vulnerable';
+            desc = 'Significant structural controls are missing. You are likely already experiencing some of the failure modes identified below, whether or not they are visible yet.';
+        } else {
+            color = 'var(--red)';
+            label = 'High reliability risk';
+            desc = 'Core structural controls are absent. Any extended or high-stakes AI collaboration in this configuration will eventually produce serious failures.';
+        }
+
+        scoreNum.style.color = color;
+        circle.style.borderColor = color;
+        verdictLabel.style.color = color;
+        verdictLabel.textContent = label;
+        verdictDesc.textContent = desc;
+
+        // Domain bars
+        const barsContainer = document.getElementById('domainBarsContainer');
+        barsContainer.innerHTML = '';
+        domainScores.forEach((score, i) => {
+            const barColor = score >= 70 ? 'var(--green)' : score >= 50 ? 'var(--amber)' : 'var(--red)';
+            barsContainer.innerHTML += `
+                <div class="domain-bar-row">
+                    <div class="domain-bar-name">${domainNames[i]}</div>
+                    <div class="domain-bar-track">
+                        <div class="domain-bar-fill" style="width:${score}%; background:${barColor};"></div>
+                    </div>
+                    <div class="domain-bar-pct" style="color:${barColor};">${score}</div>
+                </div>`;
+        });
+
+        // Failure modes
+        const flList = document.getElementById('failureModeList');
+        const exposed = failureModeData.filter(f =>
+            f.domains.some(d => domainScores[d] < 60)
+        );
+
+        if (exposed.length === 0) {
+            flList.innerHTML = `<div class="no-failures">No critical failure mode exposure detected. Continue monitoring — reliability is maintained, not achieved once.</div>`;
+        } else {
+            flList.innerHTML = exposed.map(f => `
+                <div class="failure-mode-card">
+                    <div class="failure-mode-name">${f.name}</div>
+                    <div class="failure-mode-desc">${f.desc} <a href="../failure-library/" style="color:var(--red); text-decoration:underline; font-size:12px;">Failure Library →</a></div>
+                </div>`).join('');
+        }
+
+        // Paper recommendations
+        const recList = document.getElementById('recList');
+        const recPapers = new Set();
+        if (domainScores[0] < 70 || domainScores[1] < 70) { recPapers.add('01'); recPapers.add('02'); }
+        if (domainScores[2] < 70) { recPapers.add('08'); recPapers.add('06'); }
+        if (domainScores[3] < 70) { recPapers.add('05'); }
+        if (domainScores[4] < 70) { recPapers.add('03'); recPapers.add('07'); }
+
+        if (recPapers.size === 0) {
+            recList.innerHTML = `<p style="font-size:13.5px; color:var(--text-3);">Strong across all domains. Browse the full archive for depth on any area.</p>
+            <a href="../papers/" style="display:inline-block; margin-top:12px; font-size:13px; color:var(--green); border:1px solid var(--green-border); border-radius:var(--r); padding:8px 16px;">View all papers →</a>`;
+        } else {
+            recList.innerHTML = [...recPapers].sort().map(num => {
+                const p = paperData[num];
+                return `<div class="rec-card">
+                    <div class="rec-card-left">
+                        <div class="rec-card-num">PAPER ${num.padStart(2,'0')}</div>
+                        <div class="rec-card-title">${p.title}</div>
+                        <div class="rec-card-domain">${p.domains}</div>
+                    </div>
+                    <a href="${p.zenodo}" target="_blank" class="rec-card-link">Read →</a>
+                </div>`;
+            }).join('');
+        }
+    }
+
+    function retake() {
+        // Reset answers
+        Object.keys(answers).forEach(k => delete answers[k]);
+
+        // Clear UI
+        document.querySelectorAll('.answer-btn').forEach(btn => {
+            btn.classList.remove('selected-yes', 'selected-partial', 'selected-no');
+        });
+        document.querySelectorAll('.question-card').forEach(c => c.classList.remove('answered'));
+
+        document.getElementById('results').classList.remove('visible');
+        document.getElementById('assessmentForm').style.opacity = '1';
+        document.getElementById('assessmentForm').style.pointerEvents = 'auto';
+
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
