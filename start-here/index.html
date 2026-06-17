@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Here | Living Framework — Rishi Sood</title>
+    <meta name="description" content="Where to begin with the Living Framework research. Visitor guides for researchers, practitioners, and decision-makers.">
+    <link rel="canonical" href="https://livingframework.github.io/start-here/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.8; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 72px;
+            border-bottom:1px solid var(--border);
+        }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:22px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:5px; height:5px;
+            border-radius:50%; background:var(--green);
+        }
+        .page-header h1 {
+            font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:600;
+            letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px;
+        }
+        .page-header > .container > p {
+            font-size:1rem; max-width:580px; color:var(--text-2); line-height:1.8;
+        }
+
+        /* ── Intro context ── */
+        .intro-section {
+            padding:64px 0 16px;
+        }
+        .intro-section p {
+            font-size:0.9375rem; max-width:680px; margin-bottom:14px;
+        }
+        .intro-section p:last-child { margin-bottom:0; }
+
+        /* ── Profile selector ── */
+        .profile-tabs {
+            padding:56px 0;
+        }
+        .profile-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:24px;
+        }
+        .tab-nav {
+            display:flex; gap:0;
+            border:1px solid var(--border); border-radius:var(--r);
+            overflow:hidden; margin-bottom:40px; width:fit-content;
+        }
+        .tab-btn {
+            padding:10px 22px;
+            font-family:var(--font); font-size:13px;
+            background:transparent; border:none; color:var(--text-3);
+            cursor:pointer; border-right:1px solid var(--border);
+            transition:background 0.15s, color 0.15s;
+        }
+        .tab-btn:last-child { border-right:none; }
+        .tab-btn:hover { background:var(--bg-2); color:var(--text-2); }
+        .tab-btn.active { background:var(--bg-2); color:var(--text); }
+
+        /* ── Profile panels ── */
+        .profile-panel { display:none; }
+        .profile-panel.active { display:block; }
+
+        .profile-intro {
+            padding:28px 32px;
+            border:1px solid var(--green-border);
+            border-radius:var(--r);
+            background:var(--green-dim);
+            margin-bottom:36px;
+        }
+        .profile-intro h2 {
+            font-size:1.15rem; font-weight:600; letter-spacing:-0.02em;
+            color:var(--text); margin-bottom:10px;
+        }
+        .profile-intro p {
+            font-size:13.5px; color:var(--text-2); line-height:1.65; margin-bottom:0;
+        }
+
+        /* ── Reading path ── */
+        .path-grid {
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(240px, 1fr));
+            gap:14px;
+        }
+        .path-step {
+            padding:22px;
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            background:var(--bg-2);
+            position:relative;
+            transition:border-color 0.15s, background 0.15s;
+        }
+        .path-step:hover { border-color:var(--border-hover); background:var(--bg-3); }
+        .path-step a.path-step-link {
+            position:absolute; inset:0; z-index:1;
+        }
+        .step-num {
+            font-family:var(--mono); font-size:10px; color:var(--green);
+            letter-spacing:0.12em; margin-bottom:12px;
+        }
+        .step-title {
+            font-size:14px; font-weight:600; color:var(--text);
+            letter-spacing:-0.01em; margin-bottom:8px; line-height:1.3;
+        }
+        .step-desc {
+            font-size:13px; color:var(--text-3); line-height:1.6;
+        }
+        .step-arrow {
+            display:inline-block; color:var(--green); margin-top:12px;
+            font-size:12px; font-family:var(--mono);
+        }
+
+        /* ── Additional notes ── */
+        .notes-section { padding:0 0 96px; }
+        .notes-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:18px;
+        }
+        .notes-row {
+            display:grid; grid-template-columns:1fr 1fr; gap:14px;
+        }
+        .note-block {
+            padding:22px 24px;
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            background:var(--bg-2);
+        }
+        .note-block h4 {
+            font-size:13.5px; font-weight:600; color:var(--text);
+            margin-bottom:8px; letter-spacing:-0.01em;
+        }
+        .note-block p {
+            font-size:13px; color:var(--text-3); line-height:1.6; margin-bottom:0;
+        }
+
+        /* ── Full sitemap ── */
+        .sitemap-section {
+            padding:0 0 96px;
+            border-top:1px solid var(--border); padding-top:56px;
+        }
+        .sitemap-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:24px;
+        }
+        .sitemap-grid {
+            display:grid; grid-template-columns:repeat(3,1fr); gap:14px;
+        }
+        .sitemap-card {
+            padding:18px 20px;
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            background:var(--bg-2);
+            transition:border-color 0.15s;
+        }
+        .sitemap-card:hover { border-color:var(--border-hover); }
+        .sitemap-card-title {
+            font-size:13.5px; font-weight:600; color:var(--text);
+            margin-bottom:6px; letter-spacing:-0.01em;
+        }
+        .sitemap-card-desc {
+            font-size:12.5px; color:var(--text-3); line-height:1.5;
+        }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        @media (max-width:700px) {
+            .notes-row { grid-template-columns:1fr; }
+            .sitemap-grid { grid-template-columns:1fr 1fr; }
+        }
+        @media (max-width:500px) {
+            .sitemap-grid { grid-template-columns:1fr; }
+            .nav-links { display:none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="../#projects">Projects</a></li>
+            <li><a href="../advisory/">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">Visitor Guide</div>
+        <h1>Start here.</h1>
+        <p>The Living Framework spans eight papers, two active research projects, and a growing failure taxonomy. This page helps you find the right entry point based on what you are trying to do.</p>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="intro-section">
+        <p>This research does not have a single intended audience. Some visitors are researchers looking for prior work. Some are practitioners trying to solve a reliability problem. Some are leaders evaluating what rigorous AI reliability research looks like. Each group needs a different starting point.</p>
+        <p>Choose the profile that fits you best. The reading path will point you to what matters most for your context — and away from what you can safely skip for now.</p>
+    </div>
+
+    <div class="profile-tabs">
+        <div class="profile-label">I am a</div>
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="showTab('researcher')">Researcher</button>
+            <button class="tab-btn" onclick="showTab('practitioner')">Practitioner</button>
+            <button class="tab-btn" onclick="showTab('leader')">Leader</button>
+        </div>
+
+        <!-- RESEARCHER -->
+        <div class="profile-panel active" id="panel-researcher">
+            <div class="profile-intro">
+                <h2>For researchers and academics</h2>
+                <p>You are working on adjacent problems — reliability, verification, human-AI interaction, extended cognition, or long-horizon AI collaboration — and you want to understand how this research frames those problems and what it has found. Start with the theoretical grounding, then move to the empirical findings.</p>
+            </div>
+            <div class="path-grid">
+                <div class="path-step">
+                    <a href="../research/" class="path-step-link"></a>
+                    <div class="step-num">01 — Start</div>
+                    <div class="step-title">Research Overview</div>
+                    <div class="step-desc">The central question, six research themes, and five major findings. Gives you the theoretical landscape before you read individual papers.</div>
+                    <div class="step-arrow">→ research/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../papers/" class="path-step-link"></a>
+                    <div class="step-num">02 — Foundation</div>
+                    <div class="step-title">Papers 01 + 02</div>
+                    <div class="step-desc">The reliability architecture and memory governance papers. Together they define the theoretical framework on which everything else builds.</div>
+                    <div class="step-arrow">→ papers/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../papers/" class="path-step-link"></a>
+                    <div class="step-num">03 — Empirical</div>
+                    <div class="step-title">Paper 03: Failure Taxonomy</div>
+                    <div class="step-desc">Six named failure modes derived from empirical observation. The first systematic taxonomy of structural AI collaboration failures.</div>
+                    <div class="step-arrow">→ papers/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../papers/" class="path-step-link"></a>
+                    <div class="step-num">04 — Recent</div>
+                    <div class="step-title">Papers 07 + 08</div>
+                    <div class="step-desc">Distributed cognition as the right frame for human-AI systems, and the verification layer as the structural gap in current reliability approaches.</div>
+                    <div class="step-arrow">→ papers/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../ritam/" class="path-step-link"></a>
+                    <div class="step-num">05 — Active</div>
+                    <div class="step-title">Project RITAM</div>
+                    <div class="step-desc">The active reliability architecture research. Open investigation questions and current status — where collaboration might intersect.</div>
+                    <div class="step-arrow">→ ritam/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../early-observations/" class="path-step-link"></a>
+                    <div class="step-num">06 — Priority record</div>
+                    <div class="step-title">Early Observations</div>
+                    <div class="step-desc">What the research documented before those concepts became mainstream — the intellectual priority record.</div>
+                    <div class="step-arrow">→ early-observations/</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRACTITIONER -->
+        <div class="profile-panel" id="panel-practitioner">
+            <div class="profile-intro">
+                <h2>For practitioners building or running AI workflows</h2>
+                <p>You are working with AI systems in production — building collaborative pipelines, managing long-horizon AI projects, or dealing with reliability failures you cannot quite name or diagnose. Start with the failure library, then take the assessment to locate your specific gaps.</p>
+            </div>
+            <div class="path-grid">
+                <div class="path-step">
+                    <a href="../failure-library/" class="path-step-link"></a>
+                    <div class="step-num">01 — Diagnose</div>
+                    <div class="step-title">Failure Library</div>
+                    <div class="step-desc">Six documented failure modes with descriptions, signals, and what they cost. Start here to identify whether a problem you have seen has a name and a structural cause.</div>
+                    <div class="step-arrow">→ failure-library/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../assessment/" class="path-step-link"></a>
+                    <div class="step-num">02 — Assess</div>
+                    <div class="step-title">Reliability Assessment</div>
+                    <div class="step-desc">Twenty questions across five reliability domains. Identifies which failure modes your workflow is most exposed to and which papers address them.</div>
+                    <div class="step-arrow">→ assessment/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../papers/" class="path-step-link"></a>
+                    <div class="step-num">03 — Understand</div>
+                    <div class="step-title">Papers 01 + 02</div>
+                    <div class="step-desc">The structural conditions for reliable AI collaboration — context integrity and memory governance. These are the most directly applicable papers for practitioners.</div>
+                    <div class="step-arrow">→ papers/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../niyom/" class="path-step-link"></a>
+                    <div class="step-num">04 — Apply</div>
+                    <div class="step-title">Project NIYOM</div>
+                    <div class="step-desc">The execution layer project — how the framework's architectural principles translate into implementable workflow structures.</div>
+                    <div class="step-arrow">→ niyom/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../terminology/" class="path-step-link"></a>
+                    <div class="step-num">05 — Translate</div>
+                    <div class="step-title">Terminology Translator</div>
+                    <div class="step-desc">Maps the industry vocabulary you already use — context engineering, RAG, grounding, AI memory — to the Living Framework concepts that describe the same phenomena more precisely.</div>
+                    <div class="step-arrow">→ terminology/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../advisory/" class="path-step-link"></a>
+                    <div class="step-num">06 — If needed</div>
+                    <div class="step-title">Work directly with Rishi</div>
+                    <div class="step-desc">If the assessment identifies significant exposure across multiple failure modes, a direct engagement may help you prioritise and address them.</div>
+                    <div class="step-arrow">→ advisory/</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LEADER -->
+        <div class="profile-panel" id="panel-leader">
+            <div class="profile-intro">
+                <h2>For leaders and decision-makers</h2>
+                <p>You need to understand the reliability risks in your organisation's AI usage at a level that lets you make informed decisions — about investment, oversight, or where to focus attention. Start with the research overview, then evaluate specific exposure with the assessment.</p>
+            </div>
+            <div class="path-grid">
+                <div class="path-step">
+                    <a href="../about/" class="path-step-link"></a>
+                    <div class="step-num">01 — Orient</div>
+                    <div class="step-title">About the Research</div>
+                    <div class="step-desc">What this research is, how it has developed, and what makes it different from general AI commentary or enterprise AI product marketing.</div>
+                    <div class="step-arrow">→ about/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../research/" class="path-step-link"></a>
+                    <div class="step-num">02 — Understand</div>
+                    <div class="step-title">Research Overview</div>
+                    <div class="step-desc">The central question and five major findings. Readable without prior technical knowledge — designed to give a clear view of what the research has established.</div>
+                    <div class="step-arrow">→ research/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../failure-library/" class="path-step-link"></a>
+                    <div class="step-num">03 — Identify risks</div>
+                    <div class="step-title">Failure Library</div>
+                    <div class="step-desc">The six structural failure modes and what they cost in practice. Concrete enough to apply to your organisation's AI workflow without technical detail.</div>
+                    <div class="step-arrow">→ failure-library/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../assessment/" class="path-step-link"></a>
+                    <div class="step-num">04 — Locate gaps</div>
+                    <div class="step-title">Reliability Assessment</div>
+                    <div class="step-desc">Twenty questions across five domains. Even if your team takes this, the domain breakdown reveals where your AI collaboration architecture has structural gaps.</div>
+                    <div class="step-arrow">→ assessment/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../roadmap/" class="path-step-link"></a>
+                    <div class="step-num">05 — See direction</div>
+                    <div class="step-title">Research Roadmap</div>
+                    <div class="step-desc">Where the research is going and what questions remain open. Useful for understanding the frontier and what will likely emerge from this work.</div>
+                    <div class="step-arrow">→ roadmap/</div>
+                </div>
+                <div class="path-step">
+                    <a href="../advisory/" class="path-step-link"></a>
+                    <div class="step-num">06 — If appropriate</div>
+                    <div class="step-title">Advisory Engagement</div>
+                    <div class="step-desc">If the assessment reveals significant structural gaps, a direct engagement can focus the research specifically on your organisation's context.</div>
+                    <div class="step-arrow">→ advisory/</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="notes-section">
+        <div class="notes-label">Good to know</div>
+        <div class="notes-row">
+            <div class="note-block">
+                <h4>No account required</h4>
+                <p>All papers are published on Zenodo with open access. The assessment runs entirely in your browser — no data is collected. Everything on this site is freely accessible.</p>
+            </div>
+            <div class="note-block">
+                <h4>The framework is evolving</h4>
+                <p>This is called a "Living Framework" because it develops as the research does. Papers 01–08 are published. RITAM and NIYOM are active. New findings get incorporated. The roadmap shows what is currently under investigation.</p>
+            </div>
+            <div class="note-block">
+                <h4>Independent research</h4>
+                <p>There is no institution, no funding body, no corporate sponsor. The research is not affiliated with any employer or company. Findings reflect what the evidence supports, not what any stakeholder would prefer.</p>
+            </div>
+            <div class="note-block">
+                <h4>Starting from a specific failure?</h4>
+                <p>If you have a concrete failure in mind — context drift, numerical errors, trust breakdowns — go to the Failure Library first and work backwards from there to the relevant papers and assessment domains.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="sitemap-section">
+        <div class="sitemap-label">Everything on this site</div>
+        <div class="sitemap-grid">
+            <a href="../" class="sitemap-card">
+                <div class="sitemap-card-title">Home</div>
+                <div class="sitemap-card-desc">Overview, stats, research themes, and key papers</div>
+            </a>
+            <a href="../about/" class="sitemap-card">
+                <div class="sitemap-card-title">About</div>
+                <div class="sitemap-card-desc">What this research is and how it developed</div>
+            </a>
+            <a href="../research/" class="sitemap-card">
+                <div class="sitemap-card-title">Research</div>
+                <div class="sitemap-card-desc">Six themes, five findings, timeline, open questions</div>
+            </a>
+            <a href="../papers/" class="sitemap-card">
+                <div class="sitemap-card-title">Papers</div>
+                <div class="sitemap-card-desc">All eight published papers with Zenodo links</div>
+            </a>
+            <a href="../failure-library/" class="sitemap-card">
+                <div class="sitemap-card-title">Failure Library</div>
+                <div class="sitemap-card-desc">Six documented structural failure modes</div>
+            </a>
+            <a href="../assessment/" class="sitemap-card">
+                <div class="sitemap-card-title">Assessment</div>
+                <div class="sitemap-card-desc">20-question reliability diagnostic, five domains</div>
+            </a>
+            <a href="../ritam/" class="sitemap-card">
+                <div class="sitemap-card-title">Project RITAM</div>
+                <div class="sitemap-card-desc">Active reliability architecture research</div>
+            </a>
+            <a href="../niyom/" class="sitemap-card">
+                <div class="sitemap-card-title">Project NIYOM</div>
+                <div class="sitemap-card-desc">Reliability execution layer</div>
+            </a>
+            <a href="../terminology/" class="sitemap-card">
+                <div class="sitemap-card-title">Terminology</div>
+                <div class="sitemap-card-desc">Industry vocab → Living Framework mapping</div>
+            </a>
+            <a href="../early-observations/" class="sitemap-card">
+                <div class="sitemap-card-title">Early Observations</div>
+                <div class="sitemap-card-desc">Intellectual priority record</div>
+            </a>
+            <a href="../roadmap/" class="sitemap-card">
+                <div class="sitemap-card-title">Research Roadmap</div>
+                <div class="sitemap-card-desc">Completed, active, and upcoming investigations</div>
+            </a>
+            <a href="../advisory/" class="sitemap-card">
+                <div class="sitemap-card-title">Advisory</div>
+                <div class="sitemap-card-desc">Working directly with Rishi</div>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+function showTab(profile) {
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.profile-panel').forEach(panel => panel.classList.remove('active'));
+    document.querySelector('#panel-' + profile).classList.add('active');
+    event.target.classList.add('active');
+}
+</script>
+
+</body>
+</html>

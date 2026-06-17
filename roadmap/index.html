@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Roadmap | Living Framework — Rishi Sood</title>
+    <meta name="description" content="A detailed view of what the Living Framework has completed, what is currently active, what is under investigation, and what open questions remain.">
+    <link rel="canonical" href="https://livingframework.github.io/roadmap/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --amber: #f59e0b;
+            --amber-dim:    rgba(245,158,11,0.08);
+            --amber-border: rgba(245,158,11,0.20);
+            --blue:  #60a5fa;
+            --blue-dim:     rgba(96,165,250,0.08);
+            --blue-border:  rgba(96,165,250,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.8; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 72px;
+            border-bottom:1px solid var(--border);
+        }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:22px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:5px; height:5px;
+            border-radius:50%; background:var(--green);
+        }
+        .page-header h1 {
+            font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:600;
+            letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px;
+        }
+        .page-header p { font-size:1rem; max-width:580px; }
+
+        /* ── Status legend ── */
+        .status-legend {
+            display:flex; gap:20px; flex-wrap:wrap;
+            margin-top:40px;
+        }
+        .legend-item {
+            display:flex; align-items:center; gap:8px;
+            font-size:12.5px; color:var(--text-3);
+        }
+        .legend-dot {
+            width:8px; height:8px; border-radius:50%;
+        }
+        .legend-dot.completed { background:var(--green); }
+        .legend-dot.active { background:var(--amber); }
+        .legend-dot.investigating { background:var(--blue); }
+        .legend-dot.open { background:var(--text-3); }
+
+        /* ── Section headers ── */
+        .section-header {
+            padding:64px 0 0;
+        }
+        .section-tag {
+            display:inline-flex; align-items:center; gap:8px;
+            font-family:var(--mono); font-size:11px; text-transform:uppercase;
+            letter-spacing:0.12em; padding:5px 12px;
+            border-radius:3px; margin-bottom:20px;
+        }
+        .section-tag.completed {
+            color:var(--green); background:var(--green-dim); border:1px solid var(--green-border);
+        }
+        .section-tag.active {
+            color:var(--amber); background:var(--amber-dim); border:1px solid var(--amber-border);
+        }
+        .section-tag.investigating {
+            color:var(--blue); background:var(--blue-dim); border:1px solid var(--blue-border);
+        }
+        .section-tag.open {
+            color:var(--text-3); background:var(--bg-2); border:1px solid var(--border);
+        }
+        .section-header h2 {
+            font-size:1.3rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em; margin-bottom:8px;
+        }
+        .section-header p {
+            font-size:0.9rem; max-width:620px; margin-bottom:28px;
+        }
+
+        /* ── Items grid ── */
+        .items-grid {
+            display:flex; flex-direction:column; gap:12px;
+            margin-bottom:8px;
+        }
+
+        /* ── Paper item (completed) ── */
+        .paper-item {
+            display:grid;
+            grid-template-columns:80px 1fr 140px;
+            gap:0;
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            overflow:hidden;
+            transition:border-color 0.15s;
+        }
+        .paper-item:hover { border-color:var(--border-hover); }
+        .paper-num {
+            padding:18px 16px;
+            background:var(--bg-2);
+            border-right:1px solid var(--border);
+            display:flex; align-items:center; justify-content:center;
+            font-family:var(--mono); font-size:12px; color:var(--green);
+        }
+        .paper-body { padding:16px 20px; }
+        .paper-title {
+            font-size:13.5px; font-weight:600; color:var(--text);
+            letter-spacing:-0.01em; margin-bottom:5px; line-height:1.3;
+        }
+        .paper-meta {
+            font-size:12.5px; color:var(--text-3);
+        }
+        .paper-link-cell {
+            padding:16px; border-left:1px solid var(--border);
+            display:flex; align-items:center; justify-content:center;
+            background:var(--bg-2);
+        }
+        .paper-zenodo {
+            font-family:var(--mono); font-size:11px; color:var(--text-3);
+            transition:color 0.15s;
+        }
+        .paper-zenodo:hover { color:var(--green); }
+
+        /* ── Project item (active) ── */
+        .project-item {
+            border:1px solid var(--amber-border);
+            border-radius:var(--r);
+            background:var(--amber-dim);
+            padding:24px 28px;
+        }
+        .project-item-header {
+            display:flex; justify-content:space-between; align-items:flex-start;
+            margin-bottom:12px;
+        }
+        .project-name {
+            font-size:1rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em;
+        }
+        .project-status-badge {
+            font-family:var(--mono); font-size:10px;
+            color:var(--amber); background:rgba(245,158,11,0.15);
+            border:1px solid var(--amber-border);
+            border-radius:3px; padding:3px 8px;
+        }
+        .project-desc {
+            font-size:13.5px; color:var(--text-2); line-height:1.65;
+            margin-bottom:12px;
+        }
+        .project-link {
+            font-size:12.5px; color:var(--amber);
+            font-family:var(--mono); transition:opacity 0.15s;
+        }
+        .project-link:hover { opacity:0.7; }
+
+        /* ── Investigation item ── */
+        .inv-item {
+            border:1px solid var(--blue-border);
+            border-radius:var(--r);
+            background:var(--blue-dim);
+            padding:22px 26px;
+        }
+        .inv-title {
+            font-size:14px; font-weight:600; color:var(--text);
+            letter-spacing:-0.01em; margin-bottom:8px;
+        }
+        .inv-desc {
+            font-size:13.5px; color:var(--text-2); line-height:1.65;
+        }
+
+        /* ── Open questions ── */
+        .question-list {
+            display:flex; flex-direction:column; gap:0;
+            border:1px solid var(--border); border-radius:var(--r); overflow:hidden;
+        }
+        .question-row {
+            padding:22px 26px;
+            border-bottom:1px solid var(--border);
+            transition:background 0.15s;
+        }
+        .question-row:last-child { border-bottom:none; }
+        .question-row:hover { background:var(--bg-2); }
+        .question-q {
+            font-size:14.5px; font-weight:600; color:var(--text);
+            letter-spacing:-0.01em; margin-bottom:8px; line-height:1.3;
+        }
+        .question-context {
+            font-size:13.5px; color:var(--text-3); line-height:1.6;
+        }
+
+        /* ── On living frameworks ── */
+        .living-section {
+            padding:64px 0 96px;
+            border-top:1px solid var(--border);
+            margin-top:56px;
+        }
+        .living-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:18px;
+        }
+        .living-section h2 {
+            font-size:1.2rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em; margin-bottom:14px;
+        }
+        .living-section p {
+            font-size:0.9375rem; max-width:680px; margin-bottom:14px;
+        }
+        .living-section p:last-child { margin-bottom:0; }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        @media (max-width:700px) {
+            .paper-item { grid-template-columns:60px 1fr; }
+            .paper-link-cell { display:none; }
+        }
+        @media (max-width:500px) { .nav-links { display:none; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="../#projects">Projects</a></li>
+            <li><a href="../advisory/">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">Research Roadmap</div>
+        <h1>Where the research is and where it is going.</h1>
+        <p>A detailed record of what has been completed, what is currently active, and what remains under investigation. Updated as the research develops.</p>
+
+        <div class="status-legend">
+            <div class="legend-item">
+                <div class="legend-dot completed"></div>
+                <span>Completed and published</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot active"></div>
+                <span>Currently active</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot investigating"></div>
+                <span>Under investigation</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-dot open"></div>
+                <span>Open question</span>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- COMPLETED -->
+    <div class="section-header">
+        <div class="section-tag completed">● Completed</div>
+        <h2>Published research</h2>
+        <p>Eight papers published on Zenodo. Each represents a complete, citable contribution to the Living Framework. Together they constitute the theoretical and empirical foundation on which RITAM and NIYOM build.</p>
+    </div>
+    <div class="items-grid">
+        <div class="paper-item">
+            <div class="paper-num">01</div>
+            <div class="paper-body">
+                <div class="paper-title">Foundations of the Living Framework — Reliability Architecture</div>
+                <div class="paper-meta">2024 · Structural reliability conditions for extended AI collaboration</div>
+            </div>
+            <div class="paper-link-cell">
+                <a href="https://zenodo.org/records/11510702" target="_blank" class="paper-zenodo">Zenodo ↗</a>
+            </div>
+        </div>
+        <div class="paper-item">
+            <div class="paper-num">02</div>
+            <div class="paper-body">
+                <div class="paper-title">Memory Governance in AI Collaboration</div>
+                <div class="paper-meta">2024 · Structured memory architecture and context integrity</div>
+            </div>
+            <div class="paper-link-cell">
+                <a href="https://zenodo.org/records/11875960" target="_blank" class="paper-zenodo">Zenodo ↗</a>
+            </div>
+        </div>
+        <div class="paper-item">
+            <div class="paper-num">03</div>
+            <div class="paper-body">
+                <div class="paper-title">Structural Failure Modes in AI Collaboration</div>
+                <div class="paper-meta">2024 · Six named failure modes — taxonomy, mechanisms, and signals</div>
+            </div>
+            <div class="paper-link-cell">
+                <a href="https://zenodo.org/records/12636785" target="_blank" class="paper-zenodo">Zenodo ↗</a>
+            </div>
+        </div>
+        <div class="paper-item">
+            <div class="paper-num">04</div>
+            <div class="paper-body">
+                <div class="paper-title">The Mahdi Ledger</div>
+                <div class="paper-meta">2024 · Applied reliability framework in complex information environments</div>
+            </div>
+            <div class="paper-link-cell">
+                <a href="https://zenodo.org/records/13120449" target="_blank" class="paper-zenodo">Zenodo ↗</a>
+            </div>
+        </div>
+        <div class="paper-item">
+            <div class="paper-num">05</div>
+            <div class="paper-body">
+                <div class="paper-title">Language Reliability in AI Systems</div>
+                <div class="paper-meta">2025 · Linguistic patterns as reliability indicators</div>
+            </div>
+            <div class="paper-link-cell">
+                <a href="https://zenodo.org/records/14969620" target="_blank" class="paper-zenodo">Zenodo ↗</a>
+            </div>
+        </div>
+        <div class="paper-item">
+            <div class="paper-num">06</div>
+            <div class="paper-body">
+                <div class="paper-title">Intervention Architecture in AI Collaboration</div>
+                <div class="paper-meta">2025 · Structural interventions for reliability maintenance</div>
+            </div>
+            <div class="paper-link-cell">
+                <a href="https://zenodo.org/records/15043131" target="_blank" class="paper-zenodo">Zenodo ↗</a>
+            </div>
+        </div>
+        <div class="paper-item">
+            <div class="paper-num">07</div>
+            <div class="paper-body">
+                <div class="paper-title">Distributed Cognition in Human-AI Systems</div>
+                <div class="paper-meta">2025 · Extended mind theory applied to AI collaboration</div>
+            </div>
+            <div class="paper-link-cell">
+                <a href="https://zenodo.org/records/15080290" target="_blank" class="paper-zenodo">Zenodo ↗</a>
+            </div>
+        </div>
+        <div class="paper-item">
+            <div class="paper-num">08</div>
+            <div class="paper-body">
+                <div class="paper-title">The Verification Layer in AI Collaboration Architecture</div>
+                <div class="paper-meta">2025 · Structural verification as the missing architectural component</div>
+            </div>
+            <div class="paper-link-cell">
+                <a href="https://zenodo.org/records/15157538" target="_blank" class="paper-zenodo">Zenodo ↗</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACTIVE -->
+    <div class="section-header">
+        <div class="section-tag active">● Active</div>
+        <h2>Currently in progress</h2>
+        <p>Two active research projects extending the published framework. Both are pre-publication — findings will be incorporated into future papers.</p>
+    </div>
+    <div class="items-grid">
+        <div class="project-item">
+            <div class="project-item-header">
+                <div class="project-name">Project RITAM — Reliability Information and Technical Architecture Model</div>
+                <div class="project-status-badge">Active · 2025–2026</div>
+            </div>
+            <div class="project-desc">Developing a formal model for how reliability information should be structured and transmitted through collaborative AI architectures. The central question is whether the structural conditions identified in Papers 01–08 can be expressed as a coherent, implementable architecture model — not just a set of principles, but a design that can be evaluated, iterated, and measured. RITAM is the architecture research layer: defining what a reliable system looks like structurally.</div>
+            <a href="../ritam/" class="project-link">→ Project RITAM</a>
+        </div>
+        <div class="project-item">
+            <div class="project-item-header">
+                <div class="project-name">Project NIYOM — Reliability Execution Layer</div>
+                <div class="project-status-badge">Active · 2025–2026</div>
+            </div>
+            <div class="project-desc">Where RITAM defines the architecture, NIYOM concerns its execution: the concrete workflow structures, operational protocols, and implementation patterns that translate the reliability architecture into practice. NIYOM draws directly from the published papers and from RITAM — it is the implementation layer, grounded in the architectural principles rather than developed in parallel to them.</div>
+            <a href="../niyom/" class="project-link">→ Project NIYOM</a>
+        </div>
+        <div class="project-item">
+            <div class="project-item-header">
+                <div class="project-name">Failure Library — ongoing documentation</div>
+                <div class="project-status-badge">Continuous</div>
+            </div>
+            <div class="project-desc">The Failure Library published six named failure modes from Paper 03. New failure modes and new instances of documented modes continue to be identified from active research. The library is maintained as a living document alongside the published papers — new entries will be added as the empirical base accumulates.</div>
+            <a href="../failure-library/" class="project-link">→ Failure Library</a>
+        </div>
+    </div>
+
+    <!-- UNDER INVESTIGATION -->
+    <div class="section-header">
+        <div class="section-tag investigating">● Investigating</div>
+        <h2>Under active investigation</h2>
+        <p>Questions the research has identified but not yet answered. These are not speculations — they are gaps that the existing papers point to and that current research is working toward.</p>
+    </div>
+    <div class="items-grid">
+        <div class="inv-item">
+            <div class="inv-title">Assessment tools for reliability architecture evaluation</div>
+            <div class="inv-desc">The published assessment (20 questions, 5 domains) is a functional diagnostic but it is primarily structured around failure mode exposure rather than architecture evaluation. A more systematic assessment methodology — one that could evaluate an AI collaboration architecture against the RITAM model — is under development. This requires RITAM to reach a stable enough state to define the evaluation criteria.</div>
+        </div>
+        <div class="inv-item">
+            <div class="inv-title">Multi-agent reliability in distributed AI systems</div>
+            <div class="inv-desc">The published framework addresses human-AI collaboration. As multi-agent AI systems become more common — where multiple AI models collaborate, pass information between themselves, and produce outputs without continuous human review — the reliability architecture questions change significantly. Paper 07 (distributed cognition) provides a theoretical basis, but the empirical work on multi-agent failure modes has not yet been done.</div>
+        </div>
+        <div class="inv-item">
+            <div class="inv-title">Automated verification — structural conditions for delegation</div>
+            <div class="inv-desc">Paper 08 argued for the verification layer as a dedicated architectural component. A key open question is what conditions must hold for verification to be delegated to an automated process rather than requiring human review. This is not an AI-specific problem — it has engineering precedent — but the conditions in human-AI collaboration systems have characteristics that may require their own analysis.</div>
+        </div>
+        <div class="inv-item">
+            <div class="inv-title">Reliability degradation rates across domain types</div>
+            <div class="inv-desc">The empirical work underlying Papers 01–08 was observational rather than controlled. A more rigorous investigation of how reliability degrades at different rates across domain types — quantitative work, legal analysis, creative work, strategic planning — and what structural factors explain these differences, would significantly strengthen the empirical foundation of the framework.</div>
+        </div>
+    </div>
+
+    <!-- OPEN QUESTIONS -->
+    <div class="section-header">
+        <div class="section-tag open">○ Open</div>
+        <h2>Open research questions</h2>
+        <p>Unresolved questions that the current research cannot answer — where the framework's limits are visible and future work is needed.</p>
+    </div>
+    <div class="question-list">
+        <div class="question-row">
+            <div class="question-q">How much of the reliability architecture needs to be built before each session begins, versus how much can be constructed adaptively during a session?</div>
+            <div class="question-context">The framework describes architectural conditions but is underspecified on timing. Some conditions (like initial context structure) are clearly antecedent. Others (like verification) might be adaptively triggered. The practical trade-off between pre-session architecture cost and in-session reliability benefit is not yet understood quantitatively.</div>
+        </div>
+        <div class="question-row">
+            <div class="question-q">Do the structural failure modes interact? If Context Drift occurs, does it increase the probability of File Divergence or Domain Erosion?</div>
+            <div class="question-context">Paper 03 documented the six failure modes as distinct. The research did not examine whether they cascade or interact — whether one failure mode raises the probability of others, or whether some failure modes are prerequisites for others. Understanding the failure cascade structure would substantially improve diagnostic prioritisation.</div>
+        </div>
+        <div class="question-row">
+            <div class="question-q">Is the reliability architecture domain-general, or does it require domain-specific adaptation?</div>
+            <div class="question-context">The framework claims to describe structural conditions for reliability across domains. But domain-specific research (legal AI, medical AI, financial AI) applies reliability concepts differently and emphasises different failure modes. The question is whether the Living Framework's architecture is domain-general with domain-specific configurations, or whether some domains require fundamentally different architectural models.</div>
+        </div>
+        <div class="question-row">
+            <div class="question-q">What is the relationship between model architecture changes and framework validity?</div>
+            <div class="question-context">The framework argues that reliability is an architectural property of the human-AI system rather than the model. But model architecture changes (extended context windows, better long-term coherence, built-in tool use) may change the nature of the structural conditions required. The framework needs to be evaluated against significantly more capable models to test whether its core claims remain valid or require revision.</div>
+        </div>
+        <div class="question-row">
+            <div class="question-q">Can the verification layer itself be a source of failure, and if so, what makes verification reliable?</div>
+            <div class="question-context">Paper 08 argued for a dedicated verification layer. The assumption is that verification is more reliable than generation. But if verification is itself performed by an AI process, it inherits its own reliability conditions. A verification process that has the same failure modes as the process it is checking does not improve system reliability. The conditions for reliable verification are currently unexamined.</div>
+        </div>
+        <div class="question-row">
+            <div class="question-q">How should the framework be evaluated? What would falsifying evidence look like?</div>
+            <div class="question-context">The Living Framework makes claims about what structural conditions are necessary for AI collaboration reliability. For these claims to be scientifically meaningful, it must be possible to specify what evidence would disconfirm them. This is currently underspecified — the research is descriptive and theoretical more than hypothesis-testing. The transition to a more falsifiable form is a methodological priority.</div>
+        </div>
+    </div>
+
+    <!-- ON LIVING FRAMEWORKS -->
+    <div class="living-section">
+        <div class="living-label">On roadmaps in research</div>
+        <h2>Why "Living Framework" is not a marketing phrase</h2>
+        <p>Most roadmaps in product or technology contexts describe planned features. This roadmap describes active empirical inquiry — questions being investigated, gaps being closed, and limits that the research currently cannot reach past. The items under "open" are not backlog items; they are limits of the current knowledge state.</p>
+        <p>The framework is called "living" because it is not a fixed model. Each paper revised and extended what came before. RITAM and NIYOM will revise and extend again. The open questions above are places where the framework's account of reliability is currently incomplete — where the evidence is insufficient, the analysis is underspecified, or the empirical work has not been done.</p>
+        <p>Researchers who work on adjacent problems and have evidence that bears on any of the open questions are welcome to make contact. The <a href="../advisory/" style="color:var(--green);">Advisory page</a> has the right channel.</p>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

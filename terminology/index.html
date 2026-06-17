@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminology Translator | Living Framework — Rishi Sood</title>
+    <meta name="description" content="Maps common AI industry vocabulary to the precise Living Framework concepts that describe the same phenomena — with the papers that documented each.">
+    <link rel="canonical" href="https://livingframework.github.io/terminology/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --amber: #f59e0b;
+            --amber-dim:    rgba(245,158,11,0.08);
+            --amber-border: rgba(245,158,11,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.8; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 72px;
+            border-bottom:1px solid var(--border);
+        }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:22px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:5px; height:5px;
+            border-radius:50%; background:var(--green);
+        }
+        .page-header h1 {
+            font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:600;
+            letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px;
+        }
+        .page-header p { font-size:1rem; max-width:600px; }
+
+        /* ── Intro note ── */
+        .intro-note {
+            margin:48px 0 0;
+            padding:22px 26px;
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            background:var(--bg-2);
+            max-width:740px;
+        }
+        .intro-note p {
+            font-size:13.5px; color:var(--text-3); line-height:1.65; margin-bottom:0;
+        }
+
+        /* ── Filter bar ── */
+        .filter-bar {
+            padding:48px 0 0;
+            display:flex; gap:8px; flex-wrap:wrap;
+        }
+        .filter-btn {
+            padding:7px 16px;
+            font-family:var(--font); font-size:12px;
+            background:var(--bg-2); border:1px solid var(--border);
+            border-radius:var(--r); color:var(--text-3);
+            cursor:pointer; transition:all 0.15s;
+        }
+        .filter-btn:hover { border-color:var(--border-hover); color:var(--text-2); }
+        .filter-btn.active {
+            background:var(--green-dim); border-color:var(--green-border);
+            color:var(--green);
+        }
+
+        /* ── Category label ── */
+        .cat-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3);
+            margin:48px 0 18px; padding-bottom:10px;
+            border-bottom:1px solid var(--border);
+        }
+
+        /* ── Translation rows ── */
+        .translation-table {
+            display:flex; flex-direction:column; gap:0;
+            border:1px solid var(--border); border-radius:var(--r); overflow:hidden;
+            margin-bottom:8px;
+        }
+        .translation-row {
+            display:grid;
+            grid-template-columns:280px 1fr 160px;
+            gap:0;
+            border-bottom:1px solid var(--border);
+            transition:background 0.15s;
+        }
+        .translation-row:last-child { border-bottom:none; }
+        .translation-row:hover { background:rgba(255,255,255,0.02); }
+        .translation-row.header-row {
+            background:var(--bg-2);
+        }
+        .translation-row.header-row .cell {
+            font-family:var(--mono); font-size:10px;
+            text-transform:uppercase; letter-spacing:0.12em; color:var(--text-3);
+            padding:12px 20px;
+        }
+        .cell {
+            padding:20px;
+            border-right:1px solid var(--border);
+        }
+        .cell:last-child { border-right:none; }
+        .cell-industry {
+            font-size:14px; font-weight:600; color:var(--text);
+            letter-spacing:-0.01em; line-height:1.3;
+        }
+        .cell-industry-sub {
+            font-size:12px; color:var(--text-3); margin-top:4px; line-height:1.4;
+            font-style:italic;
+        }
+        .cell-lf {
+            display:flex; flex-direction:column; justify-content:center;
+        }
+        .lf-concept {
+            font-size:14px; font-weight:600; color:var(--green);
+            letter-spacing:-0.01em; margin-bottom:5px;
+        }
+        .lf-note {
+            font-size:13px; color:var(--text-3); line-height:1.5;
+        }
+        .cell-paper {
+            display:flex; flex-direction:column; justify-content:center; gap:5px;
+        }
+        .paper-tag {
+            font-family:var(--mono); font-size:10px; color:var(--text-3);
+            background:var(--bg-3); border:1px solid var(--border);
+            border-radius:3px; padding:3px 7px; display:inline-block;
+            width:fit-content;
+        }
+        .paper-tag a { color:inherit; transition:color 0.15s; }
+        .paper-tag a:hover { color:var(--green); }
+
+        /* ── Precision note ── */
+        .precision-section {
+            padding:64px 0 96px;
+            border-top:1px solid var(--border);
+            margin-top:56px;
+        }
+        .precision-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:18px;
+        }
+        .precision-section h2 {
+            font-size:1.2rem; font-weight:600; letter-spacing:-0.02em;
+            color:var(--text); margin-bottom:16px;
+        }
+        .precision-section p {
+            font-size:0.9375rem; max-width:680px; margin-bottom:14px;
+        }
+        .precision-section p:last-child { margin-bottom:0; }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        @media (max-width:800px) {
+            .translation-row { grid-template-columns:1fr; }
+            .cell { border-right:none; border-bottom:1px solid var(--border); }
+            .translation-row .cell:last-child { border-bottom:none; }
+            .translation-row.header-row { display:none; }
+        }
+        @media (max-width:500px) { .nav-links { display:none; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="../#projects">Projects</a></li>
+            <li><a href="../advisory/">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">Vocabulary Bridge</div>
+        <h1>Terminology translator.</h1>
+        <p>The Living Framework uses precise terminology that does not always map directly to common AI industry vocabulary. This page bridges the two: find the term you know, and see the concept the framework uses to describe that phenomenon — with more rigour.</p>
+
+        <div class="intro-note">
+            <p>Industry terms are often underspecified — they describe what is happening without explaining the structural mechanism that causes it. The Living Framework terms name the mechanism. The translations below show why the concepts are related, where they differ, and which papers define the precise meaning.</p>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- CONTEXT & MEMORY -->
+    <div class="cat-label">Context and memory</div>
+    <div class="translation-table">
+        <div class="translation-row header-row">
+            <div class="cell">Industry term</div>
+            <div class="cell">Living Framework concept</div>
+            <div class="cell">Paper</div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Context engineering</div>
+                <div class="cell-industry-sub">How you structure the information given to an LLM</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Context Engineering / Context Architecture</div>
+                <div class="lf-note">Paper 01 documented this as a structural reliability discipline in 2024. The concept gained mainstream traction in 2025–2026. The LF frame emphasises what happens to context over time — not just at input, but through the duration of a collaboration.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 01 (2024)</a></span>
+                <span class="paper-tag"><a href="../papers/">Paper 02 (2024)</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Context window management</div>
+                <div class="cell-industry-sub">Techniques for staying within token limits</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Context Integrity</div>
+                <div class="lf-note">The LF concept covers more than token management. Context integrity refers to whether the shared understanding between human and AI remains accurate and undegraded — across time, not just at any one moment. Token management is one tactic; context integrity is the structural condition it serves.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 01 (2024)</a></span>
+                <span class="paper-tag"><a href="../papers/">Paper 02 (2024)</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">AI memory</div>
+                <div class="cell-industry-sub">Persistent storage of information across sessions</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Memory Governance</div>
+                <div class="lf-note">Industry discussions focus on what gets stored. The LF concept asks: how is memory structured, verified, updated, and kept coherent? Storage is only one dimension of a governed memory architecture. Memory that is stored but unverified, or stored but structurally inconsistent, introduces reliability risks that raw persistence does not address.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 01 (2024)</a></span>
+                <span class="paper-tag"><a href="../papers/">Paper 02 (2024)</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">RAG / Retrieval-Augmented Generation</div>
+                <div class="cell-industry-sub">Retrieving external knowledge at inference time</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Memory Governance (retrieval layer)</div>
+                <div class="lf-note">RAG names a technical mechanism. The LF frame asks whether retrieved content is reliable enough to be incorporated into the active context without introducing integrity failures. Retrieval quality and coherence with existing context are governance questions, not engineering questions alone.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 02 (2024)</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Context drift</div>
+                <div class="cell-industry-sub">When the LLM seems to forget earlier instructions</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Context Drift (Failure Mode 1)</div>
+                <div class="lf-note">This is a named failure mode in the Living Framework — not just a symptom. The LF describes its mechanism (gradual degradation of established parameters over extended sessions), its signals, and its structural causes. It was documented in Paper 03 in 2024 before the term was widely used in practitioner writing.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 03 (2024)</a></span>
+                <span class="paper-tag"><a href="../failure-library/">Failure Library</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RELIABILITY & VERIFICATION -->
+    <div class="cat-label">Reliability and verification</div>
+    <div class="translation-table">
+        <div class="translation-row header-row">
+            <div class="cell">Industry term</div>
+            <div class="cell">Living Framework concept</div>
+            <div class="cell">Paper</div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">LLM reliability</div>
+                <div class="cell-industry-sub">How consistently an AI system produces correct outputs</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Reliability Architecture</div>
+                <div class="lf-note">The LF treats reliability as an architectural property of the human-AI system — not a property of the model alone. A reliable architecture can produce reliable outputs even from a model that is individually imperfect. The framing shifts responsibility from the model to the system design.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 01 (2024)</a></span>
+                <span class="paper-tag"><a href="../papers/">Paper 06 (2025)</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Grounding</div>
+                <div class="cell-industry-sub">Connecting AI outputs to verifiable facts or sources</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Verification Layer</div>
+                <div class="lf-note">Grounding describes what we want: outputs connected to reliable sources. The Verification Layer describes the structural mechanism that ensures this happens — a dedicated layer in the architecture, separate from generation, whose function is to check outputs before they are incorporated or acted on. Paper 08 (2025) argued this layer is the most consistent structural gap in current AI reliability architectures.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 08 (2025)</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Hallucination</div>
+                <div class="cell-industry-sub">When an AI confidently states something false</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Trust Deficit / Numerical Error Propagation</div>
+                <div class="lf-note">"Hallucination" is a single label for two distinct structural problems. Numerical Error Propagation (Failure Mode 3) describes false quantitative claims that enter calculations and amplify. Trust Deficit (Failure Mode 5) describes the broader collapse of reliable collaboration that follows repeated undetected errors. Each has different mechanisms, different signals, and different structural responses.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 03 (2024)</a></span>
+                <span class="paper-tag"><a href="../failure-library/">Failure Library</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">AI safety</div>
+                <div class="cell-industry-sub">Preventing AI from causing harm</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Reliability Engineering (operational scope)</div>
+                <div class="lf-note">AI safety in the public discourse typically addresses existential or systemic risk from advanced AI systems. The Living Framework addresses operational reliability — the structural failure modes that cause real harm in current AI collaborative workflows. These are related but distinct concerns. The LF does not address existential AI risk; it addresses the reliability failures already occurring in deployed systems.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 01 (2024)</a></span>
+                <span class="paper-tag"><a href="../research/">Research Overview</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- COLLABORATION & AGENCY -->
+    <div class="cat-label">Collaboration and agency</div>
+    <div class="translation-table">
+        <div class="translation-row header-row">
+            <div class="cell">Industry term</div>
+            <div class="cell">Living Framework concept</div>
+            <div class="cell">Paper</div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">AI collaboration</div>
+                <div class="cell-industry-sub">Working alongside an AI system on tasks</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Distributed Cognitive System</div>
+                <div class="lf-note">The LF frames human-AI collaboration not as human-using-tool but as a distributed cognitive system — two processors with different capabilities and failure modes sharing cognitive work. This reframe has practical consequences: it changes where you look for reliability problems (in the system, not just the model) and what architectural decisions matter.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 07 (2025)</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Agentic AI / AI agents</div>
+                <div class="cell-industry-sub">AI systems that take multi-step actions autonomously</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Distributed Cognition / Verification Layer</div>
+                <div class="lf-note">Agentic AI raises the stakes for the reliability architecture because errors compound across action sequences. The LF concepts are directly applicable: distributed cognition provides the frame for understanding the human-AI division of responsibility in agentic systems, and the verification layer is even more critical when actions cannot be easily reversed.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 07 (2025)</a></span>
+                <span class="paper-tag"><a href="../papers/">Paper 08 (2025)</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Prompt engineering</div>
+                <div class="cell-industry-sub">Crafting inputs to get better AI outputs</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Instruction Architecture / Language Reliability</div>
+                <div class="lf-note">Prompt engineering describes a practice. The LF concepts describe the structural properties that make instruction-giving reliable: how instructions are structured to maintain integrity, how linguistic patterns in AI output signal reliability problems (Paper 05), and how language choices affect the collaborative architecture rather than just individual outputs.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 01 (2024)</a></span>
+                <span class="paper-tag"><a href="../papers/">Paper 05 (2025)</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Long-context AI</div>
+                <div class="cell-industry-sub">AI models with large context windows</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Context Integrity over extended sessions</div>
+                <div class="lf-note">A large context window is a capability; context integrity is the reliability condition. Long-context AI makes extended collaboration technically possible — but it does not automatically make it reliable. The LF research focuses precisely on what breaks down over extended sessions, even as raw context capacity increases.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 01 (2024)</a></span>
+                <span class="paper-tag"><a href="../papers/">Paper 02 (2024)</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAILURE & RECOVERY -->
+    <div class="cat-label">Failure and recovery</div>
+    <div class="translation-table">
+        <div class="translation-row header-row">
+            <div class="cell">Industry term</div>
+            <div class="cell">Living Framework concept</div>
+            <div class="cell">Paper</div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Knowledge loss / forgetting</div>
+                <div class="cell-industry-sub">When important context disappears from the collaboration</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Reconstruction Failure (Failure Mode 6)</div>
+                <div class="lf-note">The LF names this as a structural failure mode with a specific mechanism: the inability to rebuild a reliable working state after a session break or context loss event. It is distinct from context drift (which is gradual degradation) and addresses the recovery problem specifically — what architecture enables reliable reconstruction, and what prevents it.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 03 (2024)</a></span>
+                <span class="paper-tag"><a href="../failure-library/">Failure Library</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">AI errors / mistakes</div>
+                <div class="cell-industry-sub">Incorrect outputs from an AI system</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Six named structural failure modes</div>
+                <div class="lf-note">The LF does not treat AI errors as a single category. Paper 03 (2024) documented six structurally distinct failure modes, each with a different mechanism, different signals, and different architectural response. Treating all errors as the same kind of event leads to responses that address the symptom without the cause.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 03 (2024)</a></span>
+                <span class="paper-tag"><a href="../failure-library/">Failure Library</a></span>
+            </div>
+        </div>
+        <div class="translation-row">
+            <div class="cell">
+                <div class="cell-industry">Domain specialisation</div>
+                <div class="cell-industry-sub">AI maintaining expertise in a specific subject area</div>
+            </div>
+            <div class="cell cell-lf">
+                <div class="lf-concept">Domain Erosion (Failure Mode 4)</div>
+                <div class="lf-note">Domain Erosion describes what happens when domain-specific precision degrades over a session — the AI gradually reverts to generalist language as specialised context is crowded out or deprioritised. It is the failure condition that domain specialisation is trying to prevent, and understanding its mechanism informs how to structure domain context for durability.</div>
+            </div>
+            <div class="cell cell-paper">
+                <span class="paper-tag"><a href="../papers/">Paper 03 (2024)</a></span>
+                <span class="paper-tag"><a href="../failure-library/">Failure Library</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRECISION NOTE -->
+    <div class="precision-section">
+        <div class="precision-label">On terminology</div>
+        <h2>Why the distinctions matter</h2>
+        <p>The Living Framework uses precise terminology not for novelty but because imprecise terms make it harder to identify and address structural problems. When "hallucination" covers both numerical propagation errors and systemic trust collapse, a team that addresses one thinks it has solved the other. When "context engineering" describes any act of structuring an LLM prompt, it obscures whether the intervention addresses context integrity over time — which is the reliability concern.</p>
+        <p>The translations on this page are not corrections of industry vocabulary. Industry terms are useful for the phenomena they name. The purpose here is to bridge the two vocabularies — so that a practitioner who knows what context drift feels like can find the structural account of what is causing it, and what changes the architecture needs to prevent it.</p>
+        <p>If a term you use regularly is missing from this page, or if a translation seems imprecise, the contact on the <a href="../advisory/" style="color:var(--green);">Advisory</a> page is the right channel.</p>
+    </div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advisory | Living Framework — Rishi Sood</title>
+    <meta name="description" content="Rishi Sood occasionally works with teams applying the Living Framework reliability research to real AI workflows. Not a consultancy. Selective, research-grounded engagements.">
+    <link rel="canonical" href="https://livingframework.github.io/advisory/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.8; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 72px;
+            border-bottom:1px solid var(--border);
+        }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:22px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:5px; height:5px;
+            border-radius:50%; background:var(--green);
+        }
+        .page-header h1 {
+            font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:600;
+            letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px;
+        }
+        .page-header p { font-size:1rem; max-width:580px; }
+
+        /* ── Content layout ── */
+        .content-grid {
+            display:grid;
+            grid-template-columns:1fr 300px;
+            gap:72px;
+            padding:72px 0 96px;
+            align-items:start;
+        }
+
+        /* ── Prose ── */
+        .prose-block { margin-bottom:56px; }
+        .prose-block:last-child { margin-bottom:0; }
+        .prose-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:14px;
+        }
+        .prose-block h2 {
+            font-size:1.2rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em; margin-bottom:16px; line-height:1.2;
+        }
+        .prose-block p { font-size:0.9375rem; margin-bottom:14px; }
+        .prose-block p:last-child { margin-bottom:0; }
+
+        /* ── Not this ── */
+        .not-this {
+            padding:24px 28px;
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            background:var(--bg-2);
+            margin-bottom:56px;
+        }
+        .not-this-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.12em; color:var(--text-3); margin-bottom:12px;
+        }
+        .not-this p {
+            font-size:13.5px; color:var(--text-3); line-height:1.65; margin-bottom:0;
+        }
+
+        /* ── Engagement types ── */
+        .engagement-list {
+            display:flex; flex-direction:column; gap:0;
+            border:1px solid var(--border); border-radius:var(--r); overflow:hidden;
+        }
+        .engagement-row {
+            padding:24px;
+            border-bottom:1px solid var(--border);
+            transition:background 0.15s;
+        }
+        .engagement-row:last-child { border-bottom:none; }
+        .engagement-row:hover { background:var(--bg-2); }
+        .engagement-name {
+            font-size:14.5px; font-weight:600; color:var(--text);
+            letter-spacing:-0.01em; margin-bottom:8px;
+        }
+        .engagement-desc {
+            font-size:13.5px; color:var(--text-3); line-height:1.65;
+        }
+
+        /* ── Contact CTA ── */
+        .contact-block {
+            padding:32px;
+            border:1px solid var(--green-border);
+            border-radius:var(--r);
+            background:var(--green-dim);
+            margin-top:48px;
+        }
+        .contact-block h3 {
+            font-size:1rem; font-weight:600; color:var(--text);
+            margin-bottom:10px; letter-spacing:-0.01em;
+        }
+        .contact-block p {
+            font-size:13.5px; color:var(--text-2); margin-bottom:20px; line-height:1.6;
+        }
+        .contact-email {
+            display:inline-block;
+            font-family:var(--mono); font-size:13px; color:var(--green);
+            border:1px solid var(--green-border);
+            border-radius:var(--r); padding:10px 18px;
+            transition:background 0.15s;
+        }
+        .contact-email:hover { background:rgba(16,185,129,0.12); }
+
+        /* ── Sidebar ── */
+        .sidebar { position:sticky; top:80px; }
+        .sidebar-block {
+            padding:22px;
+            border:1px solid var(--border); border-radius:var(--r);
+            background:var(--bg-2); margin-bottom:14px;
+        }
+        .sidebar-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.12em; color:var(--text-3); margin-bottom:14px;
+        }
+        .sidebar-item {
+            font-size:13px; color:var(--text-3); line-height:1.6;
+            padding:6px 0; border-bottom:1px solid var(--border);
+        }
+        .sidebar-item:last-child { border-bottom:none; }
+        .sidebar-link {
+            display:block; font-size:13px; color:var(--text-3);
+            padding:8px 0; border-bottom:1px solid var(--border);
+            transition:color 0.15s;
+        }
+        .sidebar-link:last-child { border-bottom:none; }
+        .sidebar-link:hover { color:var(--text-2); }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        @media (max-width:800px) {
+            .content-grid { grid-template-columns:1fr; gap:0; }
+            .sidebar { position:static; margin-top:48px; }
+        }
+        @media (max-width:600px) { .nav-links { display:none; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="../#projects">Projects</a></li>
+            <li><a href="./" class="active">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">Research Advisory</div>
+        <h1>Working directly with Rishi.</h1>
+        <p>I occasionally work with teams applying the Living Framework research to real AI workflows. This is not a consultancy. Engagements are selective and research-grounded.</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="content-grid">
+
+        <div>
+
+            <div class="not-this">
+                <div class="not-this-label">What this is not</div>
+                <p>This is not a consultancy. There is no product, no retainer, no packaged service. I do not sell prompt engineering templates or AI implementation playbooks. What I offer is the application of two years of documented research to a specific problem in a specific context — directly, without intermediaries.</p>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">Who I work with</div>
+                <h2>The right fit</h2>
+                <p>I work with teams where the reliability of AI collaboration has real consequences — where errors propagate into real decisions, where context loss causes real cost, where the absence of verification has already caused problems or is likely to.</p>
+                <p>The research is most useful where AI is being used in sustained, complex, high-stakes work: long-horizon projects, knowledge-intensive workflows, situations where the human and the AI are collaborating over weeks or months rather than hours. If AI is being used as a search engine or spell-checker, the framework is probably overkill.</p>
+                <p>I am also interested in conversations with researchers working on adjacent problems — reliability, verification, human-AI interaction, extended cognition. If the papers are relevant to work you are doing, a conversation is worth having.</p>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">Engagement types</div>
+                <h2>What working together looks like</h2>
+                <div class="engagement-list">
+                    <div class="engagement-row">
+                        <div class="engagement-name">Reliability Assessment</div>
+                        <div class="engagement-desc">A structured evaluation of an existing AI workflow against the five reliability domains — context integrity, memory governance, verification, language governance, and recovery. Identifies specific failure mode exposure and the structural changes that address them. Output: a written assessment and a prioritised set of architectural recommendations.</div>
+                    </div>
+                    <div class="engagement-row">
+                        <div class="engagement-name">Architecture Review</div>
+                        <div class="engagement-desc">Direct review of a proposed or existing AI collaboration architecture. Does the design address the structural conditions that reliability requires? Where are the gaps? What would a more reliably governed version of this look like? Useful before deployment, before scaling, or after a significant failure.</div>
+                    </div>
+                    <div class="engagement-row">
+                        <div class="engagement-name">Research Conversation</div>
+                        <div class="engagement-desc">For researchers working on adjacent problems — reliability, verification, memory systems, long-horizon collaboration, human-AI interaction. An unstructured conversation about where the research intersects. No deliverable, no fee. I am genuinely interested in what others are finding on these questions.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">How to approach</div>
+                <h2>Getting in touch</h2>
+                <p>Email is the right channel. Describe what you are working on and why the research seems relevant to it. I read everything and respond to what fits.</p>
+                <p>I do not take on many engagements at once. If I am at capacity, I will say so.</p>
+
+                <div class="contact-block">
+                    <h3>Send an email</h3>
+                    <p>Describe your context, your problem, and why the research seems relevant. That is enough to start a conversation.</p>
+                    <a href="mailto:rishisood@protonmail.com" class="contact-email">rishisood@protonmail.com</a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-block">
+                <div class="sidebar-label">Before reaching out</div>
+                <div class="sidebar-item">Read the Research Overview to understand what the framework covers.</div>
+                <div class="sidebar-item" style="margin-top:6px;">Take the Reliability Assessment to identify your specific gaps.</div>
+                <div class="sidebar-item" style="margin-top:6px;">Browse the Failure Library to see if your problems are already documented.</div>
+            </div>
+            <div class="sidebar-block">
+                <div class="sidebar-label">Useful starting points</div>
+                <a href="../research/" class="sidebar-link">Research Overview</a>
+                <a href="../assessment/" class="sidebar-link">Reliability Assessment</a>
+                <a href="../failure-library/" class="sidebar-link">Failure Library</a>
+                <a href="../papers/" class="sidebar-link">Published Papers</a>
+                <a href="../about/" class="sidebar-link">About this research</a>
+            </div>
+            <div class="sidebar-block">
+                <div class="sidebar-label">Profiles</div>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank" class="sidebar-link">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank" class="sidebar-link">Google Scholar</a>
+                <a href="https://twitter.com/satoshisats" target="_blank" class="sidebar-link">X / @satoshisats</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank" class="sidebar-link">LinkedIn</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

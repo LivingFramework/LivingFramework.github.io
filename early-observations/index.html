@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Early Observations | Living Framework — Rishi Sood</title>
+    <meta name="description" content="What the Living Framework documented before those concepts became mainstream. An intellectual priority record — not a claim of invention, but a record of first documentation.">
+    <link rel="canonical" href="https://livingframework.github.io/early-observations/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.8; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 72px;
+            border-bottom:1px solid var(--border);
+        }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:22px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:5px; height:5px;
+            border-radius:50%; background:var(--green);
+        }
+        .page-header h1 {
+            font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:600;
+            letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px;
+        }
+        .page-header p { font-size:1rem; max-width:600px; }
+
+        /* ── Framing note ── */
+        .framing-note {
+            margin-top:48px;
+            padding:24px 28px;
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            background:var(--bg-2);
+            max-width:720px;
+        }
+        .framing-note p {
+            font-size:13.5px; color:var(--text-3); line-height:1.65; margin-bottom:0;
+        }
+
+        /* ── Content ── */
+        .main-content { padding:72px 0 96px; }
+
+        /* ── Observation entry ── */
+        .obs-entry {
+            display:grid;
+            grid-template-columns:200px 1fr;
+            gap:0;
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            overflow:hidden;
+            margin-bottom:18px;
+        }
+        .obs-sidebar {
+            padding:28px 24px;
+            background:var(--bg-2);
+            border-right:1px solid var(--border);
+            display:flex; flex-direction:column; gap:16px;
+        }
+        .obs-year {
+            font-family:var(--mono); font-size:22px; font-weight:500;
+            color:var(--green); letter-spacing:-0.02em; line-height:1;
+        }
+        .obs-paper-tag {
+            font-family:var(--mono); font-size:10px;
+            color:var(--text-3); text-transform:uppercase; letter-spacing:0.1em;
+        }
+        .obs-paper-link {
+            font-size:12.5px; color:var(--text-3);
+            transition:color 0.15s;
+        }
+        .obs-paper-link:hover { color:var(--green); }
+        .obs-paper-link:not(:last-child)::after { content:''; display:block; }
+
+        .obs-body { padding:28px 32px; }
+        .obs-title {
+            font-size:1.1rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em; margin-bottom:14px; line-height:1.2;
+        }
+        .obs-desc {
+            font-size:0.9rem; color:var(--text-2); line-height:1.8; margin-bottom:16px;
+        }
+        .obs-quote {
+            padding:16px 20px;
+            border-left:2px solid var(--green-border);
+            background:var(--green-dim);
+            border-radius:0 var(--r) var(--r) 0;
+            margin-bottom:16px;
+        }
+        .obs-quote p {
+            font-size:13.5px; color:var(--text-2); line-height:1.65;
+            font-style:italic; margin-bottom:0;
+        }
+        .obs-quote cite {
+            display:block; font-size:11.5px; color:var(--text-3);
+            font-style:normal; margin-top:8px; font-family:var(--mono);
+        }
+        .obs-status {
+            display:flex; gap:8px; flex-wrap:wrap; margin-top:4px;
+        }
+        .status-tag {
+            font-size:11.5px; font-family:var(--mono);
+            padding:3px 9px; border-radius:3px;
+            border:1px solid var(--border);
+            background:var(--bg-3); color:var(--text-3);
+        }
+        .status-tag.mainstream {
+            border-color:var(--green-border);
+            background:var(--green-dim);
+            color:var(--green);
+        }
+
+        /* ── Caveat section ── */
+        .caveat-section {
+            padding:56px 0;
+            border-top:1px solid var(--border);
+        }
+        .caveat-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:18px;
+        }
+        .caveat-section h2 {
+            font-size:1.15rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em; margin-bottom:14px;
+        }
+        .caveat-section p {
+            font-size:0.9375rem; max-width:680px; margin-bottom:14px;
+        }
+        .caveat-section p:last-child { margin-bottom:0; }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        @media (max-width:700px) {
+            .obs-entry { grid-template-columns:1fr; }
+            .obs-sidebar { border-right:none; border-bottom:1px solid var(--border); flex-direction:row; flex-wrap:wrap; align-items:center; gap:16px; }
+        }
+        @media (max-width:500px) { .nav-links { display:none; } }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="../#projects">Projects</a></li>
+            <li><a href="../advisory/">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">Intellectual Priority Record</div>
+        <h1>Early observations.</h1>
+        <p>A record of what the Living Framework documented before those ideas entered mainstream AI discourse. Not a claim to have invented these concepts. A claim to have studied and published them systematically, when doing so required building the framework from scratch.</p>
+
+        <div class="framing-note">
+            <p>This page exists because intellectual priority matters to research integrity. It is not a competitive assertion. Many of these ideas were being thought about by others simultaneously — the priority claim is specifically about systematic documentation in published, citable, dated form. The Zenodo timestamps are the evidence. The papers are the record.</p>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+<div class="main-content">
+
+    <!-- OBSERVATION 1 -->
+    <div class="obs-entry">
+        <div class="obs-sidebar">
+            <div class="obs-year">2024</div>
+            <div>
+                <div class="obs-paper-tag">documented in</div>
+                <a href="../papers/" class="obs-paper-link">Paper 01</a>
+                <a href="../papers/" class="obs-paper-link">Paper 02</a>
+            </div>
+        </div>
+        <div class="obs-body">
+            <div class="obs-title">Context degradation as a structural reliability problem — not a model limitation</div>
+            <div class="obs-desc">
+                <p>In 2024, the dominant framing of AI context problems was as a model capability issue: the model "forgot" things, the model "lost track" of earlier instructions, the model "couldn't handle" long contexts. The Living Framework's early papers argued that this framing was wrong. Context degradation over extended collaboration is a structural condition of the human-AI system — it is produced by how context is constructed and maintained, not by what the model can or cannot do.</p>
+                <p>This distinction has practical consequences: if context degradation is a model limitation, the response is to wait for better models. If it is a structural condition, the response is to architect the collaboration differently — which is something practitioners can act on now.</p>
+            </div>
+            <div class="obs-quote">
+                <p>The reliability of extended AI collaboration is determined more by the structure of the collaborative architecture than by the underlying capabilities of the AI model.</p>
+                <cite>— Living Framework, Paper 01 (2024)</cite>
+            </div>
+            <div class="obs-status">
+                <span class="status-tag">Documented: 2024</span>
+                <span class="status-tag mainstream">Now mainstream framing: 2025–2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- OBSERVATION 2 -->
+    <div class="obs-entry">
+        <div class="obs-sidebar">
+            <div class="obs-year">2024</div>
+            <div>
+                <div class="obs-paper-tag">documented in</div>
+                <a href="../papers/" class="obs-paper-link">Paper 01</a>
+            </div>
+        </div>
+        <div class="obs-body">
+            <div class="obs-title">Context engineering as a discipline, not a prompt-writing technique</div>
+            <div class="obs-desc">
+                <p>The term "context engineering" became popular in 2025 and 2026. The Living Framework's Paper 01 used and defined it in 2024 — not as a synonym for prompt engineering, but as the systematic discipline of architecting what information the AI has access to, in what form, and across what timeframe. The concept was introduced with the explicit argument that structuring context over time is qualitatively different from writing effective individual prompts.</p>
+                <p>The 2025–2026 industry usage of "context engineering" has been broader and less precise. The Living Framework's version emphasises the temporal dimension: how context integrity is maintained over extended sessions, not just at the point of a single exchange.</p>
+            </div>
+            <div class="obs-quote">
+                <p>Context engineering is not an upgrade of prompt engineering. It is the architectural practice of governing what the collaborative system knows, when it knows it, and how that knowledge remains coherent over time.</p>
+                <cite>— Living Framework, Paper 01 (2024)</cite>
+            </div>
+            <div class="obs-status">
+                <span class="status-tag">Documented: 2024</span>
+                <span class="status-tag mainstream">Term entered mainstream: mid-2025</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- OBSERVATION 3 -->
+    <div class="obs-entry">
+        <div class="obs-sidebar">
+            <div class="obs-year">2024</div>
+            <div>
+                <div class="obs-paper-tag">documented in</div>
+                <a href="../papers/" class="obs-paper-link">Paper 03</a>
+            </div>
+        </div>
+        <div class="obs-body">
+            <div class="obs-title">A systematic taxonomy of AI collaboration failure modes</div>
+            <div class="obs-desc">
+                <p>Before Paper 03 (2024), practitioner writing about AI failures used informal, inconsistent language: the AI "got confused," "lost track," "started making things up." These descriptions were accurate symptoms but did not specify the structural mechanism, which meant that identifying the right response was guesswork.</p>
+                <p>Paper 03 published the first structured taxonomy of failure modes specific to extended AI collaboration: six named modes, each with a defined mechanism, observable signals, and structural causes. The taxonomy treats failure modes as diagnostics — different mechanisms require different architectural responses, and naming them precisely makes those responses possible.</p>
+                <p>By 2025-2026, structured failure taxonomies for AI systems had become more common across the field. The Living Framework taxonomy was one of the earliest in the specific domain of collaborative AI reliability.</p>
+            </div>
+            <div class="obs-status">
+                <span class="status-tag">Documented: 2024</span>
+                <span class="status-tag mainstream">Field-wide taxonomies: 2025–2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- OBSERVATION 4 -->
+    <div class="obs-entry">
+        <div class="obs-sidebar">
+            <div class="obs-year">2024</div>
+            <div>
+                <div class="obs-paper-tag">documented in</div>
+                <a href="../papers/" class="obs-paper-link">Paper 01</a>
+                <a href="../papers/" class="obs-paper-link">Paper 02</a>
+            </div>
+        </div>
+        <div class="obs-body">
+            <div class="obs-title">Memory governance as distinct from memory storage</div>
+            <div class="obs-desc">
+                <p>When "AI memory" became a significant area of industry and research attention in 2024–2025, the primary question was technical: how do you persist information across sessions? The Living Framework's Papers 01 and 02 had already posed a different question: given that you can store memory, what makes stored memory a reliable part of the collaborative system?</p>
+                <p>The concept of memory governance — how memory is structured for coherence, how it is verified before incorporation, how it is updated without corrupting existing state — was developed before AI memory became a mainstream concern. The governance frame addresses a problem that becomes visible only after the storage problem is solved: that persisted memory that is structurally inconsistent, unverified, or stale introduces new reliability risks rather than resolving existing ones.</p>
+            </div>
+            <div class="obs-status">
+                <span class="status-tag">Documented: 2024</span>
+                <span class="status-tag mainstream">AI memory boom: 2024–2025</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- OBSERVATION 5 -->
+    <div class="obs-entry">
+        <div class="obs-sidebar">
+            <div class="obs-year">2025</div>
+            <div>
+                <div class="obs-paper-tag">documented in</div>
+                <a href="../papers/" class="obs-paper-link">Paper 05</a>
+            </div>
+        </div>
+        <div class="obs-body">
+            <div class="obs-title">Linguistic patterns in AI output as reliability signals</div>
+            <div class="obs-desc">
+                <p>Paper 05 (2025) investigated something that practitioners had noticed but not studied systematically: that the way an AI writes can signal whether the underlying process is reliable. Hedging patterns, qualifier use, lexical consistency with prior outputs, structural changes in response format — these are not just stylistic features. They are observable indicators of changes in the underlying collaborative state.</p>
+                <p>The framing of language as a reliability signal — rather than just as communication — was ahead of broader discussions about AI output quality assessment. It provides practitioners with a layer of observable evidence that does not require access to model internals: what the AI says, and how it says it, contains information about what is happening structurally.</p>
+            </div>
+            <div class="obs-status">
+                <span class="status-tag">Documented: 2025</span>
+                <span class="status-tag">Still an underexplored area</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- OBSERVATION 6 -->
+    <div class="obs-entry">
+        <div class="obs-sidebar">
+            <div class="obs-year">2025</div>
+            <div>
+                <div class="obs-paper-tag">documented in</div>
+                <a href="../papers/" class="obs-paper-link">Paper 07</a>
+            </div>
+        </div>
+        <div class="obs-body">
+            <div class="obs-title">Distributed cognition as the correct frame for human-AI collaboration</div>
+            <div class="obs-desc">
+                <p>The dominant frames for understanding human-AI interaction in 2024–2025 were tool-use frames (the human uses the AI as a sophisticated tool) and assistant frames (the AI assists the human in completing tasks). Paper 07 (2025) argued that neither frame is structurally correct for extended, high-stakes collaboration.</p>
+                <p>Distributed cognition — the theoretical framework from cognitive science describing how cognitive processes are distributed across agents and artefacts — provides a more accurate account. In a distributed cognitive system, both components (human and AI) are processing agents with distinct capabilities and failure modes. The system's reliability is a property of the architecture that coordinates them, not of either component alone. This reframing changes where you look for reliability problems and what architectural interventions make sense.</p>
+            </div>
+            <div class="obs-status">
+                <span class="status-tag">Documented: 2025</span>
+                <span class="status-tag">Gaining traction in research: 2025–2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- OBSERVATION 7 -->
+    <div class="obs-entry">
+        <div class="obs-sidebar">
+            <div class="obs-year">2025</div>
+            <div>
+                <div class="obs-paper-tag">documented in</div>
+                <a href="../papers/" class="obs-paper-link">Paper 08</a>
+            </div>
+        </div>
+        <div class="obs-body">
+            <div class="obs-title">The verification layer as the structural gap in AI reliability architectures</div>
+            <div class="obs-desc">
+                <p>As agentic AI systems and complex AI workflows proliferated in 2024–2025, discussions of reliability focused on input quality (better prompts), model quality (better models), and output format (structured outputs). Paper 08 (2025) argued that all of these address surface conditions while leaving the structural gap untouched: the absence of a dedicated verification layer.</p>
+                <p>A verification layer is a structural component whose specific function is to check outputs before they are incorporated, used, or acted upon — separate from the generation process and separate from the human reviewer. Without it, the human carries the entire verification burden, which is unsustainable in complex workflows. The argument that verification must be architectural — not a behaviour or a practice but a structural component — was developed before the concept of "AI verification" became a standard part of reliability discussions.</p>
+            </div>
+            <div class="obs-quote">
+                <p>The most consistent structural gap across AI collaboration architectures is not at the level of model capability or prompt design. It is the absence of a dedicated verification layer — a structural component whose sole function is to check outputs before they are incorporated into the shared state.</p>
+                <cite>— Living Framework, Paper 08 (2025)</cite>
+            </div>
+            <div class="obs-status">
+                <span class="status-tag">Documented: 2025</span>
+                <span class="status-tag mainstream">Verification receiving field attention: 2026</span>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- CAVEAT -->
+<div class="caveat-section">
+    <div class="caveat-label">On intellectual priority claims</div>
+    <h2>What this page is not claiming</h2>
+    <p>This page does not claim that the Living Framework invented any of these ideas. Cognitive science has studied distributed cognition for decades. Reliability engineering has deep roots across many fields. Memory as a research area predates AI. The claim here is specifically that the Living Framework applied these ideas to the specific problem of AI collaboration reliability in published form, with Zenodo timestamps as the evidence, before these framings entered mainstream practitioner or research discourse around AI systems.</p>
+    <p>Priority claims in research are always approximate. Papers are not the only form of prior art. But published papers with dated DOIs are the most legible form of priority evidence, and making this record explicit is a practice of research integrity — not a competitive assertion.</p>
+    <p>If you are aware of earlier published work that covers the same ground with the same specificity, that is worth knowing. The <a href="../advisory/" style="color:var(--green);">contact channel</a> on the Advisory page is the right place for that kind of correspondence.</p>
+</div>
+
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
