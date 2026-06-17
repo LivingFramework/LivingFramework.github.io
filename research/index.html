@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research Overview | Living Framework — Rishi Sood</title>
+    <meta name="description" content="An overview of the Living Framework research programme — major findings, research timeline, open questions, and a map of how eight papers connect into one coherent investigation.">
+    <link rel="canonical" href="https://livingframework.github.io/research/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.75; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 64px;
+            border-bottom:1px solid var(--border);
+        }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:22px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:5px; height:5px;
+            border-radius:50%; background:var(--green);
+        }
+        .page-header h1 {
+            font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:600;
+            letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px;
+        }
+        .page-header p { font-size:1rem; max-width:600px; }
+
+        /* ── Sections ── */
+        .research-section {
+            padding:72px 0;
+            border-bottom:1px solid var(--border);
+        }
+        .research-section:last-of-type { border-bottom:none; }
+
+        .section-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:16px;
+        }
+        .section-title {
+            font-size:clamp(1.3rem, 2.5vw, 1.7rem); font-weight:600;
+            color:var(--text); letter-spacing:-0.02em; line-height:1.2;
+            margin-bottom:10px;
+        }
+        .section-intro {
+            font-size:0.9375rem; max-width:640px;
+            margin-bottom:48px;
+        }
+
+        /* ── Core question ── */
+        .core-question {
+            padding:32px 36px;
+            border:1px solid var(--green-border);
+            border-radius:var(--r);
+            background:var(--green-dim);
+            margin-bottom:48px;
+            max-width:640px;
+        }
+        .core-question p {
+            font-size:1.05rem; color:var(--text);
+            font-weight:500; line-height:1.5; letter-spacing:-0.01em;
+        }
+        .core-question span {
+            display:block; font-family:var(--mono);
+            font-size:10px; text-transform:uppercase;
+            letter-spacing:0.12em; color:var(--green);
+            margin-bottom:10px;
+        }
+
+        /* ── Major Findings ── */
+        .findings-list {
+            display:flex; flex-direction:column; gap:0;
+            border:1px solid var(--border); border-radius:var(--r); overflow:hidden;
+        }
+        .finding-row {
+            display:grid; grid-template-columns:40px 1fr;
+            gap:24px; padding:24px;
+            border-bottom:1px solid var(--border);
+            transition:background 0.15s;
+        }
+        .finding-row:last-child { border-bottom:none; }
+        .finding-row:hover { background:var(--bg-2); }
+        .finding-n {
+            font-family:var(--mono); font-size:11px;
+            color:var(--text-3); padding-top:2px;
+        }
+        .finding-text {
+            font-size:14.5px; color:var(--text); font-weight:500;
+            line-height:1.4; margin-bottom:6px;
+        }
+        .finding-detail {
+            font-size:13px; color:var(--text-3); line-height:1.6;
+        }
+
+        /* ── Timeline ── */
+        .timeline {
+            position:relative;
+            padding-left:28px;
+        }
+        .timeline::before {
+            content:''; position:absolute;
+            left:0; top:8px; bottom:8px;
+            width:1px; background:var(--border);
+        }
+        .timeline-item {
+            position:relative;
+            margin-bottom:36px;
+        }
+        .timeline-item:last-child { margin-bottom:0; }
+        .timeline-item::before {
+            content:''; position:absolute;
+            left:-32px; top:6px;
+            width:8px; height:8px;
+            border-radius:50%; background:var(--bg-3);
+            border:1px solid var(--border);
+        }
+        .timeline-item.active::before {
+            background:var(--green);
+            border-color:var(--green);
+            box-shadow:0 0 0 3px var(--green-dim);
+        }
+        .timeline-period {
+            font-family:var(--mono); font-size:11px; color:var(--text-3);
+            letter-spacing:0.06em; margin-bottom:8px;
+        }
+        .timeline-heading {
+            font-size:14.5px; font-weight:600; color:var(--text);
+            margin-bottom:6px; letter-spacing:-0.01em;
+        }
+        .timeline-desc {
+            font-size:13px; color:var(--text-3); line-height:1.6; max-width:600px;
+        }
+        .timeline-papers {
+            display:flex; flex-wrap:wrap; gap:6px; margin-top:10px;
+        }
+        .t-paper {
+            font-family:var(--mono); font-size:10px; color:var(--text-3);
+            border:1px solid var(--border); border-radius:4px;
+            padding:3px 8px; transition:all 0.15s;
+        }
+        .t-paper:hover { border-color:var(--green-border); color:var(--green); }
+
+        /* ── Research Themes ── */
+        .themes-grid {
+            display:grid; grid-template-columns:repeat(3,1fr);
+            gap:1px; background:var(--border);
+            border:1px solid var(--border); border-radius:var(--r); overflow:hidden;
+        }
+        .theme-card {
+            padding:24px; background:var(--bg); transition:background 0.15s;
+        }
+        .theme-card:hover { background:var(--bg-2); }
+        .theme-name {
+            font-size:13.5px; font-weight:600; color:var(--text);
+            margin-bottom:8px; letter-spacing:-0.01em;
+        }
+        .theme-desc { font-size:12.5px; color:var(--text-3); line-height:1.6; }
+
+        /* ── Open Questions ── */
+        .questions-list {
+            display:flex; flex-direction:column; gap:16px;
+        }
+        .question-item {
+            padding:20px 24px;
+            border:1px solid var(--border); border-radius:var(--r);
+            background:var(--bg-2);
+        }
+        .question-text {
+            font-size:14px; color:var(--text); font-weight:500;
+            margin-bottom:8px; line-height:1.4;
+        }
+        .question-context {
+            font-size:13px; color:var(--text-3); line-height:1.6;
+        }
+
+        /* ── Research Roadmap ── */
+        .roadmap-grid {
+            display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;
+        }
+        .roadmap-col {}
+        .roadmap-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.12em; margin-bottom:16px; padding-bottom:10px;
+            border-bottom:1px solid var(--border);
+        }
+        .roadmap-label.done { color:var(--green); }
+        .roadmap-label.active { color:var(--text-2); }
+        .roadmap-label.planned { color:var(--text-3); }
+        .roadmap-item {
+            font-size:13px; color:var(--text-3); line-height:1.5;
+            padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.03);
+            display:flex; align-items:start; gap:8px;
+        }
+        .roadmap-item:last-child { border-bottom:none; }
+        .roadmap-item::before {
+            content:'·'; color:var(--text-3); flex-shrink:0; margin-top:1px;
+        }
+
+        /* ── Quick links ── */
+        .quick-links {
+            display:flex; gap:10px; flex-wrap:wrap;
+        }
+        .quick-link {
+            display:inline-flex; align-items:center; gap:6px;
+            font-size:13px; color:var(--text-2);
+            border:1px solid var(--border); border-radius:var(--r);
+            padding:9px 16px; transition:all 0.15s;
+        }
+        .quick-link:hover { border-color:var(--border-hover); color:var(--text); }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        /* ── Responsive ── */
+        @media (max-width:800px) {
+            .themes-grid { grid-template-columns:1fr 1fr; }
+            .roadmap-grid { grid-template-columns:1fr; gap:32px; }
+        }
+        @media (max-width:600px) {
+            .nav-links { display:none; }
+            .themes-grid { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="./" class="active">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../#advisory">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">Research Overview</div>
+        <h1>One question. Eight papers. An ongoing investigation.</h1>
+        <p>This page maps the full research programme — what was studied, what was found, what remains open, and where the work is going next.</p>
+    </div>
+</header>
+
+<!-- Core Question -->
+<section class="research-section">
+    <div class="container">
+        <div class="section-label">The Research Question</div>
+        <div class="core-question">
+            <span>Central investigation</span>
+            <p>How do humans and AI systems work together reliably over extended periods of time — and what structural conditions make that reliability possible?</p>
+        </div>
+        <p style="max-width:640px; font-size:0.9375rem;">This question is deceptively simple. It does not ask which model is best, or how to write better prompts. It asks what makes the entire collaboration system — human judgment, AI reasoning, shared memory, governance structures — remain coherent and trustworthy across weeks, months, and hundreds of hours of work. That question turns out to be both harder and more important than most AI research currently addresses.</p>
+    </div>
+</section>
+
+<!-- Research Themes -->
+<section class="research-section">
+    <div class="container">
+        <div class="section-label">Research Areas</div>
+        <h2 class="section-title">Six themes of investigation</h2>
+        <p class="section-intro">The research spans six interconnected areas. No theme stands alone — each illuminates a different aspect of the same underlying problem.</p>
+        <div class="themes-grid">
+            <div class="theme-card">
+                <div class="theme-name">AI Reliability</div>
+                <div class="theme-desc">Why AI systems fail at predictable structural points, and what architectural conditions prevent those failures. Reliability as a systems property, not a model property.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Context Engineering</div>
+                <div class="theme-desc">How context degrades over extended collaboration and what structural mechanisms keep it stable. The design of context as a governed resource rather than an assumed constant.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Memory Systems</div>
+                <div class="theme-desc">Persistent external memory as a reliability mechanism. How decisions, corrections, and shared knowledge are preserved across sessions without degradation.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Verification Systems</div>
+                <div class="theme-desc">The missing architectural layer in most AI deployments. Generating outputs and verifying them are two distinct operations — both necessary, rarely treated as such.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Governance Architecture</div>
+                <div class="theme-desc">Layered structural models for reliable long-horizon collaboration. How multiple governance mechanisms interact to produce reliability as an emergent property.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Human-AI Collaboration</div>
+                <div class="theme-desc">The distributed cognitive system: human judgment, AI reasoning, and governed shared memory. How trust builds, fractures, and repairs over time.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Major Findings -->
+<section class="research-section">
+    <div class="container">
+        <div class="section-label">Major Findings</div>
+        <h2 class="section-title">What the research has established</h2>
+        <p class="section-intro">Five findings that hold across the full body of work. Each is supported by multiple papers and grounded in documented observation, not theoretical inference.</p>
+        <div class="findings-list">
+            <div class="finding-row">
+                <div class="finding-n">F1</div>
+                <div>
+                    <div class="finding-text">AI reliability is architectural, not intrinsic to the model.</div>
+                    <div class="finding-detail">The same model can produce reliable or unreliable collaboration depending on the structural conditions surrounding it. Improving the model does not resolve failures that are caused by the absence of memory governance, verification, or context management. These are architecture problems, not capability problems.</div>
+                </div>
+            </div>
+            <div class="finding-row">
+                <div class="finding-n">F2</div>
+                <div>
+                    <div class="finding-text">Failure modes in AI collaboration are predictable, recurring, and structurally distinct.</div>
+                    <div class="finding-detail">Failures do not occur randomly. Six failure modes — Context Drift, File Divergence, Numerical Error Propagation, Domain Erosion, Trust Deficit, and Reconstruction Failure — each follows a recognisable trajectory with identifiable precursors. This predictability makes prevention and repair possible.</div>
+                </div>
+            </div>
+            <div class="finding-row">
+                <div class="finding-n">F3</div>
+                <div>
+                    <div class="finding-text">Language is a governance mechanism — and linguistic drift is an early signal of collaboration failure.</div>
+                    <div class="finding-detail">How human and AI communicate within a session is not merely a style choice. Specific language patterns predict collaboration stability. When the language of the collaboration begins to shift — instructions become vague, corrections become implicit, shared vocabulary erodes — structural failure typically follows. The signal appears in language before it appears in outputs.</div>
+                </div>
+            </div>
+            <div class="finding-row">
+                <div class="finding-n">F4</div>
+                <div>
+                    <div class="finding-text">Reliable collaboration is a distributed cognitive achievement, not a model capability.</div>
+                    <div class="finding-detail">The relevant unit of analysis is not the human or the AI individually, but the governed system they form together. Human judgment, AI reasoning, and shared external memory — operating under explicit governance controls — constitute a single distributed cognitive system. Reliability is a property of the system, not of any participant.</div>
+                </div>
+            </div>
+            <div class="finding-row">
+                <div class="finding-n">F5</div>
+                <div>
+                    <div class="finding-text">Current AI systems lack a dedicated verification layer — and this is the central unresolved reliability problem.</div>
+                    <div class="finding-detail">Generation and validation are treated as one operation when they are two. AI systems produce outputs; they do not natively verify them. In the absence of a structured verification layer, errors propagate unchecked. This is not a model limitation. It is an architectural omission — and it is addressable.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Research Timeline -->
+<section class="research-section">
+    <div class="container">
+        <div class="section-label">Research Timeline</div>
+        <h2 class="section-title">How this work developed</h2>
+        <p class="section-intro">The research did not begin with a theory. It began with observations — and the papers followed.</p>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-period">2024 — Early work</div>
+                <div class="timeline-heading">First observations and foundational papers</div>
+                <div class="timeline-desc">Extended AI collaboration revealed recurring patterns — context loss, file divergence, trust erosion — that no existing framework explained. The first four papers formalised these observations: the reliability architecture (A1–A10), the operational protocols (LC-OS), the failure taxonomy, and the philosophy of sustained partnership.</div>
+                <div class="timeline-papers">
+                    <a href="https://zenodo.org/records/17760288" target="_blank" class="t-paper">Paper 01</a>
+                    <a href="https://zenodo.org/records/17760777" target="_blank" class="t-paper">Paper 02</a>
+                    <a href="https://zenodo.org/records/17896542" target="_blank" class="t-paper">Paper 03</a>
+                    <a href="https://zenodo.org/records/18015990" target="_blank" class="t-paper">Paper 04</a>
+                    <a href="https://zenodo.org/records/18054346" target="_blank" class="t-paper">Mahdi Ledger</a>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-period">2025 — Deeper mechanisms</div>
+                <div class="timeline-heading">Language, architecture, cognition, and verification</div>
+                <div class="timeline-desc">Papers 05 through 08 went deeper into specific mechanisms. Linguistic governance showed how language functions as a reliability layer. The six-layer architecture model showed how governance mechanisms interact. Distributed cognition theory provided the theoretical grounding. Paper 08 identified the missing verification layer as the central outstanding problem.</div>
+                <div class="timeline-papers">
+                    <a href="https://zenodo.org/records/18900058" target="_blank" class="t-paper">Paper 05</a>
+                    <a href="https://zenodo.org/records/19038340" target="_blank" class="t-paper">Paper 06</a>
+                    <a href="https://zenodo.org/records/19151397" target="_blank" class="t-paper">Paper 07</a>
+                    <a href="https://zenodo.org/records/19983551" target="_blank" class="t-paper">Paper 08</a>
+                </div>
+            </div>
+            <div class="timeline-item active">
+                <div class="timeline-period">2026 — Active</div>
+                <div class="timeline-heading">Architecture development and continued investigation</div>
+                <div class="timeline-desc">RITAM is translating the research into a practical reliability architecture. NIYOM is developing the execution layer. Failure documentation continues. The convergence of industry terminology (context engineering, reliability, agent memory) with concepts documented in the papers confirms the research was tracking the right problem early.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Open Questions -->
+<section class="research-section">
+    <div class="container">
+        <div class="section-label">Open Questions</div>
+        <h2 class="section-title">What the research has not yet resolved</h2>
+        <p class="section-intro">These are genuine open questions — not rhetorical. They define the next phase of investigation.</p>
+        <div class="questions-list">
+            <div class="question-item">
+                <div class="question-text">How does the reliability architecture scale to multi-agent systems?</div>
+                <div class="question-context">The current framework addresses single-AI collaboration. In systems with multiple AI agents working in parallel or in sequence, the failure modes multiply and interact. Context drift in one agent may cause downstream failures in another. The architecture for this is not yet understood.</div>
+            </div>
+            <div class="question-item">
+                <div class="question-text">Can any part of the verification layer be automated without reintroducing the original reliability problem?</div>
+                <div class="question-context">Paper 08 identifies the need for a verification layer. But if that layer is itself an AI system, it introduces a recursive reliability problem. Some verification requires human judgment. The boundary between what can be automated and what cannot is not yet clearly drawn.</div>
+            </div>
+            <div class="question-item">
+                <div class="question-text">What are the reliable early warning signals for Reconstruction Failure before it becomes terminal?</div>
+                <div class="question-context">Reconstruction Failure is the most costly failure mode — it results in complete loss of collaborative progress. But the precursors are subtle. By the time the failure is visible, recovery is already expensive. Earlier, more reliable indicators are needed.</div>
+            </div>
+            <div class="question-item">
+                <div class="question-text">How do memory architectures degrade differently across short, medium, and long-horizon collaborations?</div>
+                <div class="question-context">The research covers long-horizon collaboration (weeks and months). The failure modes may manifest differently, or at different rates, in shorter engagements. Whether the reliability controls are necessary or sufficient across all collaboration timescales is not yet established.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Research Roadmap -->
+<section class="research-section">
+    <div class="container">
+        <div class="section-label">Research Roadmap</div>
+        <h2 class="section-title">Completed, active, and planned</h2>
+        <p class="section-intro">This research programme is ongoing. What follows is an honest account of where the work currently stands.</p>
+        <div class="roadmap-grid">
+            <div class="roadmap-col">
+                <div class="roadmap-label done">Completed</div>
+                <div class="roadmap-item">Papers 01–08 (published, open access)</div>
+                <div class="roadmap-item">Mahdi Ledger (published)</div>
+                <div class="roadmap-item">Failure taxonomy (6 documented modes)</div>
+                <div class="roadmap-item">10-control reliability stack (A1–A10)</div>
+                <div class="roadmap-item">Six-layer governance architecture</div>
+                <div class="roadmap-item">Distributed cognition model</div>
+                <div class="roadmap-item">Linguistic governance analysis</div>
+            </div>
+            <div class="roadmap-col">
+                <div class="roadmap-label active">Active</div>
+                <div class="roadmap-item">RITAM — reliability architecture development</div>
+                <div class="roadmap-item">NIYOM — reliability execution layer</div>
+                <div class="roadmap-item">Continued failure episode documentation</div>
+                <div class="roadmap-item">Verification layer design (following Paper 08)</div>
+                <div class="roadmap-item">Multi-agent reliability investigation (early stage)</div>
+            </div>
+            <div class="roadmap-col">
+                <div class="roadmap-label planned">Under Investigation</div>
+                <div class="roadmap-item">Assessment diagnostic engine — AI reliability scoring</div>
+                <div class="roadmap-item">Failure mode extension — additional patterns</div>
+                <div class="roadmap-item">Terminology translator — framework-to-industry mapping</div>
+                <div class="roadmap-item">Research timeline documentation</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Quick links -->
+<section class="research-section" style="border-bottom:none; padding-bottom:88px;">
+    <div class="container">
+        <div class="section-label">Explore the Research</div>
+        <h2 class="section-title">Where to go next</h2>
+        <p class="section-intro" style="margin-bottom:32px;">Start with the papers if you want the primary research. Start with the Failure Library if you want something immediately practical.</p>
+        <div class="quick-links">
+            <a href="../papers/" class="quick-link">Read all eight papers →</a>
+            <a href="../failure-library/" class="quick-link">Browse the Failure Library →</a>
+            <a href="../about/" class="quick-link">About this research →</a>
+            <a href="../#advisory" class="quick-link">Research Advisory →</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Failure Library | Living Framework — Rishi Sood</title>
+    <meta name="description" content="Documented AI failure patterns from 18+ months of long-horizon collaboration research. Six failure modes with symptoms, root causes, observed effects, and mitigations. By Rishi Sood.">
+    <link rel="canonical" href="https://livingframework.github.io/failure-library/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --amber: #f59e0b;
+            --amber-dim:    rgba(245,158,11,0.06);
+            --amber-border: rgba(245,158,11,0.18);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.75; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 64px;
+            border-bottom:1px solid var(--border);
+        }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:22px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:5px; height:5px;
+            border-radius:50%; background:var(--green);
+        }
+        .page-header h1 {
+            font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:600;
+            letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px;
+        }
+        .page-header p { font-size:1rem; max-width:620px; }
+
+        /* ── Intro note ── */
+        .intro-note {
+            padding:36px 0 0;
+        }
+        .intro-note p {
+            font-size:0.9375rem; max-width:720px; margin-bottom:10px;
+        }
+        .source-note {
+            font-family:var(--mono); font-size:11px; color:var(--text-3);
+            margin-top:16px; letter-spacing:0.02em;
+        }
+
+        /* ── Failure index (quick nav) ── */
+        .failure-index {
+            padding:32px 0;
+            border-bottom:1px solid var(--border);
+        }
+        .index-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.12em; color:var(--text-3); margin-bottom:14px;
+        }
+        .index-list {
+            display:flex; flex-wrap:wrap; gap:8px;
+        }
+        .index-item {
+            font-family:var(--mono); font-size:11px;
+            color:var(--text-3); border:1px solid var(--border);
+            border-radius:var(--r); padding:5px 12px;
+            transition:all 0.15s; letter-spacing:0.02em;
+        }
+        .index-item:hover { border-color:var(--amber-border); color:var(--amber); }
+
+        /* ── Failure entries ── */
+        .failures-section { padding:64px 0 96px; }
+
+        .failure-entry {
+            padding:48px 0;
+            border-bottom:1px solid var(--border);
+        }
+        .failure-entry:last-child { border-bottom:none; }
+
+        .failure-header {
+            display:flex; align-items:baseline; gap:18px;
+            margin-bottom:10px;
+        }
+        .failure-num {
+            font-family:var(--mono); font-size:11px;
+            color:var(--text-3); letter-spacing:0.08em; flex-shrink:0;
+        }
+        .failure-name {
+            font-size:1.4rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em; line-height:1.2;
+        }
+
+        .failure-summary {
+            font-size:0.9375rem; color:var(--text-2);
+            max-width:720px; margin-bottom:32px;
+            padding-left:calc(11px + 18px);
+            line-height:1.7;
+        }
+
+        .failure-grid {
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:2px;
+            background:var(--border);
+            border:1px solid var(--border);
+            border-radius:var(--r);
+            overflow:hidden;
+        }
+        .failure-cell {
+            padding:22px 24px;
+            background:var(--bg);
+        }
+        .failure-cell.full { grid-column:1 / -1; }
+        .failure-cell.dark { background:var(--bg-2); }
+
+        .cell-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.12em; color:var(--text-3); margin-bottom:10px;
+        }
+        .cell-body {
+            font-size:13.5px; color:var(--text-2); line-height:1.65;
+        }
+        .cell-body ul {
+            list-style:none; padding:0; display:flex; flex-direction:column; gap:5px;
+        }
+        .cell-body ul li {
+            padding-left:14px; position:relative; color:var(--text-2);
+            font-size:13.5px; line-height:1.6;
+        }
+        .cell-body ul li::before {
+            content:'–'; position:absolute; left:0; color:var(--text-3);
+        }
+
+        .mitigation-cell { background:var(--green-dim); border-top:1px solid var(--border); }
+        .mitigation-cell .cell-label { color:var(--green); }
+        .mitigation-cell .cell-body ul li { color:var(--text-2); }
+
+        .papers-cell { background:var(--bg-2); }
+        .paper-ref {
+            display:inline-flex; align-items:center; gap:6px;
+            font-family:var(--mono); font-size:11px; color:var(--text-3);
+            border:1px solid var(--border); border-radius:4px;
+            padding:4px 10px; margin:3px 4px 3px 0;
+            transition:all 0.15s;
+        }
+        .paper-ref:hover { border-color:var(--green-border); color:var(--green); }
+
+        /* ── Additional patterns note ── */
+        .additional-note {
+            margin-top:48px; padding:28px 32px;
+            border:1px solid var(--border); border-radius:var(--r);
+            background:var(--bg-2);
+        }
+        .additional-note p {
+            font-size:0.9rem; color:var(--text-3); line-height:1.7;
+        }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        /* ── Responsive ── */
+        @media (max-width:700px) {
+            .failure-grid { grid-template-columns:1fr; }
+            .failure-cell.full { grid-column:1; }
+            .nav-links { display:none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="./" class="active">Failure Library</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../#advisory">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">Failure Library</div>
+        <h1>Documented AI Failure Patterns</h1>
+        <p>Six recurring failure modes identified through 18+ months of documented long-horizon AI collaboration. These are not theoretical constructs — each mode was observed repeatedly, follows recognisable patterns, and responds to specific structural interventions.</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="intro-note">
+        <p>AI failures in extended collaboration are not random. They cluster into predictable categories with consistent precursor signals, root causes, and failure trajectories. Identifying which mode is active is the first step toward repair.</p>
+        <p>The taxonomy below was formalised in <a href="../papers/" style="color:var(--green);">Paper 03</a>. Each entry includes a definition, observable symptoms, root cause analysis, observed downstream effects, and the structural interventions that prevent or repair the failure.</p>
+        <div class="source-note">Source: Paper 03 — Failure and Repair in Long-Horizon Human-AI Collaboration · Zenodo · CC BY 4.0</div>
+    </div>
+</div>
+
+<div class="failure-index" style="margin-top:32px;">
+    <div class="container">
+        <div class="index-label">Jump to failure mode</div>
+        <div class="index-list">
+            <a href="#context-drift" class="index-item">01 · Context Drift</a>
+            <a href="#file-divergence" class="index-item">02 · File Divergence</a>
+            <a href="#numerical-error" class="index-item">03 · Numerical Error Propagation</a>
+            <a href="#domain-erosion" class="index-item">04 · Domain Erosion</a>
+            <a href="#trust-deficit" class="index-item">05 · Trust Deficit</a>
+            <a href="#reconstruction-failure" class="index-item">06 · Reconstruction Failure</a>
+        </div>
+    </div>
+</div>
+
+<section class="failures-section">
+    <div class="container">
+
+        <!-- 01 Context Drift -->
+        <div class="failure-entry" id="context-drift">
+            <div class="failure-header">
+                <span class="failure-num">FAILURE MODE 01</span>
+                <h2 class="failure-name">Context Drift</h2>
+            </div>
+            <p class="failure-summary">Progressive erosion of shared understanding between human and AI over an extended session. The AI's working model of the task, its constraints, and its history gradually diverges from the human's — without either party being immediately aware of it.</p>
+            <div class="failure-grid">
+                <div class="failure-cell">
+                    <div class="cell-label">Definition</div>
+                    <div class="cell-body">The AI's active working context is not a fixed record — it is a finite window that fills with new information as the session progresses. Early decisions, constraints, and agreements are progressively diluted, reinterpreted, or lost entirely. The AI continues operating, but on an increasingly inaccurate model of the task.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Root Cause</div>
+                    <div class="cell-body">No persistent external memory. Context window constraints mean older information is deprioritised. Instructions established early in a session carry less weight than recent exchanges, even when the earlier instructions should remain authoritative.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Symptoms</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Outputs that were accurate earlier begin missing important nuances</li>
+                            <li>AI makes suggestions that contradict decisions already made</li>
+                            <li>Questions are asked that were clearly answered earlier in the session</li>
+                            <li>The correction rate increases noticeably over time</li>
+                            <li>Human starts feeling the need to restate context frequently</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Observed Effects</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Compounding errors built on incorrect assumptions</li>
+                            <li>Increased human cognitive load (correcting rather than directing)</li>
+                            <li>Session restarts, losing all collaborative progress</li>
+                            <li>Erosion of trust in AI outputs generally</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full mitigation-cell">
+                    <div class="cell-label">Structural Mitigations</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Running Documents — persistent external record of all active decisions, constraints, and context, updated continuously and reloaded at session start</li>
+                            <li>Stability Pings — scheduled explicit checks that the AI's current working context remains accurate</li>
+                            <li>Re-anchoring protocol — explicit restating of core constraints at key session transitions</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full papers-cell">
+                    <div class="cell-label">Related Research</div>
+                    <div class="cell-body">
+                        <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-ref">Paper 01</a>
+                        <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-ref">Paper 03</a>
+                        <a href="https://zenodo.org/records/18900058" target="_blank" class="paper-ref">Paper 05</a>
+                        <a href="https://zenodo.org/records/19038340" target="_blank" class="paper-ref">Paper 06</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 02 File Divergence -->
+        <div class="failure-entry" id="file-divergence">
+            <div class="failure-header">
+                <span class="failure-num">FAILURE MODE 02</span>
+                <h2 class="failure-name">File Divergence</h2>
+            </div>
+            <p class="failure-summary">The state of a document or artifact as the AI believes it to exist becomes inconsistent with the actual file — or with the human's understanding of what the file contains. Work proceeds on two different versions of reality simultaneously.</p>
+            <div class="failure-grid">
+                <div class="failure-cell">
+                    <div class="cell-label">Definition</div>
+                    <div class="cell-body">In extended AI collaboration, documents pass through multiple edit cycles. Without explicit state reconciliation, the version the AI is working from and the version on disk progressively diverge. Both human and AI continue working in good faith, on different documents.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Root Cause</div>
+                    <div class="cell-body">No canonical source of truth. Multiple edit cycles without checkpointing. AI works from in-context representation of a document rather than the live file. Changes made outside the session are invisible to the AI unless explicitly reloaded.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Symptoms</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>AI references content that does not exist in the current file</li>
+                            <li>Edits proposed don't match what the human sees on screen</li>
+                            <li>Disagreement between human and AI about what was last saved or agreed</li>
+                            <li>Multiple versions of the same section existing in different places</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Observed Effects</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Work built on wrong foundations — sometimes discovered late</li>
+                            <li>Significant rework when the divergence is eventually found</li>
+                            <li>Trust breakdown when errors are discovered after the fact</li>
+                            <li>Time lost reconstructing what the actual current state is</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full mitigation-cell">
+                    <div class="cell-label">Structural Mitigations</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>File Governance protocol — explicit rules for which file is canonical, how versions are named, and when the AI's working copy must be refreshed from disk</li>
+                            <li>State confirmation — before major edits, AI explicitly states its current understanding of the document state and human confirms or corrects</li>
+                            <li>Single canonical document — one authoritative version; all others are drafts or archives</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full papers-cell">
+                    <div class="cell-label">Related Research</div>
+                    <div class="cell-body">
+                        <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-ref">Paper 01</a>
+                        <a href="https://zenodo.org/records/17760777" target="_blank" class="paper-ref">Paper 02</a>
+                        <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-ref">Paper 03</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 03 Numerical Error Propagation -->
+        <div class="failure-entry" id="numerical-error">
+            <div class="failure-header">
+                <span class="failure-num">FAILURE MODE 03</span>
+                <h2 class="failure-name">Numerical Error Propagation</h2>
+            </div>
+            <p class="failure-summary">Unverified quantitative outputs are used as inputs to subsequent calculations or decisions, compounding errors silently. By the time the problem becomes visible, a significant body of work has been built on incorrect numbers.</p>
+            <div class="failure-grid">
+                <div class="failure-cell">
+                    <div class="cell-label">Definition</div>
+                    <div class="cell-body">AI systems generate numerical outputs with high confidence regardless of accuracy. Without an explicit verification step, these numbers enter the workflow as facts. Downstream calculations use them. Reports cite them. Decisions rest on them. The error compounds with each propagation step before anyone checks the source.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Root Cause</div>
+                    <div class="cell-body">Generation and verification treated as a single operation when they are two distinct ones. AI numerical output carries no accuracy signal — a correct figure and a plausible but wrong figure are presented identically. The human has no structural prompt to verify before using the output.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Symptoms</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Calculations that cannot be independently cross-checked</li>
+                            <li>Figures that shift between sessions without explanation</li>
+                            <li>Numbers that cannot be traced back to a primary source</li>
+                            <li>Totals that don't reconcile when checked manually</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Observed Effects</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Large blocks of work requiring complete reconstruction</li>
+                            <li>Loss of confidence in the entire dataset, not just the erroneous figures</li>
+                            <li>Time spent re-deriving correct numbers from scratch</li>
+                            <li>Decisions made and sometimes acted on based on wrong data</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full mitigation-cell">
+                    <div class="cell-label">Structural Mitigations</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Verification Gates — explicit checkpoints at which AI-generated numbers are confirmed before being used downstream</li>
+                            <li>Source tracing — every figure must be traceable to a primary source; AI-generated calculations treated as estimates until verified</li>
+                            <li>Step Mode for quantitative work — AI presents calculations one step at a time for inspection rather than delivering completed figures</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full papers-cell">
+                    <div class="cell-label">Related Research</div>
+                    <div class="cell-body">
+                        <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-ref">Paper 01</a>
+                        <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-ref">Paper 03</a>
+                        <a href="https://zenodo.org/records/19983551" target="_blank" class="paper-ref">Paper 08</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 04 Domain Erosion -->
+        <div class="failure-entry" id="domain-erosion">
+            <div class="failure-header">
+                <span class="failure-num">FAILURE MODE 04</span>
+                <h2 class="failure-name">Domain Erosion</h2>
+            </div>
+            <p class="failure-summary">Over an extended session, the AI's reasoning gradually detaches from the specific domain constraints and knowledge that define the actual task — drifting toward outputs that are generically plausible but domain-inappropriate.</p>
+            <div class="failure-grid">
+                <div class="failure-cell">
+                    <div class="cell-label">Definition</div>
+                    <div class="cell-body">Domain context — the specific terminology, constraints, norms, and knowledge that make a task tractable — is established early in a session but erodes as the session continues. The AI optimises for coherent, helpful-sounding output rather than domain accuracy. The outputs pass surface-level review but fail when assessed by someone with domain expertise.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Root Cause</div>
+                    <div class="cell-body">Domain constraints are contextual, not structural. The AI has no mechanism to distinguish "this is a general principle" from "this is specific to this domain and must not be violated." As context fills, domain specificity erodes toward statistical plausibility.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Symptoms</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Advice that sounds sensible generally but is wrong for this specific context</li>
+                            <li>Loss of domain-specific vocabulary; replacement with generic equivalents</li>
+                            <li>Citations or frameworks that apply to adjacent fields, not this one</li>
+                            <li>Recommendations that ignore constraints stated clearly at the start of the session</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Observed Effects</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Work that passes casual review but fails domain expert scrutiny</li>
+                            <li>Errors that are invisible to a non-expert until consequences emerge</li>
+                            <li>Accumulated rework when domain inappropriateness is identified late</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full mitigation-cell">
+                    <div class="cell-label">Structural Mitigations</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Domain anchoring — explicit re-statement of domain constraints at session transitions and before any significant output is generated</li>
+                            <li>Domain-specific Running Documents — a dedicated section in the canonical document recording the domain rules the AI must not violate</li>
+                            <li>Specialist review checkpoints — structured moments where domain expert confirms AI outputs remain appropriate before work continues</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full papers-cell">
+                    <div class="cell-label">Related Research</div>
+                    <div class="cell-body">
+                        <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-ref">Paper 03</a>
+                        <a href="https://zenodo.org/records/18900058" target="_blank" class="paper-ref">Paper 05</a>
+                        <a href="https://zenodo.org/records/19038340" target="_blank" class="paper-ref">Paper 06</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 05 Trust Deficit -->
+        <div class="failure-entry" id="trust-deficit">
+            <div class="failure-header">
+                <span class="failure-num">FAILURE MODE 05</span>
+                <h2 class="failure-name">Trust Deficit</h2>
+            </div>
+            <p class="failure-summary">A cumulative state in which multiple small failures — individually recoverable — erode the human's confidence in AI outputs generally. Over-correction, excessive verification, and eventual disengagement follow.</p>
+            <div class="failure-grid">
+                <div class="failure-cell">
+                    <div class="cell-label">Definition</div>
+                    <div class="cell-body">Trust in AI collaboration is not binary. It degrades incrementally. Each unexplained error, each output that requires correction, each moment where the AI contradicts itself — these subtract from a working trust reserve. When the reserve is exhausted, the human can no longer treat AI output as a starting point. Collaboration becomes a net cost.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Root Cause</div>
+                    <div class="cell-body">Lack of transparent failure signalling — errors appear without explanation or acknowledgment. Absence of repair protocols — there is no structured way to restore the collaboration relationship after a failure. Errors compound without visible recovery, creating the impression of unreliability even when individual failures were minor.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Symptoms</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Human checking every output even when verification is not warranted</li>
+                            <li>Reluctance to delegate substantive tasks to AI</li>
+                            <li>Explicit expressions of doubt in the collaboration ("I don't trust this")</li>
+                            <li>Collaborative productivity falls below what the human could achieve alone</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Observed Effects</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>The collaboration relationship becomes a burden rather than a benefit</li>
+                            <li>Human disengages — either abandons the session or continues with excessive manual oversight</li>
+                            <li>Future collaboration attempts start from a damaged baseline</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full mitigation-cell">
+                    <div class="cell-label">Structural Mitigations</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Challenge Protocol — a structured mechanism for the AI to explicitly flag uncertainty before producing output, rather than producing plausible-but-uncertain output silently</li>
+                            <li>Transparent error acknowledgment — errors are named, documented, and explicitly recovered from, not glossed over</li>
+                            <li>Error Recovery protocol — a defined sequence for restoring shared understanding after a failure, designed to rebuild rather than ignore the trust damage</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full papers-cell">
+                    <div class="cell-label">Related Research</div>
+                    <div class="cell-body">
+                        <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-ref">Paper 03</a>
+                        <a href="https://zenodo.org/records/18015990" target="_blank" class="paper-ref">Paper 04</a>
+                        <a href="https://zenodo.org/records/18900058" target="_blank" class="paper-ref">Paper 05</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 06 Reconstruction Failure -->
+        <div class="failure-entry" id="reconstruction-failure">
+            <div class="failure-header">
+                <span class="failure-num">FAILURE MODE 06</span>
+                <h2 class="failure-name">Reconstruction Failure</h2>
+            </div>
+            <p class="failure-summary">After a significant disruption — session end, context reset, major error, or version conflict — the human and AI cannot recover a coherent shared working state. The cost of reconstruction exceeds the perceived benefit of continuing.</p>
+            <div class="failure-grid">
+                <div class="failure-cell">
+                    <div class="cell-label">Definition</div>
+                    <div class="cell-body">AI collaboration systems have no native persistence. When a session ends or context is reset, everything held in working memory is lost. If no external record was maintained, the only option is to reconstruct from memory — which is incomplete, inconsistent across participants, and expensive. At some point reconstruction cost exceeds restart cost, and the work is abandoned.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Root Cause</div>
+                    <div class="cell-body">No persistent external memory. No session handoff protocol. Intermediate decisions — the small choices made during a session that shape all subsequent work — exist only in the session context. When the context is lost, those decisions are lost too, even if the final artefacts survive.</div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Symptoms</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Inability to locate previous decisions after a session break</li>
+                            <li>Human and AI disagreeing about what was agreed versus what was discarded</li>
+                            <li>New session starts re-covering ground already covered</li>
+                            <li>Artefacts exist but context for why they are in their current state is gone</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell">
+                    <div class="cell-label">Observed Effects</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Complete restart from the beginning, losing all intermediate work</li>
+                            <li>Decisions unmade and remade inconsistently across sessions</li>
+                            <li>In severe cases, permanent abandonment of the collaborative task</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full mitigation-cell">
+                    <div class="cell-label">Structural Mitigations</div>
+                    <div class="cell-body">
+                        <ul>
+                            <li>Running Documents — a continuously updated external record that functions as the session's memory, recoverable at any future point regardless of context resets</li>
+                            <li>Session Handoff Protocol — a structured end-of-session summary capturing current state, outstanding decisions, and next steps, designed to enable a cold-start continuation</li>
+                            <li>Explicit checkpointing — designated moments at which current state is formally recorded, creating reliable restore points</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="failure-cell full papers-cell">
+                    <div class="cell-label">Related Research</div>
+                    <div class="cell-body">
+                        <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-ref">Paper 01</a>
+                        <a href="https://zenodo.org/records/17760777" target="_blank" class="paper-ref">Paper 02</a>
+                        <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-ref">Paper 03</a>
+                        <a href="https://zenodo.org/records/19151397" target="_blank" class="paper-ref">Paper 07</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="additional-note">
+            <p>The taxonomy above covers the six failure modes formalised in Paper 03. Additional patterns — including verification failure, authority drift, and collaboration fatigue — are under active investigation as part of the ongoing research programme. This library will be updated as new patterns are documented and formalised.</p>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
