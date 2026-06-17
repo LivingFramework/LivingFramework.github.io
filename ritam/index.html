@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RITAM | Living Framework — Rishi Sood</title>
+    <meta name="description" content="RITAM is an architecture research project translating the Living Framework reliability research into a practical architecture for long-horizon human-AI collaboration.">
+    <link rel="canonical" href="https://livingframework.github.io/ritam/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.75; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 64px;
+            border-bottom:1px solid var(--border);
+        }
+        .breadcrumb {
+            display:flex; align-items:center; gap:8px;
+            font-family:var(--mono); font-size:11px; color:var(--text-3);
+            margin-bottom:24px; letter-spacing:0.04em;
+        }
+        .breadcrumb a:hover { color:var(--text-2); }
+        .breadcrumb span { color:var(--text-3); }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:18px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:6px; height:6px;
+            border-radius:50%; background:var(--green);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity:1; }
+            50% { opacity:0.4; }
+        }
+        .page-header h1 {
+            font-size:clamp(2.2rem, 5vw, 3.5rem); font-weight:700;
+            letter-spacing:-0.04em; line-height:1; margin-bottom:20px;
+            font-family:var(--mono);
+        }
+        .page-header p { font-size:1rem; max-width:580px; }
+
+        /* ── Layout ── */
+        .content-layout {
+            display:grid;
+            grid-template-columns:1fr 260px;
+            gap:64px;
+            padding:64px 0 96px;
+            align-items:start;
+        }
+
+        /* ── Sections ── */
+        .prose-block { margin-bottom:52px; }
+        .prose-block:last-child { margin-bottom:0; }
+        .prose-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:14px;
+        }
+        .prose-block h2 {
+            font-size:1.2rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em; margin-bottom:14px; line-height:1.2;
+        }
+        .prose-block p {
+            font-size:0.9375rem; margin-bottom:14px;
+        }
+        .prose-block p:last-child { margin-bottom:0; }
+
+        /* ── Callout ── */
+        .callout {
+            padding:24px 28px;
+            border:1px solid var(--green-border);
+            border-radius:var(--r);
+            background:var(--green-dim);
+            margin-bottom:52px;
+        }
+        .callout p {
+            font-size:0.9375rem; color:var(--text);
+            font-weight:500; line-height:1.55; letter-spacing:-0.01em;
+        }
+        .callout span {
+            display:block; font-family:var(--mono); font-size:10px;
+            text-transform:uppercase; letter-spacing:0.12em;
+            color:var(--green); margin-bottom:10px;
+        }
+
+        /* ── Investigation questions ── */
+        .questions {
+            border:1px solid var(--border); border-radius:var(--r); overflow:hidden;
+        }
+        .question-row {
+            display:grid; grid-template-columns:20px 1fr;
+            gap:16px; padding:18px 20px;
+            border-bottom:1px solid var(--border);
+            align-items:start;
+        }
+        .question-row:last-child { border-bottom:none; }
+        .q-dot {
+            width:6px; height:6px; border-radius:50%;
+            background:var(--border-hover); margin-top:6px; flex-shrink:0;
+        }
+        .q-text { font-size:13.5px; color:var(--text-2); line-height:1.55; }
+
+        /* ── Papers foundation ── */
+        .papers-foundation {
+            display:flex; flex-wrap:wrap; gap:8px;
+        }
+        .paper-ref {
+            display:inline-flex; align-items:center; gap:6px;
+            font-family:var(--mono); font-size:11px; color:var(--text-3);
+            border:1px solid var(--border); border-radius:4px;
+            padding:5px 10px; transition:all 0.15s;
+        }
+        .paper-ref:hover { border-color:var(--green-border); color:var(--green); }
+        .paper-ref-label { font-size:10px; color:var(--text-3); }
+
+        /* ── Sidebar ── */
+        .sidebar { position:sticky; top:80px; }
+        .sidebar-block {
+            padding:20px;
+            border:1px solid var(--border); border-radius:var(--r);
+            background:var(--bg-2); margin-bottom:12px;
+        }
+        .sidebar-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.12em; color:var(--text-3); margin-bottom:12px;
+        }
+        .sidebar-row {
+            display:flex; justify-content:space-between;
+            padding:6px 0; border-bottom:1px solid var(--border);
+            gap:8px;
+        }
+        .sidebar-row:last-child { border-bottom:none; padding-bottom:0; }
+        .s-key { font-size:12px; color:var(--text-3); }
+        .s-val { font-size:12px; color:var(--text-2); font-weight:500; text-align:right; }
+        .s-val.active { color:var(--green); }
+
+        .sidebar-nav-link {
+            display:block; font-size:13px; color:var(--text-3);
+            padding:8px 0; border-bottom:1px solid var(--border);
+            transition:color 0.15s;
+        }
+        .sidebar-nav-link:last-child { border-bottom:none; }
+        .sidebar-nav-link:hover { color:var(--text-2); }
+
+        /* ── Related ── */
+        .related-link {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:14px 18px;
+            border:1px solid var(--border); border-radius:var(--r);
+            margin-bottom:8px; transition:all 0.15s;
+            background:var(--bg-2);
+        }
+        .related-link:hover { border-color:var(--border-hover); }
+        .related-link:last-child { margin-bottom:0; }
+        .related-title { font-size:13.5px; color:var(--text); font-weight:500; }
+        .related-sub { font-size:12px; color:var(--text-3); margin-top:2px; }
+        .related-arrow { font-size:12px; color:var(--text-3); }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        /* ── Responsive ── */
+        @media (max-width:800px) {
+            .content-layout { grid-template-columns:1fr; gap:0; }
+            .sidebar { position:static; margin-top:48px; }
+        }
+        @media (max-width:600px) {
+            .nav-links { display:none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="../#projects">Projects</a></li>
+            <li><a href="../#advisory">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../">Home</a>
+            <span>/</span>
+            <a href="../#projects">Projects</a>
+            <span>/</span>
+            RITAM
+        </div>
+        <div class="page-label">Architecture Research · Active · 2026</div>
+        <h1>RITAM</h1>
+        <p>A practical architecture for reliable long-horizon human-AI collaboration — translating eight papers of foundational research into structural form.</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="content-layout">
+
+        <div class="main-content">
+
+            <div class="callout">
+                <span>The gap this addresses</span>
+                <p>The published research established that reliable AI collaboration requires structural conditions — not better models. RITAM is the attempt to specify what that structure actually looks like in practice.</p>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">What RITAM Is</div>
+                <h2>From research to architecture</h2>
+                <p>Eight papers documented the problem. RITAM is the next step: taking those findings and building an architecture that instantiates them.</p>
+                <p>The papers established several things clearly. That AI reliability is structural, not intrinsic to the model. That failure modes are predictable and recurring. That the absence of a dedicated verification layer is the central outstanding problem. That language, memory, and governance structure all function as reliability mechanisms.</p>
+                <p>RITAM asks: what does an architecture that takes all of this seriously actually look like? What are its components? How do they interact? What does it require from the human side, and what does it require from the system side?</p>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">The Investigation</div>
+                <h2>What RITAM is working to answer</h2>
+                <div class="questions">
+                    <div class="question-row">
+                        <div class="q-dot"></div>
+                        <div class="q-text">How do the ten reliability controls from Paper 01 interact as a system — and what does their interaction require architecturally?</div>
+                    </div>
+                    <div class="question-row">
+                        <div class="q-dot"></div>
+                        <div class="q-text">What does the six-layer governance architecture from Paper 06 look like when implemented, layer by layer?</div>
+                    </div>
+                    <div class="question-row">
+                        <div class="q-dot"></div>
+                        <div class="q-text">Where does the verification layer attach in the architecture — and what does it need in order to function independently of the generation process it is verifying?</div>
+                    </div>
+                    <div class="question-row">
+                        <div class="q-dot"></div>
+                        <div class="q-text">How does a persistent memory architecture need to be structured to prevent Context Drift and Reconstruction Failure over long collaboration timelines?</div>
+                    </div>
+                    <div class="question-row">
+                        <div class="q-dot"></div>
+                        <div class="q-text">What are the minimum structural conditions for a human-AI collaboration system to be considered reliably governed?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">Research Foundation</div>
+                <h2>Built on the published papers</h2>
+                <p>RITAM is grounded in the specific findings of eight published papers. The architecture is not speculative — it is derived from documented observations. Every design decision in RITAM should be traceable to a finding in the research.</p>
+                <p>Primary foundations:</p>
+                <div class="papers-foundation" style="margin-top:14px;">
+                    <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-ref">Paper 01 · Reliability Stack (A1–A10)</a>
+                    <a href="https://zenodo.org/records/17760777" target="_blank" class="paper-ref">Paper 02 · Operational Protocols</a>
+                    <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-ref">Paper 03 · Failure Taxonomy</a>
+                    <a href="https://zenodo.org/records/19038340" target="_blank" class="paper-ref">Paper 06 · Six-Layer Architecture</a>
+                    <a href="https://zenodo.org/records/19151397" target="_blank" class="paper-ref">Paper 07 · Distributed Cognition</a>
+                    <a href="https://zenodo.org/records/19983551" target="_blank" class="paper-ref">Paper 08 · Verification Systems</a>
+                </div>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">Relationship to NIYOM</div>
+                <h2>Architecture and execution</h2>
+                <p>RITAM and NIYOM are two distinct but dependent projects. RITAM is architecture: it specifies what a reliable collaboration system looks like structurally. NIYOM is execution: it implements those specifications as practical tools and protocols.</p>
+                <p>RITAM has to exist first. The architecture has to be right before implementation is useful. NIYOM follows RITAM's output, not the other way around.</p>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">Current Status</div>
+                <h2>Active development · 2026</h2>
+                <p>RITAM is in active development. The research foundation is complete — eight papers provide the empirical and theoretical basis. The architecture work itself is ongoing: specifying components, mapping interactions, establishing what the minimum viable reliability architecture looks like before NIYOM can implement it.</p>
+                <p>RITAM is not a product. It is architecture research. Its output is a specification, not a piece of software.</p>
+            </div>
+
+            <div style="padding-top:8px;">
+                <div class="prose-label" style="margin-bottom:16px;">Explore Further</div>
+                <a href="../research/" class="related-link">
+                    <div>
+                        <div class="related-title">Research Overview</div>
+                        <div class="related-sub">Major findings, timeline, open questions</div>
+                    </div>
+                    <div class="related-arrow">→</div>
+                </a>
+                <a href="../papers/" class="related-link">
+                    <div>
+                        <div class="related-title">Published Papers</div>
+                        <div class="related-sub">The eight papers RITAM is built on</div>
+                    </div>
+                    <div class="related-arrow">→</div>
+                </a>
+                <a href="../failure-library/" class="related-link">
+                    <div>
+                        <div class="related-title">Failure Library</div>
+                        <div class="related-sub">Six failure modes the architecture addresses</div>
+                    </div>
+                    <div class="related-arrow">→</div>
+                </a>
+                <a href="niyom/" class="related-link" style="display:none;"><!-- NIYOM link placeholder --></a>
+                <a href="../niyom/" class="related-link">
+                    <div>
+                        <div class="related-title">NIYOM</div>
+                        <div class="related-sub">The execution layer that implements RITAM</div>
+                    </div>
+                    <div class="related-arrow">→</div>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-block">
+                <div class="sidebar-label">Project Status</div>
+                <div class="sidebar-row">
+                    <span class="s-key">Status</span>
+                    <span class="s-val active">Active</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Type</span>
+                    <span class="s-val">Architecture Research</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Started</span>
+                    <span class="s-val">2026</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Output</span>
+                    <span class="s-val">Architecture Spec</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Papers grounding it</span>
+                    <span class="s-val">8</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Product</span>
+                    <span class="s-val">No</span>
+                </div>
+            </div>
+
+            <div class="sidebar-block">
+                <div class="sidebar-label">Key Papers</div>
+                <a href="https://zenodo.org/records/17760288" target="_blank" class="sidebar-nav-link">Paper 01 — Reliability Stack</a>
+                <a href="https://zenodo.org/records/17896542" target="_blank" class="sidebar-nav-link">Paper 03 — Failure Taxonomy</a>
+                <a href="https://zenodo.org/records/19038340" target="_blank" class="sidebar-nav-link">Paper 06 — Architecture</a>
+                <a href="https://zenodo.org/records/19983551" target="_blank" class="sidebar-nav-link">Paper 08 — Verification</a>
+            </div>
+
+            <div class="sidebar-block">
+                <div class="sidebar-label">Related</div>
+                <a href="../niyom/" class="sidebar-nav-link">NIYOM — Execution Layer</a>
+                <a href="../failure-library/" class="sidebar-nav-link">Failure Library</a>
+                <a href="../research/" class="sidebar-nav-link">Research Overview</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NIYOM | Living Framework — Rishi Sood</title>
+    <meta name="description" content="NIYOM is the reliability execution layer — translating the RITAM architecture and Living Framework research into practical tools, protocols, and verification procedures.">
+    <link rel="canonical" href="https://livingframework.github.io/niyom/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg:    #09090b;
+            --bg-2:  #111113;
+            --bg-3:  #18181b;
+            --border:       rgba(255,255,255,0.07);
+            --border-hover: rgba(255,255,255,0.14);
+            --text:  #f4f4f5;
+            --text-2:#a1a1aa;
+            --text-3:#52525b;
+            --green: #10b981;
+            --green-dim:    rgba(16,185,129,0.08);
+            --green-border: rgba(16,185,129,0.20);
+            --font:  'Space Grotesk', -apple-system, sans-serif;
+            --mono:  'JetBrains Mono', monospace;
+            --max:   1080px;
+            --r:     6px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.75; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+
+        /* ── Nav ── */
+        nav {
+            position:fixed; top:0; left:0; right:0; z-index:100;
+            background:rgba(9,9,11,0.92);
+            backdrop-filter:blur(16px);
+            border-bottom:1px solid var(--border);
+        }
+        .nav-inner {
+            max-width:var(--max); margin:0 auto; padding:0 28px;
+            height:54px; display:flex; align-items:center; justify-content:space-between;
+        }
+        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
+        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+
+        /* ── Page header ── */
+        .page-header {
+            padding:140px 0 64px;
+            border-bottom:1px solid var(--border);
+        }
+        .breadcrumb {
+            display:flex; align-items:center; gap:8px;
+            font-family:var(--mono); font-size:11px; color:var(--text-3);
+            margin-bottom:24px; letter-spacing:0.04em;
+        }
+        .breadcrumb a:hover { color:var(--text-2); }
+        .breadcrumb span { color:var(--text-3); }
+        .page-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--green); margin-bottom:18px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .page-label::before {
+            content:''; width:6px; height:6px;
+            border-radius:50%; background:var(--green);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity:1; }
+            50% { opacity:0.4; }
+        }
+        .page-header h1 {
+            font-size:clamp(2.2rem, 5vw, 3.5rem); font-weight:700;
+            letter-spacing:-0.04em; line-height:1; margin-bottom:20px;
+            font-family:var(--mono);
+        }
+        .page-header p { font-size:1rem; max-width:580px; }
+
+        /* ── Layout ── */
+        .content-layout {
+            display:grid;
+            grid-template-columns:1fr 260px;
+            gap:64px;
+            padding:64px 0 96px;
+            align-items:start;
+        }
+
+        /* ── Sections ── */
+        .prose-block { margin-bottom:52px; }
+        .prose-block:last-child { margin-bottom:0; }
+        .prose-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.14em; color:var(--text-3); margin-bottom:14px;
+        }
+        .prose-block h2 {
+            font-size:1.2rem; font-weight:600; color:var(--text);
+            letter-spacing:-0.02em; margin-bottom:14px; line-height:1.2;
+        }
+        .prose-block p {
+            font-size:0.9375rem; margin-bottom:14px;
+        }
+        .prose-block p:last-child { margin-bottom:0; }
+
+        /* ── Callout ── */
+        .callout {
+            padding:24px 28px;
+            border:1px solid var(--green-border);
+            border-radius:var(--r);
+            background:var(--green-dim);
+            margin-bottom:52px;
+        }
+        .callout p {
+            font-size:0.9375rem; color:var(--text);
+            font-weight:500; line-height:1.55; letter-spacing:-0.01em;
+        }
+        .callout span {
+            display:block; font-family:var(--mono); font-size:10px;
+            text-transform:uppercase; letter-spacing:0.12em;
+            color:var(--green); margin-bottom:10px;
+        }
+
+        /* ── Dependency chain ── */
+        .dep-chain {
+            display:flex; align-items:center; gap:0;
+            border:1px solid var(--border); border-radius:var(--r);
+            overflow:hidden; margin-top:20px;
+        }
+        .dep-node {
+            flex:1; padding:18px 20px;
+            border-right:1px solid var(--border);
+        }
+        .dep-node:last-child { border-right:none; }
+        .dep-node-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.1em; color:var(--text-3); margin-bottom:6px;
+        }
+        .dep-node-name {
+            font-size:13.5px; font-weight:600; color:var(--text); margin-bottom:4px;
+        }
+        .dep-node-desc { font-size:12px; color:var(--text-3); line-height:1.5; }
+        .dep-node.current .dep-node-name { color:var(--green); }
+        .dep-node.current { background:var(--green-dim); }
+        .dep-arrow {
+            padding:0 4px; color:var(--text-3); font-size:12px;
+            background:var(--bg-3); align-self:stretch;
+            display:flex; align-items:center;
+        }
+
+        /* ── What it implements ── */
+        .impl-list {
+            border:1px solid var(--border); border-radius:var(--r); overflow:hidden;
+        }
+        .impl-row {
+            display:grid; grid-template-columns:1fr auto;
+            gap:16px; padding:16px 20px;
+            border-bottom:1px solid var(--border);
+            align-items:center;
+        }
+        .impl-row:last-child { border-bottom:none; }
+        .impl-name { font-size:13.5px; color:var(--text); font-weight:500; }
+        .impl-src { font-family:var(--mono); font-size:10px; color:var(--text-3); }
+
+        /* ── Related links ── */
+        .related-link {
+            display:flex; align-items:center; justify-content:space-between;
+            padding:14px 18px;
+            border:1px solid var(--border); border-radius:var(--r);
+            margin-bottom:8px; transition:all 0.15s;
+            background:var(--bg-2);
+        }
+        .related-link:hover { border-color:var(--border-hover); }
+        .related-link:last-child { margin-bottom:0; }
+        .related-title { font-size:13.5px; color:var(--text); font-weight:500; }
+        .related-sub { font-size:12px; color:var(--text-3); margin-top:2px; }
+        .related-arrow { font-size:12px; color:var(--text-3); }
+
+        /* ── Sidebar ── */
+        .sidebar { position:sticky; top:80px; }
+        .sidebar-block {
+            padding:20px;
+            border:1px solid var(--border); border-radius:var(--r);
+            background:var(--bg-2); margin-bottom:12px;
+        }
+        .sidebar-label {
+            font-family:var(--mono); font-size:10px; text-transform:uppercase;
+            letter-spacing:0.12em; color:var(--text-3); margin-bottom:12px;
+        }
+        .sidebar-row {
+            display:flex; justify-content:space-between;
+            padding:6px 0; border-bottom:1px solid var(--border); gap:8px;
+        }
+        .sidebar-row:last-child { border-bottom:none; padding-bottom:0; }
+        .s-key { font-size:12px; color:var(--text-3); }
+        .s-val { font-size:12px; color:var(--text-2); font-weight:500; text-align:right; }
+        .s-val.active { color:var(--green); }
+        .sidebar-nav-link {
+            display:block; font-size:13px; color:var(--text-3);
+            padding:8px 0; border-bottom:1px solid var(--border);
+            transition:color 0.15s;
+        }
+        .sidebar-nav-link:last-child { border-bottom:none; }
+        .sidebar-nav-link:hover { color:var(--text-2); }
+
+        /* ── Footer ── */
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner {
+            display:flex; align-items:center;
+            justify-content:space-between; flex-wrap:wrap; gap:16px;
+        }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+
+        /* ── Responsive ── */
+        @media (max-width:800px) {
+            .content-layout { grid-template-columns:1fr; gap:0; }
+            .sidebar { position:static; margin-top:48px; }
+            .dep-chain { flex-direction:column; }
+            .dep-node { border-right:none; border-bottom:1px solid var(--border); }
+            .dep-node:last-child { border-bottom:none; }
+            .dep-arrow { display:none; }
+        }
+        @media (max-width:600px) {
+            .nav-links { display:none; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo">Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="../#projects">Projects</a></li>
+            <li><a href="../#advisory">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../">Home</a>
+            <span>/</span>
+            <a href="../#projects">Projects</a>
+            <span>/</span>
+            NIYOM
+        </div>
+        <div class="page-label">Reliability Execution Layer · Early Development · 2026</div>
+        <h1>NIYOM</h1>
+        <p>The execution layer that implements the RITAM architecture — turning research-derived controls, verification protocols, and repair procedures into tools practitioners can actually use.</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="content-layout">
+
+        <div class="main-content">
+
+            <div class="callout">
+                <span>The problem NIYOM solves</span>
+                <p>Research and architecture are necessary but not sufficient. A practitioner who reads the papers and understands the architecture still faces a gap: how does this actually work in a real workflow, on a real day, with real constraints? NIYOM closes that gap.</p>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">What NIYOM Is</div>
+                <h2>Implementation, not theory</h2>
+                <p>NIYOM is the execution layer of the Living Framework research programme. Where the papers document findings and RITAM specifies an architecture, NIYOM implements that architecture into practical form.</p>
+                <p>The research established what reliable AI collaboration requires structurally. RITAM translates that into an architecture. NIYOM makes the architecture usable — the controls become operable, the verification steps become executable, the repair protocols become actionable. The research does not remain at the level of principle.</p>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">The Dependency Chain</div>
+                <h2>How the three layers relate</h2>
+                <p>NIYOM is the third layer in a deliberate sequence. Each layer depends on the one before it being correct.</p>
+                <div class="dep-chain">
+                    <div class="dep-node">
+                        <div class="dep-node-label">Layer 1</div>
+                        <div class="dep-node-name">Research</div>
+                        <div class="dep-node-desc">Eight papers documenting what reliable AI collaboration requires and why</div>
+                    </div>
+                    <div class="dep-node">
+                        <div class="dep-node-label">Layer 2</div>
+                        <div class="dep-node-name">RITAM</div>
+                        <div class="dep-node-desc">Architecture that specifies how the research findings translate into structural form</div>
+                    </div>
+                    <div class="dep-node current">
+                        <div class="dep-node-label">Layer 3</div>
+                        <div class="dep-node-name">NIYOM</div>
+                        <div class="dep-node-desc">Execution layer that implements the architecture as usable protocols and tools</div>
+                    </div>
+                </div>
+                <p style="margin-top:18px;">NIYOM does not attempt to shortcut this sequence. Implementation built on a wrong architecture produces reliable-looking unreliability — it embeds the mistakes deeply and makes them harder to find. The sequence is intentional.</p>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">What It Implements</div>
+                <h2>The research, made operational</h2>
+                <p>NIYOM works through the specific controls, protocols, and procedures established by the research and specified by RITAM.</p>
+                <div class="impl-list" style="margin-top:18px;">
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Reliability controls (A1–A10)</div>
+                            <div class="impl-src" style="margin-top:3px;">From Paper 01 · Specified in RITAM</div>
+                        </div>
+                    </div>
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Verification protocols</div>
+                            <div class="impl-src" style="margin-top:3px;">From Paper 08 · Core gap the research identified</div>
+                        </div>
+                    </div>
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Memory governance procedures</div>
+                            <div class="impl-src" style="margin-top:3px;">From Papers 01–02 · Prevents Context Drift and Reconstruction Failure</div>
+                        </div>
+                    </div>
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Failure mode detection and repair</div>
+                            <div class="impl-src" style="margin-top:3px;">From Paper 03 · Six documented failure modes, each with repair paths</div>
+                        </div>
+                    </div>
+                    <div class="impl-row">
+                        <div>
+                            <div class="impl-name">Linguistic governance layer</div>
+                            <div class="impl-src" style="margin-top:3px;">From Paper 05 · Language as a reliability mechanism</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">Current Status</div>
+                <h2>Early development · 2026</h2>
+                <p>NIYOM is in early development. RITAM, the architecture layer it depends on, is currently active. NIYOM development proceeds in step with RITAM's output — implementation cannot get ahead of the architecture it is implementing.</p>
+                <p>NIYOM is not a product. It is an implementation project whose output is a set of structured, research-grounded tools and protocols for practitioners working with AI systems in sustained, high-stakes contexts.</p>
+            </div>
+
+            <div style="padding-top:8px;">
+                <div class="prose-label" style="margin-bottom:16px;">Explore Further</div>
+                <a href="../ritam/" class="related-link">
+                    <div>
+                        <div class="related-title">RITAM</div>
+                        <div class="related-sub">The architecture layer NIYOM implements</div>
+                    </div>
+                    <div class="related-arrow">→</div>
+                </a>
+                <a href="../research/" class="related-link">
+                    <div>
+                        <div class="related-title">Research Overview</div>
+                        <div class="related-sub">The findings both projects are built on</div>
+                    </div>
+                    <div class="related-arrow">→</div>
+                </a>
+                <a href="../papers/" class="related-link">
+                    <div>
+                        <div class="related-title">Published Papers</div>
+                        <div class="related-sub">Eight papers — the research foundation</div>
+                    </div>
+                    <div class="related-arrow">→</div>
+                </a>
+                <a href="../failure-library/" class="related-link">
+                    <div>
+                        <div class="related-title">Failure Library</div>
+                        <div class="related-sub">Six failure modes NIYOM helps prevent and repair</div>
+                    </div>
+                    <div class="related-arrow">→</div>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="sidebar">
+            <div class="sidebar-block">
+                <div class="sidebar-label">Project Status</div>
+                <div class="sidebar-row">
+                    <span class="s-key">Status</span>
+                    <span class="s-val active">Early dev</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Type</span>
+                    <span class="s-val">Execution Layer</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Started</span>
+                    <span class="s-val">2026</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Depends on</span>
+                    <span class="s-val">RITAM</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Output</span>
+                    <span class="s-val">Protocols + Tools</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Product</span>
+                    <span class="s-val">No</span>
+                </div>
+            </div>
+
+            <div class="sidebar-block">
+                <div class="sidebar-label">Grounding Papers</div>
+                <a href="https://zenodo.org/records/17760288" target="_blank" class="sidebar-nav-link">Paper 01 — Controls A1–A10</a>
+                <a href="https://zenodo.org/records/17760777" target="_blank" class="sidebar-nav-link">Paper 02 — Protocols</a>
+                <a href="https://zenodo.org/records/17896542" target="_blank" class="sidebar-nav-link">Paper 03 — Failure Modes</a>
+                <a href="https://zenodo.org/records/18900058" target="_blank" class="sidebar-nav-link">Paper 05 — Linguistic Layer</a>
+                <a href="https://zenodo.org/records/19983551" target="_blank" class="sidebar-nav-link">Paper 08 — Verification</a>
+            </div>
+
+            <div class="sidebar-block">
+                <div class="sidebar-label">Related</div>
+                <a href="../ritam/" class="sidebar-nav-link">RITAM — Architecture</a>
+                <a href="../failure-library/" class="sidebar-nav-link">Failure Library</a>
+                <a href="../research/" class="sidebar-nav-link">Research Overview</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
+            </div>
+            <div class="footer-links">
+                <a href="https://twitter.com/satoshisats" target="_blank">X</a>
+                <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
+                <a href="https://github.com/LivingFramework" target="_blank">GitHub</a>
+                <a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a>
+                <a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
