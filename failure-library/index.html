@@ -9,26 +9,27 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg:    #09090b;
-            --bg-2:  #111113;
-            --bg-3:  #18181b;
-            --border:       rgba(255,255,255,0.07);
-            --border-hover: rgba(255,255,255,0.14);
-            --text:  #f4f4f5;
-            --text-2:#a1a1aa;
-            --text-3:#52525b;
-            --green: #10b981;
-            --green-dim:    rgba(16,185,129,0.08);
-            --green-border: rgba(16,185,129,0.20);
-            --amber: #f59e0b;
-            --amber-dim:    rgba(245,158,11,0.06);
-            --amber-border: rgba(245,158,11,0.18);
-            --font:  'Space Grotesk', -apple-system, sans-serif;
-            --mono:  'JetBrains Mono', monospace;
+            --bg:    #eae7e0;
+            --bg-2:  #e2ddd6;
+            --bg-3:  #d8d3cb;
+            --border:       rgba(26,24,20,0.10);
+            --border-hover: rgba(26,24,20,0.20);
+            --text:  #1a1814;
+            --text-2:#4e4840;
+            --text-3:#8c8680;
+            --green: #9a5a28;
+            --green-dim:    rgba(154,90,40,0.07);
+            --green-border: rgba(154,90,40,0.22);
+            --amber: #b45309;
+            --amber-dim:    rgba(180,83,9,0.07);
+            --amber-border: rgba(180,83,9,0.20);
+            --font:  'DM Sans', -apple-system, sans-serif;
+            --serif: 'Newsreader', Georgia, serif;
+            --mono:  'IBM Plex Mono', monospace;
             --max:   1080px;
             --r:     6px;
         }
@@ -50,7 +51,7 @@
         /* ── Nav ── */
         nav {
             position:fixed; top:0; left:0; right:0; z-index:100;
-            background:rgba(9,9,11,0.92);
+            background:rgba(234,231,224,0.95);
             backdrop-filter:blur(16px);
             border-bottom:1px solid var(--border);
         }
@@ -58,8 +59,8 @@
             max-width:var(--max); margin:0 auto; padding:0 28px;
             height:54px; display:flex; align-items:center; justify-content:space-between;
         }
-        .nav-logo { font-family:var(--mono); font-size:12px; color:var(--text-2); letter-spacing:0.04em; }
-        .nav-logo em { color:var(--green); font-style:normal; }
+        .nav-logo { font-family:var(--serif); font-size:15px; color:var(--text); letter-spacing:0.01em; }
+        .nav-logo em { color:var(--text-3); font-style:italic; }
         .nav-links { display:flex; gap:28px; list-style:none; }
         .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
         .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
@@ -221,7 +222,18 @@
             .failure-cell.full { grid-column:1; }
             .nav-links { display:none; }
         }
-    </style>
+    
+        /* ── Design refresh: serif headings ── */
+        h1, h2, h3,
+        .section-title, .page-title, .paper-title,
+        .hero h1, .card-title, .entry-title {
+            font-family: var(--serif);
+        }
+        .nav-links a.active {
+            color: var(--text);
+            font-weight: 500;
+        }
+        </style>
 </head>
 <body>
 

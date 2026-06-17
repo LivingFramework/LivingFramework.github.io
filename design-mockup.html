@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Living Framework — Design Mockup</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <style>
+        /* ── Design tokens ── */
+        :root {
+            --bg:       #eae7e0;
+            --bg-2:     #e2ddd6;
+            --bg-3:     #d8d3cb;
+            --border:       rgba(26,24,20,0.10);
+            --border-hover: rgba(26,24,20,0.20);
+            --text:     #1a1814;
+            --text-2:   #4e4840;
+            --text-3:   #8c8680;
+            --amber:    #9a5a28;
+            --amber-dim:    rgba(154,90,40,0.07);
+            --amber-border: rgba(154,90,40,0.22);
+            --font:     'DM Sans', -apple-system, sans-serif;
+            --serif:    'Newsreader', Georgia, serif;
+            --mono:     'IBM Plex Mono', monospace;
+            --max:      1080px;
+            --r:        4px;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body {
+            font-family: var(--font);
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        a { color:inherit; text-decoration:none; }
+        p { color: var(--text-2); line-height:1.75; }
+
+        .container { max-width:var(--max); margin:0 auto; padding:0 32px; }
+
+        /* ── Mockup notice ── */
+        .mockup-notice {
+            background: var(--amber-dim);
+            border-bottom: 1px solid var(--amber-border);
+            padding: 10px 32px;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--amber);
+            letter-spacing: 0.06em;
+            text-align: center;
+        }
+
+        /* ── Nav ── */
+        nav {
+            position: sticky; top: 0;
+            z-index: 100;
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: var(--max); margin: 0 auto; padding: 0 32px;
+            height: 54px;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-logo {
+            font-family: var(--serif);
+            font-size: 15px;
+            font-weight: 400;
+            color: var(--text);
+            letter-spacing: 0.01em;
+        }
+        .nav-logo em {
+            font-style: italic;
+            color: var(--text-3);
+        }
+        .nav-links { display: flex; gap: 28px; list-style: none; }
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--text-3);
+            letter-spacing: 0.01em;
+            transition: color 0.12s;
+        }
+        .nav-links a:hover { color: var(--text-2); }
+        .nav-links a.active { color: var(--text); font-weight: 500; }
+
+        /* ── Hero ── */
+        .hero {
+            padding: 120px 0 96px;
+            border-bottom: 1px solid var(--border);
+        }
+        .hero-label {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-family: var(--mono); font-size: 10.5px;
+            text-transform: uppercase; letter-spacing: 0.13em;
+            color: var(--amber); margin-bottom: 36px;
+        }
+        .hero-label::before {
+            content: ''; width: 5px; height: 5px;
+            border-radius: 50%; background: var(--amber); flex-shrink: 0;
+        }
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(2.6rem, 5.5vw, 4rem);
+            font-weight: 400;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+            max-width: 740px;
+            margin-bottom: 28px;
+            color: var(--text);
+        }
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--text-2);
+            max-width: 520px;
+            line-height: 1.75;
+            margin-bottom: 12px;
+        }
+        .hero-note {
+            font-family: var(--mono);
+            font-size: 11.5px;
+            color: var(--text-3);
+            margin-bottom: 44px;
+            letter-spacing: 0.02em;
+        }
+        .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .hero-guide {
+            margin-top: 22px;
+            font-size: 13px;
+            color: var(--text-3);
+        }
+        .hero-guide a {
+            color: var(--text-2);
+            text-decoration: underline;
+            text-decoration-color: var(--border-hover);
+            text-underline-offset: 3px;
+        }
+
+        /* ── Buttons ── */
+        .btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 9px 20px;
+            font-family: var(--font);
+            font-size: 13px; font-weight: 500; letter-spacing: 0.01em;
+            border-radius: var(--r);
+            transition: all 0.14s; border: 1px solid transparent; cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--text);
+            color: var(--bg);
+            border-color: var(--text);
+        }
+        .btn-primary:hover { opacity: 0.82; }
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-2);
+            border-color: var(--border-hover);
+        }
+        .btn-ghost:hover { background: var(--bg-2); color: var(--text); }
+
+        /* ── Stats strip ── */
+        .stats {
+            padding: 44px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .stats-inner { display: flex; gap: 64px; flex-wrap: wrap; }
+        .stat-value {
+            font-family: var(--mono);
+            font-size: 1.6rem;
+            font-weight: 500;
+            color: var(--text);
+            letter-spacing: -0.02em;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .stat-label {
+            font-size: 11.5px;
+            color: var(--text-3);
+            text-transform: uppercase;
+            letter-spacing: 0.09em;
+        }
+
+        /* ── Core Insight ── */
+        section { padding: 88px 0; border-bottom: 1px solid var(--border); }
+        .section-label {
+            font-family: var(--mono);
+            font-size: 10.5px;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            color: var(--text-3);
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 2.8vw, 2rem);
+            font-weight: 400;
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            margin-bottom: 14px;
+            color: var(--text);
+        }
+        .section-intro {
+            font-size: 0.9375rem;
+            color: var(--text-2);
+            max-width: 540px;
+            line-height: 1.75;
+            margin-bottom: 52px;
+        }
+        .insight-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 72px;
+            align-items: start;
+        }
+        .insight-text p {
+            font-size: 0.9375rem;
+            margin-bottom: 18px;
+            color: var(--text-2);
+            line-height: 1.75;
+        }
+        .insight-text p:last-child { margin-bottom: 0; }
+
+        /* Stack diagram — redesigned for light bg */
+        .insight-diagram {
+            display: flex; flex-direction: column; align-items: center;
+            padding: 32px;
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+        .stack-layer {
+            width: 100%; max-width: 280px;
+            padding: 12px 20px; text-align: center;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            font-size: 13px; font-weight: 500;
+            color: var(--text-2);
+            background: var(--bg);
+        }
+        .stack-layer.muted {
+            color: var(--text-3);
+            background: var(--bg-2);
+            border-color: var(--border);
+        }
+        .stack-layer.active {
+            border-color: var(--amber-border);
+            color: var(--amber);
+            background: var(--amber-dim);
+        }
+        .stack-arrow {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-3);
+            padding: 5px 0;
+            text-align: center;
+        }
+        .stack-caption {
+            font-family: var(--mono);
+            font-size: 10.5px;
+            color: var(--text-3);
+            text-align: center;
+            margin-top: 18px;
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+        }
+
+        /* ── Research themes ── */
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .theme-card {
+            padding: 28px;
+            background: var(--bg);
+            transition: background 0.12s;
+        }
+        .theme-card:hover { background: var(--bg-2); }
+        .theme-name {
+            font-family: var(--serif);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text);
+            margin-bottom: 10px;
+        }
+        .theme-desc {
+            font-size: 13px;
+            color: var(--text-3);
+            line-height: 1.65;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+        }
+        .footer-inner {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 16px;
+        }
+        .footer-copy {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--text-3);
+            letter-spacing: 0.04em;
+        }
+        .footer-links {
+            display: flex; gap: 24px; list-style: none;
+        }
+        .footer-links a {
+            font-size: 12px;
+            color: var(--text-3);
+            transition: color 0.12s;
+        }
+        .footer-links a:hover { color: var(--text-2); }
+    </style>
+</head>
+<body>
+
+<!-- Mockup notice -->
+<div class="mockup-notice">DESIGN MOCKUP — not live. Warm cream / Newsreader / DM Sans / IBM Plex Mono / Amber accent.</div>
+
+<!-- Nav -->
+<nav>
+    <div class="nav-inner">
+        <span class="nav-logo">Living<em>Framework</em></span>
+        <ul class="nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Research</a></li>
+            <li><a href="#">Papers</a></li>
+            <li><a href="#">Failure Library</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Advisory</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="container">
+        <div class="hero-label">Independent AI Reliability Research</div>
+        <h1>Understanding Why AI Systems Fail</h1>
+        <p class="hero-sub">Independent research exploring reliability, context engineering, memory architectures, and long-term human-AI collaboration.</p>
+        <p class="hero-note">No institution. No funding. No corporate sponsorship. · Rishi Sood</p>
+        <div class="hero-actions">
+            <a href="#" class="btn btn-primary">Read the Research</a>
+            <a href="#" class="btn btn-ghost">Explore RITAM</a>
+        </div>
+        <p class="hero-guide">New here? <a href="#">Start with a guided reading path →</a></p>
+    </div>
+</header>
+
+<!-- Stats -->
+<div class="stats">
+    <div class="container">
+        <div class="stats-inner">
+            <div>
+                <span class="stat-value">8</span>
+                <span class="stat-label">Research Papers</span>
+            </div>
+            <div>
+                <span class="stat-value">7,000+</span>
+                <span class="stat-label">Downloads</span>
+            </div>
+            <div>
+                <span class="stat-value">18+</span>
+                <span class="stat-label">Months of Investigation</span>
+            </div>
+            <div>
+                <span class="stat-value">12+</span>
+                <span class="stat-label">Documented Failure Episodes</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Core Insight -->
+<section>
+    <div class="container">
+        <div class="section-label">Core Finding</div>
+        <div class="insight-grid">
+            <div class="insight-text">
+                <h2 class="section-title">The real problem sits above the model.</h2>
+                <p>Most AI discussions start and stop at the model — which one to use, how to prompt it, when to update it. Living Framework begins there and goes further: into how context is managed, how memory is governed, how outputs are verified before they propagate.</p>
+                <p>Over two years of documented observations, the same insight emerged repeatedly: AI failures are not primarily model failures. They are architectural failures. Context drifts. Memory degrades. Outputs propagate without verification. These failures are structural — and they have structural solutions.</p>
+                <p>Eight published papers document what those solutions look like in practice.</p>
+            </div>
+            <div class="insight-diagram">
+                <div class="stack-layer muted">Prompts &amp; Models</div>
+                <div class="stack-arrow">↓</div>
+                <div class="stack-layer">Memory &amp; Context</div>
+                <div class="stack-arrow">↓</div>
+                <div class="stack-layer">Verification</div>
+                <div class="stack-arrow">↓</div>
+                <div class="stack-layer">Reliability Architecture</div>
+                <div class="stack-arrow">↓</div>
+                <div class="stack-layer active">Reliability</div>
+                <p class="stack-caption">Most AI discussions begin and end at prompts.<br>The leverage is in the layers above.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Research Themes -->
+<section>
+    <div class="container">
+        <div class="section-label">Research Areas</div>
+        <h2 class="section-title">Six themes. One question.</h2>
+        <p class="section-intro">How do humans and AI work together reliably over time? The research approaches this from six interconnected directions.</p>
+        <div class="themes-grid">
+            <div class="theme-card">
+                <div class="theme-name">AI Reliability</div>
+                <div class="theme-desc">Why AI systems fail at predictable structural points — and the conditions that prevent it. Reliability as an emergent property of the interaction system, not the model.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Context Engineering</div>
+                <div class="theme-desc">How context degrades over extended collaboration and what structural mechanisms keep it stable. Context as a governed resource, not an unlimited one.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Memory Systems</div>
+                <div class="theme-desc">Persistent external memory as a reliability mechanism. How to preserve decisions, corrections, and shared knowledge across sessions without degradation.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Verification Systems</div>
+                <div class="theme-desc">The missing architectural layer in most AI deployments. Generating outputs and verifying them before propagation are two distinct operations — both necessary.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Reliability Architecture</div>
+                <div class="theme-desc">Six-layer structural models for reliable long-horizon collaboration. Stable behaviour is an emergent systems property — not a feature of any single component.</div>
+            </div>
+            <div class="theme-card">
+                <div class="theme-name">Human-AI Collaboration</div>
+                <div class="theme-desc">The distributed cognitive system: human judgment, AI reasoning, and governed shared memory. How trust builds, fractures, and repairs over time.</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <span class="footer-copy">© 2025 Living Framework · Rishi Sood · Independent Research</span>
+            <ul class="footer-links">
+                <li><a href="#">Papers</a></li>
+                <li><a href="#">Zenodo</a></li>
+                <li><a href="#">Advisory</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
