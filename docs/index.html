@@ -426,6 +426,17 @@
         
         .nav-logo { display:flex; align-items:center; gap:10px; }
         .nav-mark { flex-shrink:0; display:block; }
+
+        /* Hero two-column layout */
+        .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+        .hero-right { display:flex; align-items:center; }
+        .hero-quote { border-left:3px solid var(--green); padding-left:28px; }
+        .hero-quote p { font-family:var(--serif); font-size:1.35rem; font-style:italic;
+                        line-height:1.6; color:var(--text); margin-bottom:18px; }
+        .hero-quote cite { font-family:var(--mono); font-size:10.5px; letter-spacing:0.08em;
+                           text-transform:uppercase; color:var(--text-3); font-style:normal; }
+        @media(max-width:700px) { .hero-grid { grid-template-columns:1fr; gap:0; }
+                                   .hero-right { display:none; } }
         </style>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -449,26 +460,34 @@
 
 <!-- Hero -->
 <header class="hero">
-    <div class="container">
-        <div class="hero-label">Independent AI Research</div>
-        <h1>Building Reliable Cognition Systems</h1>
-        <p class="hero-sub">Research, frameworks, and infrastructure for reliable long-horizon AI.<br>Exploring memory, continuity, provenance, and trustworthy cognition in intelligent systems.</p>
-        <div class="hero-actions" style="margin-top:40px;">
-            <a href="research/" class="btn btn-primary">Read the Research</a>
-            <a href="papers/" class="btn btn-ghost">Papers</a>
+    <div class="container hero-grid">
+        <div class="hero-left">
+            <div class="hero-label">Independent AI Research</div>
+            <h1>Building Reliable Cognition Systems</h1>
+            <p class="hero-sub">Research, frameworks, and infrastructure for reliable long-horizon AI.<br>Exploring memory, continuity, provenance, and trustworthy cognition in intelligent systems.</p>
+            <div class="hero-actions" style="margin-top:40px;">
+                <a href="research/" class="btn btn-primary">Read the Research</a>
+                <a href="papers/" class="btn btn-ghost">Papers</a>
+            </div>
+            <p style="margin-top:24px; font-size:15px; color:var(--text-3);">
+                New here? <a href="start-here/" style="color:var(--text-2); text-decoration:underline; text-decoration-color:var(--border); text-underline-offset:3px;">Start with a guided reading path →</a>
+            </p>
         </div>
-        <p style="margin-top:24px; font-size:15px; color:var(--text-3);">
-            New here? <a href="start-here/" style="color:var(--text-2); text-decoration:underline; text-decoration-color:var(--border); text-underline-offset:3px;">Start with a guided reading path →</a>
-        </p>
+        <div class="hero-right">
+            <blockquote class="hero-quote">
+                <p>Reliability is not a property of the model. It is a property of the architecture surrounding it.</p>
+                <cite>— The Living Framework, Paper 01</cite>
+            </blockquote>
+        </div>
     </div>
 </header>
 
 <!-- Projects -->
 <section id="projects">
     <div class="container">
-        <div class="section-label" style="color:#1a3a2a;">Current Research</div>
-        <h2 class="section-title" style="color:#1a3a2a;">Active investigations.</h2>
-        <p class="section-intro" style="color:#1a3a2a;">Two ongoing projects extending the research into cognitive substrate design and implementation architecture.</p>
+        <div class="section-label" style="color:#2d6a4f;">Current Research</div>
+        <h2 class="section-title" style="color:#2d6a4f;">Active investigations.</h2>
+        <p class="section-intro" style="color:#2d6a4f;">Two ongoing projects extending the research into cognitive substrate design and implementation architecture.</p>
         <div class="projects-grid">
             <a href="ritam/" class="project-card">
                 <div class="project-tag">Substrate Research</div>
