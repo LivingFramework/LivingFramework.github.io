@@ -254,6 +254,7 @@
             padding:32px; border:1px solid var(--border);
             border-radius:var(--r); background:var(--bg-2);
             transition:border-color 0.15s;
+            display:flex; flex-direction:column;
         }
         .project-card:hover { border-color:var(--border-hover); }
         .project-tag {
@@ -485,22 +486,22 @@
 <!-- Projects -->
 <section id="projects">
     <div class="container">
-        <div class="section-label" style="color:#2d6a4f;">Current Research</div>
-        <h2 class="section-title" style="color:#2d6a4f;">Active investigations.</h2>
-        <p class="section-intro" style="color:#2d6a4f;">Two ongoing projects extending the research into cognitive substrate design and implementation architecture.</p>
+        <div class="section-label">Current Research</div>
+        <h2 class="section-title">Active investigations.</h2>
+        <p class="section-intro">Two ongoing projects extending the research into cognitive substrate design and implementation architecture.</p>
         <div class="projects-grid">
             <a href="ritam/" class="project-card">
-                <div class="project-tag" style="color:#2d6a4f;">Substrate Research</div>
-                <div class="project-name" style="color:#2d6a4f;">RITAM</div>
-                <div class="project-desc" style="color:#2d6a4f;">Foundational substrate research for governed AI cognition. RITAM investigates nine architectural primitives — State, Memory, Ontology, Governance, Epistemic, Coordination, Temporal, Observation, Repair — through pre-registered experiments and adversarial review. The executable substrate doesn’t exist yet. That’s the research target.</div>
-                <div class="project-status" style="color:#2d6a4f;">Status · Active development · 2026</div>
+                <div class="project-tag">Substrate Research</div>
+                <div class="project-name">RITAM</div>
+                <div class="project-desc">Foundational substrate research for governed AI cognition. RITAM investigates nine architectural primitives — State, Memory, Ontology, Governance, Epistemic, Coordination, Temporal, Observation, Repair — through pre-registered experiments and adversarial review. The executable substrate doesn’t exist yet. That’s the research target.</div>
+                <div class="project-status" style="margin-top:auto;">Status · Active development · 2026</div>
                 <span class="btn btn-primary" style="display:inline-block; margin-top:20px; pointer-events:none;">View project →</span>
             </a>
             <a href="niyom/" class="project-card">
-                <div class="project-tag" style="color:#2d6a4f;">Verification Harness</div>
-                <div class="project-name" style="color:#2d6a4f;">NIYOM</div>
-                <div class="project-desc" style="color:#2d6a4f;">A structured execution harness for AI. NIYOM forces every task through Plan, Execute, Verify, and Repair — with adversarial verification between generation and acceptance. 41–87% of production AI failures are architectural, not model-based. NIYOM is the architectural response.</div>
-                <div class="project-status" style="color:#2d6a4f;">Status · Stage 7 · In Development · 2026</div>
+                <div class="project-tag">Verification Harness</div>
+                <div class="project-name">NIYOM</div>
+                <div class="project-desc">A structured execution harness for AI. NIYOM forces every task through Plan, Execute, Verify, and Repair — with adversarial verification between generation and acceptance. 41–87% of production AI failures are architectural, not model-based. NIYOM is the architectural response.</div>
+                <div class="project-status" style="margin-top:auto;">Status · Stage 7 · In Development · 2026</div>
                 <span class="btn btn-primary" style="display:inline-block; margin-top:20px; pointer-events:none;">View project →</span>
             </a>
         </div>
