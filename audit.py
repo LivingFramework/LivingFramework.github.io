@@ -2,28 +2,28 @@
 """
 LivingFramework.github.io -- Site Audit Script
 Scans all 13 HTML pages for known stale or inconsistent strings.
-Run before every push: python3 scripts/audit.py
+Run before every push: python3 audit.py
 """
 
 import re
 from pathlib import Path
 
-ROOT = Path(__file__).parent.parent
+ROOT = Path(__file__).parent
 
 PAGES = [
-    "index.html",
-    "about/index.html",
-    "advisory/index.html",
-    "assessment/index.html",
-    "early-observations/index.html",
-    "failure-library/index.html",
-    "niyom/index.html",
-    "papers/index.html",
-    "research/index.html",
-    "ritam/index.html",
-    "roadmap/index.html",
-    "start-here/index.html",
-    "terminology/index.html",
+    "docs/index.html",
+    "docs/about/index.html",
+    "docs/advisory/index.html",
+    "docs/assessment/index.html",
+    "docs/early-observations/index.html",
+    "docs/failure-library/index.html",
+    "docs/niyom/index.html",
+    "docs/papers/index.html",
+    "docs/research/index.html",
+    "docs/ritam/index.html",
+    "docs/roadmap/index.html",
+    "docs/start-here/index.html",
+    "docs/terminology/index.html",
 ]
 
 EXACT_STRINGS = [
@@ -35,14 +35,14 @@ EXACT_STRINGS = [
     ("runtime directory",          "Internal terminology"),
     ("private prior-art audit",    "Internal qualifier"),
     ("currently in re-anchoring",  "Internal stage-progress label"),
-    ("Stage 9 · Re-anchoring",     "Internal stage label"),
+    ("Stage 9 Re-anchoring",       "Internal stage label"),
     ("Live at niyom",              "NIYOM live-status -- product not yet public"),
-    ("Stage 7 · Active",           "NIYOM card status -- should be In Development"),
+    ("Stage 7 Active",             "NIYOM card status -- should be In Development"),
 ]
 
 PATTERN_CHECKS = [
     (re.compile(r"Session\s+\d+"),          "Internal session number reference"),
-    (re.compile(r"Stage\s+\d+\s+·\s+Re-"), "Internal stage label"),
+    (re.compile(r"Stage\s+\d+\s+Re-"),      "Internal stage label"),
 ]
 
 def scan(filepath):
@@ -87,7 +87,7 @@ def main():
     if total == 0:
         print("  OK  No issues found. Safe to push.")
     else:
-        print("  !!  " + str(total) + " issue(s) in " + str(flagged) + " file(s). Fix before pushing.")
+        print("  !!  " + str(total) + " issue(s) found. Fix before pushing.")
     print(bar + "\n")
 
 if __name__ == "__main__":
