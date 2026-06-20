@@ -433,7 +433,7 @@
 
         /* Hero two-column layout */
         .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
-        .hero-right { display:flex; align-items:center; padding-top:48px; }
+        .hero-right { display:flex; align-items:center; padding-top:88px; }
         .hero-quote { border-left:3px solid var(--green); padding-left:28px; }
         .hero-quote p { font-family:var(--serif); font-size:1.35rem; font-style:italic;
                         line-height:1.6; color:var(--text); margin-bottom:18px; }
@@ -999,7 +999,7 @@
             quotes[current].classList.remove('active');
             current = (current + 1) % quotes.length;
             quotes[current].classList.add('active');
-        }, 3500);
+        }, 5500);
     })();
     </script>
 </body>
