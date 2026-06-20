@@ -499,9 +499,10 @@
             .page-label { font-size: 11px; }
         }
         
-        /* ── Audience strip ── */
-        .audience-intro {
-            margin-top:48px;
+        /* ── Audience strip (standalone section) ── */
+        .paths-section {
+            padding: 72px 0;
+            border-bottom: 1px solid var(--border);
         }
         .audience-intro-label {
             font-family: var(--mono);
@@ -555,7 +556,7 @@
         
         /* ── Assessment CTA ── */
         .assess-cta {
-            padding: 0 0 80px;
+            padding: 80px 0;
         }
         .assess-cta-inner {
             display: flex;
@@ -662,26 +663,7 @@
                 <a href="research/" class="btn btn-primary">Read the Research</a>
                 <a href="papers/" class="btn btn-ghost">Papers</a>
             </div>
-            <div class="audience-intro">
-                <div class="audience-intro-label">New here? Choose your path</div>
-                <div class="audience-strip">
-                    <a href="start-here/" class="audience-card">
-                        <div class="audience-card-label">Researchers</div>
-                        <div class="audience-card-desc">Theoretical grounding, empirical findings, and priority record.</div>
-                        <div class="audience-card-arrow">→ Reading path</div>
-                    </a>
-                    <a href="start-here/" class="audience-card">
-                        <div class="audience-card-label">Practitioners</div>
-                        <div class="audience-card-desc">Failure library, reliability assessment, and applied guides.</div>
-                        <div class="audience-card-arrow">→ Reading path</div>
-                    </a>
-                    <a href="start-here/" class="audience-card">
-                        <div class="audience-card-label">Leaders</div>
-                        <div class="audience-card-desc">Risk identification, gap assessment, and strategic direction.</div>
-                        <div class="audience-card-arrow">→ Reading path</div>
-                    </a>
-                </div>
-            </div>
+
         </div>
         <div class="hero-right">
             <blockquote class="hero-quote">
@@ -691,6 +673,30 @@
         </div>
     </div>
 </header>
+
+<!-- Reading paths -->
+<section class="paths-section">
+    <div class="container">
+        <div class="audience-intro-label">New here? Choose your path</div>
+        <div class="audience-strip">
+            <a href="start-here/" class="audience-card">
+                <div class="audience-card-label">Researchers</div>
+                <div class="audience-card-desc">Theoretical grounding, empirical findings, and priority record.</div>
+                <div class="audience-card-arrow">→ Reading path</div>
+            </a>
+            <a href="start-here/" class="audience-card">
+                <div class="audience-card-label">Practitioners</div>
+                <div class="audience-card-desc">Failure library, reliability assessment, and applied guides.</div>
+                <div class="audience-card-arrow">→ Reading path</div>
+            </a>
+            <a href="start-here/" class="audience-card">
+                <div class="audience-card-label">Leaders</div>
+                <div class="audience-card-desc">Risk identification, gap assessment, and strategic direction.</div>
+                <div class="audience-card-arrow">→ Reading path</div>
+            </a>
+        </div>
+    </div>
+</section>
 
 <!-- Projects -->
 <section id="projects">
