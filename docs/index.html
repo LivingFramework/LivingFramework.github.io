@@ -432,7 +432,7 @@
         .nav-mark { flex-shrink:0; display:block; }
 
         /* Hero two-column layout */
-        .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+        .hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
         .hero-right { display:flex; align-items:center; }
         .hero-quote { border-left:3px solid var(--green); padding-left:28px; }
         .hero-quote p { font-family:var(--serif); font-size:1.35rem; font-style:italic;
@@ -440,11 +440,12 @@
         .hero-quote cite { font-family:var(--mono); font-size:10.5px; letter-spacing:0.08em;
                            text-transform:uppercase; color:var(--text-3); font-style:normal; }
         @media(max-width:700px) {
+            .hero { padding: 120px 0 64px; }
             .hero-grid { grid-template-columns:1fr; gap:0; }
             .hero-right {
                 display: block;
-                margin-top: 32px;
-                padding-top: 28px;
+                margin-top: 28px;
+                padding-top: 24px;
                 border-top: 1px solid var(--border);
             }
             .hero-quote { border-left: none; padding-left: 0; }
