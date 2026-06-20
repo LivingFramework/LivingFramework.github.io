@@ -236,6 +236,52 @@
         
         .nav-logo { display:flex; align-items:center; gap:10px; }
         .nav-mark { flex-shrink:0; display:block; }
+        
+        /* ── Mobile hamburger nav ── */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px 4px;
+        }
+        .hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text);
+            border-radius: 2px;
+        }
+        @media (max-width:640px) {
+            .hamburger { display: flex; flex-direction: column; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 64px; left: 0; right: 0;
+                background: rgba(234,231,224,0.97);
+                backdrop-filter: blur(16px);
+                border-bottom: 1px solid rgba(26,24,20,0.10);
+                padding: 8px 28px 20px;
+                gap: 0;
+                list-style: none;
+                z-index: 99;
+            }
+            .nav-links.open { display: flex; }
+            .nav-links li { border-bottom: 1px solid rgba(26,24,20,0.06); }
+            .nav-links li:last-child { border-bottom: none; }
+            .nav-links li a {
+                display: block;
+                padding: 13px 0;
+                font-size: 14px;
+                color: var(--text-2);
+                letter-spacing: 0;
+            }
+            .page-label { font-size: 11px; }
+        }
         </style>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -253,6 +299,7 @@
             <li><a href="../#projects">Projects</a></li>
             <li><a href="../advisory/">Advisory</a></li>
         </ul>
+        <button class="hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
 </nav>
 
@@ -667,5 +714,20 @@
     </div>
 </footer>
 
+<script>
+(function(){
+    var btn = document.getElementById('nav-hamburger');
+    var links = document.querySelector('.nav-links');
+    if (!btn || !links) return;
+    btn.addEventListener('click', function() {
+        links.classList.toggle('open');
+    });
+    links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            links.classList.remove('open');
+        });
+    });
+})();
+</script>
 </body>
 </html>
