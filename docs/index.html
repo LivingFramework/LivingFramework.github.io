@@ -8,6 +8,9 @@
     <meta property="og:title" content="Living Framework | Building Reliable Cognition Systems">
     <meta property="og:description" content="Research, frameworks, and infrastructure for reliable long-horizon AI. Memory, continuity, provenance, and trustworthy cognition. By Rishi Sood.">
     <meta property="og:type" content="website">
+    <meta property="og:image" content="https://livingframework.github.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     <link rel="canonical" href="https://livingframework.github.io/">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -436,8 +439,18 @@
                         line-height:1.6; color:var(--text); margin-bottom:18px; }
         .hero-quote cite { font-family:var(--mono); font-size:10.5px; letter-spacing:0.08em;
                            text-transform:uppercase; color:var(--text-3); font-style:normal; }
-        @media(max-width:700px) { .hero-grid { grid-template-columns:1fr; gap:0; }
-                                   .hero-right { display:none; } }
+        @media(max-width:700px) {
+            .hero-grid { grid-template-columns:1fr; gap:0; }
+            .hero-right {
+                display: block;
+                margin-top: 32px;
+                padding-top: 28px;
+                border-top: 1px solid var(--border);
+            }
+            .hero-quote { border-left: none; padding-left: 0; }
+            .hero-quote p { font-size: 1.1rem; }
+            .hero-quote cite { font-size: 10px; }
+        }
         
         /* ── Mobile hamburger nav ── */
         .hamburger {
@@ -538,8 +551,85 @@
         @media (max-width:640px) {
             .audience-strip { flex-direction: column; gap: 8px; }
         }
+        
+        /* ── Assessment CTA ── */
+        .assess-cta {
+            padding: 0 0 80px;
+        }
+        .assess-cta-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            padding: 36px 40px;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            background: var(--bg-2);
+        }
+        .assess-cta-left { }
+        .assess-cta-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--green);
+            margin-bottom: 10px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .assess-cta-label::before {
+            content: ''; width: 5px; height: 5px;
+            border-radius: 50%; background: var(--green);
+        }
+        .assess-cta-title {
+            font-family: var(--serif);
+            font-size: 1.45rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+        .assess-cta-desc {
+            font-size: 14px;
+            color: var(--text-3);
+            max-width: 480px;
+            line-height: 1.55;
+        }
+        .assess-cta-btn {
+            flex-shrink: 0;
+            font-family: var(--font);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--bg);
+            background: var(--text);
+            border-radius: var(--r);
+            padding: 13px 26px;
+            white-space: nowrap;
+            transition: opacity 0.15s;
+        }
+        .assess-cta-btn:hover { opacity: 0.85; }
+        @media (max-width:640px) {
+            .assess-cta-inner { flex-direction: column; align-items: flex-start; gap: 20px; padding: 24px; }
+            .assess-cta-btn { align-self: flex-start; }
+        }
         </style>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Living Framework",
+  "url": "https://livingframework.github.io",
+  "description": "Research, frameworks, and infrastructure for reliable long-horizon AI. By Rishi Sood.",
+  "author": {
+    "@type": "Person",
+    "name": "Rishi Sood",
+    "url": "https://livingframework.github.io/about/"
+  }
+}
+</script>
 </head>
 <body>
 
@@ -674,6 +764,20 @@
                 <div class="stack-layer active">Reliability</div>
                 <p class="stack-caption">Most AI discussions begin and end at prompts.<br>The leverage is in the layers above.</p>
             </div>
+        </div>
+    </div>
+</section>
+
+<!-- Assessment CTA -->
+<section class="assess-cta">
+    <div class="container">
+        <div class="assess-cta-inner">
+            <div class="assess-cta-left">
+                <div class="assess-cta-label">Diagnostic Tool</div>
+                <div class="assess-cta-title">Where is your AI deployment failing?</div>
+                <p class="assess-cta-desc">20 questions across six failure domains. Identifies exactly where your AI architecture is exposed — and which papers address each gap.</p>
+            </div>
+            <a href="assessment/" class="assess-cta-btn">Take the Assessment →</a>
         </div>
     </div>
 </section>
