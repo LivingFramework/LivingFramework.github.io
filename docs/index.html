@@ -484,6 +484,59 @@
             }
             .page-label { font-size: 11px; }
         }
+        
+        /* ── Audience strip ── */
+        .audience-intro {
+            margin-top:32px;
+        }
+        .audience-intro-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-3);
+            margin-bottom: 10px;
+        }
+        .audience-strip {
+            display: flex;
+            gap: 10px;
+        }
+        .audience-card {
+            flex: 1;
+            padding: 16px 18px;
+            border: 1px solid var(--border);
+            border-radius: var(--r);
+            background: var(--bg-2);
+            transition: border-color 0.15s, background 0.15s;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            text-decoration: none;
+        }
+        .audience-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-3);
+        }
+        .audience-card-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-3);
+        }
+        .audience-card-desc {
+            font-size: 13px;
+            color: var(--text-2);
+            line-height: 1.45;
+        }
+        .audience-card-arrow {
+            font-size: 12.5px;
+            color: var(--green);
+            margin-top: 4px;
+        }
+        @media (max-width:640px) {
+            .audience-strip { flex-direction: column; gap: 8px; }
+        }
         </style>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -517,9 +570,26 @@
                 <a href="research/" class="btn btn-primary">Read the Research</a>
                 <a href="papers/" class="btn btn-ghost">Papers</a>
             </div>
-            <p style="margin-top:24px; font-size:15px; color:var(--text-3);">
-                New here? <a href="start-here/" style="color:var(--text-2); text-decoration:underline; text-decoration-color:var(--border); text-underline-offset:3px;">Start with a guided reading path →</a>
-            </p>
+            <div class="audience-intro">
+                <div class="audience-intro-label">New here? Choose your path</div>
+                <div class="audience-strip">
+                    <a href="start-here/" class="audience-card">
+                        <div class="audience-card-label">Researchers</div>
+                        <div class="audience-card-desc">Theoretical grounding, empirical findings, and priority record.</div>
+                        <div class="audience-card-arrow">→ Reading path</div>
+                    </a>
+                    <a href="start-here/" class="audience-card">
+                        <div class="audience-card-label">Practitioners</div>
+                        <div class="audience-card-desc">Failure library, reliability assessment, and applied guides.</div>
+                        <div class="audience-card-arrow">→ Reading path</div>
+                    </a>
+                    <a href="start-here/" class="audience-card">
+                        <div class="audience-card-label">Leaders</div>
+                        <div class="audience-card-desc">Risk identification, gap assessment, and strategic direction.</div>
+                        <div class="audience-card-arrow">→ Reading path</div>
+                    </a>
+                </div>
+            </div>
         </div>
         <div class="hero-right">
             <blockquote class="hero-quote">
