@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RITAM | Living Framework — Rishi Sood</title>
-    <meta name="description" content="RITAM is an architecture research project translating the Living Framework reliability research into a practical architecture for long-horizon human-AI collaboration.">
+    <meta name="description" content="RITAM is a governed cognition substrate — nine architectural primitives, 146 tests, open source. The founding principle: governance must precede persistence. v1.1.1 published with DOI.">
     <link rel="canonical" href="https://livingframework.github.io/ritam/">
     <meta property="og:image" content="https://livingframework.github.io/og-image.png">
     <meta property="og:image:width" content="1200">
@@ -328,9 +328,9 @@
             <span>/</span>
             RITAM
         </div>
-        <div class="page-label">Architecture Research · Active · 2026</div>
+        <div class="page-label">Substrate Research · v1.1.1 Published · Open Source · 2026</div>
         <h1>RITAM</h1>
-        <p>Foundational substrate research for governed AI cognition. RITAM investigates the nine architectural primitives an executable governed cognition system requires — and holds itself to a single constraint: they must work as observable runtime behaviour, not just specification.</p>
+        <p>A governed cognition substrate for AI systems — nine primitives, 146 tests, adversarially audited. The founding principle: governance must precede persistence. v1.1.1 is published open source with a citable DOI.</p>
     </div>
 </header>
 
@@ -340,16 +340,59 @@
         <div class="main-content">
 
             <div class="callout">
-                <span>The constraint RITAM holds itself to</span>
-                <p>A specification that doesn't run doesn't count. The experimental programme has run pre-registered experiments under adversarial review — AI personas briefed to attack the core findings. No working implementation exists yet. That is not a gap to paper over; it is the standard the project holds itself to.</p>
+                <span>v1.1.1 is live</span>
+                <p>The runtime exists. 146 tests across adversarial, integration, and buildability scenarios. Five independent AI systems reproduced the substrate from the specification alone — 60/60 tests passing. The constraint RITAM held itself to: a specification that doesn't run doesn't count. It now runs.</p>
+            </div>
+
+            <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:52px;">
+                <a href="https://github.com/LivingFramework/ritam-core" target="_blank" style="display:inline-flex; align-items:center; gap:8px; background:var(--text); color:var(--bg); padding:10px 18px; border-radius:6px; font-size:12.5px; font-weight:500; font-family:var(--mono); letter-spacing:0.02em; text-decoration:none;">GitHub · ritam-core</a>
+                <a href="https://doi.org/10.5281/zenodo.20827180" target="_blank" style="display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border-hover); color:var(--text-2); padding:10px 18px; border-radius:6px; font-size:12.5px; font-family:var(--mono); letter-spacing:0.02em; text-decoration:none;">DOI 10.5281/zenodo.20827180</a>
+                <a href="https://zenodo.org/records/20827180" target="_blank" style="display:inline-flex; align-items:center; gap:8px; border:1px solid var(--border-hover); color:var(--text-2); padding:10px 18px; border-radius:6px; font-size:12.5px; font-family:var(--mono); letter-spacing:0.02em; text-decoration:none;">Zenodo Record</a>
             </div>
 
             <div class="prose-block">
                 <div class="prose-label">What RITAM Is</div>
-                <h2>Nine primitives. One constraint: they must run.</h2>
-                <p>RITAM is foundational substrate research — not a practical tool, not a product, not a translation project. It investigates the structural conditions an executable governed cognition system requires.</p>
-                <p>The research has converged on nine architectural primitives: State, Memory, Ontology, Governance, Epistemic, Coordination, Temporal, Observation, Repair. These are not design aspirations. They are the components RITAM's experiments have identified as necessary before a substrate can maintain coherence, detect degradation, and repair itself under real operating conditions.</p>
-                <p>Every primitive must be observable at runtime, testable under adversarial conditions, and provably necessary before it earns a place in the specification.</p>
+                <h2>Nine primitives. Each justified by a failure mode.</h2>
+                <p>RITAM is foundational substrate research. It investigates the structural conditions a governed cognition system requires — not as design aspirations, but as experimentally justified necessities. Remove any one primitive and a specific, observable failure appears.</p>
+                <p>The founding principle: <strong>governance must precede persistence.</strong> An AI system that admits beliefs without governance and attempts to clean them up afterward is not a governed system — it is an ungoverned system with remediation. RITAM sits beneath the model and beneath the application, governing cognitive state at the moment of admission.</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:20px;">
+                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
+                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">STATE</div>
+                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: context drifts between operations</div>
+                    </div>
+                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
+                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">MEMORY</div>
+                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: beliefs persist without governance</div>
+                    </div>
+                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
+                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">ONTOLOGY</div>
+                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: concepts mutate silently</div>
+                    </div>
+                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
+                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">GOVERNANCE</div>
+                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: no admission control at all</div>
+                    </div>
+                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
+                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">EPISTEMIC</div>
+                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: confidence is untracked</div>
+                    </div>
+                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
+                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">COORDINATION</div>
+                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: multi-agent state diverges</div>
+                    </div>
+                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
+                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">TEMPORAL</div>
+                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: time-dependent state decays undetected</div>
+                    </div>
+                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
+                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">OBSERVATION</div>
+                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: substrate state is opaque</div>
+                    </div>
+                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
+                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">REPAIR</div>
+                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: failures propagate silently</div>
+                    </div>
+                </div>
             </div>
 
             <div class="prose-block">
@@ -400,7 +443,7 @@
 
             <div class="prose-block">
                 <div class="prose-label">Current Status</div>
-                <h2>Nine chapters in late draft. No runtime implementation yet.</h2>
+                <h2>v1.1.1 runtime published. Specification in active development.</h2>
                 <p>Nine chapters of the canonical specification are in late draft. The experimental programme has run 74 pre-registered experiments with pre-specified hypotheses and an adversarial review tier. The core empirical finding — superadditivity of governance failures — has been tested, challenged by adversarial review, and subjected to a prior-art audit.</p>
                 <p>The runtime doesn’t exist yet. This is not a gap to paper over — it is the standard the project holds itself to. A polished specification that doesn’t run doesn’t count as success.</p>
                 <p>RITAM is not a product. It is foundational infrastructure research.</p>
@@ -457,8 +500,16 @@
                     <span class="s-val">2026</span>
                 </div>
                 <div class="sidebar-row">
-                    <span class="s-key">Output</span>
-                    <span class="s-val">Architecture Spec</span>
+                    <span class="s-key">Runtime</span>
+                    <span class="s-val active">v1.1.1 live</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Tests</span>
+                    <span class="s-val">146 passing</span>
+                </div>
+                <div class="sidebar-row">
+                    <span class="s-key">Licence</span>
+                    <span class="s-val">Apache 2.0</span>
                 </div>
                 <div class="sidebar-row">
                     <span class="s-key">Papers grounding it</span>
@@ -476,6 +527,13 @@
                 <a href="https://zenodo.org/records/17896542" target="_blank" class="sidebar-nav-link">Paper 03 — Failure Taxonomy</a>
                 <a href="https://zenodo.org/records/19038340" target="_blank" class="sidebar-nav-link">Paper 06 — Architecture</a>
                 <a href="https://zenodo.org/records/19983551" target="_blank" class="sidebar-nav-link">Paper 08 — Verification</a>
+            </div>
+
+            <div class="sidebar-block">
+                <div class="sidebar-label">Repository &amp; DOI</div>
+                <a href="https://github.com/LivingFramework/ritam-core" target="_blank" class="sidebar-nav-link">GitHub · ritam-core ↗</a>
+                <a href="https://doi.org/10.5281/zenodo.20827180" target="_blank" class="sidebar-nav-link">DOI · 10.5281/zenodo ↗</a>
+                <a href="https://zenodo.org/records/20827180" target="_blank" class="sidebar-nav-link">Zenodo Record ↗</a>
             </div>
 
             <div class="sidebar-block">
