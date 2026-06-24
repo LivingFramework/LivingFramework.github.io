@@ -443,8 +443,24 @@
 
             <div class="prose-block">
                 <div class="prose-label">Current Status</div>
-                <h2>v1.1.1 runtime published. Specification in active development.</h2>
-                <p>RITAM is not a product. It is foundational infrastructure research.</p>
+                <h2>v1.1.1 is live. What that means.</h2>
+                <p>The runtime substrate is published open source under Apache 2.0. 146 tests pass across adversarial, integration, and buildability scenarios on Python 3.9, 3.10, and 3.11. Five independent AI systems reproduced the runtime from the specification alone — 60/60 tests passing — confirming the specification is precise enough to build from without guidance from the original author.</p>
+                <p>Three consumer types are demonstrated: governed research assistant, governed decision log, governed agent memory. The substrate is domain-agnostic — the same nine primitives govern cognitive state regardless of what the application does with it.</p>
+                <p>The canonical specification (nine chapters) continues in active development. The runtime demonstrates that the architecture is correct and buildable. The specification provides the theoretical account of why it is the right architecture — and what it must remain to stay right.</p>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:24px;">
+                    <div style="padding:16px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2); text-align:center;">
+                        <div style="font-family:var(--mono); font-size:1.5rem; font-weight:600; color:var(--text); letter-spacing:-0.02em;">146</div>
+                        <div style="font-size:12px; color:var(--text-3); margin-top:4px;">tests passing</div>
+                    </div>
+                    <div style="padding:16px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2); text-align:center;">
+                        <div style="font-family:var(--mono); font-size:1.5rem; font-weight:600; color:var(--text); letter-spacing:-0.02em;">9</div>
+                        <div style="font-size:12px; color:var(--text-3); margin-top:4px;">substrate primitives</div>
+                    </div>
+                    <div style="padding:16px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2); text-align:center;">
+                        <div style="font-family:var(--mono); font-size:1.5rem; font-weight:600; color:var(--text); letter-spacing:-0.02em;">5/5</div>
+                        <div style="font-size:12px; color:var(--text-3); margin-top:4px;">independent reproductions</div>
+                    </div>
+                </div>
             </div>
 
             <div style="padding-top:8px;">
