@@ -70,6 +70,13 @@
         .impl-name { font-size:13.5px; color:var(--text); font-weight:500; }
         .impl-src { font-family:var(--mono); font-size:10px; color:var(--text-3); }
 
+        .progress-list { border:1px solid var(--border); border-radius:var(--r); overflow:hidden; margin-top:18px; }
+        .progress-row { display:grid; grid-template-columns:150px 1fr; gap:18px; padding:16px 20px; border-bottom:1px solid var(--border); align-items:start; }
+        .progress-row:last-child { border-bottom:none; }
+        .progress-stage { font-family:var(--mono); font-size:10px; color:var(--green); letter-spacing:0.08em; text-transform:uppercase; }
+        .progress-title { font-size:13.5px; color:var(--text); font-weight:500; margin-bottom:3px; }
+        .progress-desc { font-size:12px; color:var(--text-3); line-height:1.55; }
+
         .related-link { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border:1px solid var(--border); border-radius:var(--r); margin-bottom:8px; transition:all 0.15s; background:var(--bg-2); }
         .related-link:hover { border-color:var(--border-hover); }
         .related-link:last-child { margin-bottom:0; }
@@ -97,7 +104,7 @@
         .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
         .footer-links a:hover { color:var(--text-2); }
 
-        @media(max-width:800px) { .content-layout { grid-template-columns:1fr; gap:0; } .sidebar { position:static; margin-top:48px; } }
+        @media(max-width:800px) { .content-layout { grid-template-columns:1fr; gap:0; } .sidebar { position:static; margin-top:48px; } .progress-row { grid-template-columns:1fr; gap:6px; } }
         @media(max-width:640px) { .hamburger { display:flex; } .nav-links { display:none; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:rgba(234,231,224,0.97); backdrop-filter:blur(16px); border-bottom:1px solid rgba(26,24,20,0.10); padding:8px 28px 20px; gap:0; list-style:none; z-index:99; } .nav-links.open { display:flex; } .nav-links li { border-bottom:1px solid rgba(26,24,20,0.06); } .nav-links li:last-child { border-bottom:none; } .nav-links li a { display:block; padding:13px 0; font-size:14px; color:var(--text-2); letter-spacing:0; } .page-label { font-size:11px; } }
     </style>
     <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -157,6 +164,19 @@
                     <div class="impl-row"><div><div class="impl-name">REVIEW</div><div class="impl-src" style="margin-top:3px;">The output is usable, but caveats, assumptions, or risks require human attention.</div></div></div>
                     <div class="impl-row"><div><div class="impl-name">REDO</div><div class="impl-src" style="margin-top:3px;">The output failed verification and must be repaired before use.</div></div></div>
                     <div class="impl-row"><div><div class="impl-name">BLOCKED</div><div class="impl-src" style="margin-top:3px;">The task cannot be reliably executed as stated because the objective, inputs, constraints, or evidence are insufficient.</div></div></div>
+                </div>
+            </div>
+
+            <div class="prose-block">
+                <div class="prose-label">Development Progress</div>
+                <h2>From core loop to production reliability</h2>
+                <p>NIYOM has progressed through a sequence of certified development stages. The public page does not track a fragile live stage number; instead, it shows the architectural path from the first execution loop to the current product-hardening work.</p>
+                <div class="progress-list">
+                    <div class="progress-row"><div class="progress-stage">Foundation</div><div><div class="progress-title">Core execution loop</div><div class="progress-desc">Plan, Execute, Verify, and Repair established as the basic operating cycle.</div></div></div>
+                    <div class="progress-row"><div class="progress-stage">Validation</div><div><div class="progress-title">Verification architecture</div><div class="progress-desc">Independent checks, verdicts, and repair paths added before user acceptance.</div></div></div>
+                    <div class="progress-row"><div class="progress-stage">State</div><div><div class="progress-title">Persistent sessions and memory retrieval</div><div class="progress-desc">Prior verified work, session continuity, and relevant memory became part of the execution context.</div></div></div>
+                    <div class="progress-row"><div class="progress-stage">Routing</div><div><div class="progress-title">Clarification and ambiguity handling</div><div class="progress-desc">Ambiguous objectives are classified before execution rather than treated as repair problems afterward.</div></div></div>
+                    <div class="progress-row"><div class="progress-stage">Current focus</div><div><div class="progress-title">Product hardening and observability</div><div class="progress-desc">Current development focuses on reliability around real workflows, stronger evaluation, observability, user controls, and production readiness.</div></div></div>
                 </div>
             </div>
 
