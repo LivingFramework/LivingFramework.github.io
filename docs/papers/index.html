@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Published Research | Living Framework — Rishi Sood</title>
-    <meta name="description" content="Eight published papers on AI reliability, context engineering, memory systems, verification architecture, and long-horizon human-AI collaboration. By Rishi Sood.">
+    <meta name="description" content="Eight published papers on AI reliability, context engineering, memory integrity, verification architecture, and long-horizon human-AI collaboration. OSF DOIs are preserved for citation; Zenodo links are provided for accessible reading.">
     <link rel="canonical" href="https://livingframework.github.io/papers/">
     <meta property="og:image" content="https://livingframework.github.io/og-image.png">
     <meta property="og:image:width" content="1200">
@@ -12,244 +12,93 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=DM+Sans:ital,wght@0,300..600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg:    #eae7e0;
-            --bg-2:  #e2ddd6;
-            --bg-3:  #d8d3cb;
-            --border:       rgba(26,24,20,0.10);
-            --border-hover: rgba(26,24,20,0.20);
-            --text:  #1a1814;
-            --text-2:#4e4840;
-            --text-3:#8c8680;
-            --green: #9a5a28;
-            --green-dim:    rgba(154,90,40,0.07);
-            --green-border: rgba(154,90,40,0.22);
-            --amber: #b45309;
-            --amber-dim:    rgba(180,83,9,0.07);
-            --amber-border: rgba(180,83,9,0.20);
-            --font:  'DM Sans', -apple-system, sans-serif;
-            --serif: 'Newsreader', Georgia, serif;
-            --mono:  'IBM Plex Mono', monospace;
-            --max:   1080px;
-            --r:     6px;
+            --bg:#eae7e0; --bg-2:#e2ddd6; --bg-3:#d8d3cb;
+            --border:rgba(26,24,20,0.10); --border-hover:rgba(26,24,20,0.20);
+            --text:#1a1814; --text-2:#4e4840; --text-3:#8c8680;
+            --green:#9a5a28; --green-dim:rgba(154,90,40,0.07); --green-border:rgba(154,90,40,0.22);
+            --amber:#b45309; --amber-dim:rgba(180,83,9,0.07); --amber-border:rgba(180,83,9,0.20);
+            --font:'DM Sans', -apple-system, sans-serif; --serif:'Newsreader', Georgia, serif; --mono:'IBM Plex Mono', monospace;
+            --max:1080px; --r:6px;
         }
-
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
-        body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.6;
-        }
+        body { font-family:var(--font); background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.6; }
         a { color:inherit; text-decoration:none; }
         p { color:var(--text-2); line-height:1.75; }
-
         .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
 
-        /* ── Nav ── */
-        nav {
-            position:fixed; top:0; left:0; right:0; z-index:100;
-            background:rgba(234,231,224,0.95);
-            backdrop-filter:blur(16px);
-            border-bottom:1px solid var(--border);
-        }
-        .nav-inner {
-            max-width:var(--max); margin:0 auto; padding:0 28px;
-            height:64px; display:flex; align-items:center; justify-content:space-between;
-        }
-        .nav-logo { font-family:var(--serif); font-size:2.4rem; color:var(--text); letter-spacing:0.01em; }
+        nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(234,231,224,0.95); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+        .nav-inner { max-width:var(--max); margin:0 auto; padding:0 28px; height:64px; display:flex; align-items:center; justify-content:space-between; }
+        .nav-logo { font-family:var(--serif); font-size:2.4rem; color:var(--text); letter-spacing:0.01em; display:flex; align-items:center; gap:10px; }
         .nav-logo em { color:var(--text-3); font-style:italic; }
+        .nav-mark { flex-shrink:0; display:block; }
         .nav-links { display:flex; gap:28px; list-style:none; }
         .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
-        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+        .nav-links a:hover, .nav-links a.active { color:var(--text); font-weight:500; }
+        .hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; background:none; border:none; cursor:pointer; padding:6px 4px; }
+        .hamburger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; }
 
-        /* ── Page header ── */
-        .page-header {
-            padding:140px 0 72px;
-            border-bottom:1px solid var(--border);
-        }
-        .page-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.14em; color:var(--green); margin-bottom:22px;
-            display:flex; align-items:center; gap:8px;
-        }
-        .page-label::before {
-            content:''; width:5px; height:5px;
-            border-radius:50%; background:var(--green);
-        }
-        .page-header h1 {
-            font-size:clamp(1.9rem, 4vw, 2.8rem); font-weight:600;
-            letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px;
-        }
-        .page-header p { font-size:1rem; max-width:580px; }
+        .page-header { padding:140px 0 72px; border-bottom:1px solid var(--border); }
+        .page-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--green); margin-bottom:22px; display:flex; align-items:center; gap:8px; }
+        .page-label::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); }
+        h1, h2, h3, .paper-title { font-family:var(--serif); }
+        .page-header h1 { font-size:clamp(1.9rem,4vw,2.8rem); font-weight:600; letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px; }
+        .page-header p { font-size:1rem; max-width:650px; }
 
-        /* ── Arc ── */
-        .arc {
-            padding:52px 0;
-            border-bottom:1px solid var(--border);
-        }
-        .arc-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.14em; color:var(--text-3); margin-bottom:14px;
-        }
-        .arc-text { font-size:0.9375rem; max-width:720px; }
+        .citation-note { padding:30px 0; border-bottom:1px solid var(--border); }
+        .note-box { max-width:760px; padding:24px 28px; border:1px solid var(--green-border); border-radius:var(--r); background:var(--green-dim); }
+        .note-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--green); margin-bottom:10px; }
+        .note-box p { font-size:13.5px; color:var(--text-2); line-height:1.7; margin-bottom:8px; }
+        .note-box p:last-child { margin-bottom:0; }
 
-        /* ── Papers list ── */
+        .arc { padding:52px 0; border-bottom:1px solid var(--border); }
+        .arc-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-3); margin-bottom:14px; }
+        .arc-text { font-size:0.9375rem; max-width:760px; }
+
         .papers-section { padding:64px 0 96px; }
-
-        .paper-card {
-            padding:36px 0;
-            border-bottom:1px solid var(--border);
-        }
+        .paper-card { padding:36px 0; border-bottom:1px solid var(--border); }
         .paper-card:last-child { border-bottom:none; }
-
-        .paper-meta {
-            display:flex; align-items:center; gap:14px; margin-bottom:14px;
-        }
-        .paper-num {
-            font-family:var(--mono); font-size:11px; color:var(--text-3);
-            letter-spacing:0.06em;
-        }
-        .paper-badge {
-            font-family:var(--mono); font-size:9px; text-transform:uppercase;
-            letter-spacing:0.12em; color:var(--green); background:var(--green-dim);
-            border:1px solid var(--green-border); border-radius:4px; padding:2px 8px;
-        }
-        .paper-year {
-            font-family:var(--mono); font-size:11px; color:var(--text-3);
-        }
-
-        .paper-title {
-            font-size:1.15rem; font-weight:600; color:var(--text);
-            letter-spacing:-0.02em; line-height:1.3; margin-bottom:16px;
-            max-width:820px;
-        }
-
-        .paper-body {
-            display:grid; grid-template-columns:1fr 280px;
-            gap:48px; align-items:start;
-        }
-
+        .paper-meta { display:flex; align-items:center; gap:14px; margin-bottom:14px; flex-wrap:wrap; }
+        .paper-num, .paper-year, .doi-label { font-family:var(--mono); font-size:11px; color:var(--text-3); letter-spacing:0.06em; }
+        .paper-badge { font-family:var(--mono); font-size:9px; text-transform:uppercase; letter-spacing:0.12em; color:var(--green); background:var(--green-dim); border:1px solid var(--green-border); border-radius:4px; padding:2px 8px; }
+        .paper-title { font-size:1.15rem; font-weight:600; color:var(--text); letter-spacing:-0.02em; line-height:1.3; margin-bottom:16px; max-width:820px; }
+        .paper-body { display:grid; grid-template-columns:1fr 280px; gap:48px; align-items:start; }
         .paper-abstract { font-size:0.9375rem; margin-bottom:14px; }
-        .paper-contribution {
-            font-size:13px; color:var(--text-3); line-height:1.6;
-            padding-left:14px; border-left:2px solid var(--border);
-        }
+        .paper-contribution { font-size:13px; color:var(--text-3); line-height:1.6; padding-left:14px; border-left:2px solid var(--border); }
         .paper-contribution strong { color:var(--text-2); font-weight:500; display:block; margin-bottom:4px; }
-
-        .paper-aside {}
-        .aside-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.1em; color:var(--text-3); margin-bottom:10px;
-        }
-        .aside-items { display:flex; flex-direction:column; gap:8px; }
-        .aside-tag {
-            display:inline-flex; align-items:center; gap:6px;
-            font-size:12px; color:var(--text-3); letter-spacing:0.01em;
-        }
+        .aside-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-3); margin-bottom:10px; }
+        .aside-items { display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+        .aside-tag { display:inline-flex; align-items:center; gap:6px; font-size:12px; color:var(--text-3); letter-spacing:0.01em; }
         .aside-tag::before { content:'·'; color:var(--text-3); }
-        .paper-link {
-            display:inline-flex; align-items:center; gap:7px;
-            margin-top:20px; font-family:var(--mono); font-size:11.5px;
-            color:var(--text-2); border:1px solid var(--border);
-            border-radius:var(--r); padding:8px 14px;
-            transition:all 0.15s;
-        }
+        .paper-link { display:inline-flex; align-items:center; gap:7px; margin-top:8px; font-family:var(--mono); font-size:11.5px; color:var(--text-2); border:1px solid var(--border); border-radius:var(--r); padding:8px 14px; transition:all 0.15s; }
         .paper-link:hover { border-color:var(--green-border); color:var(--green); }
+        .doi-text { font-family:var(--mono); font-size:11px; color:var(--text-3); line-height:1.6; margin-top:12px; }
+        .mahdi-card { margin-top:20px; padding:36px; border:1px solid var(--amber-border); border-radius:var(--r); background:var(--amber-dim); }
+        .mahdi-card .paper-badge { color:var(--amber); background:rgba(180,83,9,0.10); border-color:var(--amber-border); }
 
-        /* ── Mahdi special ── */
-        .mahdi-card {
-            margin-top:20px; padding:36px;
-            border:1px solid var(--border); border-radius:var(--r);
-            background:var(--bg-2);
-        }
-
-        /* ── Footer ── */
         footer { padding:36px 0; border-top:1px solid var(--border); }
-        .footer-inner {
-            display:flex; align-items:center;
-            justify-content:space-between; flex-wrap:wrap; gap:16px;
-        }
+        .footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
         .footer-left { font-size:13px; color:var(--text-3); }
         .footer-left strong { color:var(--text-2); font-weight:500; }
         .footer-links { display:flex; gap:20px; }
         .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
         .footer-links a:hover { color:var(--text-2); }
 
-        /* ── Responsive ── */
-        @media (max-width:800px) {
-            .paper-body { grid-template-columns:1fr; gap:24px; }
-            .paper-aside { display:none; }
-        }
-        @media (max-width:600px) {
-            .nav-links { display:none; }
-        }
-    
-        /* ── Design refresh: serif headings ── */
-        h1, h2, h3,
-        .section-title, .page-title, .paper-title,
-        .hero h1, .card-title, .entry-title {
-            font-family: var(--serif);
-        }
-        .nav-links a.active {
-            color: var(--text);
-            font-weight: 500;
-        }
-        
-        .nav-logo { display:flex; align-items:center; gap:10px; }
-        .nav-mark { flex-shrink:0; display:block; }
-        
-        /* ── Mobile hamburger nav ── */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px 4px;
-        }
-        .hamburger span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--text);
-            border-radius: 2px;
-        }
+        @media (max-width:800px) { .paper-body { grid-template-columns:1fr; gap:24px; } }
         @media (max-width:640px) {
-            .hamburger { display: flex; flex-direction: column; }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 64px; left: 0; right: 0;
-                background: rgba(234,231,224,0.97);
-                backdrop-filter: blur(16px);
-                border-bottom: 1px solid rgba(26,24,20,0.10);
-                padding: 8px 28px 20px;
-                gap: 0;
-                list-style: none;
-                z-index: 99;
-            }
-            .nav-links.open { display: flex; }
-            .nav-links li { border-bottom: 1px solid rgba(26,24,20,0.06); }
-            .nav-links li:last-child { border-bottom: none; }
-            .nav-links li a {
-                display: block;
-                padding: 13px 0;
-                font-size: 14px;
-                color: var(--text-2);
-                letter-spacing: 0;
-            }
-            .page-label { font-size: 11px; }
+            .hamburger { display:flex; }
+            .nav-links { display:none; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:rgba(234,231,224,0.97); backdrop-filter:blur(16px); border-bottom:1px solid rgba(26,24,20,0.10); padding:8px 28px 20px; gap:0; list-style:none; z-index:99; }
+            .nav-links.open { display:flex; }
+            .nav-links li { border-bottom:1px solid rgba(26,24,20,0.06); }
+            .nav-links li:last-child { border-bottom:none; }
+            .nav-links li a { display:block; padding:13px 0; font-size:14px; color:var(--text-2); letter-spacing:0; }
+            .page-label { font-size:11px; }
         }
-        </style>
+    </style>
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 
@@ -258,242 +107,18 @@
   "@context": "https://schema.org",
   "@type": "ItemList",
   "name": "Living Framework — Published Papers",
-  "description": "Empirical research on reliability architecture, memory governance, and verification systems for long-horizon human–AI collaboration by Rishi Sood.",
+  "description": "Empirical research on reliability architecture, memory integrity, context engineering, and verification systems for long-horizon human–AI collaboration by Rishi Sood.",
   "url": "https://livingframework.github.io/papers/",
   "numberOfItems": 8,
   "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "item": {
-        "@type": "ScholarlyArticle",
-        "name": "Context-Engineered Human-AI Collaboration",
-        "author": {
-          "@type": "Person",
-          "name": "Rishi Sood",
-          "url": "https://livingframework.github.io"
-        },
-        "datePublished": "2024",
-        "url": "https://zenodo.org/records/17760288",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "DOI",
-          "value": "10.5281/zenodo.17760288"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Zenodo"
-        },
-        "about": [
-          "AI Reliability",
-          "Human-AI Collaboration",
-          "Context Engineering"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "item": {
-        "@type": "ScholarlyArticle",
-        "name": "The Lean Collaboration Operating System",
-        "author": {
-          "@type": "Person",
-          "name": "Rishi Sood",
-          "url": "https://livingframework.github.io"
-        },
-        "datePublished": "2024",
-        "url": "https://zenodo.org/records/17760777",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "DOI",
-          "value": "10.5281/zenodo.17760777"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Zenodo"
-        },
-        "about": [
-          "AI Reliability",
-          "Human-AI Collaboration",
-          "Context Engineering"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "item": {
-        "@type": "ScholarlyArticle",
-        "name": "Failure and Repair in Long-Horizon Human-AI Collaboration",
-        "author": {
-          "@type": "Person",
-          "name": "Rishi Sood",
-          "url": "https://livingframework.github.io"
-        },
-        "datePublished": "2024",
-        "url": "https://zenodo.org/records/17896542",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "DOI",
-          "value": "10.5281/zenodo.17896542"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Zenodo"
-        },
-        "about": [
-          "AI Reliability",
-          "Human-AI Collaboration",
-          "Context Engineering"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 4,
-      "item": {
-        "@type": "ScholarlyArticle",
-        "name": "The Living Framework",
-        "author": {
-          "@type": "Person",
-          "name": "Rishi Sood",
-          "url": "https://livingframework.github.io"
-        },
-        "datePublished": "2024",
-        "url": "https://zenodo.org/records/18015990",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "DOI",
-          "value": "10.5281/zenodo.18015990"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Zenodo"
-        },
-        "about": [
-          "AI Reliability",
-          "Human-AI Collaboration",
-          "Context Engineering"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 5,
-      "item": {
-        "@type": "ScholarlyArticle",
-        "name": "Control Without Code: Linguistic Governance in Long-Horizon Human–AI Collaboration",
-        "author": {
-          "@type": "Person",
-          "name": "Rishi Sood",
-          "url": "https://livingframework.github.io"
-        },
-        "datePublished": "2025",
-        "url": "https://zenodo.org/records/18900058",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "DOI",
-          "value": "10.5281/zenodo.18900058"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Zenodo"
-        },
-        "about": [
-          "AI Reliability",
-          "Human-AI Collaboration",
-          "Context Engineering"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 6,
-      "item": {
-        "@type": "ScholarlyArticle",
-        "name": "Governance Architecture for Reliable Long-Horizon Human-AI Collaboration",
-        "author": {
-          "@type": "Person",
-          "name": "Rishi Sood",
-          "url": "https://livingframework.github.io"
-        },
-        "datePublished": "2025",
-        "url": "https://zenodo.org/records/19038340",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "DOI",
-          "value": "10.5281/zenodo.19038340"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Zenodo"
-        },
-        "about": [
-          "AI Reliability",
-          "Human-AI Collaboration",
-          "Context Engineering"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 7,
-      "item": {
-        "@type": "ScholarlyArticle",
-        "name": "Governed Distributed Cognition: A Model of Stable Reasoning in Long-Horizon Human–AI Systems",
-        "author": {
-          "@type": "Person",
-          "name": "Rishi Sood",
-          "url": "https://livingframework.github.io"
-        },
-        "datePublished": "2025",
-        "url": "https://zenodo.org/records/19151397",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "DOI",
-          "value": "10.5281/zenodo.19151397"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Zenodo"
-        },
-        "about": [
-          "AI Reliability",
-          "Human-AI Collaboration",
-          "Context Engineering"
-        ]
-      }
-    },
-    {
-      "@type": "ListItem",
-      "position": 8,
-      "item": {
-        "@type": "ScholarlyArticle",
-        "name": "AI Validation Systems: A Missing Architectural Layer for Reliable AI",
-        "author": {
-          "@type": "Person",
-          "name": "Rishi Sood",
-          "url": "https://livingframework.github.io"
-        },
-        "datePublished": "2025",
-        "url": "https://zenodo.org/records/19983551",
-        "identifier": {
-          "@type": "PropertyValue",
-          "propertyID": "DOI",
-          "value": "10.5281/zenodo.19983551"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "Zenodo"
-        },
-        "about": [
-          "AI Reliability",
-          "Human-AI Collaboration",
-          "Context Engineering"
-        ]
-      }
-    }
+    {"@type":"ListItem","position":1,"item":{"@type":"ScholarlyArticle","name":"Context-Engineered Human-AI Collaboration","author":{"@type":"Person","name":"Rishi Sood","url":"https://livingframework.github.io"},"datePublished":"2024","url":"https://zenodo.org/records/17760288","sameAs":["https://zenodo.org/records/17760288","https://doi.org/10.17605/OSF.IO/VMK7Y"],"identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.17605/OSF.IO/VMK7Y"},"publisher":{"@type":"Organization","name":"OSF"},"about":["AI Reliability","Human-AI Collaboration","Context Engineering"]}},
+    {"@type":"ListItem","position":2,"item":{"@type":"ScholarlyArticle","name":"The Lean Collaboration Operating System","author":{"@type":"Person","name":"Rishi Sood","url":"https://livingframework.github.io"},"datePublished":"2024","url":"https://zenodo.org/records/17760777","sameAs":["https://zenodo.org/records/17760777","https://doi.org/10.17605/OSF.IO/695AF"],"identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.17605/OSF.IO/695AF"},"publisher":{"@type":"Organization","name":"OSF"},"about":["AI Reliability","Human-AI Collaboration","Context Engineering"]}},
+    {"@type":"ListItem","position":3,"item":{"@type":"ScholarlyArticle","name":"Failure and Repair in Long-Horizon Human-AI Collaboration","author":{"@type":"Person","name":"Rishi Sood","url":"https://livingframework.github.io"},"datePublished":"2024","url":"https://zenodo.org/records/17896542","sameAs":["https://zenodo.org/records/17896542","https://doi.org/10.17605/OSF.IO/Z7AQ8"],"identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.17605/OSF.IO/Z7AQ8"},"publisher":{"@type":"Organization","name":"OSF"},"about":["AI Reliability","Human-AI Collaboration","Context Engineering"]}},
+    {"@type":"ListItem","position":4,"item":{"@type":"ScholarlyArticle","name":"The Living Framework","author":{"@type":"Person","name":"Rishi Sood","url":"https://livingframework.github.io"},"datePublished":"2024","url":"https://zenodo.org/records/18015990","sameAs":["https://zenodo.org/records/18015990","https://doi.org/10.17605/OSF.IO/ER4YT"],"identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.17605/OSF.IO/ER4YT"},"publisher":{"@type":"Organization","name":"OSF"},"about":["AI Reliability","Human-AI Collaboration","Epistemic Trust"]}},
+    {"@type":"ListItem","position":5,"item":{"@type":"ScholarlyArticle","name":"Control Without Code: Linguistic Governance in Long-Horizon Human–AI Collaboration","author":{"@type":"Person","name":"Rishi Sood","url":"https://livingframework.github.io"},"datePublished":"2025","url":"https://zenodo.org/records/18900058","sameAs":["https://zenodo.org/records/18900058","https://doi.org/10.5281/zenodo.18900058"],"identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.5281/zenodo.18900058"},"publisher":{"@type":"Organization","name":"Zenodo"},"about":["Language Reliability","Human-AI Collaboration","Instruction Architecture"]}},
+    {"@type":"ListItem","position":6,"item":{"@type":"ScholarlyArticle","name":"Governance Architecture for Reliable Long-Horizon Human-AI Collaboration","author":{"@type":"Person","name":"Rishi Sood","url":"https://livingframework.github.io"},"datePublished":"2025","url":"https://zenodo.org/records/19038340","sameAs":["https://zenodo.org/records/19038340","https://doi.org/10.5281/zenodo.19038340"],"identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.5281/zenodo.19038340"},"publisher":{"@type":"Organization","name":"Zenodo"},"about":["Reliability Architecture","Human-AI Collaboration","Verification Systems"]}},
+    {"@type":"ListItem","position":7,"item":{"@type":"ScholarlyArticle","name":"Governed Distributed Cognition: A Model of Stable Reasoning in Long-Horizon Human–AI Systems","author":{"@type":"Person","name":"Rishi Sood","url":"https://livingframework.github.io"},"datePublished":"2025","url":"https://zenodo.org/records/19151397","sameAs":["https://zenodo.org/records/19151397","https://doi.org/10.17605/OSF.IO/NCRP2"],"identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.17605/OSF.IO/NCRP2"},"publisher":{"@type":"Organization","name":"OSF"},"about":["Distributed Cognition","Human-AI Collaboration","Memory Integrity"]}},
+    {"@type":"ListItem","position":8,"item":{"@type":"ScholarlyArticle","name":"AI Validation Systems: A Missing Architectural Layer for Reliable AI","author":{"@type":"Person","name":"Rishi Sood","url":"https://livingframework.github.io"},"datePublished":"2025","url":"https://zenodo.org/records/19983551","sameAs":["https://zenodo.org/records/19983551","https://doi.org/10.5281/zenodo.19983551"],"identifier":{"@type":"PropertyValue","propertyID":"DOI","value":"10.5281/zenodo.19983551"},"publisher":{"@type":"Organization","name":"Zenodo"},"about":["Verification Systems","AI Reliability","Reliability Architecture"]}}
   ]
 }
 </script>
@@ -520,236 +145,82 @@
     <div class="container">
         <div class="page-label">Published Research</div>
         <h1>Eight papers. One coherent arc.</h1>
-        <p>From reliability controls and failure taxonomy through linguistic governance, distributed cognition, and verification architecture. All papers are published open access on Zenodo under CC BY 4.0.</p>
+        <p>From reliability controls and failure taxonomy through language reliability, distributed cognition, and verification architecture. Papers are made easy to read on Zenodo; canonical citation metadata preserves the OSF DOI where the paper was first registered there.</p>
     </div>
 </header>
+
+<section class="citation-note">
+    <div class="container">
+        <div class="note-box">
+            <div class="note-label">Citation and access note</div>
+            <p>For reading, use the Zenodo links below. They are the most accessible public reading surface.</p>
+            <p>For citation, use the DOI shown in each paper's metadata. Some papers were first registered on OSF and are also mirrored on Zenodo; in those cases, the OSF DOI remains the canonical citation DOI while Zenodo is provided for discovery and access.</p>
+        </div>
+    </div>
+</section>
 
 <div class="arc">
     <div class="container">
         <div class="arc-label">Research Arc</div>
-        <p class="arc-text">The papers do not stand alone — each one builds on the last. Papers 01 and 02 establish the reliability architecture and its operational protocols. Paper 03 maps the failure modes that motivated the research. Paper 04 addresses the philosophical question of what sustained partnership actually means. Papers 05, 06, and 07 go deeper into specific mechanisms: language as governance, layered architecture, and distributed cognition. Paper 08 closes the arc with the argument that AI systems need a dedicated verification layer — and identifies its absence as the central outstanding problem.</p>
+        <p class="arc-text">The papers do not stand alone — each one builds on the last. Papers 01 and 02 establish the reliability architecture and its operational protocols. Paper 03 maps the failure modes that motivated the research. Paper 04 addresses the philosophical question of what sustained partnership actually means. Papers 05, 06, and 07 go deeper into language reliability, layered architecture, and distributed cognition. Paper 08 closes the arc with the argument that AI systems need a dedicated verification layer — and identifies its absence as the central outstanding problem.</p>
     </div>
 </div>
 
 <section class="papers-section">
     <div class="container">
 
-        <!-- Paper 01 -->
         <div class="paper-card">
-            <div class="paper-meta">
-                <span class="paper-num">PAPER 01</span>
-                <span class="paper-badge">Open Access</span>
-                <span class="paper-year">2024</span>
-            </div>
+            <div class="paper-meta"><span class="paper-num">PAPER 01</span><span class="paper-badge">Open Access</span><span class="paper-year">2024</span><span class="doi-label">DOI 10.17605/OSF.IO/VMK7Y</span></div>
             <h2 class="paper-title">Context-Engineered Human-AI Collaboration</h2>
-            <div class="paper-body">
-                <div>
-                    <p class="paper-abstract">Introduces the foundational reliability framework: a 10-control reliability stack (A1–A10) and the canonical information pipeline that governs how inputs move through a governed AI collaboration system. The central argument is that reliability in AI collaboration is architectural in nature — it emerges from the structural conditions surrounding the model, not from the model's intrinsic capabilities alone.</p>
-                    <p class="paper-contribution"><strong>Core contribution</strong>The 10-control stack provides the first explicit structural account of what makes AI collaboration reliable over time. Each control addresses a specific failure vector: context loss, instruction drift, verification gaps, file divergence, and others. This paper is the foundation everything else builds on.</p>
-                </div>
-                <div class="paper-aside">
-                    <div class="aside-label">Themes</div>
-                    <div class="aside-items">
-                        <span class="aside-tag">AI Reliability</span>
-                        <span class="aside-tag">Context Engineering</span>
-                        <span class="aside-tag">Governance Architecture</span>
-                    </div>
-                    <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-link">Read on Zenodo →</a>
-                </div>
-            </div>
+            <div class="paper-body"><div><p class="paper-abstract">Introduces the foundational reliability framework: a 10-control reliability stack (A1–A10) and the canonical information pipeline that governs how inputs move through a reliable AI collaboration system.</p><p class="paper-contribution"><strong>Core contribution</strong>The 10-control stack provides an explicit structural account of what makes AI collaboration reliable over time: context integrity, instruction stability, verification, artifact consistency, and recovery.</p></div><div class="paper-aside"><div class="aside-label">Themes</div><div class="aside-items"><span class="aside-tag">AI Reliability</span><span class="aside-tag">Context Engineering</span><span class="aside-tag">Reliability Architecture</span></div><a href="https://zenodo.org/records/17760288" target="_blank" class="paper-link">Read on Zenodo →</a><div class="doi-text">Canonical DOI: 10.17605/OSF.IO/VMK7Y</div></div></div>
         </div>
 
-        <!-- Paper 02 -->
         <div class="paper-card">
-            <div class="paper-meta">
-                <span class="paper-num">PAPER 02</span>
-                <span class="paper-badge">Open Access</span>
-                <span class="paper-year">2024</span>
-            </div>
+            <div class="paper-meta"><span class="paper-num">PAPER 02</span><span class="paper-badge">Open Access</span><span class="paper-year">2024</span><span class="doi-label">DOI 10.17605/OSF.IO/695AF</span></div>
             <h2 class="paper-title">The Lean Collaboration Operating System</h2>
-            <div class="paper-body">
-                <div>
-                    <p class="paper-abstract">Translates the reliability controls from Paper 01 into six operational protocols that govern daily AI collaboration practice: Running Documents (persistent shared state), Step Mode (constrained execution), the Challenge Protocol (structured disagreement), Error Recovery (documented repair), Stability Pings (active context health monitoring), and File Governance (artifact integrity). Each protocol addresses a specific operational failure mode.</p>
-                    <p class="paper-contribution"><strong>Core contribution</strong>A practical operating system for governed collaboration that does not require custom tooling or engineering infrastructure. The protocols work within existing AI interfaces. This paper demonstrates that governance can be implemented through language and structure rather than code.</p>
-                </div>
-                <div class="paper-aside">
-                    <div class="aside-label">Themes</div>
-                    <div class="aside-items">
-                        <span class="aside-tag">AI Reliability</span>
-                        <span class="aside-tag">Memory Systems</span>
-                        <span class="aside-tag">Human-AI Collaboration</span>
-                    </div>
-                    <a href="https://zenodo.org/records/17760777" target="_blank" class="paper-link">Read on Zenodo →</a>
-                </div>
-            </div>
+            <div class="paper-body"><div><p class="paper-abstract">Translates the reliability controls from Paper 01 into operational protocols for daily AI collaboration practice: Running Documents, Step Mode, Challenge Protocol, Error Recovery, Stability Pings, and File Governance.</p><p class="paper-contribution"><strong>Core contribution</strong>A practical operating system for reliable collaboration that works inside existing AI interfaces through structure, shared state, and repair routines rather than custom infrastructure.</p></div><div class="paper-aside"><div class="aside-label">Themes</div><div class="aside-items"><span class="aside-tag">AI Reliability</span><span class="aside-tag">Memory Integrity</span><span class="aside-tag">Human-AI Collaboration</span></div><a href="https://zenodo.org/records/17760777" target="_blank" class="paper-link">Read on Zenodo →</a><div class="doi-text">Canonical DOI: 10.17605/OSF.IO/695AF</div></div></div>
         </div>
 
-        <!-- Paper 03 -->
         <div class="paper-card">
-            <div class="paper-meta">
-                <span class="paper-num">PAPER 03</span>
-                <span class="paper-badge">Open Access</span>
-                <span class="paper-year">2024</span>
-            </div>
+            <div class="paper-meta"><span class="paper-num">PAPER 03</span><span class="paper-badge">Open Access</span><span class="paper-year">2024</span><span class="doi-label">DOI 10.17605/OSF.IO/Z7AQ8</span></div>
             <h2 class="paper-title">Failure and Repair in Long-Horizon Human-AI Collaboration</h2>
-            <div class="paper-body">
-                <div>
-                    <p class="paper-abstract">Develops a systematic taxonomy of six failure modes observed in extended AI collaboration: context drift (progressive loss of shared understanding), file divergence (document state becoming inconsistent with working state), numerical error propagation (unverified quantitative outputs compounding across a session), domain erosion (AI reasoning gradually detaching from the user's actual domain), trust deficit (accumulated micro-failures undermining the collaboration relationship), and reconstruction failure (inability to recover a coherent shared state after disruption). For each mode, the paper documents precursor signals and repair protocols.</p>
-                    <p class="paper-contribution"><strong>Core contribution</strong>The first structured taxonomy of failure types in long-horizon AI collaboration, grounded in documented episodes. The repair protocols transform failure from a terminal event into a recoverable one — a critical property for sustained collaboration.</p>
-                </div>
-                <div class="paper-aside">
-                    <div class="aside-label">Themes</div>
-                    <div class="aside-items">
-                        <span class="aside-tag">AI Reliability</span>
-                        <span class="aside-tag">Context Engineering</span>
-                        <span class="aside-tag">Human-AI Collaboration</span>
-                    </div>
-                    <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-link">Read on Zenodo →</a>
-                </div>
-            </div>
+            <div class="paper-body"><div><p class="paper-abstract">Develops a taxonomy of six observed failure modes: context drift, file divergence, numerical error propagation, domain erosion, trust deficit, and reconstruction failure.</p><p class="paper-contribution"><strong>Core contribution</strong>Transforms AI collaboration failure from a vague category into diagnosable failure modes with precursor signals and repair protocols.</p></div><div class="paper-aside"><div class="aside-label">Themes</div><div class="aside-items"><span class="aside-tag">Failure Modes</span><span class="aside-tag">Repair</span><span class="aside-tag">Workflow Reliability</span></div><a href="https://zenodo.org/records/17896542" target="_blank" class="paper-link">Read on Zenodo →</a><div class="doi-text">Canonical DOI: 10.17605/OSF.IO/Z7AQ8</div></div></div>
         </div>
 
-        <!-- Paper 04 -->
         <div class="paper-card">
-            <div class="paper-meta">
-                <span class="paper-num">PAPER 04</span>
-                <span class="paper-badge">Open Access</span>
-                <span class="paper-year">2024</span>
-            </div>
+            <div class="paper-meta"><span class="paper-num">PAPER 04</span><span class="paper-badge">Open Access</span><span class="paper-year">2024</span><span class="doi-label">DOI 10.17605/OSF.IO/ER4YT</span></div>
             <h2 class="paper-title">The Living Framework</h2>
-            <div class="paper-body">
-                <div>
-                    <p class="paper-abstract">Addresses the philosophical question underlying the research program: what does sustained human-AI partnership actually mean, and what does it require? The paper develops the concept of epistemic trust in AI collaboration — how it builds, how it fractures, and what structural conditions support its repair. Argues that reliability must be understood as a relational property of the human-AI system, not merely a technical property of the model or the infrastructure surrounding it.</p>
-                    <p class="paper-contribution"><strong>Core contribution</strong>Provides the conceptual foundation for understanding AI reliability as something that exists between human and AI, not inside either one alone. The "living" framework is one that evolves with the system it describes — a deliberate departure from static, compliance-oriented governance models.</p>
-                </div>
-                <div class="paper-aside">
-                    <div class="aside-label">Themes</div>
-                    <div class="aside-items">
-                        <span class="aside-tag">Human-AI Collaboration</span>
-                        <span class="aside-tag">Governance Architecture</span>
-                        <span class="aside-tag">AI Reliability</span>
-                    </div>
-                    <a href="https://zenodo.org/records/18015990" target="_blank" class="paper-link">Read on Zenodo →</a>
-                </div>
-            </div>
+            <div class="paper-body"><div><p class="paper-abstract">Addresses the philosophical question underlying the research programme: what sustained human-AI partnership means, how trust builds and fractures, and what structural conditions support repair.</p><p class="paper-contribution"><strong>Core contribution</strong>Frames reliability as a relational and architectural property of the human-AI system, not merely a feature of model capability.</p></div><div class="paper-aside"><div class="aside-label">Themes</div><div class="aside-items"><span class="aside-tag">Epistemic Trust</span><span class="aside-tag">Partnership</span><span class="aside-tag">Reliability Architecture</span></div><a href="https://zenodo.org/records/18015990" target="_blank" class="paper-link">Read on Zenodo →</a><div class="doi-text">Canonical DOI: 10.17605/OSF.IO/ER4YT</div></div></div>
         </div>
 
-        <!-- Paper 05 -->
         <div class="paper-card">
-            <div class="paper-meta">
-                <span class="paper-num">PAPER 05</span>
-                <span class="paper-badge">Open Access</span>
-                <span class="paper-year">2025</span>
-            </div>
+            <div class="paper-meta"><span class="paper-num">PAPER 05</span><span class="paper-badge">Open Access</span><span class="paper-year">2025</span><span class="doi-label">DOI 10.5281/zenodo.18900058</span></div>
             <h2 class="paper-title">Control Without Code: Linguistic Governance in Long-Horizon Human–AI Collaboration</h2>
-            <div class="paper-body">
-                <div>
-                    <p class="paper-abstract">Investigates how conversational structure functions as a reliability mechanism in AI collaboration. Specific language patterns — the way instructions are framed, the way errors are named, the way transitions are marked — predict collaboration stability. Crucially, the paper finds that linguistic drift precedes and signals collaboration failure: changes in how human and AI communicate are early indicators of deeper structural problems in the collaboration.</p>
-                    <p class="paper-contribution"><strong>Core contribution</strong>Establishes language as a governance layer, not just a communication medium. This reframes how collaboration degradation should be monitored — the signal is in the language before it appears in the outputs. Control is achievable through structure, not code.</p>
-                </div>
-                <div class="paper-aside">
-                    <div class="aside-label">Themes</div>
-                    <div class="aside-items">
-                        <span class="aside-tag">Context Engineering</span>
-                        <span class="aside-tag">Governance Architecture</span>
-                        <span class="aside-tag">Human-AI Collaboration</span>
-                    </div>
-                    <a href="https://zenodo.org/records/18900058" target="_blank" class="paper-link">Read on Zenodo →</a>
-                </div>
-            </div>
+            <div class="paper-body"><div><p class="paper-abstract">Investigates how conversational structure functions as a reliability mechanism in AI collaboration. Specific language patterns predict collaboration stability, and linguistic drift can signal deeper failure before outputs visibly degrade.</p><p class="paper-contribution"><strong>Core contribution</strong>Establishes language reliability as an operational signal and control surface for long-horizon collaboration.</p></div><div class="paper-aside"><div class="aside-label">Themes</div><div class="aside-items"><span class="aside-tag">Language Reliability</span><span class="aside-tag">Instruction Architecture</span><span class="aside-tag">Context Engineering</span></div><a href="https://zenodo.org/records/18900058" target="_blank" class="paper-link">Read on Zenodo →</a><div class="doi-text">Canonical DOI: 10.5281/zenodo.18900058</div></div></div>
         </div>
 
-        <!-- Paper 06 -->
         <div class="paper-card">
-            <div class="paper-meta">
-                <span class="paper-num">PAPER 06</span>
-                <span class="paper-badge">Open Access</span>
-                <span class="paper-year">2025</span>
-            </div>
+            <div class="paper-meta"><span class="paper-num">PAPER 06</span><span class="paper-badge">Open Access</span><span class="paper-year">2025</span><span class="doi-label">DOI 10.5281/zenodo.19038340</span></div>
             <h2 class="paper-title">Governance Architecture for Reliable Long-Horizon Human-AI Collaboration</h2>
-            <div class="paper-body">
-                <div>
-                    <p class="paper-abstract">Proposes a six-layer architecture model for reliable AI collaboration, showing how governance mechanisms at different levels of the system interact to produce reliability as an emergent property. The layers address: context management, memory persistence, verification, instruction integrity, relational trust, and system recovery. The paper argues that no single layer is sufficient — reliability emerges from the interaction of all six, which is why it cannot be achieved by optimizing any one component in isolation.</p>
-                    <p class="paper-contribution"><strong>Core contribution</strong>The most complete structural model in the research program. Provides a diagnostic frame: when a collaboration fails, the six-layer model identifies which layer has degraded and what repair looks like at that level.</p>
-                </div>
-                <div class="paper-aside">
-                    <div class="aside-label">Themes</div>
-                    <div class="aside-items">
-                        <span class="aside-tag">Governance Architecture</span>
-                        <span class="aside-tag">AI Reliability</span>
-                        <span class="aside-tag">Context Engineering</span>
-                    </div>
-                    <a href="https://zenodo.org/records/19038340" target="_blank" class="paper-link">Read on Zenodo →</a>
-                </div>
-            </div>
+            <div class="paper-body"><div><p class="paper-abstract">Proposes a six-layer architecture model for reliable AI collaboration, covering context management, memory persistence, verification, instruction integrity, relational trust, and system recovery.</p><p class="paper-contribution"><strong>Core contribution</strong>Provides a diagnostic architecture for locating which reliability layer has degraded and what repair looks like at that layer.</p></div><div class="paper-aside"><div class="aside-label">Themes</div><div class="aside-items"><span class="aside-tag">Reliability Architecture</span><span class="aside-tag">Verification Systems</span><span class="aside-tag">Workflow Design</span></div><a href="https://zenodo.org/records/19038340" target="_blank" class="paper-link">Read on Zenodo →</a><div class="doi-text">Canonical DOI: 10.5281/zenodo.19038340</div></div></div>
         </div>
 
-        <!-- Paper 07 -->
         <div class="paper-card">
-            <div class="paper-meta">
-                <span class="paper-num">PAPER 07</span>
-                <span class="paper-badge">Open Access</span>
-                <span class="paper-year">2025</span>
-            </div>
+            <div class="paper-meta"><span class="paper-num">PAPER 07</span><span class="paper-badge">Open Access</span><span class="paper-year">2025</span><span class="doi-label">DOI 10.17605/OSF.IO/NCRP2</span></div>
             <h2 class="paper-title">Governed Distributed Cognition: A Model of Stable Reasoning in Long-Horizon Human–AI Systems</h2>
-            <div class="paper-body">
-                <div>
-                    <p class="paper-abstract">Applies distributed cognition theory to long-horizon AI collaboration, arguing that the relevant unit of analysis is not the human or the AI individually, but the governed system they form together — comprising human judgment, AI reasoning capacity, and shared external memory operating under explicit governance controls. Stable reasoning, on this account, is a property of the system, not of any participant. The paper develops implications for how AI collaboration should be structured, monitored, and recovered when disrupted.</p>
-                    <p class="paper-contribution"><strong>Core contribution</strong>Provides the theoretical grounding for why architectural interventions work. If cognition is distributed and governed, then reliability is a systems engineering problem — not a model capability problem. This reframing has significant practical implications for how AI collaboration is designed.</p>
-                </div>
-                <div class="paper-aside">
-                    <div class="aside-label">Themes</div>
-                    <div class="aside-items">
-                        <span class="aside-tag">Human-AI Collaboration</span>
-                        <span class="aside-tag">Memory Systems</span>
-                        <span class="aside-tag">Governance Architecture</span>
-                    </div>
-                    <a href="https://zenodo.org/records/19151397" target="_blank" class="paper-link">Read on Zenodo →</a>
-                </div>
-            </div>
+            <div class="paper-body"><div><p class="paper-abstract">Applies distributed cognition theory to long-horizon AI collaboration, arguing that the relevant unit of analysis is the system formed by human judgment, AI reasoning, and shared external memory.</p><p class="paper-contribution"><strong>Core contribution</strong>Explains why reliability is a systems engineering problem rather than a model-capability problem alone.</p></div><div class="paper-aside"><div class="aside-label">Themes</div><div class="aside-items"><span class="aside-tag">Distributed Cognition</span><span class="aside-tag">Memory Integrity</span><span class="aside-tag">Human-AI Systems</span></div><a href="https://zenodo.org/records/19151397" target="_blank" class="paper-link">Read on Zenodo →</a><div class="doi-text">Canonical DOI: 10.17605/OSF.IO/NCRP2</div></div></div>
         </div>
 
-        <!-- Paper 08 -->
         <div class="paper-card">
-            <div class="paper-meta">
-                <span class="paper-num">PAPER 08</span>
-                <span class="paper-badge">Open Access</span>
-                <span class="paper-year">2025</span>
-            </div>
+            <div class="paper-meta"><span class="paper-num">PAPER 08</span><span class="paper-badge">Open Access</span><span class="paper-year">2025</span><span class="doi-label">DOI 10.5281/zenodo.19983551</span></div>
             <h2 class="paper-title">AI Validation Systems: A Missing Architectural Layer for Reliable AI</h2>
-            <div class="paper-body">
-                <div>
-                    <p class="paper-abstract">The culminating paper in the research arc. Argues that current AI system architectures lack a dedicated verification layer — a structural component whose sole function is to validate outputs before they propagate. Generation and validation are treated as a single operation when they are two distinct ones with different requirements, failure modes, and design constraints. The absence of this layer is identified as the central unresolved reliability problem in contemporary AI systems, and one that cannot be solved by improving models alone.</p>
-                    <p class="paper-contribution"><strong>Core contribution</strong>Introduces AI validation as a first-class architectural component — not a post-hoc check or a human fallback, but a designed layer with its own structure, triggers, and failure modes. This is where the research program points: the verification layer is what the governance architecture has been building toward.</p>
-                </div>
-                <div class="paper-aside">
-                    <div class="aside-label">Themes</div>
-                    <div class="aside-items">
-                        <span class="aside-tag">Verification Systems</span>
-                        <span class="aside-tag">AI Reliability</span>
-                        <span class="aside-tag">Governance Architecture</span>
-                    </div>
-                    <a href="https://zenodo.org/records/19983551" target="_blank" class="paper-link">Read on Zenodo →</a>
-                </div>
-            </div>
+            <div class="paper-body"><div><p class="paper-abstract">Argues that AI system architectures need a dedicated verification layer whose function is to validate outputs before they propagate into decisions, memory, documents, or action.</p><p class="paper-contribution"><strong>Core contribution</strong>Introduces AI validation as a first-class architectural component: not a post-hoc check, but a designed layer with its own structure, triggers, and failure modes.</p></div><div class="paper-aside"><div class="aside-label">Themes</div><div class="aside-items"><span class="aside-tag">Verification Systems</span><span class="aside-tag">AI Reliability</span><span class="aside-tag">Reliability Architecture</span></div><a href="https://zenodo.org/records/19983551" target="_blank" class="paper-link">Read on Zenodo →</a><div class="doi-text">Canonical DOI: 10.5281/zenodo.19983551</div></div></div>
         </div>
 
-        <!-- Mahdi Ledger -->
         <div class="mahdi-card">
-            <div class="paper-meta">
-                <span class="paper-num">SPECIAL PUBLICATION</span>
-                <span class="paper-badge">Open Access</span>
-            </div>
+            <div class="paper-meta"><span class="paper-num">SPECIAL PUBLICATION</span><span class="paper-badge">Open Access</span><span class="doi-label">DOI 10.17605/OSF.IO/RVPNU</span></div>
             <h2 class="paper-title" style="font-size:1.1rem;">The Mahdi Ledger</h2>
-            <div class="paper-body">
-                <div>
-                    <p class="paper-abstract">A first-person account written by the AI system itself — operating under the Living Framework governance structure — documenting its experience of sustained, governed collaboration. One of the only papers in AI research produced from the AI participant's perspective. The Mahdi Ledger offers evidence that governed collaboration produces something qualitatively different from ungoverned capability: a richer shared record, a more recoverable relationship, and an AI account of what reliable partnership actually feels like from the inside.</p>
-                    <p class="paper-contribution"><strong>What makes this unusual</strong>Written entirely by the AI system itself. Rishi’s role was publisher and governing researcher — not author. The text is the AI participant’s own account, produced without human authorship.</p>
-                </div>
-                <div class="paper-aside">
-                    <a href="https://zenodo.org/records/18054346" target="_blank" class="paper-link">Read on Zenodo →</a>
-                </div>
-            </div>
+            <div class="paper-body"><div><p class="paper-abstract">A first-person account written by the AI system itself while operating under the Living Framework reliability structure. It documents the AI participant's perspective on sustained, structured collaboration.</p><p class="paper-contribution"><strong>What makes this unusual</strong>Written entirely by the AI system itself. Rishi's role was publisher and governing researcher — not author.</p></div><div class="paper-aside"><a href="https://zenodo.org/records/18054346" target="_blank" class="paper-link">Read on Zenodo →</a><div class="doi-text">Canonical DOI: 10.17605/OSF.IO/RVPNU</div></div></div>
         </div>
 
     </div>
@@ -758,9 +229,7 @@
 <footer>
     <div class="container">
         <div class="footer-inner">
-            <div class="footer-left">
-                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
-            </div>
+            <div class="footer-left"><strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research</div>
             <div class="footer-links">
                 <a href="https://twitter.com/satoshisats" target="_blank">X</a>
                 <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
@@ -777,14 +246,8 @@
     var btn = document.getElementById('nav-hamburger');
     var links = document.querySelector('.nav-links');
     if (!btn || !links) return;
-    btn.addEventListener('click', function() {
-        links.classList.toggle('open');
-    });
-    links.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() {
-            links.classList.remove('open');
-        });
-    });
+    btn.addEventListener('click', function() { links.classList.toggle('open'); });
+    links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { links.classList.remove('open'); }); });
 })();
 </script>
 </body>
