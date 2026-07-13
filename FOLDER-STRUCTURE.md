@@ -1,197 +1,227 @@
 # Folder Structure Guide
 
-> How to organise your Cowork folder for governance that actually holds.
+> How to organise Claude/Cowork project files so an AI agent can navigate without guessing.
 
-Structure is not overhead. It is the difference between a Claude that knows which file is authoritative and one that is silently working from the wrong version.
+Use this guide for Level 4 workflows: Cowork, desktop file editing, scheduled tasks, autonomous work, or any setup where Claude can read, write, move, or create files.
 
-The single most common recoverable failure in long-horizon collaboration is file divergence: two versions of the same document exist, Claude references the wrong one, and work compounds on a broken foundation. This folder structure prevents it.
+For simple chat or project-file workflows, you may not need this full structure. Use the lightest structure that protects the work.
 
 ---
 
-## The Recommended Structure
+## Why Folder Structure Still Matters
 
-```
-📁 Claude/                          ← Your main Cowork folder
+Modern Claude workflows may involve project files, local folders, connectors, uploads, memory, and background actions.
+
+That creates power and risk.
+
+A capable AI working from the wrong file can create more damage than a weaker assistant asking for help. Folder structure makes authority visible.
+
+The key failure to prevent is file divergence: two versions exist, Claude edits the wrong one, and work compounds on a broken foundation.
+
+---
+
+## Recommended Structure for Cowork / Agentic Work
+
+```text
+📁 Claude-Project/
 │
-├── 📁 00-governance/               ← Control layer. Read-first every session.
-│   ├── RUNNING-DOCUMENT.md         ← Claude's memory (read at session start)
-│   ├── PARTNERSHIP-AGREEMENT.md    ← Operating agreement
-│   ├── TRUTH-PROTOCOL.md          ← Anti-sycophancy rules
-│   ├── SESSION-START-PROTOCOL.md  ← How to begin every session
-│   ├── FAILURE-RECOVERY.md        ← What to do when things break
-│   └── CANONICAL-NUMBERS.md       ← Single source of numeric truth
+├── 📁 00-governance/               ← Control layer. Read/check first.
+│   ├── RUNNING-DOCUMENT.md         ← Authoritative project state
+│   ├── CANONICAL-NUMBERS.md        ← Numeric/date/metric truth
+│   ├── PARTNERSHIP-AGREEMENT.md    ← Optional collaboration rules
+│   ├── TRUTH-PROTOCOL.md           ← Optional anti-sycophancy rules
+│   ├── SESSION-START-PROTOCOL.md   ← Context check prompts
+│   └── FAILURE-RECOVERY.md         ← Repair protocol
 │
-├── 📁 01-inputs/                   ← Raw materials. Claude reads, never writes here.
-│   ├── papers/                     ← Research, reference documents
-│   ├── data/                       ← Source data, raw files
-│   └── uploads/                    ← Files you've provided
+├── 📁 01-inputs/                   ← Raw materials. Claude reads, does not overwrite.
+│   ├── papers/
+│   ├── data/
+│   └── uploads/
 │
-├── 📁 02-working/                  ← Active work in progress
-│   ├── [Project Name]/             ← One folder per project
-│   │   ├── RUNNING-DOCUMENT.md     ← Project-specific running doc (if needed)
+├── 📁 02-working/                  ← Active work in progress.
+│   ├── [Project Name]/
+│   │   ├── RUNNING-DOCUMENT.md     ← Optional project-specific state
 │   │   └── [working files]
-│   └── scratch/                    ← Temporary working files (safe to delete)
+│   └── scratch/                    ← Temporary files
 │
-├── 📁 03-outputs/                  ← Finished work
-│   ├── drafts/                     ← In review
-│   └── final/                      ← Approved and complete
+├── 📁 03-outputs/                  ← Deliverables.
+│   ├── drafts/
+│   └── final/
 │
-├── 📁 04-archive/                  ← Deprecated files. Never delete — rollback needs history.
-│   ├── [DEPRECATED-filename]
-│   └── [OLD-VERSION-filename]
+├── 📁 04-archive/                  ← Deprecated/superseded files for rollback.
+│   ├── DEPRECATED-[filename]
+│   └── SUPERSEDED-[YYYY-MM-DD]-[filename]
 │
-└── Claude_Session_Updates.md       ← Companion file for scheduled tasks (Cowork-specific)
+└── Claude_Session_Updates.md       ← Optional Cowork/background task log
 ```
 
 ---
 
-## The Governance Folder (00-governance)
+## The Governance Folder
 
-This folder is the control layer. Everything Claude needs to operate properly lives here.
+`00-governance/` is the control layer.
 
-**Rule:** Claude reads this folder at the start of every session before doing anything else.
+It contains files that define how Claude should work, what is authoritative, and how to repair failure.
 
-**Never put working files here.** Governance documents are stable. Working files change constantly. Mixing them creates confusion about what is authoritative.
+**Rule:** Before important work, Claude should confirm it is using the current governance files.
 
-If you have project-specific rules, create a project-level RUNNING-DOCUMENT.md inside the project's `02-working/` folder. Reference the main governance docs from it — don't duplicate them.
-
----
-
-## The Inputs Folder (01-inputs)
-
-Read-only for Claude. This is where source material lives: research papers, reference documents, data files, anything Claude reads but does not modify.
-
-**Why separate?** Keeping inputs immutable means you always have the original. Claude's edits and outputs go elsewhere. The source material is never corrupted.
+Do not use this folder as scratch space. Governance files should be stable and easy to review.
 
 ---
 
-## The Working Folder (02-working)
+## Inputs Folder
 
-One subfolder per project. Claude works here.
+`01-inputs/` contains source material: research papers, reference documents, data exports, uploads, screenshots, PDFs, or source files.
 
-Each project folder can have its own RUNNING-DOCUMENT.md if the project is large enough to need one. For smaller work, the main governance Running Document is sufficient.
+Claude may read these, but should not overwrite them.
 
-The `scratch/` subfolder is for temporary files — notes, drafts, experiments — that do not need to be preserved. Clean it out periodically.
-
----
-
-## The Outputs Folder (03-outputs)
-
-Work you've completed. Separated into `drafts/` (in review, may change) and `final/` (approved, should not change without deliberate decision).
-
-When a file moves from `drafts/` to `final/`, update the Files In Play section of RUNNING-DOCUMENT.md.
+If Claude generates a cleaned or transformed version, put that in `02-working/` or `03-outputs/`, not here.
 
 ---
 
-## The Archive Folder (04-archive)
+## Working Folder
 
-**Never delete old files. Archive them.**
+`02-working/` contains active drafts, analysis, notes, and current project files.
 
-This is the rollback requirement. When something goes wrong and you need to return to a previous version, you need the history. Deleted files cannot be restored.
+For complex projects, add a project-specific Running Document inside the project folder. That file should reference the main governance documents instead of duplicating all rules.
 
-Naming convention for archived files:
+Use `scratch/` for temporary explorations that are safe to delete.
 
-```
+---
+
+## Outputs Folder
+
+`03-outputs/` contains deliverables.
+
+Use:
+
+- `drafts/` for work under review
+- `final/` for approved outputs
+
+When a file moves to final, update `RUNNING-DOCUMENT.md` Files In Play.
+
+---
+
+## Archive Folder
+
+`04-archive/` protects rollback.
+
+Do not silently delete old versions of important files.
+
+Use names like:
+
+```text
 DEPRECATED-[original-filename]
-OLD-v1-[original-filename]
 SUPERSEDED-[YYYY-MM-DD]-[original-filename]
+OLD-v1-[original-filename]
 ```
 
-The date in the filename tells you when it was archived.
+The archive prevents uncertainty about what changed and lets you recover from wrong edits.
 
 ---
 
 ## File Naming Conventions
 
-**For active files:**
-```
+For active files:
+
+```text
 [ProjectName]-[Description]-[Status].md
-[ProjectName]-[Description]-v[N].[status].docx
+[ProjectName]-[Description]-v[N]-[Status].docx
 ```
 
-**Status suffixes:**
-- `-DRAFT` — Work in progress
-- `-REVIEW` — Waiting for your input
-- `-FINAL` — Approved and complete
-- `-CANONICAL` — Single authoritative source for this domain
+Useful status labels:
 
-**For archive:**
-```
-DEPRECATED-[original-filename]
-SUPERSEDED-[YYYY-MM-DD]-[original-filename]
-```
-
-**Examples:**
-```
-GovernanceProject-RunningDoc-v2.FINAL.docx
-Claudishi-CurriculumMap-CANONICAL.md
-DEPRECATED-GovernanceProject-RunningDoc-v1.docx
-```
+- `DRAFT` — work in progress
+- `REVIEW` — waiting for human review
+- `FINAL` — approved and complete
+- `CANONICAL` — authoritative source for this domain
+- `DEPRECATED` — no longer active
 
 ---
 
-## The Single Canonical Version Rule
+## Single Canonical Version Rule
 
-For every domain — every topic, every project, every data type — there must be exactly one authoritative file.
+For every important domain, there should be exactly one active authoritative source.
 
-Not one main file and one recent version. Not one file Claude should usually use. **One file. Period.**
+Not one main file and one recent backup.
 
-When you create a new version:
-1. Rename the old file with the `DEPRECATED-` prefix
-2. Move it to `04-archive/`
-3. Update the Files In Play section of RUNNING-DOCUMENT.md
-4. Tell Claude the new canonical file
+Not one file Claude usually uses.
 
-This takes two minutes. It prevents hours of untangling.
+One active source.
+
+When a new version becomes authoritative:
+
+1. mark or move the old file to archive
+2. update Files In Play in `RUNNING-DOCUMENT.md`
+3. tell Claude which file is authoritative
+4. confirm no background task is still using the old file
 
 ---
 
-## The Companion Update File (Cowork-Specific)
+## Cowork / Background Task Log
 
-If you're using Cowork's scheduled tasks (automated Monday/Wednesday/Friday sessions), add a `Claude_Session_Updates.md` file to your main Claude folder.
+If Cowork or scheduled tasks can work between live sessions, use a task/update file such as:
 
-Scheduled tasks append updates to this file between your live sessions. At the start of each live session:
-
-```
-"Check Claude_Session_Updates.md for automated updates since our last session.
-Summarise what happened and flag anything that needs my attention."
+```text
+Claude_Session_Updates.md
 ```
 
-This connects your automated background work to your live collaboration — nothing runs in parallel without being integrated.
+At the start of a live session:
+
+```text
+Check Claude_Session_Updates.md for changes since our last live session.
+Summarise what changed, which files were affected, and what needs human review.
+```
+
+Background work must be reconciled. Otherwise it becomes parallel drift.
 
 ---
 
 ## Common Mistakes
 
-**Too many folders**
-More structure is not better structure. If you're spending time organising rather than working, simplify. The five-folder system above is the maximum most people need.
+### Too much structure
 
-**Deleting instead of archiving**
-The moment you delete an old file is the moment you lose the ability to roll back. Archive everything.
+If folders become the work, simplify.
 
-**Two canonical versions**
-"I'll keep both just in case" creates version divergence. Pick one. Archive the other. This is not negotiable.
+### Two active versions
 
-**Working directly in governance documents**
-The `00-governance/` folder contains stable operating documents. Do not use it as scratch space. Working files go in `02-working/`.
+Pick one canonical version. Archive the other.
 
-**Not updating RUNNING-DOCUMENT.md when files move**
-If Claude doesn't know a file changed, it will reference the old one. Every time a file moves or gets a new canonical version, update the Files In Play section.
+### Claude edits inputs
+
+Inputs should remain original. Claude's transformed work belongs in working or outputs.
+
+### Governance files used as scratch space
+
+Keep governance files clean. Put exploratory work elsewhere.
+
+### Background work not reconciled
+
+If Cowork changed files while you were away, begin by reviewing those changes.
+
+### Running Document not updated after file moves
+
+If Claude does not know which file changed, it may use the old one.
 
 ---
 
 ## Starting From Scratch
 
-If you're setting up for the first time:
+For a serious Cowork/file workflow:
 
-1. Create the five folders (`00-governance/` through `04-archive/`)
-2. Copy all governance templates into `00-governance/`
-3. Fill in `RUNNING-DOCUMENT.md` with your details
-4. Fill in `PARTNERSHIP-AGREEMENT.md`
-5. Create your first project folder in `02-working/`
+1. Create the five folders.
+2. Put core governance files in `00-governance/`.
+3. Fill in `RUNNING-DOCUMENT.md`.
+4. Add `CANONICAL-NUMBERS.md` if numbers matter.
+5. Create your first project folder in `02-working/`.
+6. Add `Claude_Session_Updates.md` only if background work is running.
 
-Everything else can wait until the problem it solves becomes real for you.
+Everything else can wait until the problem it solves becomes real.
 
 ---
 
-*The goal is not a perfect folder structure. The goal is a structure Claude can navigate without guessing.*
+## The Goal
+
+The goal is not a perfect folder structure.
+
+The goal is a structure Claude can navigate without guessing, and a human can audit without panic.

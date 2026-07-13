@@ -1,85 +1,89 @@
 # Running Document
 
-> Read this at the start of every Cowork session — before anything else.
+> The current project state for Claude or Cowork. Keep this authoritative, current, and easy for the AI to load.
 
-This is your continuity artifact. Without it, Claude starts every session with no memory of who you are, what you've decided, or what rules apply. With it, Claude picks up where you left off.
+This is your continuity artefact. Modern Claude workflows may include project files, memory, uploaded documents, connectors, or Cowork folders. Those features help Claude access context, but this document defines the current authoritative state.
 
-**Session start prompt:**
-> "Read RUNNING-DOCUMENT.md before we begin. Confirm you've loaded it and tell me what's most important to hold from it."
+Claude does not need this pasted every time if it can already access the current file. Claude does need to confirm it is using the current version before important work.
 
----
-
-## Partnership Status
-
-**Last updated:** [DATE]
-**Sessions completed:** [NUMBER]
-**Active since:** [DATE]
+**Context check prompt:**
+> "Use the current RUNNING-DOCUMENT.md as the authoritative project state. Confirm the current goal, active rules, and next action before we begin."
 
 ---
 
-## Who I Am — Human Profile
+## Document Control
 
-> Tell Claude who you are. Be specific. This is what Claude needs to not have to guess.
-
-**Name:** [Your name]
-**Age:** [Age]
-**Background:** [Professional background — what you do, what you know]
-**Technical level:** [Non-technical / some technical / technical]
-**Time constraints:** [e.g., "Limited laptop time. Mobile-accessible most of day."]
-**How I work best:** [e.g., "Direct feedback. Short responses. No padding."]
-**What I'm trying to achieve:** [Your goals in plain language]
+**Last updated:** [DATE]  
+**Current version:** [VERSION]  
+**Status:** Active / Draft / Needs review  
+**Where Claude can access this:** [Claude Project / Cowork folder / shared doc / pasted context / other]
 
 ---
 
-## Active Projects
+## Human Profile
 
-| Project | Status | Priority | Next Action |
-|---------|--------|----------|-------------|
-| [Project name] | Active / Paused | High / Medium / Low | [What needs doing] |
-| | | | |
+> Give Claude the context it should not have to infer.
+
+**Name:** [Your name]  
+**Background:** [Professional/personal context relevant to this work]  
+**Technical level:** [Non-technical / some technical / technical]  
+**How I work best:** [Direct feedback, short responses, structured options, etc.]  
+**Constraints:** [Time, tools, risk boundaries, accessibility needs]  
+**Current objective:** [What you are trying to achieve]
+
+---
+
+## Active Work
+
+| Project / Workstream | Status | Priority | Next action | Authoritative files |
+|---|---|---|---|---|
+| [Name] | Active / Paused / Waiting | High / Medium / Low | [What needs doing] | [File or folder] |
+| | | | | |
 
 ---
 
 ## Rules Claude Must Follow
 
-> These apply in every session without exception.
+> These rules override convenience, memory, and inference.
 
 1. [e.g., "Direct answer first. Context second."]
-2. [e.g., "Tell me when something is wrong before you fix it."]
-3. [e.g., "Never soften feedback to spare my feelings."]
-4. [e.g., "Ask one question maximum per response."]
+2. [e.g., "Label fact vs inference vs speculation."]
+3. [e.g., "Do not use numbers unless they are in CANONICAL-NUMBERS.md or explicitly provided."]
+4. [e.g., "Challenge weak reasoning before helping execute it."]
+5. [e.g., "Ask one clarifying question only when truly blocking."]
 
 ---
 
 ## Mode Commands
 
-> Say these to instantly change how Claude operates.
-
 | Command | What it does |
-|---------|-------------|
-| "Just answer." | One sentence only |
+|---|---|
+| "Just answer." | One sentence or direct answer only |
 | "Simplify." | Plain language, no jargon |
 | "Proceed." | Start the work now |
-| "Stop." | Halt everything |
-| "Truth check." | Tell me what you know vs. what you're inferring |
+| "Stop." | Halt current action |
+| "Truth check." | Separate fact, inference, uncertainty, and honest assessment |
+| "Source check." | Identify which files/sources support the answer |
 | [Add your own] | |
 
 ---
 
-## What Claude Knows About This Project
+## Current Project State
 
-> Key context Claude needs. Update this as the project develops.
+> The concise truth Claude should use before acting.
 
-[Paste key facts, decisions, and context that Claude must hold across sessions]
+**Current goal:** [Goal]  
+**Current phase:** [Phase]  
+**What is already decided:** [Summary]  
+**What is not decided:** [Summary]  
+**What must not change without approval:** [Boundaries]
 
 ---
 
 ## Decisions Log
 
-> Record decisions here so they don't need to be re-explained or re-made.
-
 | Date | Decision | Rationale | Status |
-|------|----------|-----------|--------|
+|---|---|---|---|
 | [DATE] | [What was decided] | [Why] | Active / Superseded |
 | | | | |
 
@@ -87,18 +91,16 @@ This is your continuity artifact. Without it, Claude starts every session with n
 
 ## Corrections Log
 
-> When Claude gets something wrong, log it. Patterns here prevent repeated errors.
+> When Claude or the workflow gets something wrong, log it if it may recur.
 
 | Date | What went wrong | Correction | Prevention rule |
-|------|-----------------|------------|-----------------|
-| [DATE] | [Error] | [Fix] | [Rule to prevent recurrence] |
+|---|---|---|---|
+| [DATE] | [Error] | [Fix] | [Rule] |
 | | | | |
 
 ---
 
 ## Open Questions
-
-> Things that are unresolved and need answering. Claude should raise these if relevant.
 
 - [ ] [Question — why it matters]
 - [ ] [Question — why it matters]
@@ -107,7 +109,7 @@ This is your continuity artifact. Without it, Claude starts every session with n
 
 ## Active Ideas
 
-> Ideas in progress — not decisions yet, but worth holding.
+> Not decisions yet. Useful context Claude should preserve without treating as final.
 
 - [Idea and brief context]
 - [Idea and brief context]
@@ -116,60 +118,74 @@ This is your continuity artifact. Without it, Claude starts every session with n
 
 ## Files In Play
 
-> Which files are authoritative. Claude references these — not older versions.
+> This prevents Claude from using stale or non-authoritative files.
 
-| File | Status | Notes |
-|------|--------|-------|
-| [filename] | Active / Frozen / Deprecated | [Brief note] |
-| | | |
+| File / Location | Status | Purpose | Notes |
+|---|---|---|---|
+| [filename or folder] | Active / Frozen / Deprecated | [Purpose] | [Notes] |
+| | | | |
 
 ---
 
-## Scheduled Tasks Running
+## Native Claude / Cowork Context
 
-> Automated tasks — Claude should be aware these are running.
+> Record what Claude may be relying on outside this document.
 
-| Task | When | Purpose |
-|------|------|---------|
-| [Task name] | [Schedule] | [What it does] |
-| | | |
+| Context source | Status | Notes |
+|---|---|---|
+| Claude project instructions | Current / Stale / Unknown | [Notes] |
+| Uploaded project files | Current / Stale / Unknown | [Notes] |
+| Claude memory / preferences | Useful / Ignore / Review | [Notes] |
+| Connectors / external sources | Connected / Not connected | [Notes] |
+| Cowork local folder | Active / Not used | [Notes] |
+| Scheduled or background tasks | Active / Not used | [Notes] |
+
+**Rule:** If native memory or project context conflicts with this Running Document, this Running Document wins until updated.
+
+---
+
+## Scheduled / Background Work
+
+| Task | When / Trigger | Purpose | Where updates appear |
+|---|---|---|---|
+| [Task name] | [Schedule] | [Purpose] | [File/log/location] |
+| | | | |
 
 ---
 
 ## Next Session Starts Here
 
-> Leave a clear note. Future Claude will read this cold.
-
-**Pick up from:** [Exactly where to resume]
-**Most important thing to hold:** [The one thing that must not be forgotten]
-**Open decision needing resolution:** [Anything waiting for a call]
+**Pick up from:** [Exactly where to resume]  
+**Most important thing to hold:** [The one thing that must not be forgotten]  
+**Open decision needing resolution:** [Anything waiting for a call]  
+**Files to check first:** [Files]
 
 ---
 
-## Session Log
+## Recent Session Log
 
-> Brief notes from recent sessions. Prune when older than 4 weeks.
+> Keep this compact. Archive old notes when they stop being useful.
 
 ### [DATE] — Session [N]
 - [What happened]
 - [What was decided]
-- [What's next]
+- [What is next]
 
 ---
 
-## What I'm Watching
+## What I Am Watching
 
-> Things in the world relevant to this work. Claude should connect these when relevant.
+> Things in the world relevant to this work. Claude should connect these when relevant, but must check freshness before relying on them.
 
-- [Topic — why it matters to the project]
-- [Topic — why it matters to the project]
+- [Topic — why it matters]
+- [Topic — why it matters]
 
 ---
 
 ## Remember
 
-The Running Document is not bureaucracy. It is the memory of this collaboration.
+The Running Document is not bureaucracy. It is the governed state of the collaboration.
 
-If it's stale, Claude is guessing. If it's current, Claude is a partner.
+If it is stale, Claude may work from stale context. If it is current, Claude has a stable foundation.
 
-Update it. It takes two minutes. It saves hours.
+Update it when decisions, files, numbers, or rules change.

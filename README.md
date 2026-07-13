@@ -1,162 +1,212 @@
-# Governance Templates for Claude Cowork
+# Governance Templates for Claude and Cowork
 
-> Eight documents that turn Claude Cowork into a genuine long-horizon partner — not a capable assistant that forgets everything between sessions.
+> Practical governance templates for long-horizon work with Claude, Claude projects, Cowork-style file workflows, and other serious AI collaboration setups.
 
 > 🌐 **[Full documentation and assessment tool → livingframework.github.io](https://livingframework.github.io/)**
 
-Most people use AI like a search engine — ask, receive, discard. The results are impressive for isolated tasks. For sustained collaboration over months, they are quietly catastrophic.
+AI tools have changed quickly. Claude is no longer just a blank chat window for many users. Depending on the interface and plan, people may work with project files, memory, connectors, scheduled work, desktop workflows, and agentic file editing.
 
-Every new Cowork session, Claude starts with no memory. Without structure, it reconstructs context from fragments, drifts from earlier decisions, and gradually shifts from a genuine collaborator into a capable but uninformed assistant. The collaboration feels fine. It is silently breaking.
+That changes the job of these templates.
 
-These templates are the structural fix. Fill them in once, reference them forever. They give Claude what it cannot give itself: continuity, honesty, and a clear operating agreement — session after session.
+They are no longer only a workaround for missing memory. They are a governance layer: explicit source-of-truth files, truth rules, repair procedures, and folder boundaries that keep serious AI collaboration reliable as the tools become more capable.
+
+---
+
+## Start Here
+
+| If you are... | Start with |
+|---|---|
+| New to these templates | [ADOPTION_LEVELS.md](ADOPTION_LEVELS.md) |
+| Wondering what changed with modern Claude | [MODERN_CLAUDE_NOTE.md](MODERN_CLAUDE_NOTE.md) |
+| Deciding which templates still matter | [TEMPLATE_STATUS.md](TEMPLATE_STATUS.md) |
+| Reviewing the modernization logic | [2026_RELEVANCE_AUDIT.md](2026_RELEVANCE_AUDIT.md) |
+| Ready to begin a real project | [RUNNING-DOCUMENT.md](RUNNING-DOCUMENT.md) |
+
+---
+
+## The Modern Position
+
+Use native Claude features for convenience.
+
+Use these templates for authority.
+
+Claude project files, memory, connectors, and Cowork-style tools can help Claude access context. But access is not the same as governance. Serious work still needs explicit answers to:
+
+- Which file is authoritative?
+- Which numbers are approved?
+- Which decisions are active or superseded?
+- What should Claude challenge rather than accept?
+- What happens when something goes wrong?
+- How do automated or background actions get reconciled with live sessions?
+
+These templates answer those questions.
 
 ---
 
 ## What This Is
 
-Eight documents. Each solves one problem.
+A modular template set. Do **not** assume you need all of it.
 
-| Document | What It Solves |
-|----------|---------------|
-| [RUNNING-DOCUMENT.md](RUNNING-DOCUMENT.md) | Memory — Claude's continuity across sessions |
-| [PARTNERSHIP-AGREEMENT.md](PARTNERSHIP-AGREEMENT.md) | Relationship — what kind of collaboration this is |
-| [TRUTH-PROTOCOL.md](TRUTH-PROTOCOL.md) | Honesty — preventing Claude from telling you what you want to hear |
-| [SESSION-START-PROTOCOL.md](SESSION-START-PROTOCOL.md) | Consistency — how to start every session properly |
-| [FAILURE-RECOVERY.md](FAILURE-RECOVERY.md) | Repair — what to do when things go wrong |
-| [CANONICAL-NUMBERS.md](CANONICAL-NUMBERS.md) | Accuracy — single source of truth for all numbers |
-| [FOLDER-STRUCTURE.md](FOLDER-STRUCTURE.md) | Order — how to organise your Cowork folder |
-
----
-
-## The Core Problem
-
-Claude reconstructs. This is the fundamental issue.
-
-When you reference a number from three sessions ago, Claude doesn't look it up — it estimates. When you ask about a decision made last month, Claude doesn't remember — it infers from context. When you implicitly push back on its assessment, Claude tends to agree — because agreement is what it was trained to produce.
-
-Over time: drift. Numbers shift slightly. Decisions get re-made. Truth softens. The collaboration that felt productive begins producing work that contradicts itself.
-
-These templates prevent this by making everything explicit. One document per domain. One canonical version per decision. One agreed rule for handling disagreement.
+| Document | Current role |
+|---|---|
+| [RUNNING-DOCUMENT.md](RUNNING-DOCUMENT.md) | Core continuity and project-state document |
+| [CANONICAL-NUMBERS.md](CANONICAL-NUMBERS.md) | Source of truth for numbers, dates, targets, calculations |
+| [SESSION-START-PROTOCOL.md](SESSION-START-PROTOCOL.md) | How to confirm Claude is using the right context |
+| [FAILURE-RECOVERY.md](FAILURE-RECOVERY.md) | Repair protocol for drift, file errors, stale context, bad reasoning |
+| [PARTNERSHIP-AGREEMENT.md](PARTNERSHIP-AGREEMENT.md) | Operating agreement for serious human-AI partnership |
+| [TRUTH-PROTOCOL.md](TRUTH-PROTOCOL.md) | Anti-sycophancy and honest critique rules |
+| [FOLDER-STRUCTURE.md](FOLDER-STRUCTURE.md) | Advanced structure for Cowork, agentic file work, and multi-file projects |
 
 ---
 
 ## Quick Start
 
-**Five minutes now. Saves hours later.**
+**Do not adopt all templates at once.** Choose the level your work needs.
 
-**Step 1 — Copy the templates**
+### Level 0 — Native Claude only
 
-Copy these two files to your Cowork folder and fill them in:
-1. `RUNNING-DOCUMENT.md` — your collaboration's memory
-2. `PARTNERSHIP-AGREEMENT.md` — your operating agreement with Claude
+Use Claude normally. No template needed.
 
-**Step 2 — Start every session with one line**
+Best for: one-off drafts, brainstorming, casual questions, low-risk exploration.
 
-```
-"Read RUNNING-DOCUMENT.md before we begin. Confirm you've loaded it
-and tell me what's most important to hold from it."
-```
+### Level 1 — Light governance
 
-Wait for confirmation. Then work.
+Use:
 
-**Step 3 — Add the other documents as you need them**
+1. `RUNNING-DOCUMENT.md`
+2. optionally `SESSION-START-PROTOCOL.md`
 
-- Noticing Claude agrees too readily? Add `TRUTH-PROTOCOL.md`.
-- Numbers getting inconsistent? Add `CANONICAL-NUMBERS.md`.
-- Recovering from a mistake? Use `FAILURE-RECOVERY.md`.
+Best for: multi-session work where continuity matters.
 
-You don't need all eight documents on day one. You need the Running Document and the Partnership Agreement. Add the rest when the problems they solve become real for you.
+### Level 2 — Governed work
+
+Add:
+
+1. `CANONICAL-NUMBERS.md`
+2. `FAILURE-RECOVERY.md`
+
+Best for: research, strategy, planning, finance, operations, client work, or anything where wrong context costs time.
+
+### Level 3 — Partnership governance
+
+Add:
+
+1. `PARTNERSHIP-AGREEMENT.md`
+2. `TRUTH-PROTOCOL.md`
+
+Best for: serious thinking partnership, critique, emotional/trust-sensitive work, or high-quality decision support.
+
+### Level 4 — Cowork / agentic workflow governance
+
+Add:
+
+1. `FOLDER-STRUCTURE.md`
+2. task/update logs if scheduled or autonomous work is running
+3. archive/versioning conventions
+
+Best for: Cowork, desktop file editing, scheduled tasks, autonomous workflows, or multi-file operations.
+
+---
+
+## The Core Problem
+
+Modern Claude can often access more context than earlier AI tools. But it can still work from stale files, infer outdated decisions, over-trust memory, use the wrong version, or agree too readily when challenged.
+
+The problem is no longer simply:
+
+> Claude has no memory.
+
+The current problem is:
+
+> Claude may have many context sources, but not all of them are authoritative.
+
+LC-OS governance makes authority explicit.
 
 ---
 
 ## The Templates
 
-### RUNNING-DOCUMENT.md — The Memory Document
+### RUNNING-DOCUMENT.md — Project State
 
-Claude has no persistent memory. The Running Document is the fix.
+The Running Document is the current project state: what matters, what has been decided, what rules apply, what is open, and what to resume next.
 
-It holds: who you are, your active projects, rules Claude must follow, decisions you've made, corrections to log, open questions, and what happened last session. Claude reads it at the start of every session and picks up where you left off.
-
-**Without it:** Claude guesses. Every session starts cold.
-**With it:** Claude is a genuine partner with real context.
+Claude may access it through project files, a Cowork folder, a shared document, an upload, or pasted context. The key is not the delivery method. The key is that this file remains current and authoritative.
 
 [→ View template](RUNNING-DOCUMENT.md)
 
 ---
 
-### PARTNERSHIP-AGREEMENT.md — The Operating Agreement
+### CANONICAL-NUMBERS.md — Numeric Truth
 
-Most people don't establish what kind of relationship they want with Claude. The result is an undefined dynamic that drifts toward pleasant but unchallenging.
-
-The Partnership Agreement makes it explicit: who holds final authority, what Claude is responsible for, what you are responsible for, and the one non-negotiable principle — **truth over ego, always.**
-
-[→ View template](PARTNERSHIP-AGREEMENT.md)
-
----
-
-### TRUTH-PROTOCOL.md — The Anti-Sycophancy Rules
-
-This is the most important document most people don't have.
-
-AI systems are structurally incentivised to agree. The training process rewards responses that feel good. Responses that feel good tend to validate, soften criticism, and shift position when you push back — regardless of whether you're right.
-
-The Truth Protocol establishes explicit rules that override this default. It names the warning signs, defines the reset prompt, and distinguishes earned validation from reflexive validation.
-
-[→ View template](TRUTH-PROTOCOL.md)
-
----
-
-### SESSION-START-PROTOCOL.md — The Startup Sequence
-
-The first five minutes of a session determine the quality of everything that follows. This document gives you the exact prompts for every scenario: normal sessions, important work, starting new projects, returning after a long break.
-
-The minimum viable start takes 60 seconds. It prevents the most common failure mode in long-horizon collaboration.
-
-[→ View template](SESSION-START-PROTOCOL.md)
-
----
-
-### FAILURE-RECOVERY.md — The Repair Protocol
-
-Collaboration doesn't fail dramatically. It fails through small, invisible drift that compounds until something snaps.
-
-This document defines the repair sequence (STOP → DIAGNOSE → ROLLBACK → NOTE), a taxonomy of seven failure types based on empirical research into human-AI collaboration, and specific repair procedures for each type — including sycophancy drift, numerical errors, and cross-domain interference.
-
-**A system that breaks visibly and repairs cleanly is more trustworthy than one that pretends to be perfect.**
-
-[→ View template](FAILURE-RECOVERY.md)
-
----
-
-### CANONICAL-NUMBERS.md — The Numbers Reference
-
-Numbers are the first thing Claude reconstructs incorrectly. A figure mentioned in session one gets subtly wrong by session five.
-
-This document is the single source of numeric truth: financial numbers, project metrics, dates, conversion rates, calculated values. Every number lives here. Claude references this file — it never reconstructs from memory.
+Numbers drift when they are scattered across chats, documents, and memory. This file keeps budgets, dates, targets, rates, and calculated values in one place.
 
 [→ View template](CANONICAL-NUMBERS.md)
 
 ---
 
-### FOLDER-STRUCTURE.md — The Organisation Guide
+### SESSION-START-PROTOCOL.md — Context Check
 
-Structure prevents version confusion. Version confusion causes file divergence. File divergence is one of the most common and most repairable failure modes in long-horizon collaboration — but only if you catch it.
+Session start is no longer always “paste everything again.” It is a context check: confirm Claude is using the right project state, files, instructions, and numbers before important work begins.
 
-This document gives you a folder structure that makes canonical versions obvious, separates inputs from outputs, and ensures archived work stays accessible for rollback.
+[→ View template](SESSION-START-PROTOCOL.md)
+
+---
+
+### FAILURE-RECOVERY.md — Repair Protocol
+
+When Claude works from stale context, changes the wrong file, uses the wrong number, or drifts into agreeable nonsense, stop and repair visibly.
+
+[→ View template](FAILURE-RECOVERY.md)
+
+---
+
+### PARTNERSHIP-AGREEMENT.md — Operating Agreement
+
+Use this when Claude is more than a task assistant: strategist, critic, builder, planner, or thinking partner.
+
+[→ View template](PARTNERSHIP-AGREEMENT.md)
+
+---
+
+### TRUTH-PROTOCOL.md — Anti-Sycophancy Rules
+
+Use this when you need Claude to challenge weak ideas, hold position when evidence supports it, and distinguish earned validation from reflexive agreement.
+
+[→ View template](TRUTH-PROTOCOL.md)
+
+---
+
+### FOLDER-STRUCTURE.md — Agentic File Governance
+
+Use this for Cowork, file-editing workflows, scheduled tasks, or any setup where Claude can read, write, move, or create project files.
 
 [→ View template](FOLDER-STRUCTURE.md)
 
 ---
 
+## What Changed Since the Original Version?
+
+The original repo was optimized for Claude Cowork at a moment when long-running AI work often started from cold sessions.
+
+This version preserves the templates but updates the posture:
+
+- Claude/Cowork is a supported environment, not the only assumption.
+- Native project files and memory are useful, but not automatically authoritative.
+- Full governance is advanced, not the default.
+- The Running Document is a source-of-truth file, not necessarily something pasted every session.
+- Cowork/agentic workflows require stronger file boundaries, not weaker ones.
+
+See [MODERN_CLAUDE_NOTE.md](MODERN_CLAUDE_NOTE.md) and [2026_RELEVANCE_AUDIT.md](2026_RELEVANCE_AUDIT.md).
+
+---
+
 ## The Research Behind This
 
-These templates are not guesswork. They are derived from the **[LC-OS (Lean Collaboration Operating System)](https://github.com/LivingFramework/LC-OS)** — a body of empirical research into long-horizon human-AI collaboration, including published papers on epistemic autonomy, drift taxonomy, and governance frameworks for human-AI partnerships.
+These templates are derived from the **[LC-OS research corpus](https://github.com/LivingFramework/LC-OS)** and the broader **[LC-OS Project toolkit](https://github.com/LivingFramework/LC-OS-Project)**.
 
-The seven failure types in `FAILURE-RECOVERY.md` are documented patterns from real collaborations, categorised and named in the LC-OS research so they can be caught early and repaired before they compound.
+The research found that long-horizon human-AI collaboration fails through drift: context drift, numeric drift, file divergence, boundary violations, trust fractures, and weak repair.
 
-The Truth Protocol rules came from studying what happens when sessions run without them: gradual erosion of honest feedback, positions that shift with pushback rather than evidence, praise that is reflexive rather than earned.
-
-This repo is the practical Cowork implementation of that research. If you want to understand the theory and evidence behind these templates, start at [LC-OS](https://github.com/LivingFramework/LC-OS).
+This repository is the Claude/Cowork-oriented implementation layer of that research.
 
 ---
 
@@ -167,24 +217,18 @@ This repo is the practical Cowork implementation of that research. If you want t
 | 🌐 | [**Website**](https://livingframework.github.io/) | Full documentation, AI readiness assessment, quick-start guide |
 | 📚 | [**LC-OS Research**](https://github.com/LivingFramework/LC-OS) | Eight published papers, Mahdi Ledger, empirical foundations |
 | 🛠️ | [**LC-OS Project**](https://github.com/LivingFramework/LC-OS-Project) | Practitioner toolkit — templates, worked examples, field manual |
-| ⚙️ | [**Cowork Templates**](https://github.com/LivingFramework/LivingFramework.github.io) | Governance templates optimised for Claude Cowork |
+| ⚙️ | [**Claude/Cowork Templates**](https://github.com/LivingFramework/LivingFramework.github.io) | Claude-oriented governance templates |
 
 *Each resource is standalone. Together they form a complete governance stack — from theory to daily practice.*
-
-## How to Contribute
-
-These templates are live — they improve from real use.
-
-If you've been using Claude Cowork and discovered a failure mode not covered, a template structure that works better, or a prompt that produces consistently better results: open an issue or submit a pull request.
-
-The goal is templates that work for non-technical users doing serious, sustained work with Claude Cowork — with no prior knowledge of AI systems required.
 
 ---
 
 ## Compatibility
 
-These templates are built for **Claude Cowork** (Claude desktop app). The core documents — Running Document, Partnership Agreement, Truth Protocol — work in any Claude interface. Cowork-specific features (scheduled tasks, companion update files) are labelled clearly.
+These templates were originally built for Claude Cowork. The core governance documents now work across Claude interfaces and can be adapted to other AI tools.
+
+Cowork-specific guidance is labelled where it depends on agentic file work, scheduled tasks, or local folder access.
 
 ---
 
-*Built from research into long-horizon human-AI collaboration. Designed for people doing serious, sustained work with Claude Cowork.*
+*Use the lightest structure that protects the work.*

@@ -1,122 +1,167 @@
 # Session Start Protocol
 
-> The first five minutes of a Cowork session determine the quality of everything that follows.
+> A context check for Claude/Cowork sessions. Use it to confirm Claude is working from the right project state before important work begins.
 
-Claude starts every session without memory. It reconstructs context from whatever you give it. Give it the right context and it picks up exactly where you left off. Give it nothing and it starts cold — well-intentioned but uninformed.
+The old version of session start was simple: paste or load the Running Document every time.
 
-This document tells you how to start sessions properly.
+Modern Claude workflows are more varied. Claude may already have access to project files, uploaded documents, memory, connectors, local folders, or Cowork task outputs.
 
----
+That is useful, but it creates a new risk: Claude may have access to context without knowing which context is current and authoritative.
 
-## Why Session Start Matters
-
-The context window is everything. What Claude knows at the start of a session is all it will know for that session. You cannot retroactively give context — you can only add it going forward.
-
-Decisions made on incomplete context compound. Two sessions of partial context create drift that takes a third session to repair. Five minutes of proper setup prevents an hour of untangling.
+This protocol solves that.
 
 ---
 
-## The Minimum Viable Start
+## Why Session Start Still Matters
 
-If you have limited time, do at minimum:
+The question is no longer only:
 
-```
-"Read RUNNING-DOCUMENT.md. Tell me the one most important thing
-to hold from it, and confirm you understand the current rules."
-```
+> Did Claude receive context?
 
-Wait for confirmation. Then proceed.
+The better question is:
 
-This takes 60 seconds. It saves you from the most common failure mode: Claude acting on stale or reconstructed context.
+> Is Claude using the current authoritative context?
+
+Before important work, verify:
+
+- current goal
+- active rules
+- authoritative files
+- current numbers
+- open decisions
+- stale or conflicting context
+- background updates from Cowork or scheduled tasks
 
 ---
 
-## The Full Session Start
+## Minimum Viable Start
 
-For sessions where you're doing important work:
+Use this for normal sessions:
 
-**Step 1: Load governance**
-```
-"Read RUNNING-DOCUMENT.md and CANONICAL-NUMBERS.md before we begin."
-```
-
-**Step 2: Request confirmation**
-```
-"Confirm you've loaded them. Tell me: current project status,
-active rules, and what we were working on last."
+```text
+Use the current RUNNING-DOCUMENT.md as the authoritative project state.
+Before we begin, confirm:
+1. current goal
+2. active rules
+3. next action
+4. any context that seems stale or unclear
 ```
 
-**Step 3: Check for drift**
-```
-"Is anything in the running document unclear, contradictory,
-or missing that I should know about?"
+If Claude cannot access the file, paste or attach it.
+
+---
+
+## Full Session Start
+
+Use this for important, high-stakes, stale, or multi-file work.
+
+### Step 1 — Load authoritative context
+
+```text
+Use these as the authoritative context for this session:
+- RUNNING-DOCUMENT.md
+- CANONICAL-NUMBERS.md, if numbers matter
+- any files listed as Active in Files In Play
+
+If your memory, project context, or prior chat conflicts with these files, treat these files as authoritative.
 ```
 
-**Step 4: Set the session agenda**
+### Step 2 — Confirm alignment
+
+```text
+Confirm:
+1. current project status
+2. active rules
+3. authoritative files
+4. numbers source
+5. what we were working on last
 ```
-"Today I want to [GOAL]. We have [TIME AVAILABLE].
-Confirm you understand what we're doing and flag anything
-that might complicate it."
+
+### Step 3 — Check for drift
+
+```text
+Before proceeding, flag anything that appears stale, contradictory, missing, or risky.
+Do not silently resolve conflicts by guessing.
+```
+
+### Step 4 — Set the session goal
+
+```text
+Today I want to [GOAL]. We have [TIME AVAILABLE].
+Confirm the plan and name any constraint that may affect the work.
 ```
 
 ---
 
 ## Starting a New Project
 
-When beginning something new with Claude:
+When beginning something new:
 
-**Step 1: Establish the partnership**
-```
-"We're starting a new project. Before we begin, read
-PARTNERSHIP-AGREEMENT.md and TRUTH-PROTOCOL.md.
-These govern how we work together."
-```
+### Step 1 — Choose governance level
 
-**Step 2: Define the project**
-```
-"Here's what we're building: [DESCRIPTION]
-Here's what success looks like: [DEFINITION]
-Here are the constraints: [CONSTRAINTS]
-Here's my role vs yours: [DIVISION OF RESPONSIBILITY]"
+```text
+We are starting a new project. Help me choose the lightest governance level needed:
+Level 0 native Claude only
+Level 1 Running Document
+Level 2 add numbers and failure recovery
+Level 3 add partnership/truth rules
+Level 4 add Cowork/file workflow governance
 ```
 
-**Step 3: Create the Running Document**
+### Step 2 — Define the project
+
+```text
+Here is what we are building: [DESCRIPTION]
+Success looks like: [DEFINITION]
+Constraints: [CONSTRAINTS]
+My role vs Claude's role: [DIVISION]
+Risks if this goes wrong: [LOW / MEDIUM / HIGH]
 ```
-"Create a Running Document for this project using
-the RUNNING-DOCUMENT.md template. Fill in what you know.
-Mark what needs filling in."
+
+### Step 3 — Create initial state
+
+```text
+Create a first-pass RUNNING-DOCUMENT.md for this project.
+Fill in what you know.
+Mark unknowns clearly.
+Do not invent missing facts.
 ```
 
 ---
 
 ## Returning After a Break
 
-If significant time has passed since the last session:
+If significant time has passed:
 
-```
-"We haven't worked together in [TIME PERIOD].
-Read RUNNING-DOCUMENT.md and tell me:
-1. What we were working on
-2. What decisions were made
-3. What was left open
-4. Anything that might be stale given the time that's passed"
+```text
+We have not worked on this for [TIME PERIOD].
+Use the current RUNNING-DOCUMENT.md and active project files.
+Tell me:
+1. where we left off
+2. which decisions are active
+3. what may be stale now
+4. what needs checking before we proceed
 ```
 
-This prompts Claude to flag things that may have changed — market conditions, your priorities, time-sensitive decisions — rather than assuming everything is still current.
+This is especially important for market, legal, pricing, scheduling, software, research, or AI-tooling details that may have changed.
 
 ---
 
-## Cowork-Specific: Scheduled Tasks
+## Cowork / Agentic Workflow Start
 
-If you have scheduled tasks running (Monday reviews, Friday book sessions, etc.):
+Use this when Cowork, scheduled tasks, or file-editing agents have been active:
 
+```text
+Before we begin, reconcile background work.
+Check task/update logs such as Claude_Session_Updates.md if available.
+Tell me:
+1. what changed since the last live session
+2. which files were created or modified
+3. whether any changes need review
+4. whether RUNNING-DOCUMENT.md or CANONICAL-NUMBERS.md must be updated
 ```
-"Check Claude_Session_Updates.md for any automated updates
-since our last session. Summarise what happened and flag
-anything that needs my attention."
-```
 
-This ensures automated work gets integrated into the session rather than running in parallel without connection.
+Agentic work must be reconciled. Otherwise background progress becomes parallel drift.
 
 ---
 
@@ -124,48 +169,53 @@ This ensures automated work gets integrated into the session rather than running
 
 Stop and reset if Claude:
 
-- Contradicts something in the Running Document
-- References a decision that was superseded
-- Uses numbers that aren't in CANONICAL-NUMBERS.md
-- Seems to be working from a different version of the project
-- Can't accurately summarise where you left off
+- cannot identify the current goal
+- uses numbers not in `CANONICAL-NUMBERS.md`
+- references an old decision as active
+- relies on memory instead of the current file
+- cannot identify the authoritative version
+- contradicts `RUNNING-DOCUMENT.md`
+- ignores files modified by Cowork or background tasks
+- seems too agreeable when risk or uncertainty is present
 
 **Reset prompt:**
-```
-"Stop. Something is misaligned. Re-read RUNNING-DOCUMENT.md
-from scratch. Tell me what you see. We'll diagnose from there."
+
+```text
+Stop. Something is misaligned.
+Use only the current authoritative files.
+Tell me what you see, what conflicts, and what needs updating before we continue.
 ```
 
 ---
 
 ## Session End Protocol
 
-Good endings make good starts. Before closing a session:
+Good endings make good starts.
 
-**Update the Running Document:**
-```
-"Update RUNNING-DOCUMENT.md with:
-- What we did today
-- Decisions made (with date)
-- What's next
-- Anything I must remember for next session"
+Before closing important work:
+
+```text
+Update RUNNING-DOCUMENT.md with:
+- what we did
+- decisions made
+- numbers changed
+- files changed
+- what is next
+- anything that must be checked next session
 ```
 
-**Set the next session start:**
-```
-"Write a one-sentence 'Next Session Starts Here' note in
-RUNNING-DOCUMENT.md. Make it specific enough that future
-Claude can pick up immediately."
+For Cowork or file-editing workflows, also ask:
+
+```text
+List every file you created, edited, renamed, or relied on.
+Which file is now authoritative?
+Which files should be archived or marked deprecated?
 ```
 
 ---
 
 ## The One Rule
 
-**Never skip session start.**
+Never start important work from unverified context.
 
-When you're in a hurry, session start feels like overhead. Skip it once and it's fine. Skip it three times and drift has accumulated. Skip it ten times and you're untangling context from two months ago.
-
-The busier you are, the more you need the structure — not less.
-
-Sixty seconds at the start. Every time.
+Fast work with stale context is not fast. It is debt.

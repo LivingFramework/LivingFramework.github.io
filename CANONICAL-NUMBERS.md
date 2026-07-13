@@ -2,22 +2,33 @@
 
 > The single source of numeric truth for this collaboration.
 
-Claude cannot reliably recall numbers across sessions. It reconstructs them — plausibly but incorrectly. A figure cited correctly in session one will drift by session five.
+Modern Claude can access more files and context than earlier chat workflows, but numbers still drift when they live in multiple places: chats, project memory, screenshots, spreadsheets, documents, or old versions.
 
-This document is the fix. Every number that matters lives here. Claude references this file — it never reconstructs from memory.
+This document defines the authoritative numbers. Claude may use native memory or project files to find context, but approved figures live here or in a clearly named linked source.
 
-**Rule:** If a number is not in this document, Claude must ask before using it. Not estimate. Ask.
+**Rule:** If a number is not in this document or an explicitly linked authoritative source, Claude must flag that and ask before using it.
 
 ---
 
 ## How to Use This Document
 
-**You:** Add numbers here as they become established. Date each entry. Mark deprecated numbers when they change — don't delete them.
+**Human:** Add numbers here as they become established. Date each entry. Mark deprecated numbers when they change; do not silently delete them.
 
-**Claude:** Before using any figure in calculations, plans, or documents — check this file. If the number isn't here, flag it and ask.
+**Claude:** Before using figures in calculations, plans, claims, or deliverables, check this file or the linked authoritative source. Do not reconstruct numbers from memory or old chat context.
 
-**Session start prompt:**
-> "Read CANONICAL-NUMBERS.md along with RUNNING-DOCUMENT.md. Reference it for all figures."
+**Context check prompt:**
+> "Use CANONICAL-NUMBERS.md as the authoritative source for figures. If a figure is missing, stale, or conflicts with another source, stop and ask."
+
+---
+
+## Authority Rules
+
+1. One number, one authoritative location.
+2. Every important number needs a source, date, or status.
+3. If numbers conflict, do not average, infer, or choose the plausible one.
+4. Deprecated numbers stay visible in the Deprecated section.
+5. Calculated values must show the formula and inputs.
+6. Native Claude memory never overrides this document.
 
 ---
 
@@ -25,25 +36,23 @@ This document is the fix. Every number that matters lives here. Claude reference
 
 > Budget figures, prices, costs, revenue, income.
 
-| Label | Value | Date Established | Notes |
-|-------|-------|-----------------|-------|
-| [e.g., Monthly operating budget] | [£0,000] | [DATE] | [Source or context] |
-| [e.g., Target monthly revenue] | [£0,000] | [DATE] | [Phase or milestone] |
-| [e.g., Current savings] | [£0,000] | [DATE] | [As of date] |
-| | | | |
+| Label | Value | Date established | Source / notes | Status |
+|---|---|---|---|---|
+| [e.g., Monthly operating budget] | [£0,000] | [DATE] | [Source] | Active |
+| [e.g., Target monthly revenue] | [£0,000] | [DATE] | [Phase/milestone] | Active |
+| | | | | |
 
 ---
 
 ## Project Numbers
 
-> Quantities, metrics, targets, counts.
+> Counts, targets, metrics, quantities.
 
-| Label | Value | Date Established | Notes |
-|-------|-------|-----------------|-------|
-| [e.g., Total curriculum sessions] | [72] | [DATE] | [Programme name] |
-| [e.g., Sessions completed] | [0] | [DATE] | [Update each session] |
-| [e.g., Target word count] | [00,000] | [DATE] | [Document name] |
-| | | | |
+| Label | Value | Date established | Source / notes | Status |
+|---|---|---|---|---|
+| [e.g., Total curriculum sessions] | [72] | [DATE] | [Programme name] | Active |
+| [e.g., Target word count] | [00,000] | [DATE] | [Document] | Active |
+| | | | | |
 
 ---
 
@@ -51,25 +60,23 @@ This document is the fix. Every number that matters lives here. Claude reference
 
 > Fixed dates, milestones, deadlines, durations.
 
-| Label | Date / Duration | Date Established | Notes |
-|-------|----------------|-----------------|-------|
-| [e.g., Programme start date] | [DATE] | [DATE] | |
-| [e.g., Target completion] | [DATE] | [DATE] | [Soft or hard deadline] |
-| [e.g., Review cycle] | [Every 4 weeks] | [DATE] | |
-| | | | |
+| Label | Date / Duration | Date established | Notes | Status |
+|---|---|---|---|---|
+| [e.g., Programme start date] | [DATE] | [DATE] | [Notes] | Active |
+| [e.g., Review cycle] | [Every 4 weeks] | [DATE] | [Notes] | Active |
+| | | | | |
 
 ---
 
 ## Rates and Constants
 
-> Conversion rates, fixed ratios, constants used in calculations.
+> Conversion rates, fixed ratios, assumptions used in calculations.
 
-| Label | Value | Date Established | Notes |
-|-------|-------|-----------------|-------|
-| [e.g., GBP to USD rate] | [1.27] | [DATE] | [Approximate — update if critical] |
-| [e.g., Hours per working day] | [X] | [DATE] | |
-| [e.g., Sessions per week] | [X] | [DATE] | |
-| | | | |
+| Label | Value | Date established | Source / notes | Status |
+|---|---|---|---|---|
+| [e.g., GBP to USD rate] | [1.27] | [DATE] | [Approximate or source] | Active / Needs update |
+| [e.g., Hours per working day] | [X] | [DATE] | [Assumption] | Active |
+| | | | | |
 
 ---
 
@@ -77,22 +84,32 @@ This document is the fix. Every number that matters lives here. Claude reference
 
 > Numbers derived from other numbers. Always show the formula.
 
-| Label | Value | Formula | Date Established | Notes |
-|-------|-------|---------|-----------------|-------|
-| [e.g., Sessions remaining] | [00] | [Total sessions] - [Sessions completed] | [DATE] | [Recalculate each session] |
-| [e.g., Weeks to completion] | [00] | [Sessions remaining] ÷ [Sessions per week] | [DATE] | |
-| | | | | |
+| Label | Value | Formula | Inputs checked date | Notes | Status |
+|---|---|---|---|---|---|
+| [e.g., Sessions remaining] | [00] | [Total sessions] - [Sessions completed] | [DATE] | [Notes] | Active |
+| | | | | | |
 
-**Claude's rule for calculated values:** Recalculate from the canonical inputs above. Do not use the stored result if inputs have changed since the calculation was done.
+**Claude's rule for calculated values:** Recalculate from canonical inputs if any input has changed. Do not reuse an old result just because it appears in memory or a prior session.
+
+---
+
+## Linked Authoritative Sources
+
+> Use this when the true source of numeric truth is a spreadsheet, database, dashboard, or external document.
+
+| Source | What it governs | Access method | Last checked | Notes |
+|---|---|---|---|---|
+| [Spreadsheet/file/link] | [Budget / schedule / metrics] | [Project file / connector / manual] | [DATE] | [Notes] |
+| | | | | |
 
 ---
 
 ## Deprecated Numbers
 
-> Numbers that are no longer current. Keep these — they show how things changed.
+> Numbers that are no longer current. Keep them for traceability and rollback.
 
-| Label | Old Value | Replaced By | Date Deprecated | Reason |
-|-------|-----------|-------------|----------------|--------|
+| Label | Old value | Replaced by | Date deprecated | Reason |
+|---|---|---|---|---|
 | [e.g., Previous budget] | [£0,000] | [New canonical entry] | [DATE] | [Why it changed] |
 | | | | | |
 
@@ -100,15 +117,14 @@ This document is the fix. Every number that matters lives here. Claude reference
 
 ## When to Update This Document
 
-Add a number when:
-- You establish a budget, target, or metric
-- You make a decision that involves a specific figure
-- A calculated value is used more than once
-- You find yourself explaining the same number to Claude repeatedly
+Add or update when:
 
-Update a number when:
-- The figure changes — move the old one to Deprecated
-- A calculation's inputs change — recalculate and update
+- a budget, target, date, or metric is established
+- a number appears in a deliverable
+- a calculation is used more than once
+- a linked spreadsheet or source changes
+- Claude uses or proposes a number not already canonical
+- you find yourself explaining the same figure repeatedly
 
 Do not update without dating the change.
 
@@ -118,6 +134,4 @@ Do not update without dating the change.
 
 **One number, one place, one truth.**
 
-If Claude uses a figure not in this document — stop and add it before proceeding. If you're not sure of the number, establish it now. Vague numbers compound into wrong decisions.
-
-> "Check CANONICAL-NUMBERS.md before using any figure."
+If Claude uses a figure not in this document or an explicit linked source, stop and add it before proceeding.
