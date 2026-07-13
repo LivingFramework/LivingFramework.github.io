@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RITAM | Living Framework — Rishi Sood</title>
-    <meta name="description" content="RITAM is a governed cognition substrate — nine architectural primitives, 146 tests, open source. The founding principle: governance must precede persistence. v1.1.1 published with DOI.">
+    <meta name="description" content="RITAM is substrate reliability research for AI systems: nine primitives for state admission, memory integrity, epistemic stability, observability, and repair. v1.1.1 is open source with 146 tests and a citable DOI.">
     <link rel="canonical" href="https://livingframework.github.io/ritam/">
     <meta property="og:image" content="https://livingframework.github.io/og-image.png">
     <meta property="og:image:width" content="1200">
@@ -16,288 +16,100 @@
 
     <style>
         :root {
-            --bg:    #eae7e0;
-            --bg-2:  #e2ddd6;
-            --bg-3:  #d8d3cb;
-            --border:       rgba(26,24,20,0.10);
-            --border-hover: rgba(26,24,20,0.20);
-            --text:  #1a1814;
-            --text-2:#4e4840;
-            --text-3:#8c8680;
-            --green: #9a5a28;
-            --green-dim:    rgba(154,90,40,0.07);
-            --green-border: rgba(154,90,40,0.22);
-            --amber: #b45309;
-            --amber-dim:    rgba(180,83,9,0.07);
-            --amber-border: rgba(180,83,9,0.20);
-            --font:  'DM Sans', -apple-system, sans-serif;
-            --serif: 'Newsreader', Georgia, serif;
-            --mono:  'IBM Plex Mono', monospace;
-            --max:   1080px;
-            --r:     6px;
+            --bg:#eae7e0; --bg-2:#e2ddd6; --bg-3:#d8d3cb;
+            --border:rgba(26,24,20,0.10); --border-hover:rgba(26,24,20,0.20);
+            --text:#1a1814; --text-2:#4e4840; --text-3:#8c8680;
+            --green:#9a5a28; --green-dim:rgba(154,90,40,0.07); --green-border:rgba(154,90,40,0.22);
+            --font:'DM Sans',-apple-system,sans-serif; --serif:'Newsreader',Georgia,serif; --mono:'IBM Plex Mono',monospace;
+            --max:1080px; --r:6px;
         }
-
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
-        body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.6;
-        }
+        body { font-family:var(--font); background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.6; }
         a { color:inherit; text-decoration:none; }
         p { color:var(--text-2); line-height:1.75; }
-
         .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
 
-        /* ── Nav ── */
-        nav {
-            position:fixed; top:0; left:0; right:0; z-index:100;
-            background:rgba(234,231,224,0.95);
-            backdrop-filter:blur(16px);
-            border-bottom:1px solid var(--border);
-        }
-        .nav-inner {
-            max-width:var(--max); margin:0 auto; padding:0 28px;
-            height:64px; display:flex; align-items:center; justify-content:space-between;
-        }
-        .nav-logo { font-family:var(--serif); font-size:2.4rem; color:var(--text); letter-spacing:0.01em; }
+        nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(234,231,224,0.95); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+        .nav-inner { max-width:var(--max); margin:0 auto; padding:0 28px; height:64px; display:flex; align-items:center; justify-content:space-between; }
+        .nav-logo { font-family:var(--serif); font-size:2.4rem; color:var(--text); letter-spacing:0.01em; display:flex; align-items:center; gap:10px; }
         .nav-logo em { color:var(--text-3); font-style:italic; }
+        .nav-mark { flex-shrink:0; display:block; }
         .nav-links { display:flex; gap:28px; list-style:none; }
         .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
-        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+        .nav-links a:hover, .nav-links a.active { color:var(--text); font-weight:500; }
+        .hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; background:none; border:none; cursor:pointer; padding:6px 4px; }
+        .hamburger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; }
 
-        /* ── Page header ── */
-        .page-header {
-            padding:140px 0 64px;
-            border-bottom:1px solid var(--border);
-        }
-        .breadcrumb {
-            display:flex; align-items:center; gap:8px;
-            font-family:var(--mono); font-size:11px; color:var(--text-3);
-            margin-bottom:24px; letter-spacing:0.04em;
-        }
+        .page-header { padding:140px 0 64px; border-bottom:1px solid var(--border); }
+        .breadcrumb { display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; color:var(--text-3); margin-bottom:24px; letter-spacing:0.04em; }
         .breadcrumb a:hover { color:var(--text-2); }
         .breadcrumb span { color:var(--text-3); }
-        .page-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.14em; color:var(--green); margin-bottom:18px;
-            display:flex; align-items:center; gap:8px;
-        }
-        .page-label::before {
-            content:''; width:6px; height:6px;
-            border-radius:50%; background:var(--green);
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity:1; }
-            50% { opacity:0.4; }
-        }
-        .page-header h1 {
-            font-size:clamp(2.2rem, 5vw, 3.5rem); font-weight:700;
-            letter-spacing:-0.04em; line-height:1; margin-bottom:20px;
-            font-family:var(--mono);
-        }
-        .page-header p { font-size:1rem; max-width:580px; }
+        .page-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--green); margin-bottom:18px; display:flex; align-items:center; gap:8px; }
+        .page-label::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+        .page-header h1 { font-family:var(--serif); font-size:clamp(2.2rem,5vw,3.5rem); font-weight:700; letter-spacing:-0.04em; line-height:1; margin-bottom:20px; }
+        .page-header p { font-size:1rem; max-width:680px; }
 
-        /* ── Layout ── */
-        .content-layout {
-            display:grid;
-            grid-template-columns:1fr 260px;
-            gap:64px;
-            padding:64px 0 96px;
-            align-items:start;
-        }
-
-        /* ── Sections ── */
+        .content-layout { display:grid; grid-template-columns:1fr 260px; gap:64px; padding:64px 0 96px; align-items:start; }
         .prose-block { margin-bottom:52px; }
         .prose-block:last-child { margin-bottom:0; }
-        .prose-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.14em; color:var(--text-3); margin-bottom:14px;
-        }
-        .prose-block h2 {
-            font-size:1.2rem; font-weight:600; color:var(--text);
-            letter-spacing:-0.02em; margin-bottom:14px; line-height:1.2;
-        }
-        .prose-block p {
-            font-size:0.9375rem; margin-bottom:14px;
-        }
+        .prose-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-3); margin-bottom:14px; }
+        .prose-block h2 { font-family:var(--serif); font-size:1.2rem; font-weight:600; color:var(--text); letter-spacing:-0.02em; margin-bottom:14px; line-height:1.2; }
+        .prose-block p { font-size:0.9375rem; margin-bottom:14px; }
         .prose-block p:last-child { margin-bottom:0; }
 
-        /* ── Callout ── */
-        .callout {
-            padding:24px 28px;
-            border:1px solid var(--green-border);
-            border-radius:var(--r);
-            background:var(--green-dim);
-            margin-bottom:52px;
-        }
-        .callout p {
-            font-size:0.9375rem; color:var(--text);
-            font-weight:500; line-height:1.55; letter-spacing:-0.01em;
-        }
-        .callout span {
-            display:block; font-family:var(--mono); font-size:10px;
-            text-transform:uppercase; letter-spacing:0.12em;
-            color:var(--green); margin-bottom:10px;
-        }
+        .callout { padding:24px 28px; border:1px solid var(--green-border); border-radius:var(--r); background:var(--green-dim); margin-bottom:52px; }
+        .callout p { font-size:0.9375rem; color:var(--text); font-weight:500; line-height:1.55; letter-spacing:-0.01em; }
+        .callout span { display:block; font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.12em; color:var(--green); margin-bottom:10px; }
 
-        /* ── Investigation questions ── */
-        .questions {
-            border:1px solid var(--border); border-radius:var(--r); overflow:hidden;
-        }
-        .question-row {
-            display:grid; grid-template-columns:20px 1fr;
-            gap:16px; padding:18px 20px;
-            border-bottom:1px solid var(--border);
-            align-items:start;
-        }
+        .primitive-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:20px; }
+        .primitive { padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2); }
+        .primitive-name { font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px; }
+        .primitive-desc { font-size:12px; color:var(--text-3); line-height:1.5; }
+        .questions { border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+        .question-row { display:grid; grid-template-columns:20px 1fr; gap:16px; padding:18px 20px; border-bottom:1px solid var(--border); align-items:start; }
         .question-row:last-child { border-bottom:none; }
-        .q-dot {
-            width:6px; height:6px; border-radius:50%;
-            background:var(--border-hover); margin-top:6px; flex-shrink:0;
-        }
+        .q-dot { width:6px; height:6px; border-radius:50%; background:var(--border-hover); margin-top:6px; flex-shrink:0; }
         .q-text { font-size:13.5px; color:var(--text-2); line-height:1.55; }
-
-        /* ── Papers foundation ── */
-        .papers-foundation {
-            display:flex; flex-wrap:wrap; gap:8px;
-        }
-        .paper-ref {
-            display:inline-flex; align-items:center; gap:6px;
-            font-family:var(--mono); font-size:11px; color:var(--text-3);
-            border:1px solid var(--border); border-radius:4px;
-            padding:5px 10px; transition:all 0.15s;
-        }
+        .papers-foundation { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+        .paper-ref { display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:11px; color:var(--text-3); border:1px solid var(--border); border-radius:4px; padding:5px 10px; transition:all 0.15s; }
         .paper-ref:hover { border-color:var(--green-border); color:var(--green); }
-        .paper-ref-label { font-size:10px; color:var(--text-3); }
+        .stat-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:24px; }
+        .stat-card { padding:16px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2); text-align:center; }
+        .stat-value { font-family:var(--mono); font-size:1.5rem; font-weight:600; color:var(--text); letter-spacing:-0.02em; }
+        .stat-label { font-size:12px; color:var(--text-3); margin-top:4px; }
 
-        /* ── Sidebar ── */
-        .sidebar { position:sticky; top:80px; }
-        .sidebar-block {
-            padding:20px;
-            border:1px solid var(--border); border-radius:var(--r);
-            background:var(--bg-2); margin-bottom:12px;
-        }
-        .sidebar-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.12em; color:var(--text-3); margin-bottom:12px;
-        }
-        .sidebar-row {
-            display:flex; justify-content:space-between;
-            padding:6px 0; border-bottom:1px solid var(--border);
-            gap:8px;
-        }
-        .sidebar-row:last-child { border-bottom:none; padding-bottom:0; }
-        .s-key { font-size:12px; color:var(--text-3); }
-        .s-val { font-size:12px; color:var(--text-2); font-weight:500; text-align:right; }
-        .s-val.active { color:var(--green); }
-
-        .sidebar-nav-link {
-            display:block; font-size:13px; color:var(--text-3);
-            padding:8px 0; border-bottom:1px solid var(--border);
-            transition:color 0.15s;
-        }
-        .sidebar-nav-link:last-child { border-bottom:none; }
-        .sidebar-nav-link:hover { color:var(--text-2); }
-
-        /* ── Related ── */
-        .related-link {
-            display:flex; align-items:center; justify-content:space-between;
-            padding:14px 18px;
-            border:1px solid var(--border); border-radius:var(--r);
-            margin-bottom:8px; transition:all 0.15s;
-            background:var(--bg-2);
-        }
+        .related-link { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border:1px solid var(--border); border-radius:var(--r); margin-bottom:8px; transition:all 0.15s; background:var(--bg-2); }
         .related-link:hover { border-color:var(--border-hover); }
         .related-link:last-child { margin-bottom:0; }
         .related-title { font-size:13.5px; color:var(--text); font-weight:500; }
         .related-sub { font-size:12px; color:var(--text-3); margin-top:2px; }
         .related-arrow { font-size:12px; color:var(--text-3); }
 
-        /* ── Footer ── */
+        .sidebar { position:sticky; top:80px; }
+        .sidebar-block { padding:20px; border:1px solid var(--border); border-radius:var(--r); background:var(--bg-2); margin-bottom:12px; }
+        .sidebar-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-3); margin-bottom:12px; }
+        .sidebar-row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border); gap:8px; }
+        .sidebar-row:last-child { border-bottom:none; padding-bottom:0; }
+        .s-key { font-size:12px; color:var(--text-3); }
+        .s-val { font-size:12px; color:var(--text-2); font-weight:500; text-align:right; }
+        .s-val.active { color:var(--green); }
+        .sidebar-nav-link { display:block; font-size:13px; color:var(--text-3); padding:8px 0; border-bottom:1px solid var(--border); transition:color 0.15s; }
+        .sidebar-nav-link:last-child { border-bottom:none; }
+        .sidebar-nav-link:hover { color:var(--text-2); }
+
         footer { padding:36px 0; border-top:1px solid var(--border); }
-        .footer-inner {
-            display:flex; align-items:center;
-            justify-content:space-between; flex-wrap:wrap; gap:16px;
-        }
+        .footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
         .footer-left { font-size:13px; color:var(--text-3); }
         .footer-left strong { color:var(--text-2); font-weight:500; }
         .footer-links { display:flex; gap:20px; }
         .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
         .footer-links a:hover { color:var(--text-2); }
 
-        /* ── Responsive ── */
-        @media (max-width:800px) {
-            .content-layout { grid-template-columns:1fr; gap:0; }
-            .sidebar { position:static; margin-top:48px; }
-        }
-        @media (max-width:600px) {
-            .nav-links { display:none; }
-        }
-    
-        /* ── Design refresh: serif headings ── */
-        h1, h2, h3,
-        .section-title, .page-title, .paper-title,
-        .hero h1, .card-title, .entry-title {
-            font-family: var(--serif);
-        }
-        .nav-links a.active {
-            color: var(--text);
-            font-weight: 500;
-        }
-        
-        .nav-logo { display:flex; align-items:center; gap:10px; }
-        .nav-mark { flex-shrink:0; display:block; }
-        
-        /* ── Mobile hamburger nav ── */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px 4px;
-        }
-        .hamburger span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--text);
-            border-radius: 2px;
-        }
-        @media (max-width:640px) {
-            .hamburger { display: flex; flex-direction: column; }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 64px; left: 0; right: 0;
-                background: rgba(234,231,224,0.97);
-                backdrop-filter: blur(16px);
-                border-bottom: 1px solid rgba(26,24,20,0.10);
-                padding: 8px 28px 20px;
-                gap: 0;
-                list-style: none;
-                z-index: 99;
-            }
-            .nav-links.open { display: flex; }
-            .nav-links li { border-bottom: 1px solid rgba(26,24,20,0.06); }
-            .nav-links li:last-child { border-bottom: none; }
-            .nav-links li a {
-                display: block;
-                padding: 13px 0;
-                font-size: 14px;
-                color: var(--text-2);
-                letter-spacing: 0;
-            }
-            .page-label { font-size: 11px; }
-        }
-        </style>
+        @media(max-width:800px) { .content-layout { grid-template-columns:1fr; gap:0; } .sidebar { position:static; margin-top:48px; } .primitive-grid, .stat-grid { grid-template-columns:1fr; } }
+        @media(max-width:640px) { .hamburger { display:flex; } .nav-links { display:none; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:rgba(234,231,224,0.97); backdrop-filter:blur(16px); border-bottom:1px solid rgba(26,24,20,0.10); padding:8px 28px 20px; gap:0; list-style:none; z-index:99; } .nav-links.open { display:flex; } .nav-links li { border-bottom:1px solid rgba(26,24,20,0.06); } .nav-links li:last-child { border-bottom:none; } .nav-links li a { display:block; padding:13px 0; font-size:14px; color:var(--text-2); letter-spacing:0; } .page-label { font-size:11px; } }
+    </style>
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -321,27 +133,19 @@
 
 <header class="page-header">
     <div class="container">
-        <div class="breadcrumb">
-            <a href="../">Home</a>
-            <span>/</span>
-            <a href="../#projects">Projects</a>
-            <span>/</span>
-            RITAM
-        </div>
-        <div class="page-label">Substrate Research · v1.1.1 Published · Open Source · 2026</div>
+        <div class="breadcrumb"><a href="../">Home</a><span>/</span><a href="../#projects">Projects</a><span>/</span>RITAM</div>
+        <div class="page-label">Substrate Reliability Research · v1.1.1 Published · Open Source · 2026</div>
         <h1>RITAM</h1>
-        <p>A governed cognition substrate for AI systems — nine primitives, 146 tests, adversarially audited. The founding principle: governance must precede persistence. v1.1.1 is published open source with a citable DOI.</p>
+        <p>RITAM is substrate reliability research for AI systems: nine primitives for state admission, memory integrity, epistemic stability, observability, and repair. v1.1.1 is published open source, passes 146 tests, and has a citable DOI.</p>
     </div>
 </header>
 
 <div class="container">
     <div class="content-layout">
-
         <div class="main-content">
-
             <div class="callout">
                 <span>v1.1.1 is live</span>
-                <p>The runtime exists. 146 tests across adversarial, integration, and buildability scenarios. Five independent AI systems reproduced the substrate from the specification alone — 60/60 tests passing. The constraint RITAM held itself to: a specification that doesn't run doesn't count. It now runs.</p>
+                <p>The runtime exists. 146 tests pass across adversarial, integration, and buildability scenarios. Five independent AI systems reproduced the substrate from the specification alone — 60/60 tests passing. The constraint RITAM held itself to: a specification that does not run does not count. It now runs.</p>
             </div>
 
             <div style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:52px;">
@@ -353,45 +157,18 @@
             <div class="prose-block">
                 <div class="prose-label">What RITAM Is</div>
                 <h2>Nine primitives. Each justified by a failure mode.</h2>
-                <p>RITAM is foundational substrate research. It investigates the structural conditions a governed cognition system requires — not as design aspirations, but as experimentally justified necessities. Remove any one primitive and a specific, observable failure appears.</p>
-                <p>The founding principle: <strong>governance must precede persistence.</strong> An AI system that admits beliefs without governance and attempts to clean them up afterward is not a governed system — it is an ungoverned system with remediation. RITAM sits beneath the model and beneath the application, governing cognitive state at the moment of admission.</p>
-                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:20px;">
-                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
-                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">STATE</div>
-                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: context drifts between operations</div>
-                    </div>
-                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
-                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">MEMORY</div>
-                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: beliefs persist without governance</div>
-                    </div>
-                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
-                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">ONTOLOGY</div>
-                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: concepts mutate silently</div>
-                    </div>
-                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
-                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">GOVERNANCE</div>
-                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: no admission control at all</div>
-                    </div>
-                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
-                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">EPISTEMIC</div>
-                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: confidence is untracked</div>
-                    </div>
-                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
-                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">COORDINATION</div>
-                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: multi-agent state diverges</div>
-                    </div>
-                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
-                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">TEMPORAL</div>
-                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: time-dependent state decays undetected</div>
-                    </div>
-                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
-                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">OBSERVATION</div>
-                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: substrate state is opaque</div>
-                    </div>
-                    <div style="padding:12px 14px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2);">
-                        <div style="font-family:var(--mono); font-size:10px; color:var(--green); font-weight:500; margin-bottom:4px;">REPAIR</div>
-                        <div style="font-size:12px; color:var(--text-3); line-height:1.5;">Without it: failures propagate silently</div>
-                    </div>
+                <p>RITAM investigates the structural conditions required for reliable cognitive state in AI systems. It is not a chatbot, product wrapper, or orchestration layer. It sits beneath applications and asks what must be true before memory, belief, confidence, time, coordination, and repair can be treated as dependable system state.</p>
+                <p>The core principle is admission before persistence: state should be checked before it is retained, reused, or allowed to shape later reasoning. RITAM formalizes this through nine primitives that make cognitive state inspectable, constrained, and repairable.</p>
+                <div class="primitive-grid">
+                    <div class="primitive"><div class="primitive-name">STATE</div><div class="primitive-desc">Without it: context drifts between operations</div></div>
+                    <div class="primitive"><div class="primitive-name">MEMORY</div><div class="primitive-desc">Without it: beliefs persist without admission checks</div></div>
+                    <div class="primitive"><div class="primitive-name">ONTOLOGY</div><div class="primitive-desc">Without it: concepts mutate silently</div></div>
+                    <div class="primitive"><div class="primitive-name">ADMISSION</div><div class="primitive-desc">Without it: invalid state enters the system unchecked</div></div>
+                    <div class="primitive"><div class="primitive-name">EPISTEMIC</div><div class="primitive-desc">Without it: confidence is untracked</div></div>
+                    <div class="primitive"><div class="primitive-name">COORDINATION</div><div class="primitive-desc">Without it: multi-agent state diverges</div></div>
+                    <div class="primitive"><div class="primitive-name">TEMPORAL</div><div class="primitive-desc">Without it: time-dependent state decays undetected</div></div>
+                    <div class="primitive"><div class="primitive-name">OBSERVATION</div><div class="primitive-desc">Without it: substrate state is opaque</div></div>
+                    <div class="primitive"><div class="primitive-name">REPAIR</div><div class="primitive-desc">Without it: failures propagate silently</div></div>
                 </div>
             </div>
 
@@ -399,33 +176,21 @@
                 <div class="prose-label">The Investigation</div>
                 <h2>What RITAM is working to answer</h2>
                 <div class="questions">
-                    <div class="question-row">
-                        <div class="q-dot"></div>
-                        <div class="q-text">Is multi-primitive superadditivity — the finding that simultaneous governance degradations compound worse than their sum — architecture-independent, or does it require specific substrate conditions?</div>
-                    </div>
-                    <div class="question-row">
-                        <div class="q-dot"></div>
-                        <div class="q-text">Where does each of the nine primitives attach in a running system? What observable signatures confirm it is functioning?</div>
-                    </div>
-                    <div class="question-row">
-                        <div class="q-dot"></div>
-                        <div class="q-text">What is the minimum viable executable substrate — the threshold at which NIYOM can begin implementation?</div>
-                    </div>
-                    <div class="question-row">
-                        <div class="q-dot"></div>
-                        <div class="q-text">Do RITAM's core empirical findings represent genuinely new theory, or a governance-framed restatement of established results in adjacent fields?</div>
-                    </div>
+                    <div class="question-row"><div class="q-dot"></div><div class="q-text">Is multi-primitive superadditivity — the finding that simultaneous reliability degradations compound worse than their sum — architecture-independent, or does it require specific substrate conditions?</div></div>
+                    <div class="question-row"><div class="q-dot"></div><div class="q-text">Where does each of the nine primitives attach in a running system? What observable signatures confirm that it is functioning?</div></div>
+                    <div class="question-row"><div class="q-dot"></div><div class="q-text">What is the minimum viable executable substrate — the threshold at which NIYOM can begin implementation?</div></div>
+                    <div class="question-row"><div class="q-dot"></div><div class="q-text">Do RITAM's core empirical findings represent genuinely new theory, or a reliability-framed restatement of established results in adjacent fields?</div></div>
                 </div>
             </div>
 
             <div class="prose-block">
                 <div class="prose-label">Research Foundation</div>
                 <h2>Built on the published papers</h2>
-                <p>RITAM is grounded in the specific findings of eight published papers. The architecture is not speculative — it is derived from documented observations. Every design decision in RITAM should be traceable to a finding in the research.</p>
-                <p>RITAM's own experimental programme has also produced findings documented independently of the published papers — pre-registered experiments under adversarial review, and a prior-art audit confirming that the core findings represent genuinely new contributions to the literature.</p>
+                <p>RITAM is grounded in the specific findings of eight published papers. The architecture is not speculative: it is derived from documented observations about reliability, memory, protocol failure, language reliability, distributed cognition, and verification.</p>
+                <p>RITAM's own experimental programme has also produced findings documented independently of the published papers, including pre-registered experiments under adversarial review and a prior-art audit of the core claims.</p>
                 <p>Primary foundations:</p>
-                <div class="papers-foundation" style="margin-top:14px;">
-                    <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-ref">Paper 01 · Reliability Stack (A1–A10)</a>
+                <div class="papers-foundation">
+                    <a href="https://zenodo.org/records/17760288" target="_blank" class="paper-ref">Paper 01 · Reliability Stack</a>
                     <a href="https://zenodo.org/records/17760777" target="_blank" class="paper-ref">Paper 02 · Operational Protocols</a>
                     <a href="https://zenodo.org/records/17896542" target="_blank" class="paper-ref">Paper 03 · Failure Taxonomy</a>
                     <a href="https://zenodo.org/records/19038340" target="_blank" class="paper-ref">Paper 06 · Six-Layer Architecture</a>
@@ -436,103 +201,43 @@
 
             <div class="prose-block">
                 <div class="prose-label">Relationship to NIYOM</div>
-                <h2>Architecture and execution</h2>
-                <p>RITAM and NIYOM are two distinct but dependent projects. RITAM is architecture: it specifies what a reliable collaboration system looks like structurally. NIYOM is execution: it implements those specifications as practical tools and protocols.</p>
-                <p>RITAM has to exist first. The architecture has to be right before implementation is useful. NIYOM follows RITAM's output, not the other way around.</p>
+                <h2>Substrate and execution</h2>
+                <p>RITAM and NIYOM are distinct but related projects. RITAM is substrate research: it studies the reliability conditions beneath persistent cognitive state. NIYOM is execution: it turns reliability architecture into a practical harness for planning, verification, repair, and repeatable AI workflows.</p>
+                <p>RITAM stays below the product layer. Its job is to clarify what reliable state requires before product systems attempt to implement or depend on it.</p>
             </div>
 
             <div class="prose-block">
                 <div class="prose-label">Current Status</div>
                 <h2>v1.1.1 is live. What that means.</h2>
-                <p>The runtime substrate is published open source under Apache 2.0. 146 tests pass across adversarial, integration, and buildability scenarios on Python 3.9, 3.10, and 3.11. Five independent AI systems reproduced the runtime from the specification alone — 60/60 tests passing — confirming the specification is precise enough to build from without guidance from the original author.</p>
-                <p>Three consumer types are demonstrated: governed research assistant, governed decision log, governed agent memory. The substrate is domain-agnostic — the same nine primitives govern cognitive state regardless of what the application does with it.</p>
-                <p>The canonical specification (nine chapters) continues in active development. The runtime demonstrates that the architecture is correct and buildable. The specification provides the theoretical account of why it is the right architecture — and what it must remain to stay right.</p>
-                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-top:24px;">
-                    <div style="padding:16px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2); text-align:center;">
-                        <div style="font-family:var(--mono); font-size:1.5rem; font-weight:600; color:var(--text); letter-spacing:-0.02em;">146</div>
-                        <div style="font-size:12px; color:var(--text-3); margin-top:4px;">tests passing</div>
-                    </div>
-                    <div style="padding:16px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2); text-align:center;">
-                        <div style="font-family:var(--mono); font-size:1.5rem; font-weight:600; color:var(--text); letter-spacing:-0.02em;">9</div>
-                        <div style="font-size:12px; color:var(--text-3); margin-top:4px;">substrate primitives</div>
-                    </div>
-                    <div style="padding:16px; border:1px solid var(--border); border-radius:6px; background:var(--bg-2); text-align:center;">
-                        <div style="font-family:var(--mono); font-size:1.5rem; font-weight:600; color:var(--text); letter-spacing:-0.02em;">5/5</div>
-                        <div style="font-size:12px; color:var(--text-3); margin-top:4px;">independent reproductions</div>
-                    </div>
+                <p>The runtime substrate is published open source under Apache 2.0. 146 tests pass across adversarial, integration, and buildability scenarios on Python 3.9, 3.10, and 3.11. Five independent AI systems reproduced the runtime from the specification alone — 60/60 tests passing — confirming that the specification is precise enough to build from without guidance from the original author.</p>
+                <p>Three consumer types are demonstrated: reliable research assistant, reliable decision log, and reliable agent memory. The substrate is domain-agnostic: the same nine primitives constrain cognitive state regardless of what the application does with it.</p>
+                <p>The canonical specification continues in active development. The runtime demonstrates that the architecture is correct and buildable; the specification provides the theoretical account of why it is the right architecture and what it must preserve to stay right.</p>
+                <div class="stat-grid">
+                    <div class="stat-card"><div class="stat-value">146</div><div class="stat-label">tests passing</div></div>
+                    <div class="stat-card"><div class="stat-value">9</div><div class="stat-label">substrate primitives</div></div>
+                    <div class="stat-card"><div class="stat-value">5/5</div><div class="stat-label">independent reproductions</div></div>
                 </div>
             </div>
 
             <div style="padding-top:8px;">
                 <div class="prose-label" style="margin-bottom:16px;">Explore Further</div>
-                <a href="../research/" class="related-link">
-                    <div>
-                        <div class="related-title">Research Overview</div>
-                        <div class="related-sub">Major findings, timeline, open questions</div>
-                    </div>
-                    <div class="related-arrow">→</div>
-                </a>
-                <a href="../papers/" class="related-link">
-                    <div>
-                        <div class="related-title">Published Papers</div>
-                        <div class="related-sub">The eight papers RITAM is built on</div>
-                    </div>
-                    <div class="related-arrow">→</div>
-                </a>
-                <a href="../failure-library/" class="related-link">
-                    <div>
-                        <div class="related-title">Failure Library</div>
-                        <div class="related-sub">Six failure modes the architecture addresses</div>
-                    </div>
-                    <div class="related-arrow">→</div>
-                </a>
-                <a href="niyom/" class="related-link" style="display:none;"><!-- NIYOM link placeholder --></a>
-                <a href="../niyom/" class="related-link">
-                    <div>
-                        <div class="related-title">NIYOM</div>
-                        <div class="related-sub">The execution layer that implements RITAM</div>
-                    </div>
-                    <div class="related-arrow">→</div>
-                </a>
+                <a href="../research/" class="related-link"><div><div class="related-title">Research Overview</div><div class="related-sub">Major findings, timeline, open questions</div></div><div class="related-arrow">→</div></a>
+                <a href="../papers/" class="related-link"><div><div class="related-title">Published Papers</div><div class="related-sub">The eight papers RITAM is built on</div></div><div class="related-arrow">→</div></a>
+                <a href="../failure-library/" class="related-link"><div><div class="related-title">Failure Library</div><div class="related-sub">Six failure modes the architecture addresses</div></div><div class="related-arrow">→</div></a>
+                <a href="../niyom/" class="related-link"><div><div class="related-title">NIYOM</div><div class="related-sub">The execution layer connected to RITAM</div></div><div class="related-arrow">→</div></a>
             </div>
-
         </div>
 
         <div class="sidebar">
             <div class="sidebar-block">
                 <div class="sidebar-label">Project Status</div>
-                <div class="sidebar-row">
-                    <span class="s-key">Status</span>
-                    <span class="s-val active">Active</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Type</span>
-                    <span class="s-val">Architecture Research</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Started</span>
-                    <span class="s-val">2026</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Runtime</span>
-                    <span class="s-val active">v1.1.1 live</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Tests</span>
-                    <span class="s-val">146 passing</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Licence</span>
-                    <span class="s-val">Apache 2.0</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Papers grounding it</span>
-                    <span class="s-val">8</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Product</span>
-                    <span class="s-val">No</span>
-                </div>
+                <div class="sidebar-row"><span class="s-key">Status</span><span class="s-val active">Active</span></div>
+                <div class="sidebar-row"><span class="s-key">Type</span><span class="s-val">Substrate Reliability Research</span></div>
+                <div class="sidebar-row"><span class="s-key">Runtime</span><span class="s-val active">v1.1.1 live</span></div>
+                <div class="sidebar-row"><span class="s-key">Tests</span><span class="s-val">146 passing</span></div>
+                <div class="sidebar-row"><span class="s-key">Licence</span><span class="s-val">Apache 2.0</span></div>
+                <div class="sidebar-row"><span class="s-key">Papers grounding it</span><span class="s-val">8</span></div>
+                <div class="sidebar-row"><span class="s-key">Product</span><span class="s-val">No</span></div>
             </div>
 
             <div class="sidebar-block">
@@ -557,16 +262,13 @@
                 <a href="../research/" class="sidebar-nav-link">Research Overview</a>
             </div>
         </div>
-
     </div>
 </div>
 
 <footer>
     <div class="container">
         <div class="footer-inner">
-            <div class="footer-left">
-                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
-            </div>
+            <div class="footer-left"><strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research</div>
             <div class="footer-links">
                 <a href="https://twitter.com/satoshisats" target="_blank">X</a>
                 <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
@@ -583,14 +285,8 @@
     var btn = document.getElementById('nav-hamburger');
     var links = document.querySelector('.nav-links');
     if (!btn || !links) return;
-    btn.addEventListener('click', function() {
-        links.classList.toggle('open');
-    });
-    links.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() {
-            links.classList.remove('open');
-        });
-    });
+    btn.addEventListener('click', function() { links.classList.toggle('open'); });
+    links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { links.classList.remove('open'); }); });
 })();
 </script>
 </body>
