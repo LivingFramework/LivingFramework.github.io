@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecosystem | Living Framework — Rishi Sood</title>
+    <meta name="description" content="A map of the Living Framework ecosystem: LC-OS research, RITAM, NIYOM, AWEN, templates, and applied AI books.">
+    <link rel="canonical" href="https://livingframework.github.io/ecosystem/">
+    <meta property="og:image" content="https://livingframework.github.io/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=DM+Sans:ital,wght@0,300..600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg:#eae7e0; --bg-2:#e2ddd6; --bg-3:#d8d3cb; --border:rgba(26,24,20,0.10); --border-hover:rgba(26,24,20,0.20); --text:#1a1814; --text-2:#4e4840; --text-3:#8c8680; --green:#9a5a28; --green-dim:rgba(154,90,40,0.07); --green-border:rgba(154,90,40,0.22); --amber:#b45309; --amber-dim:rgba(180,83,9,0.07); --amber-border:rgba(180,83,9,0.20); --font:'DM Sans',-apple-system,sans-serif; --serif:'Newsreader',Georgia,serif; --mono:'IBM Plex Mono',monospace; --max:1080px; --r:6px; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; }
+        body { font-family:var(--font); background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.6; }
+        a { color:inherit; text-decoration:none; }
+        p { color:var(--text-2); line-height:1.75; }
+        .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
+        nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(234,231,224,0.95); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+        .nav-inner { max-width:var(--max); margin:0 auto; padding:0 28px; height:64px; display:flex; align-items:center; justify-content:space-between; }
+        .nav-logo { font-family:var(--serif); font-size:2.4rem; color:var(--text); letter-spacing:0.01em; display:flex; align-items:center; gap:10px; }
+        .nav-logo em { color:var(--text-3); font-style:italic; }
+        .nav-mark { flex-shrink:0; display:block; }
+        .nav-links { display:flex; gap:28px; list-style:none; }
+        .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
+        .nav-links a:hover, .nav-links a.active { color:var(--text); font-weight:500; }
+        .hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; background:none; border:none; cursor:pointer; padding:6px 4px; }
+        .hamburger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; }
+        h1, h2, h3 { font-family:var(--serif); }
+        .page-header { padding:140px 0 72px; border-bottom:1px solid var(--border); }
+        .page-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--green); margin-bottom:22px; display:flex; align-items:center; gap:8px; }
+        .page-label::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); }
+        .page-header h1 { font-size:clamp(1.9rem,4vw,2.8rem); font-weight:600; letter-spacing:-0.03em; line-height:1.1; margin-bottom:18px; }
+        .page-header p { font-size:1rem; max-width:680px; }
+        section { padding:72px 0; border-bottom:1px solid var(--border); }
+        .section-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-3); margin-bottom:16px; }
+        .section-title { font-size:clamp(1.4rem,2.8vw,1.9rem); font-weight:600; letter-spacing:-0.02em; line-height:1.2; margin-bottom:12px; }
+        .section-intro { font-size:0.9375rem; max-width:680px; margin-bottom:42px; }
+        .stack { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+        .card { padding:28px; border:1px solid var(--border); border-radius:var(--r); background:var(--bg-2); transition:border-color 0.15s; }
+        .card:hover { border-color:var(--border-hover); }
+        .card-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-3); margin-bottom:12px; }
+        .card-name { font-size:1.1rem; font-weight:600; color:var(--text); letter-spacing:-0.02em; margin-bottom:10px; }
+        .card-desc { font-size:13.5px; color:var(--text-2); line-height:1.65; margin-bottom:18px; }
+        .card-links { display:flex; gap:8px; flex-wrap:wrap; }
+        .pill { display:inline-flex; font-family:var(--mono); font-size:11px; color:var(--text-3); border:1px solid var(--border); border-radius:var(--r); padding:6px 10px; transition:all 0.15s; }
+        .pill:hover { color:var(--green); border-color:var(--green-border); }
+        .system-map { max-width:760px; border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+        .map-row { display:grid; grid-template-columns:160px 1fr; border-bottom:1px solid var(--border); }
+        .map-row:last-child { border-bottom:none; }
+        .map-key { font-family:var(--mono); font-size:11px; color:var(--green); padding:16px 18px; background:var(--green-dim); border-right:1px solid var(--border); }
+        .map-val { padding:16px 18px; color:var(--text-2); font-size:13.5px; line-height:1.65; }
+        .note { padding:24px 28px; border:1px solid var(--amber-border); border-radius:var(--r); background:var(--amber-dim); max-width:760px; }
+        .note p { font-size:13.5px; color:var(--text-2); }
+        footer { padding:36px 0; border-top:1px solid var(--border); }
+        .footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
+        .footer-left { font-size:13px; color:var(--text-3); }
+        .footer-left strong { color:var(--text-2); font-weight:500; }
+        .footer-links { display:flex; gap:20px; }
+        .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
+        .footer-links a:hover { color:var(--text-2); }
+        @media(max-width:800px) { .stack { grid-template-columns:1fr; } .map-row { grid-template-columns:1fr; } .map-key { border-right:none; border-bottom:1px solid var(--border); } }
+        @media(max-width:640px) { .hamburger { display:flex; } .nav-links { display:none; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:rgba(234,231,224,0.97); backdrop-filter:blur(16px); border-bottom:1px solid rgba(26,24,20,0.10); padding:8px 28px 20px; gap:0; list-style:none; z-index:99; } .nav-links.open { display:flex; } .nav-links li { border-bottom:1px solid rgba(26,24,20,0.06); } .nav-links li:last-child { border-bottom:none; } .nav-links li a { display:block; padding:13px 0; font-size:14px; color:var(--text-2); } }
+    </style>
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+</head>
+<body>
+<nav>
+    <div class="nav-inner">
+        <a href="../" class="nav-logo"><svg class="nav-mark" width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="50" cy="50" r="47" fill="#1c1917"/><rect x="15" y="48" width="10" height="36" fill="#eae7e0"/><rect x="15" y="74" width="28" height="11" fill="#eae7e0"/><rect x="56" y="48" width="10" height="36" fill="#eae7e0"/><rect x="56" y="48" width="21" height="10" fill="#eae7e0"/><rect x="56" y="64" width="16" height="9" fill="#eae7e0"/><circle cx="50" cy="48" r="2.5" fill="#b45309"/><line x1="50" y1="48" x2="50" y2="32" stroke="#b45309" stroke-width="2.5" stroke-linecap="round"/><line x1="50" y1="38" x2="33" y2="22" stroke="#b45309" stroke-width="2" stroke-linecap="round"/><line x1="50" y1="38" x2="67" y2="22" stroke="#b45309" stroke-width="2" stroke-linecap="round"/><line x1="50" y1="32" x2="50" y2="18" stroke="#b45309" stroke-width="2" stroke-linecap="round"/><circle cx="31" cy="20" r="3.5" fill="#b45309"/><circle cx="69" cy="20" r="3.5" fill="#b45309"/><circle cx="50" cy="16" r="3.5" fill="#b45309"/></svg>Living<em>Framework</em></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../about/">About</a></li>
+            <li><a href="../research/">Research</a></li>
+            <li><a href="../papers/">Papers</a></li>
+            <li><a href="../failure-library/">Failure Library</a></li>
+            <li><a href="./" class="active">Ecosystem</a></li>
+            <li><a href="../advisory/">Advisory</a></li>
+        </ul>
+        <button class="hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<header class="page-header">
+    <div class="container">
+        <div class="page-label">Ecosystem Map</div>
+        <h1>One research programme, several working surfaces.</h1>
+        <p>Living Framework is not a single repo or product. It is a body of research and applied systems around reliable AI workflows: context engineering, memory integrity, verification, state management, provenance, observability, and repair.</p>
+    </div>
+</header>
+
+<section>
+    <div class="container">
+        <div class="section-label">The simple map</div>
+        <h2 class="section-title">How the pieces relate.</h2>
+        <p class="section-intro">The projects sit at different levels of the same problem: how increasingly capable AI systems can remain reliable over long-horizon work.</p>
+        <div class="system-map">
+            <div class="map-row"><div class="map-key">LC-OS</div><div class="map-val">The research foundation: papers, failure taxonomy, operating protocols, and the Mahdi Ledger.</div></div>
+            <div class="map-row"><div class="map-key">AWEN</div><div class="map-val">Field-intelligence layer: watches the AI field, tracks evidence, updates beliefs, and informs strategy.</div></div>
+            <div class="map-row"><div class="map-key">RITAM</div><div class="map-val">Substrate research: investigates the structural primitives required for reliable cognition systems.</div></div>
+            <div class="map-row"><div class="map-key">NIYOM</div><div class="map-val">Execution reliability layer: turns planning, verification, repair, and memory into a practical execution harness.</div></div>
+            <div class="map-row"><div class="map-key">Templates</div><div class="map-val">Practical adoption layer: lightweight artefacts for people using AI tools today.</div></div>
+            <div class="map-row"><div class="map-key">Books</div><div class="map-val">Public education layer: applied AI guides for practitioners who want structured, useful AI workflows without reading the full research corpus.</div></div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="section-label">Current work</div>
+        <h2 class="section-title">Different levels of the reliability stack.</h2>
+        <div class="stack">
+            <div class="card">
+                <div class="card-label">Research Foundation</div>
+                <div class="card-name">LC-OS Research</div>
+                <p class="card-desc">The published research corpus for long-horizon human-AI collaboration, reliability architecture, failure modes, memory integrity, and verification.</p>
+                <div class="card-links"><a href="../research/" class="pill">Research overview</a><a href="../papers/" class="pill">Papers</a></div>
+            </div>
+            <div class="card">
+                <div class="card-label">Field Intelligence</div>
+                <div class="card-name">AWEN</div>
+                <p class="card-desc">An internal intelligence layer for tracking what is changing in the AI field and turning that into research and product decisions.</p>
+                <div class="card-links"><span class="pill">Internal / active</span></div>
+            </div>
+            <div class="card">
+                <div class="card-label">Substrate Research</div>
+                <div class="card-name">RITAM</div>
+                <p class="card-desc">Research into governed cognition substrates: state, memory, ontology, epistemic confidence, coordination, time, observation, and repair.</p>
+                <div class="card-links"><a href="../ritam/" class="pill">RITAM page</a><a href="https://github.com/LivingFramework/ritam-core" target="_blank" class="pill">ritam-core</a></div>
+            </div>
+            <div class="card">
+                <div class="card-label">Execution Layer</div>
+                <div class="card-name">NIYOM</div>
+                <p class="card-desc">A reliability harness for AI work: Plan, Execute, Verify, Repair. NIYOM focuses on what happens before output reaches the user or enters memory.</p>
+                <div class="card-links"><a href="../niyom/" class="pill">NIYOM page</a></div>
+            </div>
+            <div class="card">
+                <div class="card-label">Practitioner Adoption</div>
+                <div class="card-name">Templates</div>
+                <p class="card-desc">Model-agnostic and platform-specific templates for context, canonical facts, failure recovery, and working-state continuity.</p>
+                <div class="card-links"><a href="https://github.com/LivingFramework/LC-OS-Project" target="_blank" class="pill">LC-OS Project</a></div>
+            </div>
+            <div class="card">
+                <div class="card-label">Applied Guides</div>
+                <div class="card-name">Books</div>
+                <p class="card-desc">Kindle/app guides that translate the same reliability ideas into field-specific AI use for managers, lawyers, teachers, HR teams, recruiters, administrators, and others.</p>
+                <div class="card-links"><a href="https://livingframework.github.io/books" target="_blank" class="pill">Applied AI Guides</a><a href="https://github.com/LivingFramework/books" target="_blank" class="pill">Books repo</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="section-label">Terminology</div>
+        <h2 class="section-title">Current field language first.</h2>
+        <div class="note"><p>The public website should lead with the language the current AI field recognises: reliability architecture, context engineering, memory integrity, state management, verification, observability, provenance, evaluation, agent workflows, and repair. “Governance” remains part of the research vocabulary where precise, but it should not be the only front-door term because it is overloaded by policy, compliance, and regulation.</p></div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-left"><strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research</div>
+            <div class="footer-links"><a href="https://twitter.com/satoshisats" target="_blank">X</a><a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a><a href="https://github.com/LivingFramework" target="_blank">GitHub</a><a href="https://orcid.org/0009-0008-6479-4061" target="_blank">ORCID</a><a href="https://scholar.google.com/citations?user=o89AbpEAAAAJ" target="_blank">Scholar</a></div>
+        </div>
+    </div>
+</footer>
+<script>
+(function(){ var btn=document.getElementById('nav-hamburger'); var links=document.querySelector('.nav-links'); if(!btn||!links)return; btn.addEventListener('click',function(){links.classList.toggle('open');}); links.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');});}); })();
+</script>
+</body>
+</html>
