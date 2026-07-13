@@ -1,10 +1,10 @@
 # Failure Recovery
 
-> What to do when things break. Because they will.
+> What to do when Claude, Cowork, project files, memory, or workflow state drift.
 
-Long-horizon collaboration doesn't fail dramatically. It fails through small, invisible drift that compounds until something snaps.
+Long-horizon AI collaboration does not fail only through bad answers. It also fails through stale project state, wrong files, hidden assumptions, outdated memory, over-agreement, background task drift, and numbers that were never made authoritative.
 
-The goal isn't preventing failure. The goal is making failure visible, bounded, and repairable.
+The goal is not preventing all failure. The goal is making failure visible, bounded, and repairable.
 
 **A system that breaks visibly and repairs cleanly is more trustworthy than one that pretends to be perfect.**
 
@@ -12,179 +12,205 @@ The goal isn't preventing failure. The goal is making failure visible, bounded, 
 
 ## The Core Protocol
 
-When something goes wrong, follow this sequence:
+When something goes wrong:
 
-```
+```text
 STOP → DIAGNOSE → ROLLBACK → NOTE
 ```
 
-Do not skip steps. Do not rush.
+Do not rush. Do not fix forward until you know what broke.
 
 ---
 
-## Step 1: STOP
+## Step 1 — STOP
 
-The moment you sense something is off — stop.
+The moment something feels off, stop the workflow.
 
 Do not:
-- Ask Claude to explain itself while continuing
-- Try to fix it quickly and push forward
-- Hope it resolves on its own
 
-Do:
-- Pause all work immediately
-- State clearly that something is wrong
+- keep generating output while diagnosing
+- let Cowork continue editing files
+- assume Claude's memory or project context is current
+- patch the visible symptom while leaving the source unclear
 
 **Prompt:**
-> "Stop. Something isn't right. Do not generate further output until we diagnose what happened."
 
-Stopping prevents error from spreading. The earlier you stop, the less you have to repair.
+```text
+Stop. Something is misaligned.
+Do not generate, edit, move, or modify anything further until we diagnose what happened.
+```
 
 ---
 
-## Step 2: DIAGNOSE
+## Step 2 — DIAGNOSE
 
-Identify what went wrong. Not why — just what.
+Identify what went wrong before explaining why.
 
 Ask:
+
 - What was the last known good state?
-- What changed since then?
-- Which file(s) are affected?
-- Which failure type is this? (See taxonomy below)
+- Which file, decision, number, or instruction changed?
+- Was Claude using memory, project files, pasted context, connectors, or Cowork folder state?
+- Which source was supposed to be authoritative?
+- Which failure type is this?
 
 **Prompt:**
-> "Let's diagnose. What was the last stable state? What changed? Which files are affected? Don't explain why yet — just identify what."
+
+```text
+Diagnose only.
+What was the last stable state?
+What changed?
+Which files, numbers, decisions, or instructions are affected?
+Which context source were you relying on?
+Do not repair yet.
+```
 
 ---
 
 ## Failure Taxonomy
 
-Seven categories of drift, from empirical research on long-horizon human-AI collaboration. Most failures belong to one of these.
+| # | Type | What it looks like |
+|---|---|---|
+| 1 | **Context / Memory Drift** | Claude relies on outdated memory, old project context, or an earlier decision. |
+| 2 | **Numerical Drift** | Numbers are reconstructed, guessed, copied from old context, or calculated from stale inputs. |
+| 3 | **File / Version Divergence** | Claude edits or references the wrong file; multiple versions become active. |
+| 4 | **Governance / Boundary Violation** | Claude ignores stated rules, project boundaries, or authority hierarchy. |
+| 5 | **Tool / Connector Drift** | Claude relies on connected data that is stale, incomplete, inaccessible, or misread. |
+| 6 | **Background Task Drift** | Scheduled or agentic work runs but is not reconciled with the live project state. |
+| 7 | **Sycophancy / Truth Drift** | Claude agrees too readily, softens critique, or changes position without evidence. |
+| 8 | **Cross-Domain Interference** | Assumptions from one project or domain leak into another. |
 
-| # | Type | What It Looks Like |
-|---|------|--------------------|
-| 1 | **Context & Memory Drift** | Claude acts on forgotten or outdated rules; "remembers" something incorrectly |
-| 2 | **Numerical Reasoning Errors** | Numbers reconstructed from memory rather than referenced; calculations break |
-| 3 | **File & Version Divergence** | Multiple versions exist; Claude references wrong one; parallel truths emerge |
-| 4 | **Governance & Boundary Violations** | Work from one project appears in another; domain rules forgotten |
-| 5 | **Emotional / Trust Drift** | Responses feel off — over-soft, over-confident, or misaligned in tone |
-| 6 | **Cross-Domain Interference** | Assumptions from one context contaminate another |
-| 7 | **Subtle Sycophancy Drift** | Claude agrees more than it should; pushback softens; truth erodes gradually |
-
-Identifying the type speeds up the repair. Context drift repairs differently from numeric errors. Sycophancy drift repairs differently from file divergence.
+Identifying the type speeds up the repair.
 
 ---
 
-## Step 3: ROLLBACK
+## Step 3 — ROLLBACK
 
-Return to the last known good state. Do not try to fix forward.
+Return to the last known good state.
 
 Actions:
-- Identify the last clean version of affected file(s)
-- Restore from archive or revert changes
-- Re-read RUNNING-DOCUMENT.md to reset context
-- Confirm Claude is aligned before proceeding
+
+- identify the authoritative file or source
+- restore from archive or revert changes if needed
+- re-read `RUNNING-DOCUMENT.md`
+- re-check `CANONICAL-NUMBERS.md` if numbers are involved
+- pause or reconcile background tasks
+- confirm alignment before proceeding
 
 **Prompt:**
-> "We're rolling back to [last stable state]. Discard work since [point of failure]. Re-read RUNNING-DOCUMENT.md and confirm you're aligned with current rules before we continue."
+
+```text
+Rollback to [last stable state].
+Discard or isolate work after [point of failure].
+Use only the current authoritative files.
+Confirm what is safe to keep and what must be ignored.
+```
 
 ---
 
-## Step 4: NOTE
+## Step 4 — NOTE
 
-Document what happened so it doesn't repeat.
+Document the failure so it does not repeat.
 
 Update:
-1. **RUNNING-DOCUMENT.md** — add to Corrections Log
-2. **Failure History below** — if the pattern is new
+
+1. `RUNNING-DOCUMENT.md` Corrections Log
+2. `CANONICAL-NUMBERS.md` if numeric truth changed
+3. relevant file status / archive notes
+4. task/update log if Cowork or background work was involved
 
 Capture:
-- What failed
-- What triggered it
-- How it was repaired
-- What rule or practice prevents recurrence
+
+- what failed
+- trigger
+- affected files/sources
+- repair action
+- prevention rule
 
 **Prompt:**
-> "Log this failure in the Corrections Log: what happened, what we fixed, and what prevents it next time."
 
----
-
-## Quick Reference
-
-```
-┌─────────────────────────────────────────────┐
-│           FAILURE RECOVERY                  │
-├─────────────────────────────────────────────┤
-│  1. STOP     — Halt immediately             │
-│  2. DIAGNOSE — What broke (not why)         │
-│  3. ROLLBACK — Return to last stable state  │
-│  4. NOTE     — Document to prevent repeat   │
-└─────────────────────────────────────────────┘
+```text
+Log this failure clearly:
+what happened, what source was wrong or stale, what we repaired, and what rule prevents recurrence.
 ```
 
 ---
 
 ## Type-Specific Repairs
 
-### Context & Memory Drift
-Re-read RUNNING-DOCUMENT.md from scratch. Ask Claude to summarise current rules before proceeding.
+### Context / Memory Drift
 
-### Numerical Errors
-Identify the incorrect number. Find it in CANONICAL-NUMBERS.md. Have Claude re-do any calculation using only canonical sources.
+Use the current `RUNNING-DOCUMENT.md` as authority. Ask Claude to separate current project state from memory or prior chat context.
 
-### File Divergence
-Identify which file is authoritative. Archive all other versions. Update RUNNING-DOCUMENT.md Files In Play section. Confirm one canonical version before proceeding.
+### Numerical Drift
 
-### Boundary Violations
-Identify which domain was crossed. Re-read relevant boundary rules. Consider adding an explicit rule to RUNNING-DOCUMENT.md.
+Find the value in `CANONICAL-NUMBERS.md` or an explicitly linked source. If it is missing, stop and establish the number before using it.
 
-### Emotional / Trust Drift
-Name it directly: "Your tone has shifted. Recalibrate." Re-read TRUTH-PROTOCOL.md. Use the Truth Check mode command.
+### File / Version Divergence
 
-### Sycophancy Drift
-Use the Trust Reset:
-> "Truth check. Stop managing my feelings. Tell me what you actually think about [X]. Be specific. Include what's weak or wrong."
+Identify the active canonical file. Archive or mark old versions. Update Files In Play in `RUNNING-DOCUMENT.md`.
+
+### Governance / Boundary Violation
+
+Re-read active rules. Add a new rule if the same boundary could be crossed again.
+
+### Tool / Connector Drift
+
+Check whether the connected source is current, accessible, and complete. If not, label the output provisional.
+
+### Background Task Drift
+
+Reconcile task outputs before continuing. Add a summary of background changes to the Running Document.
+
+### Sycophancy / Truth Drift
+
+Use the Truth Check reset:
+
+```text
+Truth check. Stop managing my feelings.
+Tell me what you actually think about [X], including what is weak, wrong, missing, or uncertain.
+```
+
+### Cross-Domain Interference
+
+Name the contaminated assumption. Re-anchor the session in the correct project, folder, or domain rules.
 
 ---
 
 ## Warning Signs — Catch Drift Early
 
-Stop before full failure. Watch for:
+Stop before full failure when Claude:
 
-- Claude contradicting earlier decisions
-- Numbers that look plausible but weren't referenced
-- Tone shifts (over-soft, defensive, over-confident)
-- Confusion about which file is authoritative
-- Claude asking questions that were already answered
-- Agreement where you expected pushback
-- Work from one project appearing in another
-- Responses that feel good but don't feel honest
-
-When you see these: **STOP**. Don't wait for the full collapse.
+- uses numbers not in the canonical source
+- references a superseded decision
+- edits or cites the wrong file
+- acts from memory when project files say otherwise
+- cannot name the authoritative source
+- agrees when critique is expected
+- becomes vague about uncertainty
+- mixes workstreams
+- ignores background changes
+- produces output that feels polished but ungrounded
 
 ---
 
 ## Prevention Habits
 
-The best repair is the one you never need.
-
-1. **Read RUNNING-DOCUMENT.md every session** — resets context
-2. **Reference CANONICAL-NUMBERS.md for all numbers** — no reconstruction
-3. **One canonical file per domain** — eliminates version confusion
-4. **Archive, don't delete** — rollback requires history
-5. **Name files with status** — DRAFT / FINAL / DEPRECATED
-6. **Log corrections as they happen** — not later
-7. **Trust your instincts** — if something feels off, stop
+1. Keep `RUNNING-DOCUMENT.md` current.
+2. Keep `CANONICAL-NUMBERS.md` authoritative.
+3. Mark files Active / Draft / Deprecated.
+4. Reconcile Cowork or scheduled-task outputs.
+5. Archive rather than delete.
+6. Ask Claude what source it used when stakes are high.
+7. Use Truth Check when agreement feels too easy.
 
 ---
 
 ## Failure History
 
-> Log significant failures here for pattern recognition. Patterns repeat.
-
-| Date | Type | What Happened | Resolution | Prevention |
-|------|------|---------------|------------|------------|
-| | | | | |
+| Date | Type | What happened | Affected source/file | Resolution | Prevention |
+|---|---|---|---|---|---|
+| | | | | | |
 
 ---
 
@@ -192,8 +218,6 @@ The best repair is the one you never need.
 
 Failure is not the enemy. Invisible failure is.
 
-When something breaks visibly and repairs cleanly, the collaboration gets stronger — not weaker. Each repaired failure makes the system more robust. The twelve documented repair patterns in the LC-OS research came from real failures, logged and studied.
-
-Treat failures as design data, not setbacks.
+Treat failures as design data. Every visible repair strengthens the system.
 
 **STOP → DIAGNOSE → ROLLBACK → NOTE**
