@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NIYOM | Living Framework — Rishi Sood</title>
-    <meta name="description" content="NIYOM is an AI verification harness — Plan, Execute, Verify, Repair. Forces AI output through governed stages before it reaches the user. Built on the LC-OS research series. In active development.">
+    <meta name="description" content="NIYOM is an AI execution-reliability harness for planning, verification, repair, memory, and repeatable AI workflows. Built from the Living Framework research programme.">
     <link rel="canonical" href="https://livingframework.github.io/niyom/">
     <meta property="og:image" content="https://livingframework.github.io/og-image.png">
     <meta property="og:image:width" content="1200">
@@ -16,301 +16,90 @@
 
     <style>
         :root {
-            --bg:    #eae7e0;
-            --bg-2:  #e2ddd6;
-            --bg-3:  #d8d3cb;
-            --border:       rgba(26,24,20,0.10);
-            --border-hover: rgba(26,24,20,0.20);
-            --text:  #1a1814;
-            --text-2:#4e4840;
-            --text-3:#8c8680;
-            --green: #9a5a28;
-            --green-dim:    rgba(154,90,40,0.07);
-            --green-border: rgba(154,90,40,0.22);
-            --amber: #b45309;
-            --amber-dim:    rgba(180,83,9,0.07);
-            --amber-border: rgba(180,83,9,0.20);
-            --font:  'DM Sans', -apple-system, sans-serif;
-            --serif: 'Newsreader', Georgia, serif;
-            --mono:  'IBM Plex Mono', monospace;
-            --max:   1080px;
-            --r:     6px;
+            --bg:#eae7e0; --bg-2:#e2ddd6; --bg-3:#d8d3cb;
+            --border:rgba(26,24,20,0.10); --border-hover:rgba(26,24,20,0.20);
+            --text:#1a1814; --text-2:#4e4840; --text-3:#8c8680;
+            --green:#9a5a28; --green-dim:rgba(154,90,40,0.07); --green-border:rgba(154,90,40,0.22);
+            --amber:#b45309; --amber-dim:rgba(180,83,9,0.07); --amber-border:rgba(180,83,9,0.20);
+            --font:'DM Sans',-apple-system,sans-serif; --serif:'Newsreader',Georgia,serif; --mono:'IBM Plex Mono',monospace;
+            --max:1080px; --r:6px;
         }
-
         * { margin:0; padding:0; box-sizing:border-box; }
         html { scroll-behavior:smooth; }
-        body {
-            font-family: var(--font);
-            background: var(--bg);
-            color: var(--text);
-            -webkit-font-smoothing: antialiased;
-            line-height: 1.6;
-        }
+        body { font-family:var(--font); background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; line-height:1.6; }
         a { color:inherit; text-decoration:none; }
         p { color:var(--text-2); line-height:1.75; }
-
         .container { max-width:var(--max); margin:0 auto; padding:0 28px; }
 
-        /* ── Nav ── */
-        nav {
-            position:fixed; top:0; left:0; right:0; z-index:100;
-            background:rgba(234,231,224,0.95);
-            backdrop-filter:blur(16px);
-            border-bottom:1px solid var(--border);
-        }
-        .nav-inner {
-            max-width:var(--max); margin:0 auto; padding:0 28px;
-            height:64px; display:flex; align-items:center; justify-content:space-between;
-        }
-        .nav-logo { font-family:var(--serif); font-size:2.4rem; color:var(--text); letter-spacing:0.01em; }
+        nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(234,231,224,0.95); backdrop-filter:blur(16px); border-bottom:1px solid var(--border); }
+        .nav-inner { max-width:var(--max); margin:0 auto; padding:0 28px; height:64px; display:flex; align-items:center; justify-content:space-between; }
+        .nav-logo { font-family:var(--serif); font-size:2.4rem; color:var(--text); letter-spacing:0.01em; display:flex; align-items:center; gap:10px; }
         .nav-logo em { color:var(--text-3); font-style:italic; }
+        .nav-mark { flex-shrink:0; display:block; }
         .nav-links { display:flex; gap:28px; list-style:none; }
         .nav-links a { font-size:13px; color:var(--text-3); transition:color 0.15s; }
-        .nav-links a:hover, .nav-links a.active { color:var(--text-2); }
+        .nav-links a:hover, .nav-links a.active { color:var(--text); font-weight:500; }
+        .hamburger { display:none; flex-direction:column; justify-content:center; gap:5px; background:none; border:none; cursor:pointer; padding:6px 4px; }
+        .hamburger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; }
 
-        /* ── Page header ── */
-        .page-header {
-            padding:140px 0 64px;
-            border-bottom:1px solid var(--border);
-        }
-        .breadcrumb {
-            display:flex; align-items:center; gap:8px;
-            font-family:var(--mono); font-size:11px; color:var(--text-3);
-            margin-bottom:24px; letter-spacing:0.04em;
-        }
+        .page-header { padding:140px 0 64px; border-bottom:1px solid var(--border); }
+        .breadcrumb { display:flex; align-items:center; gap:8px; font-family:var(--mono); font-size:11px; color:var(--text-3); margin-bottom:24px; letter-spacing:0.04em; }
         .breadcrumb a:hover { color:var(--text-2); }
         .breadcrumb span { color:var(--text-3); }
-        .page-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.14em; color:var(--green); margin-bottom:18px;
-            display:flex; align-items:center; gap:8px;
-        }
-        .page-label::before {
-            content:''; width:6px; height:6px;
-            border-radius:50%; background:var(--green);
-            animation: pulse 2s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity:1; }
-            50% { opacity:0.4; }
-        }
-        .page-header h1 {
-            font-size:clamp(2.2rem, 5vw, 3.5rem); font-weight:700;
-            letter-spacing:-0.04em; line-height:1; margin-bottom:20px;
-            font-family:var(--mono);
-        }
-        .page-header p { font-size:1rem; max-width:580px; }
+        .page-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--green); margin-bottom:18px; display:flex; align-items:center; gap:8px; }
+        .page-label::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--green); animation:pulse 2s ease-in-out infinite; }
+        @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+        .page-header h1 { font-size:clamp(2.2rem,5vw,3.5rem); font-weight:700; letter-spacing:-0.04em; line-height:1; margin-bottom:20px; font-family:var(--serif); }
+        .page-header p { font-size:1rem; max-width:680px; }
 
-        /* ── Layout ── */
-        .content-layout {
-            display:grid;
-            grid-template-columns:1fr 260px;
-            gap:64px;
-            padding:64px 0 96px;
-            align-items:start;
-        }
-
-        /* ── Sections ── */
+        .content-layout { display:grid; grid-template-columns:1fr 260px; gap:64px; padding:64px 0 96px; align-items:start; }
         .prose-block { margin-bottom:52px; }
         .prose-block:last-child { margin-bottom:0; }
-        .prose-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.14em; color:var(--text-3); margin-bottom:14px;
-        }
-        .prose-block h2 {
-            font-size:1.2rem; font-weight:600; color:var(--text);
-            letter-spacing:-0.02em; margin-bottom:14px; line-height:1.2;
-        }
-        .prose-block p {
-            font-size:0.9375rem; margin-bottom:14px;
-        }
+        .prose-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.14em; color:var(--text-3); margin-bottom:14px; }
+        .prose-block h2 { font-family:var(--serif); font-size:1.2rem; font-weight:600; color:var(--text); letter-spacing:-0.02em; margin-bottom:14px; line-height:1.2; }
+        .prose-block p { font-size:0.9375rem; margin-bottom:14px; }
         .prose-block p:last-child { margin-bottom:0; }
 
-        /* ── Callout ── */
-        .callout {
-            padding:24px 28px;
-            border:1px solid var(--green-border);
-            border-radius:var(--r);
-            background:var(--green-dim);
-            margin-bottom:52px;
-        }
-        .callout p {
-            font-size:0.9375rem; color:var(--text);
-            font-weight:500; line-height:1.55; letter-spacing:-0.01em;
-        }
-        .callout span {
-            display:block; font-family:var(--mono); font-size:10px;
-            text-transform:uppercase; letter-spacing:0.12em;
-            color:var(--green); margin-bottom:10px;
-        }
+        .callout { padding:24px 28px; border:1px solid var(--green-border); border-radius:var(--r); background:var(--green-dim); margin-bottom:52px; }
+        .callout p { font-size:0.9375rem; color:var(--text); font-weight:500; line-height:1.55; letter-spacing:-0.01em; }
+        .callout span { display:block; font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.12em; color:var(--green); margin-bottom:10px; }
 
-        /* ── Dependency chain ── */
-        .dep-chain {
-            display:flex; align-items:center; gap:0;
-            border:1px solid var(--border); border-radius:var(--r);
-            overflow:hidden; margin-top:20px;
-        }
-        .dep-node {
-            flex:1; padding:18px 20px;
-            border-right:1px solid var(--border);
-        }
-        .dep-node:last-child { border-right:none; }
-        .dep-node-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.1em; color:var(--text-3); margin-bottom:6px;
-        }
-        .dep-node-name {
-            font-size:13.5px; font-weight:600; color:var(--text); margin-bottom:4px;
-        }
-        .dep-node-desc { font-size:12px; color:var(--text-3); line-height:1.5; }
-        .dep-node.current .dep-node-name { color:var(--green); }
-        .dep-node.current { background:var(--green-dim); }
-        .dep-arrow {
-            padding:0 4px; color:var(--text-3); font-size:12px;
-            background:var(--bg-3); align-self:stretch;
-            display:flex; align-items:center;
-        }
-
-        /* ── What it implements ── */
-        .impl-list {
-            border:1px solid var(--border); border-radius:var(--r); overflow:hidden;
-        }
-        .impl-row {
-            display:grid; grid-template-columns:1fr auto;
-            gap:16px; padding:16px 20px;
-            border-bottom:1px solid var(--border);
-            align-items:center;
-        }
+        .impl-list { border:1px solid var(--border); border-radius:var(--r); overflow:hidden; }
+        .impl-row { display:grid; grid-template-columns:1fr auto; gap:16px; padding:16px 20px; border-bottom:1px solid var(--border); align-items:center; }
         .impl-row:last-child { border-bottom:none; }
         .impl-name { font-size:13.5px; color:var(--text); font-weight:500; }
         .impl-src { font-family:var(--mono); font-size:10px; color:var(--text-3); }
 
-        /* ── Related links ── */
-        .related-link {
-            display:flex; align-items:center; justify-content:space-between;
-            padding:14px 18px;
-            border:1px solid var(--border); border-radius:var(--r);
-            margin-bottom:8px; transition:all 0.15s;
-            background:var(--bg-2);
-        }
+        .related-link { display:flex; align-items:center; justify-content:space-between; padding:14px 18px; border:1px solid var(--border); border-radius:var(--r); margin-bottom:8px; transition:all 0.15s; background:var(--bg-2); }
         .related-link:hover { border-color:var(--border-hover); }
         .related-link:last-child { margin-bottom:0; }
         .related-title { font-size:13.5px; color:var(--text); font-weight:500; }
         .related-sub { font-size:12px; color:var(--text-3); margin-top:2px; }
         .related-arrow { font-size:12px; color:var(--text-3); }
 
-        /* ── Sidebar ── */
         .sidebar { position:sticky; top:80px; }
-        .sidebar-block {
-            padding:20px;
-            border:1px solid var(--border); border-radius:var(--r);
-            background:var(--bg-2); margin-bottom:12px;
-        }
-        .sidebar-label {
-            font-family:var(--mono); font-size:10px; text-transform:uppercase;
-            letter-spacing:0.12em; color:var(--text-3); margin-bottom:12px;
-        }
-        .sidebar-row {
-            display:flex; justify-content:space-between;
-            padding:6px 0; border-bottom:1px solid var(--border); gap:8px;
-        }
+        .sidebar-block { padding:20px; border:1px solid var(--border); border-radius:var(--r); background:var(--bg-2); margin-bottom:12px; }
+        .sidebar-label { font-family:var(--mono); font-size:10px; text-transform:uppercase; letter-spacing:0.12em; color:var(--text-3); margin-bottom:12px; }
+        .sidebar-row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border); gap:8px; }
         .sidebar-row:last-child { border-bottom:none; padding-bottom:0; }
         .s-key { font-size:12px; color:var(--text-3); }
         .s-val { font-size:12px; color:var(--text-2); font-weight:500; text-align:right; }
         .s-val.active { color:var(--green); }
-        .sidebar-nav-link {
-            display:block; font-size:13px; color:var(--text-3);
-            padding:8px 0; border-bottom:1px solid var(--border);
-            transition:color 0.15s;
-        }
+        .sidebar-nav-link { display:block; font-size:13px; color:var(--text-3); padding:8px 0; border-bottom:1px solid var(--border); transition:color 0.15s; }
         .sidebar-nav-link:last-child { border-bottom:none; }
         .sidebar-nav-link:hover { color:var(--text-2); }
 
-        /* ── Footer ── */
         footer { padding:36px 0; border-top:1px solid var(--border); }
-        .footer-inner {
-            display:flex; align-items:center;
-            justify-content:space-between; flex-wrap:wrap; gap:16px;
-        }
+        .footer-inner { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px; }
         .footer-left { font-size:13px; color:var(--text-3); }
         .footer-left strong { color:var(--text-2); font-weight:500; }
         .footer-links { display:flex; gap:20px; }
         .footer-links a { font-size:12.5px; color:var(--text-3); transition:color 0.15s; }
         .footer-links a:hover { color:var(--text-2); }
 
-        /* ── Responsive ── */
-        @media (max-width:800px) {
-            .content-layout { grid-template-columns:1fr; gap:0; }
-            .sidebar { position:static; margin-top:48px; }
-            .dep-chain { flex-direction:column; }
-            .dep-node { border-right:none; border-bottom:1px solid var(--border); }
-            .dep-node:last-child { border-bottom:none; }
-            .dep-arrow { display:none; }
-        }
-        @media (max-width:600px) {
-            .nav-links { display:none; }
-        }
-    
-        /* ── Design refresh: serif headings ── */
-        h1, h2, h3,
-        .section-title, .page-title, .paper-title,
-        .hero h1, .card-title, .entry-title {
-            font-family: var(--serif);
-        }
-        .nav-links a.active {
-            color: var(--text);
-            font-weight: 500;
-        }
-        
-        .nav-logo { display:flex; align-items:center; gap:10px; }
-        .nav-mark { flex-shrink:0; display:block; }
-        
-        /* ── Mobile hamburger nav ── */
-        .hamburger {
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            gap: 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 6px 4px;
-        }
-        .hamburger span {
-            display: block;
-            width: 22px;
-            height: 2px;
-            background: var(--text);
-            border-radius: 2px;
-        }
-        @media (max-width:640px) {
-            .hamburger { display: flex; flex-direction: column; }
-            .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 64px; left: 0; right: 0;
-                background: rgba(234,231,224,0.97);
-                backdrop-filter: blur(16px);
-                border-bottom: 1px solid rgba(26,24,20,0.10);
-                padding: 8px 28px 20px;
-                gap: 0;
-                list-style: none;
-                z-index: 99;
-            }
-            .nav-links.open { display: flex; }
-            .nav-links li { border-bottom: 1px solid rgba(26,24,20,0.06); }
-            .nav-links li:last-child { border-bottom: none; }
-            .nav-links li a {
-                display: block;
-                padding: 13px 0;
-                font-size: 14px;
-                color: var(--text-2);
-                letter-spacing: 0;
-            }
-            .page-label { font-size: 11px; }
-        }
-        </style>
+        @media(max-width:800px) { .content-layout { grid-template-columns:1fr; gap:0; } .sidebar { position:static; margin-top:48px; } }
+        @media(max-width:640px) { .hamburger { display:flex; } .nav-links { display:none; flex-direction:column; position:absolute; top:64px; left:0; right:0; background:rgba(234,231,224,0.97); backdrop-filter:blur(16px); border-bottom:1px solid rgba(26,24,20,0.10); padding:8px 28px 20px; gap:0; list-style:none; z-index:99; } .nav-links.open { display:flex; } .nav-links li { border-bottom:1px solid rgba(26,24,20,0.06); } .nav-links li:last-child { border-bottom:none; } .nav-links li a { display:block; padding:13px 0; font-size:14px; color:var(--text-2); letter-spacing:0; } .page-label { font-size:11px; } }
+    </style>
     <link rel="icon" href="/favicon.ico" sizes="32x32">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 </head>
@@ -325,7 +114,7 @@
             <li><a href="../research/">Research</a></li>
             <li><a href="../papers/">Papers</a></li>
             <li><a href="../failure-library/">Failure Library</a></li>
-            <li><a href="../#projects">Projects</a></li>
+            <li><a href="../ecosystem/">Ecosystem</a></li>
             <li><a href="../advisory/">Advisory</a></li>
         </ul>
         <button class="hamburger" id="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
@@ -335,187 +124,76 @@
 <header class="page-header">
     <div class="container">
         <div class="breadcrumb">
-            <a href="../">Home</a>
-            <span>/</span>
-            <a href="../#projects">Projects</a>
-            <span>/</span>
-            NIYOM
+            <a href="../">Home</a><span>/</span><a href="../ecosystem/">Ecosystem</a><span>/</span>NIYOM
         </div>
-        <div class="page-label">AI Verification Harness · v1.0.0 · Stage 7 · In Development · 2026</div>
+        <div class="page-label">AI Execution Reliability · Verification Harness · Active Product Development</div>
         <h1>NIYOM</h1>
-        <p>A structured execution harness for AI output. Every task goes through Plan, Execute, Verify, and Repair — with adversarial verification between generation and acceptance. Not a chatbot. Not a wrapper. Infrastructure. In active development.</p>
+        <p>NIYOM is a structured execution harness for reliable AI work. It separates planning, generation, verification, repair, and memory so AI outputs are not simply produced and accepted, but checked before they propagate into documents, decisions, workflows, or future context. Not a chatbot. Not a wrapper. A reliability layer for serious AI execution.</p>
     </div>
 </header>
 
 <div class="container">
     <div class="content-layout">
-
         <div class="main-content">
-
             <div class="callout">
-                <span>The problem it’s built to solve</span>
-                <p>41–87% of production AI failures are architectural, not model-based. The model isn’t the problem — the harness is. Standard AI tools generate output and present it directly. There is no verification step. Errors arrive confidently. NIYOM separates generation from judgement — the AI generates, a separate adversarial pass judges independently, and the user only receives output that has passed structured verification.</p>
+                <span>The problem it is built to solve</span>
+                <p>Modern AI systems are increasingly capable, but capability does not automatically produce dependable execution. Many AI workflow failures arise from missing execution structure: weak verification, unclear assumptions, memory drift, and poor recovery paths. NIYOM places a structured verification and repair layer between AI generation and user acceptance.</p>
             </div>
 
             <div class="prose-block">
                 <div class="prose-label">What NIYOM Is</div>
-                <h2>A governed four-stage loop</h2>
-                <p>NIYOM is not a chatbot, not an AI wrapper, not an agent. It is a verification harness: a governed execution environment that forces AI output through four enforced stages before anything reaches the user.</p>
-                <p>Plan — the AI commits to a structured approach with declared assumptions and a cognitive contract before any execution begins. Execute — the plan runs step by step in enforced format. Verify — a completely separate AI prompt, independent of the execute prompt, audits the output adversarially. It doesn’t know it’s reviewing the same pipeline’s work. Repair — if Verify returns REDO, the output is rewritten to address every identified failure, and Verify runs again.</p>
-                <p>Only verified outputs enter memory. No unvalidated work accumulates. This is the Stochastic-Deterministic Boundary: generation is stochastic, Verify is the deterministic gate.</p>
+                <h2>An execution-reliability layer for AI workflows.</h2>
+                <p>NIYOM forces work through a clear operating loop: Plan, Execute, Verify, Repair, and Memory.</p>
+                <p><strong>Plan</strong> defines the objective, assumptions, constraints, and intended approach before execution begins. <strong>Execute</strong> produces the output in a structured way. <strong>Verify</strong> audits the output independently against the objective, constraints, factual requirements, and failure risks. <strong>Repair</strong> corrects identified issues before the output is accepted, saved, exported, or reused. <strong>Memory</strong> retains only useful, verified, or explicitly reviewed outputs so future work is grounded in higher-quality state.</p>
+                <p>The core idea is simple: generation and validation are different jobs. NIYOM treats them as separate stages rather than assuming that a fluent answer is a reliable answer.</p>
             </div>
 
             <div class="prose-block">
                 <div class="prose-label">Verdicts</div>
                 <h2>What Verify can return</h2>
-                <p>Every task ends with one of four verdicts — not a score, not a rating. A governed decision about whether the output has earned the right to reach the user.</p>
+                <p>Every task resolves into a clear verdict. These verdicts create friction at the right moment: before unreliable output becomes accepted work.</p>
                 <div class="impl-list" style="margin-top:18px;">
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">READY</div>
-                            <div class="impl-src" style="margin-top:3px;">Output passed structured verification. Use it.</div>
-                        </div>
-                    </div>
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">REVIEW</div>
-                            <div class="impl-src" style="margin-top:3px;">Usable, but findings were noted. Check before acting. Acceptance requires friction.</div>
-                        </div>
-                    </div>
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">REDO</div>
-                            <div class="impl-src" style="margin-top:3px;">Critical failure. Output rewrites automatically. Verify runs again.</div>
-                        </div>
-                    </div>
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">BLOCKED</div>
-                            <div class="impl-src" style="margin-top:3px;">Objective cannot be reliably governed as stated. Pipeline does not start.</div>
-                        </div>
-                    </div>
+                    <div class="impl-row"><div><div class="impl-name">READY</div><div class="impl-src" style="margin-top:3px;">The output passed structured verification and is suitable to use.</div></div></div>
+                    <div class="impl-row"><div><div class="impl-name">REVIEW</div><div class="impl-src" style="margin-top:3px;">The output is usable, but caveats, assumptions, or risks require human attention.</div></div></div>
+                    <div class="impl-row"><div><div class="impl-name">REDO</div><div class="impl-src" style="margin-top:3px;">The output failed verification and must be repaired before use.</div></div></div>
+                    <div class="impl-row"><div><div class="impl-name">BLOCKED</div><div class="impl-src" style="margin-top:3px;">The task cannot be reliably executed as stated because the objective, inputs, constraints, or evidence are insufficient.</div></div></div>
                 </div>
             </div>
 
             <div class="prose-block">
                 <div class="prose-label">Development</div>
-                <h2>Seven stages, six complete</h2>
-                <p>Niyom was built in certified stages — each stage gated by automated Python certification scripts run against the live production URL, not locally.</p>
-                <div class="impl-list" style="margin-top:18px;">
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">Stage 1 — Core Loop</div>
-                            <div class="impl-src" style="margin-top:3px;">Complete ✓</div>
-                        </div>
-                    </div>
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">Stage 2 — Validation Architecture</div>
-                            <div class="impl-src" style="margin-top:3px;">Complete ✓</div>
-                        </div>
-                    </div>
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">Stage 3 — Intelligence Layer</div>
-                            <div class="impl-src" style="margin-top:3px;">Complete ✓</div>
-                        </div>
-                    </div>
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">Stage 4 — Auth + Persistent Sessions</div>
-                            <div class="impl-src" style="margin-top:3px;">Complete ✓</div>
-                        </div>
-                    </div>
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">Stage 5 — Smart Memory Retrieval</div>
-                            <div class="impl-src" style="margin-top:3px;">Complete ✓</div>
-                        </div>
-                    </div>
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">Stage 6 — Clarification Routing</div>
-                            <div class="impl-src" style="margin-top:3px;">Complete ✓</div>
-                        </div>
-                    </div>
-                    <div class="impl-row">
-                        <div>
-                            <div class="impl-name">Stage 7 — Semantic Governance</div>
-                            <div class="impl-src" style="margin-top:3px;">In progress</div>
-                        </div>
-                    </div>
-                </div>
+                <h2>Active product development</h2>
+                <p>NIYOM is in active product development. The current work focuses on making AI execution more dependable through structured planning, adversarial verification, repair loops, memory, session continuity, observability, and user-facing workflow controls.</p>
+                <p>The aim is not to make AI sound more confident. The aim is to make AI work more inspectable, recoverable, and trustworthy.</p>
+                <p>Earlier development established the core execution loop, verification architecture, memory, persistent sessions, and ambiguity handling. Current development continues to expand the reliability layer around real user workflows, stronger evaluation, observability, and production readiness.</p>
             </div>
 
             <div class="prose-block">
                 <div class="prose-label">Current Status</div>
-                <h2>v1.0.0 · Stage 7 in progress</h2>
-                <p>NIYOM is in active development and internal testing. Six of seven development stages are complete. Stage 7 (Semantic Governance) is in progress.</p>
-                <p>Every completed run is stored to the user's account, protected by row-level security. Smart memory retrieval injects relevant prior runs into new plans, weighted by recency and verdict quality. Clarification routing classifies every ambiguous objective before the pipeline starts — ambiguity is a governance state, not a repair problem.</p>
-                <p>Niyom is a product. The research programme has run 432 controlled experiments across the architecture.</p>
+                <h2>Active execution-reliability product</h2>
+                <p>NIYOM translates the Living Framework research arc into a working harness: plan before action, verify before acceptance, repair before reuse, and preserve only useful state.</p>
+                <p>Its role in the ecosystem is practical execution. RITAM investigates the substrate questions beneath reliable cognition systems; NIYOM turns reliability architecture into a usable execution layer.</p>
             </div>
 
             <div style="padding-top:8px;">
                 <div class="prose-label" style="margin-bottom:16px;">Explore Further</div>
-                <a href="../ritam/" class="related-link">
-                    <div>
-                        <div class="related-title">RITAM</div>
-                        <div class="related-sub">Foundational substrate research alongside NIYOM</div>
-                    </div>
-                    <div class="related-arrow">→</div>
-                </a>
-                <a href="../research/" class="related-link">
-                    <div>
-                        <div class="related-title">Research Overview</div>
-                        <div class="related-sub">The findings both projects are built on</div>
-                    </div>
-                    <div class="related-arrow">→</div>
-                </a>
-                <a href="../papers/" class="related-link">
-                    <div>
-                        <div class="related-title">Published Papers</div>
-                        <div class="related-sub">Eight papers — the research foundation</div>
-                    </div>
-                    <div class="related-arrow">→</div>
-                </a>
-                <a href="../failure-library/" class="related-link">
-                    <div>
-                        <div class="related-title">Failure Library</div>
-                        <div class="related-sub">Six failure modes NIYOM helps prevent and repair</div>
-                    </div>
-                    <div class="related-arrow">→</div>
-                </a>
+                <a href="../ritam/" class="related-link"><div><div class="related-title">RITAM</div><div class="related-sub">Substrate research beneath reliable cognition systems</div></div><div class="related-arrow">→</div></a>
+                <a href="../ecosystem/" class="related-link"><div><div class="related-title">Ecosystem</div><div class="related-sub">How LC-OS, RITAM, NIYOM, AWEN, templates, and books fit together</div></div><div class="related-arrow">→</div></a>
+                <a href="../research/" class="related-link"><div><div class="related-title">Research Overview</div><div class="related-sub">The findings NIYOM is built from</div></div><div class="related-arrow">→</div></a>
+                <a href="../papers/" class="related-link"><div><div class="related-title">Published Papers</div><div class="related-sub">Eight papers — the research foundation</div></div><div class="related-arrow">→</div></a>
+                <a href="../failure-library/" class="related-link"><div><div class="related-title">Failure Library</div><div class="related-sub">Failure modes NIYOM helps prevent and repair</div></div><div class="related-arrow">→</div></a>
             </div>
-
         </div>
 
         <div class="sidebar">
             <div class="sidebar-block">
                 <div class="sidebar-label">Project Status</div>
-                <div class="sidebar-row">
-                    <span class="s-key">Status</span>
-                    <span class="s-val active">v1.0.0 · Active</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Type</span>
-                    <span class="s-val">Verification Harness</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Started</span>
-                    <span class="s-val">2026</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Built on</span>
-                    <span class="s-val">LC-OS Papers 1–8</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Output</span>
-                    <span class="s-val">Live software</span>
-                </div>
-                <div class="sidebar-row">
-                    <span class="s-key">Product</span>
-                    <span class="s-val active">Yes — In development</span>
-                </div>
+                <div class="sidebar-row"><span class="s-key">Status</span><span class="s-val active">Active development</span></div>
+                <div class="sidebar-row"><span class="s-key">Type</span><span class="s-val">Execution reliability harness</span></div>
+                <div class="sidebar-row"><span class="s-key">Focus</span><span class="s-val">Plan · Verify · Repair · Memory</span></div>
+                <div class="sidebar-row"><span class="s-key">Built on</span><span class="s-val">LC-OS Papers 1–8</span></div>
+                <div class="sidebar-row"><span class="s-key">Related</span><span class="s-val">RITAM substrate research</span></div>
+                <div class="sidebar-row"><span class="s-key">Output</span><span class="s-val active">Product under development</span></div>
             </div>
 
             <div class="sidebar-block">
@@ -523,27 +201,25 @@
                 <a href="https://zenodo.org/records/17760288" target="_blank" class="sidebar-nav-link">Paper 01 — Controls A1–A10</a>
                 <a href="https://zenodo.org/records/17760777" target="_blank" class="sidebar-nav-link">Paper 02 — Protocols</a>
                 <a href="https://zenodo.org/records/17896542" target="_blank" class="sidebar-nav-link">Paper 03 — Failure Modes</a>
-                <a href="https://zenodo.org/records/18900058" target="_blank" class="sidebar-nav-link">Paper 05 — Linguistic Layer</a>
+                <a href="https://zenodo.org/records/18900058" target="_blank" class="sidebar-nav-link">Paper 05 — Language Reliability</a>
                 <a href="https://zenodo.org/records/19983551" target="_blank" class="sidebar-nav-link">Paper 08 — Verification</a>
             </div>
 
             <div class="sidebar-block">
                 <div class="sidebar-label">Related</div>
-                <a href="../ritam/" class="sidebar-nav-link">RITAM — Architecture</a>
+                <a href="../ecosystem/" class="sidebar-nav-link">Ecosystem Map</a>
+                <a href="../ritam/" class="sidebar-nav-link">RITAM — Substrate Research</a>
                 <a href="../failure-library/" class="sidebar-nav-link">Failure Library</a>
                 <a href="../research/" class="sidebar-nav-link">Research Overview</a>
             </div>
         </div>
-
     </div>
 </div>
 
 <footer>
     <div class="container">
         <div class="footer-inner">
-            <div class="footer-left">
-                <strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research
-            </div>
+            <div class="footer-left"><strong>Rishi Sood</strong> · Living Framework · Independent AI Reliability Research</div>
             <div class="footer-links">
                 <a href="https://twitter.com/satoshisats" target="_blank">X</a>
                 <a href="https://www.linkedin.com/in/livingframework/" target="_blank">LinkedIn</a>
@@ -560,14 +236,8 @@
     var btn = document.getElementById('nav-hamburger');
     var links = document.querySelector('.nav-links');
     if (!btn || !links) return;
-    btn.addEventListener('click', function() {
-        links.classList.toggle('open');
-    });
-    links.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() {
-            links.classList.remove('open');
-        });
-    });
+    btn.addEventListener('click', function() { links.classList.toggle('open'); });
+    links.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { links.classList.remove('open'); }); });
 })();
 </script>
 </body>
