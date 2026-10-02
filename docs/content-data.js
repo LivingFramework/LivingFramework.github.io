@@ -1,0 +1,259 @@
+window.LF_CONTENT = {
+  "books": [
+    {
+      "title": "Hello AI",
+      "desc": "Your very first step into the world of artificial intelligence. No jargon, no fear — just a clear, friendly guide to what AI is and how it fits into your life.",
+      "amazon": "https://www.amazon.com/dp/B0GTR267MM",
+      "image": "assets/hello-ai.jpg",
+      "group": "Hello AI series"
+    },
+    {
+      "title": "The AI Habit",
+      "desc": "Build daily AI practices that stick. Learn how to weave AI tools into your routine so they become second nature — saving you time every single day.",
+      "amazon": "https://www.amazon.com/dp/B0GTQWDFKT",
+      "image": "assets/the-ai-habit.jpg",
+      "group": "Hello AI series"
+    },
+    {
+      "title": "AI Does the Heavy Lifting",
+      "desc": "Stop doing everything the hard way. Discover how to delegate the tedious, time-consuming work to AI so you can focus on what actually matters.",
+      "amazon": "https://www.amazon.com/dp/B0GTR26MSL",
+      "image": "assets/ai-heavy-lifting.jpg",
+      "group": "Hello AI series"
+    },
+    {
+      "title": "The Manager’s Handbook",
+      "desc": "A practical guide for managers navigating AI adoption — from leading AI-augmented teams to making smarter decisions with data. Built for the modern workplace.",
+      "amazon": "https://www.amazon.com/dp/B0GTGJGY3Z",
+      "image": "assets/managers-handbook.jpg",
+      "group": "Everyday practice"
+    },
+    {
+      "title": "Talk to AI Like a Pro",
+      "desc": "Master the art of prompting. Learn how to communicate with AI tools in a way that consistently gets you better results, faster — whatever you’re working on.",
+      "amazon": "https://www.amazon.com/dp/B0GHT9VV85",
+      "image": "assets/talk-to-ai-pro.jpg",
+      "group": "Everyday practice"
+    },
+    {
+      "title": "AI Won’t Remember You Tomorrow",
+      "desc": "A fascinating look at AI memory, context, and the human side of working with machines that reset. Understand your tools deeply — and work with them more wisely.",
+      "amazon": "https://www.amazon.com/dp/B0GT1MTRMM",
+      "image": "assets/ai-wont-remember.jpg",
+      "group": "Everyday practice"
+    },
+    {
+      "title": "The Administrator’s AI Playbook",
+      "desc": "Built for administrators who manage operations, scheduling, and communications. Practical AI workflows to reduce admin burden and increase accuracy.",
+      "amazon": "https://www.amazon.com/dp/B0GTYL5JC9",
+      "image": "assets/administrators-playbook.jpg",
+      "group": "Professional guides"
+    },
+    {
+      "title": "The Manager’s AI Playbook",
+      "desc": "For managers who want to lead confidently in an AI-first world. Covers performance, delegation, communication, and building high-performing AI-augmented teams.",
+      "amazon": "https://www.amazon.com/dp/B0GTYFXGQC",
+      "image": "assets/managers-ai-playbook.jpg",
+      "group": "Professional guides"
+    },
+    {
+      "title": "The Recruiter’s AI Edge",
+      "desc": "For talent professionals ready to supercharge their pipeline. Use AI to write better job descriptions, screen faster, and identify the best candidates with less effort.",
+      "amazon": "https://www.amazon.com/dp/B0GTYQV6CD",
+      "image": "assets/recruiters-ai-edge.jpg",
+      "group": "Professional guides"
+    },
+    {
+      "title": "The Lawyer’s AI Handbook",
+      "desc": "For legal professionals navigating AI in practice. From drafting and research to client communications — use AI confidently while staying on the right side of professional ethics.",
+      "amazon": "https://www.amazon.co.uk/dp/B0GTWXZXXS",
+      "image": "assets/lawyers-ai-handbook.jpg",
+      "group": "Professional guides"
+    },
+    {
+      "title": "The Teacher’s AI Playbook",
+      "desc": "For educators who want to use AI thoughtfully in the classroom and beyond. Plan lessons, give better feedback, differentiate learning, and reclaim your evenings.",
+      "amazon": "https://www.amazon.co.uk/dp/B0GTQZPCV4",
+      "image": "assets/teachers-ai-playbook.jpg",
+      "group": "Professional guides"
+    },
+    {
+      "title": "The HR Professional’s AI Playbook",
+      "desc": "A complete AI toolkit for HR professionals. Streamline onboarding, sharpen performance conversations, and use AI ethically across the entire employee lifecycle.",
+      "amazon": "https://www.amazon.com/dp/B0GTPSZB93",
+      "image": "assets/hr-ai-playbook.jpg",
+      "group": "Professional guides"
+    }
+  ],
+  "papers": [
+    {
+      "number": "01",
+      "year": 2025,
+      "title": "Context-Engineered Human–AI Collaboration for Long-Horizon Tasks: A Case Study in Governance, Canonical Numerics, and Execution Control",
+      "doi": "10.17605/OSF.IO/VMK7Y",
+      "record": "17760288",
+      "summary": "Three authoritative artefacts and ten execution controls for maintaining coherence during extended human–AI work.",
+      "theme": "Foundations"
+    },
+    {
+      "number": "02",
+      "year": 2025,
+      "title": "The Lean Collaboration Operating System (LC-OS): A Practical Framework for Long-Term Human-AI Work",
+      "doi": "10.17605/OSF.IO/695AF",
+      "record": "17760777",
+      "summary": "Running Documents, Step Mode, Challenge Protocol, Error Recovery, Stability Pings, and File Governance.",
+      "theme": "Practice"
+    },
+    {
+      "number": "03",
+      "year": 2025,
+      "title": "Failure and Repair in Long-Horizon Human–AI Collaboration: A Transparent Tracing Case Study",
+      "doi": "10.17605/OSF.IO/Z7AQ8",
+      "record": "17896542",
+      "summary": "Twelve observed episodes organised into six failure categories, with tracing and repair protocols.",
+      "theme": "Failure & repair"
+    },
+    {
+      "number": "04",
+      "year": 2025,
+      "title": "The Living Framework: Living with a Governed Human-AI Dyad",
+      "doi": "10.17605/OSF.IO/ER4YT",
+      "record": "18015990",
+      "summary": "The relational and ethical dimensions of sustained collaboration: trust, rupture, repair, dependence, and human responsibility.",
+      "theme": "Trust & partnership"
+    },
+    {
+      "number": "05",
+      "year": 2026,
+      "title": "Control Without Code: Linguistic Governance in Long-Horizon Human–AI Collaboration",
+      "doi": "10.5281/zenodo.18900058",
+      "record": "18900058",
+      "summary": "A case study of 25 linguistic events examining scope drift, repair language, and behavioural anchors.",
+      "theme": "Language"
+    },
+    {
+      "number": "06",
+      "year": 2026,
+      "title": "Governance Architecture for Reliable Long-Horizon Human–AI Collaboration",
+      "doi": "10.5281/zenodo.19038340",
+      "record": "19038340",
+      "summary": "A layered model covering human authority, governance rules, collaboration protocols, artefact memory, linguistic signals, and drift detection and repair.",
+      "theme": "Architecture"
+    },
+    {
+      "number": "07",
+      "year": 2026,
+      "title": "Governed Distributed Cognition: A Model of Stable Reasoning in Long-Horizon Human–AI Systems",
+      "doi": "10.17605/OSF.IO/NCRP2",
+      "record": "19151397",
+      "summary": "Reasoning as a distributed, governed, and recoverable process across human judgment, AI processing, and external artefacts.",
+      "theme": "Cognition"
+    },
+    {
+      "number": "08",
+      "year": 2026,
+      "title": "AI Validation Systems: A Missing Architectural Layer for Reliable AI",
+      "doi": "10.5281/zenodo.19983551",
+      "record": "19983551",
+      "summary": "Validation as a distinct architectural function: objective anchoring, adversarial evaluation, structured judgment, and decision output.",
+      "theme": "Validation"
+    }
+  ],
+  "failures": [
+    {
+      "code": "F1",
+      "name": "Context & Memory Drift",
+      "definition": "Earlier decisions or constraints are lost, weakened, or reinterpreted during extended work.",
+      "signal": "A new answer contradicts an established decision; the same context must be restated repeatedly.",
+      "repair": "Keep a current Running Document. Re-anchor decisions before consequential work.",
+      "paper": "01"
+    },
+    {
+      "code": "F2",
+      "name": "File & Version Divergence",
+      "definition": "Parallel artefacts or different versions create conflicting accounts of the current state.",
+      "signal": "The AI edits an old version, or a correction exists in one copy but not the canonical file.",
+      "repair": "Identify one authoritative file. Check the live version before edits and record what was saved.",
+      "paper": "02"
+    },
+    {
+      "code": "F3",
+      "name": "Numerical Reasoning Errors",
+      "definition": "Incorrect calculations or reconstructed figures enter the work and influence later decisions.",
+      "signal": "Totals do not reconcile, values change without a source, or an assumption is mistaken for an approved number.",
+      "repair": "Use a canonical numbers record. Verify calculations and trace figures to their source.",
+      "paper": "01"
+    },
+    {
+      "code": "F4",
+      "name": "Governance & Boundary Violations",
+      "definition": "Agreed rules, authority limits, or approval boundaries are bypassed.",
+      "signal": "Work proceeds outside scope, or a draft decision is treated as permission to act.",
+      "repair": "Keep scope and authority explicit. Stop and review when an action crosses an agreed boundary.",
+      "paper": "02"
+    },
+    {
+      "code": "F5",
+      "name": "Emotional/Trust Fractures",
+      "definition": "Accumulated failures and poor repair damage trust in the collaboration.",
+      "signal": "Corrections are minimised, uncertainty is hidden, or repeated errors lead to disengagement.",
+      "repair": "Name the error, explain its effect, repair visibly, and use the Challenge Protocol for disagreement.",
+      "paper": "04"
+    },
+    {
+      "code": "F6",
+      "name": "Cross-Pillar Interference",
+      "definition": "Assumptions or decisions from one domain contaminate another domain of work.",
+      "signal": "A rule from one project is applied to another without justification; separate plans become entangled.",
+      "repair": "Separate project records and constraints. Reconcile shared dependencies explicitly.",
+      "paper": "03"
+    }
+  ],
+  "domains": [
+    {
+      "name": "Context & continuity",
+      "questions": [
+        "I keep a current record of the objective, constraints, and agreed decisions.",
+        "Before consequential work, I check that the AI is using the current project state.",
+        "I can trace a new output back to the decisions and sources it depends on.",
+        "I record a handoff that lets the next session resume from the right state."
+      ]
+    },
+    {
+      "name": "Files & governance",
+      "questions": [
+        "I identify the authoritative version of each important working file.",
+        "I check the live file before making or accepting changes.",
+        "I distinguish drafts, approved decisions, and permission to act.",
+        "I keep separate projects and their constraints distinct."
+      ]
+    },
+    {
+      "name": "Verification",
+      "questions": [
+        "I verify important outputs separately from generating them.",
+        "I check factual and numerical claims against suitable sources.",
+        "For consequential work, I use checks or reviewers that can challenge the original output.",
+        "I prevent unchecked outputs from becoming authoritative records or triggering action."
+      ]
+    },
+    {
+      "name": "Instructions & challenge",
+      "questions": [
+        "I state important terms, assumptions, and constraints explicitly.",
+        "I correct ambiguous or drifting instructions when I notice them.",
+        "The AI can challenge my reasoning and identify uncertainty.",
+        "I resolve contradictory instructions rather than letting the AI silently choose between them."
+      ]
+    },
+    {
+      "name": "Recovery & repair",
+      "questions": [
+        "I have a defined way to stop and diagnose a collaboration failure.",
+        "I preserve checkpoints or versions from which work can be recovered.",
+        "I record significant errors, corrections, and the decisions they affect.",
+        "I confirm that repaired work is coherent before resuming or reusing it."
+      ]
+    }
+  ]
+};
