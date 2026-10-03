@@ -83,6 +83,20 @@
       "amazon": "https://www.amazon.com/dp/B0GTPSZB93",
       "image": "assets/hr-ai-playbook.jpg",
       "group": "Professional guides"
+    },
+    {
+      "title": "The Nurse’s AI Companion",
+      "desc": "50 prompts for nursing documentation, patient communication, clinical administration, and professional development. Emphasises confidentiality, draft review, and keeping clinical decisions with the nurse.",
+      "amazon": "https://www.amazon.co.uk/dp/B0HHXQHSSV",
+      "image": "assets/nurses-ai-companion.jpg",
+      "group": "Professional guides"
+    },
+    {
+      "title": "The Accountant’s AI Playbook",
+      "desc": "50 prompts for accountants, bookkeepers, and finance professionals covering client communication, reports, HMRC correspondence, and advisory preparation. Keeps verification and professional judgment central.",
+      "amazon": "https://www.amazon.co.uk/dp/B0HHY87FJ8",
+      "image": "assets/accountants-ai-playbook.jpg",
+      "group": "Professional guides"
     }
   ],
   "papers": [
